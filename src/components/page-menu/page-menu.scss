@@ -1,0 +1,9 @@
+.page-menu {
+  display: flex;
+  overflow-x: hidden;
+  &__screen {
+    height: 100vh;
+    overflow: hidden; 
+    flex-shrink: 1;
+  }
+}
