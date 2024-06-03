@@ -1,5 +1,12 @@
 .language-toggle {
+  display: flex;
+  gap: 3px;
   .disabled {
     color: #C7C7C7;
+  }
+  button {
+    text-transform: capitalize;
+    font-family: inherit;
+    font-size: 12px;
   }
 }

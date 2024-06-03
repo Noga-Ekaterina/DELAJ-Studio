@@ -1,8 +1,12 @@
 .page-menu {
   display: flex;
   overflow-x: hidden;
+  height: 100vh;
+  position: relative;
   &__screen {
-    height: 100vh;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     overflow: hidden; 
     flex-shrink: 1;
   }

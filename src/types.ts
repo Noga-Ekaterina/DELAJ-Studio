@@ -5,5 +5,5 @@ export interface IWithClass {
 } 
 
 export interface IWithChildren {
-  children: ReactNode
+  children?: ReactNode
 }

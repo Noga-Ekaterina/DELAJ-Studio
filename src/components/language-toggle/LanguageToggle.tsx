@@ -26,9 +26,7 @@ const LanguageToggleSpan: FC<SpanProps> = (props) => {
   );
 };
 
-interface Props extends IWithClass {}
-
-const LanguageToggle: FC<Props> = (props) => {
+const LanguageToggle: FC<IWithClass> = (props) => {
   const className = cn('language-toggle', props.className);
   const [currentLang, setCurrentlang] = useState<langType>('ru');
 

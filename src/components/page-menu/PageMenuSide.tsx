@@ -2,26 +2,35 @@
 import { FC, useEffect, useRef } from "react";
 import store from "@/store/store";
 import { Transition } from 'react-transition-group';
-import { IWithChildren, IWithClass } from "@/types";
+import { IWithClass } from "@/types";
 import { observer } from "mobx-react-lite";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
+type StyleObject = Record<string, string>
 
 interface Props {
   styles : {
-    defaultStyles: Record<string, string>,
-    onOpen : Record<string, {translate: string, width?: string}>
-    onCurrentPage: Record<string, {translate: string, width?: string}>
+    defaultStyles: StyleObject,
+    onOpen : Record<string, StyleObject>
+    onCurrentPage: Record<string, StyleObject>
   }
   path: string
-  Component: FC<IWithClass>
+  Component: FC<{isOpened: boolean}>
 }
 
 const PageMenuSide: FC<Props> = observer(({path, styles, Component}) => {
   const { isMenuOpened, changeMenuOpened } = store;
   const ref = useRef(null);
 
+  const router = useRouter();
   const currentPath = usePathname();
   const isThisPath = currentPath.includes(path);
+  const redirectOnPage = () => {
+    if (!isThisPath) {
+      router.push(path);
+    }
+  }
+
   const styleToggle = isThisPath ? 'onCurrentPage' : 'onOpen' ;
 
   useEffect(() => {
@@ -30,18 +39,21 @@ const PageMenuSide: FC<Props> = observer(({path, styles, Component}) => {
     }
   },[isThisPath])
 
+  if (currentPath === '/menu') return null;
+
   return (
     <Transition nodeRef={ref} in={isMenuOpened || isThisPath} timeout={300}>
       {state => (
         <div 
           className="page-menu__screen" 
           ref={ref}
+          onClick={redirectOnPage}
           style={{
             ...styles.defaultStyles, 
             ...styles[styleToggle][state],
           }}
         >
-          <Component className={isThisPath ? 'opened' : ''}/>
+          <Component isOpened={isThisPath}/>
         </div>
       )}
     </Transition>

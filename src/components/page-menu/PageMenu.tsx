@@ -4,37 +4,38 @@ import KidsScreen from "../kids-screen/KidsScreen";
 import './page-menu.scss';
 import PageMenuSide from './PageMenuSide';
 
-const transitionProperty = "translate 0.6s, width 0.4s";
+const duration = 0.6;
+const transitionProperty = `${duration}s ease-in`;
 
 const transitionStyles = {
   kids: {
-    defaultStyles: {width: '50vw', translate:"-100%", transition: transitionProperty},
+    defaultStyles: {width: '50vw', left:"-50%", transition: transitionProperty},
     onOpen : {
-      entering: {width: '50vw', translate: "0%"},
-      entered: {width: '50vw', translate: "0%"},
-      exiting:  { width: '50vw', translate: "-100%" },
-      exited:  { width: '50vw', translate: "-100%" },
+      entering: {width: '50vw', left: "0%"},
+      entered: {width: '50vw', left: "0%"},
+      exiting:  { width: '50vw', left: "-50%" },
+      exited:  { width: '50vw', left: "-50%" },
     },
     onCurrentPage : {
-      entering: {width: '100vw', translate: "0%"},
-      entered: {width: '100vw', translate: "0%", flexShrink: 0},
-      exiting:  { width: '50vw', translate: "0%"},
-      exited:  { width: '50vw', translate: "0%" },
+      entering: {width: '100vw', left: "0%"},
+      entered: {width: '100vw', left: "0%", flexShrink: 0},
+      exiting:  { width: '50vw', left: "0%"},
+      exited:  { width: '50vw', left: "0%" },
     },
   },
   adult: {
-    defaultStyles: {width: '50vw', translate:"100%", transition: transitionProperty},
+    defaultStyles: {width: '50vw', right:"-50%", transition: transitionProperty},
     onOpen : {
-      entering: {width: '50vw', translate: "0%"},
-      entered: {width: '50vw', translate: "0%"},
-      exiting:  { width: '50vw', translate: "100%" },
-      exited:  { width: '50vw', translate: "100%" },
+      entering: {width: '50vw', right: "0%"},
+      entered: {width: '50vw', right: "0%"},
+      exiting:  { width: '50vw', right: "-50%" },
+      exited:  { width: '50vw', right: "-50%" },
     },
     onCurrentPage : {
-      entering: {width: '100vw', translate: "0%"},
-      entered: {width: '100vw', translate: "0%", flexShrink: 0},
-      exiting:  { width: '50vw', translate: "0%" },
-      exited:  { width: '50vw', translate: "0%" },
+      entering: {width: '100vw', right: "0%"},
+      entered: {width: '100vw', right: "0%", flexShrink: 0},
+      exiting:  { width: '50vw', right: "0%"},
+      exited:  { width: '50vw', right: "0%"},
     },
   }
 }

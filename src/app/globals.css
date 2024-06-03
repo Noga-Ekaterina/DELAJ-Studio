@@ -1,4 +1,8 @@
 /* Reset and base styles  */
+:root {
+	--text-gray: #1D1D1D;
+}
+
 * {
 	padding: 0px;
 	margin: 0px;
@@ -13,8 +17,13 @@
 
 /* Links */
 
+a {
+	display: inline-block;
+}
+
 a, a:link, a:visited  {
     text-decoration: none;
+		color: inherit;
 }
 
 a:hover  {
@@ -25,11 +34,6 @@ a:hover  {
 
 aside, nav, footer, header, section, main {
 	display: block;
-}
-
-h1, h2, h3, h4, h5, h6, p {
-    font-size: inherit;
-	font-weight: inherit;
 }
 
 ul, ul li {
@@ -86,4 +90,10 @@ label {
 
 legend {
 	display: block;
+}
+
+.container {
+	margin: 0 auto;
+	padding: 0 30px;
+	max-width: 1140px;
 }
