@@ -22,8 +22,13 @@
     color: #fff;
   }
 
+  &__big-logo {
+    width: 465px;
+    height: auto;
+  }
+
   &__jap-logo {
-    width: 85px;
+    max-height: 40px;
   }
 
   &__bottom-text {
@@ -45,15 +50,16 @@
     position: absolute;
     bottom: 0;
     width: 350px;
-    transition-delay: 0.6s;
+    height: auto;
   }
 
   &.opened {
     .adult-screen__jap-logo {
-      width: 123px;
+      max-height: 123px;
     }
     .adult-screen__big-logo {
       width: 100%;
+      height: auto;
     }
     .adult-screen__bottom-text {
       max-width: 300px;
@@ -64,6 +70,12 @@
           font-size: 16px;
         }
       }
+    }
+  }
+
+  @media screen and (min-width: 1680px) {
+    &__big-logo {
+      width: 500px;
     }
   }
 }

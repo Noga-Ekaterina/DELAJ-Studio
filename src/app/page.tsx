@@ -1,12 +1,13 @@
 'use client';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import logo from '../../public/images/logo.svg';
-import './main.-screen.scss';
+import './main-screen.scss';
 import LanguageToggle from '../components/language-toggle/LanguageToggle';
 import store from '../store/store';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
-import Font from 'next/font/local';
+import cn from 'classnames';
+import { halvar } from '@/fonts';
 
 const MainScreen: FC = () => {
   const {isMenuOpened} = store;
@@ -23,7 +24,7 @@ const MainScreen: FC = () => {
       style={{zIndex: isMenuOpened ? -1 : 1}}
     >
       <Image src={logo} alt="" />
-      <LanguageToggle className='main-screen__language'/>
+      <LanguageToggle className={cn('main-screen__language', halvar.className)}/>
     </div>
   );
 };

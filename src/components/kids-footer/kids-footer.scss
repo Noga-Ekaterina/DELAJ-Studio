@@ -2,89 +2,76 @@
   display: flex;
   height: 240px;
   margin-top: 10px;
+  color: #fff; 
 
   &__item {
-    height: 100%;
-    flex: 1;
-    padding: 37px 0 20px 23px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-weight: 700;
-    font-size: 12px;
-    row-gap: 13px;
-    position: relative;
-    &-link {
-      font-size: 30px;
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 32px;
-    } 
-    ul {
-      flex: 1;
-    }
-    &-image {
-      position: absolute;
-    }
-    &-socials {
-      a {
-        line-height: 15px;
-        padding-right: 9px;
-        margin-right: 7px;
-        position: relative;
-        text-decoration: underline;
-        &:hover {
-          text-decoration: none;
-        }
-        &:after {
-          content: '|';
-          position: absolute;
-          right: 0;
-        }
-        &:last-child::after {
-          display: none;
-        }
-      }
-    }
-    .language-toggle {
-      button.disabled {
-        color: #A2BC00;
-      }
-    }
+    width: 20%;
 
-    &#footer-blue {
-      background-color: #007BAD;
+    &-list {
+      font-size: 10px;
+      line-height: 1.5em;
       li {
-        line-height: 12px;
-        font-size: 10px;
         a {
           color: #DBFF00; 
         }
       }
-      .kids-footer__item-image {
+    }
+
+    &#kids-footer-blue {
+      background-color: #007BAD;
+      .footer-item__image {
         bottom: 23px;
         right: 30px;
       }
     }
 
-    &#footer-yellow {
+    &#kids-footer-yellow {
       background-color: #DBFF00;
       color: var(--text-gray);
-      li {
-        line-height: 14.5px;
-      }
     }
 
-    &#footer-red {
+    &#kids-footer-red {
       background-color: #F12B00;
+      width: 40%;
       span {
         color: #8CFF33;
       }
+
+      img {
+        position: absolute;
+        bottom: 0;
+        height: 265px;
+        right: 7.3%;
+      }
     }
 
-    &#footer-purple {
+    &#kids-footer-purple {
       background-color: #38044C;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  @media screen and (min-width: 1680px) {
+    height: 388px;
+
+    &__item {
+      &-list {
+        font-size: 16px;
+      }
+
+      &#kids-footer-blue {
+        .footer-item__image {
+          height: 123px;
+          bottom: 50px;
+        }
+      }
+
+      &#kids-footer-red {
+        img {
+          height: 429px;
+        }
+      }
     }
   }
 }

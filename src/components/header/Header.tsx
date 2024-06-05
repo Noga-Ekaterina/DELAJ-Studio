@@ -25,7 +25,7 @@ const Header: FC<IWithClass> = (props) => {
           </Link>
         )}
             
-        <Link href="/menu" className='header-burger'>
+        <Link href="/menu" className='header-burger' prefetch>
           <Image src={burger} alt=""/>
         </Link>
       </div>

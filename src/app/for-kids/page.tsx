@@ -16,6 +16,7 @@ const page: FC = () => {
         title="детская анимация"
         image={frogImage}
         backgroundImage={scetchBgImage}
+        className='for-kids__heading'
       />
       <KidsFooter />
     </ContentWrap>

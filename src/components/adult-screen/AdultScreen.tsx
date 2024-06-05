@@ -10,13 +10,13 @@ import screenBandit from '../../../public/images/adult/screen-bandit.png';
 import TextLogo from '../text-logo/TextLogo';
 import { courierNew } from '@/fonts';
 import cn from 'classnames';
-import { Transition, TransitionStatus } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 
 interface Props {
   isOpened: boolean
 }
 
-const transition = {transition: '0.4s'};
+const transition = {transition: '0.4s ease-out 0.6s'};
 const yellowBanditStyles = {
   entering: { right: '30px' },
   entered:  { right: '30px' },

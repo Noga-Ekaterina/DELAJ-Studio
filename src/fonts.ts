@@ -22,8 +22,6 @@ export const circe = Font({
   src: [
     {path: '../public/fonts/circe.ttf', weight: '400'},
     {path: '../public/fonts/circe-extrabold.ttf', weight: '800'},
-    {path: '../public/fonts/Circe Extra Bold.otf', weight: '800'},
     {path: '../public/fonts/circe-bold.ttf', weight: '700'},
-    {path: '../public/fonts/Circe Bold.otf', weight: '700'},
   ]
 });

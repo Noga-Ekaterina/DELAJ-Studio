@@ -4,73 +4,212 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
   height: 100%;
+  img {
+    width: auto;
+  }
   &__text-logo {
     margin-top: 12px;
     color: #fff;
     font-size: 10px;
   }
   &__picture {
+    overflow: hidden;
     &-logo {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      position: relative;
+      left: 0;
       width: 50vw;
       height: 100%;
+      transition: 0.7s;
+      img {
+        transition: inherit;
+      }
     }
-    &#kids-screen {
-      &-black {
-        background-color: #211E1D;
+
+    &#kids-screen-black {
+      position: relative;
+      overflow: visible;
+      .picture-content {
+        position: absolute;
         overflow: hidden;
-      }
-      &-picture {
-        grid-column: 2 / 4;
-        overflow: hidden;
-        img {
-          width: 100%;
-          min-height: 100%;
-          object-fit: cover;
-        }
-      }
-      &-white {
-        background-color: #fff;
-        img {
-          float: right;
-          height: 100%;
-        }
-      }
-      &-logo {
-        background-color: #007BAD;
-        grid-row: 2 / 3;
-        grid-column: 1 / 5;
-      }
-      &-green {
-        background-color: #DBFF00;
         display: flex;
-        justify-content: center;
         align-items: center;
-      } 
-      &-blue {
-        background-color: #00C2FF;
-        position: relative;
-        img {
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          height: calc(100% + 25px);
+        width: 100%;
+        height: 100%;
+        background-color: #211E1D;
+        transition: height 0.7s ease-out 0.3s;
+      }
+      img {
+        margin-top: auto;
+        height: calc((100vh * 2 / 3) - 10%); 
+      }
+    }
+
+    &#kids-screen-picture {
+      grid-column: 2 / 4;
+      display: flex;
+      align-items: flex-end;
+      img {
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+
+    &#kids-screen-white {
+      background-color: #fff;
+      position: relative;
+      img {
+        position: absolute;
+        height: 100%;
+        right: -30px;
+        bottom: 0;
+      }
+    }
+
+    &#kids-screen-logo {
+      background-color: #007BAD;
+      grid-row: 2 / 3;
+      grid-column: 1 / 5;
+    }
+
+    &#kids-screen-green {
+      background-color: #DBFF00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 150px;
+        transition: height 0.3s;
+      }
+    } 
+
+    &#kids-screen-blue {
+      background-color: #00C2FF;
+      position: relative;
+      overflow: visible;
+      img {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: calc(100% + 25px);
+      }
+    }
+
+    &#kids-screen-red {
+      background-color: #F12B00;
+      grid-column: 3 / 5;
+      padding: 24px;
+      position: relative;
+      .red-picture-car-small {
+        position: absolute;
+        right: 50%;
+        bottom: 15px;
+        height: 106px;
+        transition: right 0.1s;
+        transition-delay: 0.05s;
+      }
+      .red-picture-car {
+        position: absolute;
+        right: -100%;
+        transition: right 0.5s ease-out;
+        bottom: 12px;
+        height: 167px;
+      }
+    }
+
+    &#kids-screen-purple {
+      background: linear-gradient(180deg, #FF1267 0% 33.33% , #38044C 33.33% 100%);
+      grid-row: 1 / 4;
+      grid-column: 5 / 6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      img {
+        height: 95%;
+      }
+    }
+  }
+
+  &.opened {
+    .kids-screen__picture {
+      &-logo {
+        width: 60vw;
+        left: 25%;
+      }
+
+      &#kids-screen-black {
+        .picture-content {
+          height: calc(100vh * 2 / 3);
         }
       }
-      &-red {
-        background-color: #F12B00;
-        grid-column: 3 / 5;
+
+      &#kids-screen-red {
+        .red-picture-car-small {
+          right: 100%;
+        }
+        .red-picture-car {
+          right: 0%;
+          transition-delay: 0.1s;
+        }
       }
-      &-purple {
-        background: linear-gradient(180deg, #FF1267 0% 33.33% , #38044C 33.33% 100%);
-        grid-row: 1 / 4;
-        grid-column: 5 / 6;
-        display: flex;
-        justify-content: flex-end;
+
+      &#kids-screen-green {
+        img {
+          height: 163px;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width:1680px) {
+    &__picture {
+      &-logo {
+        img {
+          height: 150px;
+        }
+      }
+
+      &#kids-screen-green {
         align-items: flex-end;
+        img {
+          height: 250px;
+        }
+      }
+
+      &#kids-screen-red {
+        .red-picture-logo {
+          height: 88px;
+        }
+        .red-picture-car-small {
+          height: 130px;
+        }  
+        .red-picture-car {
+          height: 240px;
+        }
+      }
+    }
+
+    &.opened {
+      .kids-screen {
+        &__text-logo {
+          font-size: 19px;
+        }
+        &__picture {
+          &-logo {
+            img {
+              height: 207px;
+            }
+          }
+
+          &#kids-screen-green {
+            img {
+              height: 283px;
+            }
+          }
+        }
       }
     }
   }

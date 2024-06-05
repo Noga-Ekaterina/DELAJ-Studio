@@ -8,29 +8,33 @@ import Image from 'next/image';
 //Images
 import footerLogo from '../../../public/images/footer-logo.svg';
 import footerPhone from '../../../public/images/footer-phone.png';
+import footerGirl from '../../../public/images/footer-girl.png';
+import footerCarrot from '../../../public/images/footer-carrot.png';
+
 import LanguageToggle from '../language-toggle/LanguageToggle';
 
 const KidsFooter: FC = () => {
+  const className = cn('kids-footer', circe.className);
 
   return (
-    <footer className='kids-footer'>
-      <div className={cn("kids-footer__item", circe.className)} id="footer-blue">
-        <Link href="/" className='kids-footer__item-link'>
+    <footer className={className}>
+      <div className="footer-item kids-footer__item" id="kids-footer-blue">
+        <Link href="/" className='footer-link'>
           Contact us
         </Link>
-        <ul>
+        <ul className='kids-footer__item-list'>
           <li>Head <Link href="/">hello@delai.studio</Link></li>
           <li>HR <Link href="/">@jenechkina1</Link></li>
           <li>Work <Link href="/">documents@horshield.com</Link></li>
         </ul>
         <Link href="/">
-          <Image src={footerLogo} alt="" />
+          <Image className='footer-item__logo' src={footerLogo} alt="" />
         </Link>
-        <Image className='kids-footer__item-image' src={footerPhone} alt="" />
+        <Image className='footer-item__image' src={footerPhone} alt="" />
       </div>
 
-      <div className={cn("kids-footer__item", circe.className)} id="footer-yellow">
-        <Link href="/" className='kids-footer__item-link'>
+      <div className="footer-item kids-footer__item" id="kids-footer-yellow">
+        <Link href="/" className='footer-link'>
           career
         </Link>
         <ul>
@@ -41,26 +45,28 @@ const KidsFooter: FC = () => {
           <li><Link href="/">Motion designer</Link></li>
           <li><Link href="/">Web designer</Link></li>
         </ul>
-        <LanguageToggle />
+        <LanguageToggle className='footer-language'/>
       </div>
 
-      <div className={cn("kids-footer__item", circe.className)} id="footer-red">
-        <Link href="/" className='kids-footer__item-link'>
-          заходите в <span>гости</span>
+      <div className="footer-item kids-footer__item" id="kids-footer-red">
+        <Link href="/" className='footer-link'>
+          заходите <br /> в <span>гости</span>
         </Link>
-
-        <div className="kids-footer__item-socials">
+        <div className="footer-socials">
           <Link href='/'>Be</Link>
           <Link href='/'>Vk</Link>
           <Link href='/'>Tg</Link>
         </div>
+        <Image src={footerGirl} alt="" />
       </div>
 
-      <div className={cn("kids-footer__item", circe.className)} id="footer-purple">
-        <Link href="/" className='kids-footer__item-link'>
-          Contact us
+      <div className="footer-item kids-footer__item" id="kids-footer-purple">
+        <Link href="/" className='footer-link'>
+          About us
         </Link>
+        <Image src={footerCarrot} alt=""/>
       </div>
+
     </footer>
   );
 };
