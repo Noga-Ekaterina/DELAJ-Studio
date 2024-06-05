@@ -36,7 +36,7 @@ const ProjectList: FC = () => {
       {data.map(item => {
         return (
           <Link href={`/${item.id}`}>
-            <Image src={item.preview}  alt=""/>
+            <Image src={item.preview} key={"project-list-" + item.id} alt=""/>
           </Link>
         )
       })}
