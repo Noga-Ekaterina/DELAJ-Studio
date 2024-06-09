@@ -1,6 +1,8 @@
 import { StaticImageData } from "next/image"
 import { ReactNode } from "react"
 
+export type HeaderTheme = 'light' | 'dark';
+
 export interface IWithClass {
   className?: string
 } 

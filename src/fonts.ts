@@ -3,6 +3,7 @@ import Font from 'next/font/local';
 export const halvar = Font({
   src: [
     {path: '../public/fonts/HalvarBreit-Bd.ttf', weight: '700'},
+    {path: '../public/fonts/HalvarBreit-Md.ttf', weight: '500'},
   ],
 });
 

@@ -4,6 +4,9 @@
 	--yellow: #DBFF00;
 	--red: #F12B00;
 	--purple: #38044C;
+	--blue: #00C2FF;
+	--pink: #FF1267;
+	--green: #8BE200;
 
 	--text-gray: #1D1D1D;
 }
@@ -177,4 +180,16 @@ footer {
 			font-size: 48px;
 		}
 	}
+}
+
+.main-blue {
+	color: var(--main-blue);
+}
+
+.red {
+	color: var(--red);
+}
+
+.yellow {
+	color: var(--yellow);
 }

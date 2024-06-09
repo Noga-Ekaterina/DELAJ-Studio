@@ -1,0 +1,50 @@
+.menu {
+  height: 100vh;
+  position: relative;
+  &-link {
+    display: block;
+    font-weight: 800;
+    font-size: 127px;
+    text-transform: uppercase;
+    line-height: 85%;
+    letter-spacing: -3px;
+    position: relative;
+    &#menu-about {
+      &:hover {
+        color: var(--red);
+      } 
+    }
+    &#menu-career {
+      &:hover {
+        color: var(--blue);
+      } 
+    }
+    &#menu-contact {
+      &:hover {
+        color: var(--main-blue);
+      } 
+    }
+    &#menu-faq {
+      &:hover {
+        color: var(--pink);
+      } 
+    }
+    &#menu-ideas {
+      &:hover {
+        color: var(--green);
+      } 
+    }
+  }
+  &-logo {
+    height: 23px;
+  }
+
+  &-inner {
+    padding-top: 30px;
+    border-top: 5px solid;
+  }
+
+  &-section {
+    padding: 0 30px;
+  }
+}

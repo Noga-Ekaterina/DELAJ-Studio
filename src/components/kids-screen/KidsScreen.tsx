@@ -54,7 +54,7 @@ const KidsScreen: FC<Props> = (props) => {
         <Image src={car} className='red-picture-car' alt=""/>
       </div>
       <div className="kids-screen__picture" id="kids-screen-purple">
-        <Image src={purpleGirlPicture} alt=''/>
+        <Image src={purpleGirlPicture} quality={100} alt=''/>
       </div>
     </div>
   );

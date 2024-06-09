@@ -1,4 +1,5 @@
 'use client';
+import { usePathname } from "next/navigation";
 import AdultScreen from "../adult-screen/AdultScreen";
 import KidsScreen from "../kids-screen/KidsScreen";
 import './page-menu.scss';
@@ -41,6 +42,10 @@ const transitionStyles = {
 }
 
 const PageMenu = () => {
+  const path = usePathname();
+
+  if (path.includes('/menu')) return null;
+
   return (
     <nav className="page-menu">
       <PageMenuSide 

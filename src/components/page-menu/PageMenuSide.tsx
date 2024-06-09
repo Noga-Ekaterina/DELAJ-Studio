@@ -39,8 +39,6 @@ const PageMenuSide: FC<Props> = observer(({path, styles, Component}) => {
     }
   },[isThisPath])
 
-  if (currentPath === '/menu') return null;
-
   return (
     <Transition nodeRef={ref} in={isMenuOpened || isThisPath} timeout={300}>
       {state => (

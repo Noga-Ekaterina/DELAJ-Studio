@@ -1,0 +1,42 @@
+.kids-wallpapper {
+  position: absolute;
+  top: 0;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  overflow: hidden;
+  &__row {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+    img {
+      max-width: 10%;
+      height: auto;
+      position: relative;
+    }
+    &:nth-child(2n) {
+      justify-content: flex-end;
+    }
+    &.last {
+      position: absolute;
+      justify-content: flex-start;
+      margin-bottom: 0;
+      bottom: -14px;
+      z-index: 1;
+      img {
+        width: auto;
+        height: 20%;
+      }
+    } 
+  }
+
+  @media screen and (min-width: 1680px) {
+    &__row {
+      img {
+        max-width: 15%;
+      }
+    }
+  }
+}

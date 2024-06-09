@@ -1,0 +1,22 @@
+.menu-home {
+  position: relative;;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 23px 15px 60px; 
+  z-index: 2;
+  &__links {
+    text-align: center;
+    margin-top: 20px;  
+  }
+  &__bg {
+    z-index: 1;
+  }
+  &__language {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+}

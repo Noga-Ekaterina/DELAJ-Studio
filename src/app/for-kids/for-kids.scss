@@ -22,4 +22,14 @@
       }
     }
   }
+
+  &__projects-wrap {
+    position: relative;
+  }
+
+  &__projects {
+    .project-list__item {
+      border-radius: 20px;
+    }
+  }
 }

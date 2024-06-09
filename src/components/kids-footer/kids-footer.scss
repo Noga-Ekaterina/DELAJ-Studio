@@ -1,7 +1,6 @@
 .kids-footer {
   display: flex;
   height: 240px;
-  margin-top: 10px;
   color: #fff; 
 
   &__item {
@@ -42,6 +41,7 @@
         bottom: 0;
         height: 265px;
         right: 7.3%;
+        z-index: 3;
       }
     }
 

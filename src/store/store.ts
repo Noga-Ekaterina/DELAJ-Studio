@@ -1,3 +1,4 @@
+import { HeaderTheme } from '@/types';
 import {makeAutoObservable} from 'mobx';
 
 class Store {
@@ -6,10 +7,10 @@ class Store {
   }
 
   isMenuOpened = false;
+  headerTheme: HeaderTheme = 'light';
 
   changeMenuOpened = (value: boolean) => {
     this.isMenuOpened = value;
-    console.log(this.isMenuOpened);
   }
 }
 
