@@ -27,10 +27,13 @@
 
 a {
 	display: inline-block;
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
 }
 
 a, a:link, a:visited  {
-    text-decoration: none;
 		color: inherit;
 }
 
@@ -49,7 +52,7 @@ ul, ul li {
 }
 
 img {
-	display: block;
+	display: inline-block;
 	width: auto;
 	max-width: 100%;
 	object-fit: cover;
@@ -192,4 +195,8 @@ footer {
 
 .yellow {
 	color: var(--yellow);
+}
+
+.purple {
+	color: var(--purple);
 }

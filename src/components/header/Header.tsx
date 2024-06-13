@@ -9,8 +9,9 @@ import Image from 'next/image';
 import logo from '../../../public/images/header-logo.svg';
 import darkLogo from '../../../public/kids/logo.svg';
 import burger from '../../../public/images/header-burger.svg';
-import { usePathname } from 'next/navigation';
+import close from '../../../public/images/close.svg';
 
+import { usePathname, useRouter } from 'next/navigation';
 import './header.scss';
 
 const icons = {
@@ -27,20 +28,29 @@ const icons = {
 const Header: FC<IWithClass> = (props) => {
   const className = cn('header', props.className);
   const path = usePathname();
-  const extludes = ['/', '/menu'];
+  const router = useRouter();
+  const isMainSceen = path === '/';
+  const isMenu = path.includes('/menu');
 
     return (
     <header className={className}>
       <div className="container">
-        {!extludes.some(item => path.includes(item)) && (
-          <Link href="/">
-            <Image src={logo} alt=""/>
-          </Link>
-        ) || <div></div>}
-            
-        <Link href="/menu" className='header-burger' prefetch>
-          <Image src={burger} alt=""/>
-        </Link>
+        {(!isMainSceen && !isMenu) 
+          ? <Link href="/">
+              <Image src={logo} alt=""/>
+            </Link>
+          : <div></div>
+        }
+        
+        {(isMenu) 
+          ? <button type='button' onClick={() => router.back()}>
+              <Image src={close} alt="" />
+            </button>
+          : <Link href="/menu" className='header-burger' prefetch>
+              <Image src={burger} alt=""/>
+            </Link>
+        }
+        
       </div>
     </header>
   );

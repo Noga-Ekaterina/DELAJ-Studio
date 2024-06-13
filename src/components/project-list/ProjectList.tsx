@@ -10,16 +10,8 @@ interface Props extends IWithClass{
   data: ProjectItem[]
 }
 
-export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/projects');
-  const data = response.json();
-
-  return {
-    props: { projects: data },
-  };
-}
-
 const ProjectList: FC<Props> = ({ data, className }) => {
+  
   const getModifiedList = (data: any[]) => {
     let result: any[] = [];
 
@@ -57,14 +49,14 @@ const ProjectList: FC<Props> = ({ data, className }) => {
     <div className={cn(className, "project-list")}>
       <div className="container">
 
-        {itemsGrid.map(row => {
+        {itemsGrid.map((row, index) => {
           const rowClass = cn(
             "project-list__row",
             (row.length !== 3) && 'large',
           )
 
           return (
-            <div className={rowClass}>
+            <div className={rowClass} key={'project-list-row' + index}>
 
               {row.map((item: ProjectItem, index: number) => {
                 return (
@@ -75,6 +67,9 @@ const ProjectList: FC<Props> = ({ data, className }) => {
                     <Image 
                       src={item.preview} 
                       key={'project-list-' + item.id} 
+                      width={400}
+                      height={200}
+                      quality={100}
                       alt="" 
                     />
                   </Link>

@@ -8,6 +8,8 @@ import PageMenuSide from './PageMenuSide';
 const duration = 0.6;
 const transitionProperty = `${duration}s ease-in`;
 
+
+
 const transitionStyles = {
   kids: {
     defaultStyles: {width: '50vw', left:"-50%", transition: transitionProperty},

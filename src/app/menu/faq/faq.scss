@@ -1,0 +1,29 @@
+.faq {
+  border-color: var(--green);
+  h1 {
+    margin-bottom: 100px;
+  }
+  &-list {
+    &__row {
+      display: flex;
+      column-gap: 90px;
+      font-weight: 300;
+      color: #999999;
+      margin-bottom: 60px;
+      align-items: flex-start;
+      &:hover {
+        p {
+          color: var(--pink)
+        }
+      }
+      &-title {
+        font-size: 27px;
+        color: #21241F;
+        font-weight: 400;
+        width: 400px;
+        flex-shrink: 0;
+        line-height: 100%;
+      }
+    }
+  }
+}

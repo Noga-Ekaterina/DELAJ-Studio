@@ -17,8 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        <PageMenu />
-        
+        <PageMenu /> 
+        {/* <Hero /> */}
         {children}
       </body>
     </html>

@@ -21,6 +21,7 @@ export const courierNew = Font({
 
 export const circe = Font({
   src: [
+    {path: '../public/fonts/circe-light.ttf', weight: '300'},
     {path: '../public/fonts/circe.ttf', weight: '400'},
     {path: '../public/fonts/circe-extrabold.ttf', weight: '800'},
     {path: '../public/fonts/circe-bold.ttf', weight: '700'},

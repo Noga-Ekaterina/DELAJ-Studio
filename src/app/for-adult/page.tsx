@@ -37,6 +37,7 @@ import { FC } from 'react';
 // }
 
 const data: ProjectItem[] = [
+  { id: 11, preview: eleven },
   { id: 1, preview: first },
   { id: 2, preview: second },
   { id: 3, preview: third },

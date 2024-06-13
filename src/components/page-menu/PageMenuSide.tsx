@@ -6,7 +6,7 @@ import { IWithClass } from "@/types";
 import { observer } from "mobx-react-lite";
 import { usePathname, useRouter } from "next/navigation";
 
-type StyleObject = Record<string, string>
+type StyleObject = Record<string, string | number>
 
 interface Props {
   styles : {
@@ -37,7 +37,7 @@ const PageMenuSide: FC<Props> = observer(({path, styles, Component}) => {
     if (isThisPath) {
       changeMenuOpened(false);
     }
-  },[isThisPath])
+  }, [isThisPath, changeMenuOpened])
 
   return (
     <Transition nodeRef={ref} in={isMenuOpened || isThisPath} timeout={300}>

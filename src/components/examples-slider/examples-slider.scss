@@ -1,0 +1,22 @@
+.examples-slider {
+  max-width: 400px;
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 11px;
+    &-title {
+      color: var(--blue);
+      text-transform: uppercase;
+      font-size: 8px;
+      font-weight: 700;
+      line-height: 100%;
+    }
+  }
+  .swiper-slide {
+    height: 64px;
+    img {
+      height: 100%;
+    }
+  }
+}

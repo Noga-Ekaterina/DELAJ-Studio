@@ -1,0 +1,37 @@
+.ideas {
+  border-color: var(--green);
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &-mail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &-conditions {
+    max-width: 277px;
+    font-size: 10px;
+    line-height: 1.1em;
+    &__title {
+      text-transform: uppercase;
+      font-size: 17px;
+      margin-bottom: 16px;
+    }
+  }
+}
