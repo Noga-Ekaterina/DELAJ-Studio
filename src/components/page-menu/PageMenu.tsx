@@ -8,30 +8,28 @@ import PageMenuSide from './PageMenuSide';
 const duration = 0.6;
 const transitionProperty = `${duration}s ease-in`;
 
-
-
 const transitionStyles = {
   kids: {
-    defaultStyles: {width: '50vw', left:"-50%", transition: transitionProperty},
+    defaultStyles: {width: '50vw', left:"-50%" , transition: transitionProperty},
     onOpen : {
       entering: {width: '50vw', left: "0%"},
       entered: {width: '50vw', left: "0%"},
-      exiting:  { width: '50vw', left: "-50%" },
-      exited:  { width: '50vw', left: "-50%" },
+      exiting:  { width: '50vw', left: "-50%"},
+      exited:  { width: '50vw', left: "-50%"},
     },
     onCurrentPage : {
       entering: {width: '100vw', left: "0%"},
       entered: {width: '100vw', left: "0%", flexShrink: 0},
       exiting:  { width: '50vw', left: "0%"},
-      exited:  { width: '50vw', left: "0%" },
+      exited:  { width: '50vw', left: "0%"},
     },
   },
   adult: {
-    defaultStyles: {width: '50vw', right:"-50%", transition: transitionProperty},
+    defaultStyles: {width: '50vw', right:"-50%" , transition: transitionProperty},
     onOpen : {
       entering: {width: '50vw', right: "0%"},
       entered: {width: '50vw', right: "0%"},
-      exiting:  { width: '50vw', right: "-50%" },
+      exiting:  { width: '50vw', right: "-50%"},
       exited:  { width: '50vw', right: "-50%" },
     },
     onCurrentPage : {

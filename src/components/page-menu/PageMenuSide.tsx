@@ -40,7 +40,7 @@ const PageMenuSide: FC<Props> = observer(({path, styles, Component}) => {
   }, [isThisPath, changeMenuOpened])
 
   return (
-    <Transition nodeRef={ref} in={isMenuOpened || isThisPath} timeout={300}>
+    <Transition nodeRef={ref} in={isMenuOpened || isThisPath} timeout={0}>
       {state => (
         <div 
           className="page-menu__screen" 
