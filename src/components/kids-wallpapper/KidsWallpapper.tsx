@@ -21,7 +21,7 @@ const images = [
 
 const KidsWallpapper: FC = () => {
   const [imgList, setImgList] = useState<StaticImageData[]>([]);
-  const ref = useRef<HTMLDivElement>(document.querySelector('.kids-wallpapper'));
+  const ref = useRef<HTMLDivElement>(null);
   let rowsCount = 0;
 
   useEffect(() => {

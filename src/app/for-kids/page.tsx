@@ -9,10 +9,10 @@ import scetchBgImage from '../../../public/images/kids/heading-kids-scetch.png';
 import HeadingSection from '@/components/heading-section/HeadingSection';
 import KidsFooter from '@/components/kids-footer/KidsFooter';
 import KidsWallpapper from '@/components/kids-wallpapper/KidsWallpapper';
-import KidsProjectList from './KidsProjectList';
+import KidsProjectList from '../../components/project-list/KidsProjectList';
 
-const page: FC = () => {
-  return (
+const Page = () => {
+  return (    
     <ContentWrap className='for-kids'>
       <HeadingSection 
         title="детская анимация"
@@ -29,4 +29,4 @@ const page: FC = () => {
   );
 };
 
-export default page;
+export default Page;
