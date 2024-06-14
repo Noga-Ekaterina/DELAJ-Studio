@@ -19,8 +19,8 @@ const KidsFooter: FC = () => {
   return (
     <footer className={className}>
       <div className="footer-item kids-footer__item" id="kids-footer-blue">
-        <Link href="/" className='footer-link'>
-          Contact us
+        <Link href="/menu/contacts" className='footer-link'>
+          Контакты
         </Link>
         <ul className='kids-footer__item-list'>
           <li>Head <Link href="/">hello@delai.studio</Link></li>
@@ -34,8 +34,8 @@ const KidsFooter: FC = () => {
       </div>
 
       <div className="footer-item kids-footer__item" id="kids-footer-yellow">
-        <Link href="/" className='footer-link'>
-          career
+        <Link href="/menu/career" className='footer-link'>
+          Вакансии
         </Link>
         <ul>
           <li><Link href="/">Animator</Link></li>
@@ -49,9 +49,9 @@ const KidsFooter: FC = () => {
       </div>
 
       <div className="footer-item kids-footer__item" id="kids-footer-red">
-        <Link href="/" className='footer-link'>
+        <p className='footer-link'>
           заходите <br /> в <span>гости</span>
-        </Link>
+        </p>
         <div className="footer-socials">
           <Link href='/'>Be</Link>
           <Link href='/'>Vk</Link>
@@ -62,7 +62,7 @@ const KidsFooter: FC = () => {
 
       <div className="footer-item kids-footer__item" id="kids-footer-purple">
         <Link href="/" className='footer-link'>
-          About us
+          О нас
         </Link>
         <Image src={footerCarrot} alt=""/>
       </div>

@@ -6,6 +6,12 @@
   &__item {
     width: 20%;
 
+    a.footer-link {
+      &:hover {
+        
+      }
+    }
+
     &-list {
       font-size: 10px;
       line-height: 1.5em;
@@ -20,8 +26,9 @@
       background-color: #007BAD;
       .footer-item__image {
         height: 77px;
-        bottom: 23px;
+        bottom: 23px; 
         right: 30px;
+        width: 16.6%;
       }
     }
 

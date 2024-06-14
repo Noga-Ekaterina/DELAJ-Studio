@@ -1,5 +1,5 @@
 'use client';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, RefObject, useEffect, useRef, useState } from 'react';
 import './kids-wallpapper.scss';
 
 import fst from '../../../public/images/kids/wall-1.png';
@@ -19,14 +19,31 @@ const images = [
   fst, scd, thr, frt, fvt, sxt, svn, egh, nin,
 ]
 
+interface WallpapperImageProps{
+  src: StaticImageData
+  borderlineRef:  RefObject<HTMLDivElement>
+  containerRef: RefObject<HTMLDivElement>
+} 
+
+const WallpapperImage: FC<WallpapperImageProps> = (props) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <div ref={ref} className="kids-wallpapper__row">
+      <Image src={props.src} alt=''/>
+    </div>
+  );
+}
+
 const KidsWallpapper: FC = () => {
   const [imgList, setImgList] = useState<StaticImageData[]>([]);
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const boyRef = useRef<HTMLDivElement>(null);
   let rowsCount = 0;
 
   useEffect(() => {
-    if (ref.current) {
-      rowsCount = Math.floor((ref.current.clientHeight) / 100);
+    if (containerRef.current) {
+      rowsCount = Math.floor((containerRef.current.clientHeight) / 100);
       let count = 0;
       const result = [];
       for(let i = 0; i <= rowsCount; i++) {
@@ -42,21 +59,19 @@ const KidsWallpapper: FC = () => {
 
   return (
     <>
-    <div ref={ref} className='kids-wallpapper'>
-
+    <div ref={containerRef} className='kids-wallpapper'>
       {imgList.map((item, index) => {
         return (
-          <div 
-            className="kids-wallpapper__row" 
+          <WallpapperImage
+            borderlineRef={boyRef} 
+            containerRef={containerRef}
+            src={item} 
             key={'wallpapper-' + index}
-          >
-            <Image src={item} alt=''/>
-          </div>
+          />
         )
       })}
-
     </div>
-    <div className="kids-wallpapper__row last">
+    <div ref={boyRef} className="kids-wallpapper__row last">
       <Image src={boy} alt=""/>
     </div>
     </>

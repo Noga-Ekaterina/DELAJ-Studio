@@ -35,7 +35,6 @@ const ProjectList: FC<Props> = ({ data, className }) => {
       if (chunkSize === 3) {
         increase(2);
       } else {
-        increase(2);
         increase(3);
       }
     }

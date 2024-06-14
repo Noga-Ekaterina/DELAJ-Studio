@@ -2,28 +2,22 @@
   background-color: var(--text-gray);
   &__heading {
     color: #fff;
-    padding-bottom: 30px;
     h1 {
       position: relative;
       z-index: 2;
+      white-space: nowrap;
+      grid-row: 1 / 2;
     }
-    .heading-section {
-      margin-bottom: 30px;
-      &__scetch {
-        position: relative;
-      }
-      &__scetch-bg {
-        position: absolute;
-        height: 294px;
-        bottom: -30px;
-        z-index: 1;
-      }
-      &__scetch-image {
-        position: absolute;
-        z-index: 2;
-        bottom: 30px;
-        left: -40px;
-      }
+
+    img {
+      grid-row: 1 / 3;
+      grid-column: 2 / 3;
+      top: 0 !important;
+      align-self: end;
+    }
+
+    p {
+      padding-bottom: 30px;
     }
   }
 }

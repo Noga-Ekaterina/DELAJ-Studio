@@ -54,7 +54,19 @@ const data = {
     },
     {
       id : 5,
+      preview: '/images/data/kids-data/12.png',
+    },
+    {
+      id : 5,
       preview: '/images/data/kids-data/15.png',
+    },
+    {
+      id : 5,
+      preview: '/images/data/kids-data/13.png',
+    },
+    {
+      id : 5,
+      preview: '/images/data/kids-data/11.png',
     },
   ]
 };

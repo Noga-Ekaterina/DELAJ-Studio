@@ -1,4 +1,6 @@
 /* Reset and base styles  */
+@import './mixins.scss';
+
 :root {
 	--main-blue: #007BAD;
 	--yellow: #DBFF00;
@@ -105,6 +107,9 @@ legend {
 	margin: 0 auto;
 	padding: 0 30px;
 	max-width: 1300px;
+	@media screen and (max-width: 1199px) {
+		padding: 0 15px;
+	}
 }
 
 // footer

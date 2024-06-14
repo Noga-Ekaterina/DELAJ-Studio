@@ -5,8 +5,8 @@ import KidsScreen from "../kids-screen/KidsScreen";
 import './page-menu.scss';
 import PageMenuSide from './PageMenuSide';
 
-const duration = 0.6;
-const transitionProperty = `${duration}s ease-in`;
+const duration = 0.7;
+const transitionProperty = `${duration}s cubic-bezier(0.16, 1, 0.3, 1);`;
 
 const transitionStyles = {
   kids: {

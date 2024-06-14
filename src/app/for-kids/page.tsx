@@ -3,8 +3,7 @@ import './for-kids.scss';
 import ContentWrap from '@/components/content-wrap/ContentWrap';
 
 //Images
-import frogImage from '../../../public/images/kids/heading-frog.png';
-import scetchBgImage from '../../../public/images/kids/heading-kids-scetch.png';
+import headingImage from '../../../public/images/kids/heading.png';
 
 import HeadingSection from '@/components/heading-section/HeadingSection';
 import KidsFooter from '@/components/kids-footer/KidsFooter';
@@ -16,8 +15,7 @@ const Page = () => {
     <ContentWrap className='for-kids'>
       <HeadingSection 
         title="детская анимация"
-        image={frogImage}
-        backgroundImage={scetchBgImage}
+        image={headingImage}
         className='for-kids__heading'
       />
       <div className="for-kids__projects-wrap">

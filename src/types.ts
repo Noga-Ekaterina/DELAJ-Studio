@@ -13,5 +13,5 @@ export interface IWithChildren {
 
 export interface ProjectItem {
   id: number
-  preview: StaticImageData
+  preview: string
 }

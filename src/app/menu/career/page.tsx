@@ -24,7 +24,7 @@ const page = () => {
   return (
     <div className='menu-inner career'>
       <div className="menu-section">
-        <h1 className='menu-link'>Карьера</h1>
+        <h1 className='menu-link'>Вакансии</h1>
         <div className="career-list">
           {data.map((item, index) => (
             <Link href='/' className="career-item" key={'career-item' + index}>

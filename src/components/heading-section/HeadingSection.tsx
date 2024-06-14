@@ -8,7 +8,6 @@ import { circe, halvar } from '@/fonts';
 interface Props extends IWithClass {
   title: string
   image: StaticImageData
-  backgroundImage: StaticImageData
 }
 
 const HeadingSection: FC<Props> = (props) => {
@@ -24,18 +23,11 @@ const HeadingSection: FC<Props> = (props) => {
           <p>А еще мы осуществляем помощь в производстве на разных этапах: от сценария до звукорежиссуры.</p>
         </div>
 
-        <div className="heading-section__scetch">
           <Image 
             src={props.image} 
-            className='heading-section__scetch-image' 
+            className='heading-section__image' 
             alt="" 
           />
-          <Image 
-            src={props.backgroundImage} 
-            className='heading-section__scetch-bg' 
-            alt="" 
-          />
-        </div>
       </div>
     </section>
   );

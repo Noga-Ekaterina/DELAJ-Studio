@@ -36,7 +36,7 @@ const KidsScreen: FC<Props> = (props) => {
             <div 
               className="picture-content"
               style={{
-                unmounted: {height: '100%'}, 
+                unmounted: {height: '100%', transition: '0.7s cubic-bezier(0.16, 1, 0.3, 1);'}, 
                 entering: {height: 'calc(100vh * 2 / 3)'},
                 entered: {height: 'calc(100vh * 2 / 3)', transition: '0s'},
                 exiting:  { height: '100%'},
@@ -67,11 +67,11 @@ const KidsScreen: FC<Props> = (props) => {
               ref={logoRef}
               className="kids-screen__picture-logo"
               style={{
-                unmounted: {width: '50vw', left: '0%', transition: '0.7s 0.2s'}, 
-                entering: {width: '60vw', left: '25%', transition: '0.7s 0.2s'},
-                entered: {width: '60vw', left: '25%', transition: '0s'},
-                exiting:  {width: '50vw', left: '0%', transition: '0.7s 0.2s'},
-                exited:  { width: '50vw', left: '0%', transition: '0s'},
+                unmounted: {width: '50vw', left: '0%', transition: '0.7s cubic-bezier(0.16, 1, 0.3, 1); 0.2s'}, 
+                entering: {width: '60vw', left: '25%', },
+                entered: {width: '60vw', left: '25%', },
+                exiting:  {width: '50vw', left: '0%', },
+                exited:  { width: '50vw', left: '0%', },
               }[state]}
             >
               <Image src={logo} alt='' />

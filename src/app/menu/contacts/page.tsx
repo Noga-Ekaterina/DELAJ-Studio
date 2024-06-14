@@ -44,7 +44,7 @@ const page = () => {
           </Link>
         </div>
         <div className="menu-mail">
-          <Link href="/">hello@delai.studio</Link>
+          <Link href="mailto:hello@delai.studio">hello@delai.studio</Link>
           <p>По всем вопросам, связанным с разработкой проектов или сотрудничеством, пишите нам на почту </p>
         </div>
         <Image className='contacts-bg' src={rabbit} alt=""/>

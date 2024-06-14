@@ -23,24 +23,27 @@
       font-size: 15px;
       text-decoration: underline;
       line-height: 105%;
+      display: flex;
+      align-items: center;
       img {
         margin-right: 5px;  
+        height: 14px;
       }
-      &#contacts-vk {
-        color: #3177F6;
-      }
-      &#contacts-tg {
-        color: #4F9FDF;
-      }
-      &#contacts-be {
-        color: #1E57F6;
-      }
-      &#contacts-fb {
-        color: #4A598F;
-      }
-      &#contacts-vi {
-        color: #52BAFF;
-      }
+      // &#contacts-vk {
+      //   color: #3177F6;
+      // }
+      // &#contacts-tg {
+      //   color: #4F9FDF;
+      // }
+      // &#contacts-be {
+      //   color: #1E57F6;
+      // }
+      // &#contacts-fb {
+      //   color: #4A598F;
+      // }
+      // &#contacts-vi {
+      //   color: #52BAFF;
+      // }
     }
   }
 
