@@ -20,7 +20,6 @@ const Page = () => {
       />
       <div className="for-kids__projects-wrap">
         <KidsProjectList />
-        <KidsWallpapper />
       </div>
       <KidsFooter />
     </ContentWrap>

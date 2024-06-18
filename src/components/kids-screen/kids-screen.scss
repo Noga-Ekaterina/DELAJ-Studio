@@ -5,17 +5,19 @@
   grid-template-rows: repeat(3, 1fr);
   height: 100%;
   img {
-    width: auto;
     object-fit: contain;
     object-position: bottom;
+    max-width: unset;
+    height: auto;
   }
   &__text-logo {
-    margin-top: 12px;
     color: #fff;
     font-size: 10px;
+    bottom: -30px;
   }
   &__picture {
     overflow: hidden;
+    font-size: 0;
     &-logo {
       display: flex;
       flex-direction: column;
@@ -24,8 +26,14 @@
       position: relative;
       height: 100%;
       padding: 0 20px;
+      bottom: 5%;
+      &-wrap {
+        position: relative;
+      }
       img {
-        height: 19vh;
+        transition: width var(--transition);
+        width: min(40.5vw);
+        height: auto;
       }
     }
 
@@ -39,24 +47,22 @@
         display: flex;
         justify-content: center;
         background-color: #211E1D;
-        transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
       img {
+        width: 20vw;
+        height: auto; 
         margin-top: auto;
-        height: calc(100vh * 2 / 3); 
-        position: relative;
-
       }
     }
 
     &#kids-screen-picture {
       grid-column: 2 / 4;
       display: flex;
-      align-items: flex-end;
+      justify-content: center;
       img {
         object-fit: cover;
-        width: 100%;
-        height: 100%;
+        min-width: 101%;
+        height: 101%;
       }
     }
 
@@ -82,10 +88,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 20px 0;
       img {
-        height: 65%;
+        width: 65%;
         position: relative;
         right: 2%;
+        max-height: 100%;
       }
     } 
 
@@ -95,19 +103,23 @@
       overflow: visible;
       img {
         position: absolute;
-        right: 0;
         bottom: 0;
-        height: calc(100% + 25px);
+        right: -10%;
+        width: 20vw;
+        height: auto;
+        max-height: calc(100% + 25px);
+        object-position: bottom right;
       }
     }
 
     &#kids-screen-red {
       background-color: #F12B00;
       grid-column: 3 / 5;
-      padding: 24px;
+      padding: 6%;
       position: relative;
       .red-picture-logo {
-        height: 24.6%;
+        height: auto;
+        width: 25%;
       }
       .red-picture-car-small {
         position: absolute;
@@ -134,14 +146,24 @@
       justify-content: center;
       align-items: flex-end;
       img {
-        height: 95%;
+        height: auto;
+        max-height: 95%;
+        width: 20vw;
         position: relative;
-        right: -3%;
+        flex-shrink: 0;
       }
     }
   }
 
   &.opened {
+    .kids-screen__picture-logo-wrap {
+      img {
+        width: 49vw;
+      }
+    }
+    .kids-screen__text-logo {
+      font-size: 13px;
+    }
     .kids-screen__picture {
       &#kids-screen-red {
         .red-picture-car-small {
@@ -155,12 +177,22 @@
     }
   }
 
-  @media screen and (min-width:1680px) {
+  @media screen and (min-width: 1680px) {
+    &__text-logo {
+      font-size: 14px;
+    }
+    &__picture {
+      &#kids-screen-blue {
+        img {
+          right: 0;
+        }
+      }
+    }
     &.opened {
       .kids-screen {
         &__text-logo {
           font-size: 19px;
-        }
+        }   
       }
     }
   }

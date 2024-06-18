@@ -1,5 +1,5 @@
 'use client';
-import { FC, RefObject, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import './kids-wallpapper.scss';
 
 import fst from '../../../public/images/kids/wall-1.png';
@@ -14,22 +14,21 @@ import nin from '../../../public/images/kids/wall-9.png';
 import boy from '../../../public/images/kids/wall-boy.png';
 
 import Image, { StaticImageData } from 'next/image';
+import { IWithClass } from '@/types';
+import cn from 'classnames';
+import getBreakpoint from '@/utils/getBreakpoint';
 
 const images = [
   fst, scd, thr, frt, fvt, sxt, svn, egh, nin,
 ]
 
-interface WallpapperImageProps{
+interface WallpapperImageProps extends IWithClass{
   src: StaticImageData
-  borderlineRef:  RefObject<HTMLDivElement>
-  containerRef: RefObject<HTMLDivElement>
 } 
 
 const WallpapperImage: FC<WallpapperImageProps> = (props) => {
-  const ref = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={ref} className="kids-wallpapper__row">
+    <div className={cn("kids-wallpapper__row", props.className)}>
       <Image src={props.src} alt=''/>
     </div>
   );
@@ -38,12 +37,20 @@ const WallpapperImage: FC<WallpapperImageProps> = (props) => {
 const KidsWallpapper: FC = () => {
   const [imgList, setImgList] = useState<StaticImageData[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  const boyRef = useRef<HTMLDivElement>(null);
   let rowsCount = 0;
 
   useEffect(() => {
     if (containerRef.current) {
-      rowsCount = Math.floor((containerRef.current.clientHeight) / 100);
+      const clientBreakpoint = getBreakpoint(containerRef.current.clientWidth);
+      const rowHeight = {
+        'max': 250,
+        'lg' : 200,
+        'md' : 170,
+        'sm' : 120,
+      }[clientBreakpoint];
+      console.log(clientBreakpoint)
+      rowsCount = Math.floor((containerRef.current.clientHeight) / rowHeight);
+
       let count = 0;
       const result = [];
       for(let i = 0; i <= rowsCount; i++) {
@@ -61,18 +68,17 @@ const KidsWallpapper: FC = () => {
     <>
     <div ref={containerRef} className='kids-wallpapper'>
       {imgList.map((item, index) => {
+        const src = (index + 1 === imgList.length) ? boy : item;
+        const className = (index + 1 === imgList.length - 1) ? 'pre-last' : '';
+
         return (
           <WallpapperImage
-            borderlineRef={boyRef} 
-            containerRef={containerRef}
-            src={item} 
+            src={src} 
+            className={className}
             key={'wallpapper-' + index}
           />
         )
       })}
-    </div>
-    <div ref={boyRef} className="kids-wallpapper__row last">
-      <Image src={boy} alt=""/>
     </div>
     </>
   );

@@ -11,6 +11,9 @@
 	--green: #8BE200;
 
 	--text-gray: #1D1D1D;
+	--transition:  
+			0.7s 
+			cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -54,7 +57,7 @@ ul, ul li {
 }
 
 img {
-	display: inline-block;
+	display: block;
 	width: auto;
 	max-width: 100%;
 	object-fit: cover;
@@ -103,13 +106,37 @@ legend {
 	display: block;
 }
 
+.main-blue {
+	color: var(--main-blue);
+}
+
+.red {
+	color: var(--red);
+}
+
+.yellow {
+	color: var(--yellow);
+}
+
+.purple {
+	color: var(--purple);
+}
+
 .container {
 	margin: 0 auto;
 	padding: 0 30px;
-	max-width: 1300px;
+	max-width: 1330px;
 	@media screen and (max-width: 1199px) {
-		padding: 0 15px;
+		padding: 0 20px;
 	}
+}
+
+.logo-subtitle {
+	position: absolute;
+	right: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
 }
 
 // footer
@@ -120,6 +147,10 @@ footer {
 
 	@media screen and (min-width: 1680px) {
 		font-size: 19px;
+	}
+
+	@media screen and (max-width: 1025px) {
+		font-size: 7px;
 	}
 }
 
@@ -156,14 +187,18 @@ footer {
 	}
 	
 	&-item {
+		padding: 30px 0;
 		height: 100%;
 		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: flex-start;
 		row-gap: 13px;
 		position: relative;
-		padding: 37px 23px 20px;
+		&__content {
+      display: flex;
+      flex-direction: column;
+			justify-content: space-between;
+			height: 100%;
+      gap: 13px;
+    }
 		ul {
 			flex: 1;
 			line-height: 1.2em;
@@ -172,14 +207,16 @@ footer {
 			position: absolute;
 		}
 		&__logo {
-			height: 23px;
+			height: 24px;
 		}
 	}
 
 	@media screen and (min-width: 1680px) {
 		&-item {
-			padding: 60px 30px 50px;
-			row-gap: 19px;
+			&__content {
+				row-gap: 19px;
+			}
+			padding: 50px 0;
 			&__logo {
 				height: 38px;
 			}
@@ -188,20 +225,19 @@ footer {
 			font-size: 48px;
 		}
 	}
-}
 
-.main-blue {
-	color: var(--main-blue);
-}
-
-.red {
-	color: var(--red);
-}
-
-.yellow {
-	color: var(--yellow);
-}
-
-.purple {
-	color: var(--purple);
+	@media screen and (max-width: 1025px){
+		&-item {
+			padding: 23px 0;
+			&__content {
+				row-gap: 10px;
+			}
+			&__logo {
+				height: 15px;
+			}
+		}
+		&-link {
+			font-size: 19px;
+		}
+	}
 }

@@ -4,13 +4,11 @@ import AdultScreen from "../adult-screen/AdultScreen";
 import KidsScreen from "../kids-screen/KidsScreen";
 import './page-menu.scss';
 import PageMenuSide from './PageMenuSide';
+import { transitionStyles } from "@/vars";
 
-const duration = 0.7;
-const transitionProperty = `${duration}s cubic-bezier(0.16, 1, 0.3, 1);`;
-
-const transitionStyles = {
+const styles = {
   kids: {
-    defaultStyles: {width: '50vw', left:"-50%" , transition: transitionProperty},
+    defaultStyles: {width: '50vw', left:"-50%" , transition: transitionStyles.transition},
     onOpen : {
       entering: {width: '50vw', left: "0%"},
       entered: {width: '50vw', left: "0%"},
@@ -25,7 +23,7 @@ const transitionStyles = {
     },
   },
   adult: {
-    defaultStyles: {width: '50vw', right:"-50%" , transition: transitionProperty},
+    defaultStyles: {width: '50vw', right:"-50%" , transition: transitionStyles.transition},
     onOpen : {
       entering: {width: '50vw', right: "0%"},
       entered: {width: '50vw', right: "0%"},
@@ -49,14 +47,14 @@ const PageMenu = () => {
   return (
     <nav className="page-menu">
       <PageMenuSide 
-        styles={transitionStyles.kids}
+        styles={styles.kids}
         path="/for-kids"
         Component={KidsScreen}
       >
         
       </PageMenuSide>
       <PageMenuSide 
-        styles={transitionStyles.adult}
+        styles={styles.adult}
         path="/for-adult"
         Component={AdultScreen}
       >

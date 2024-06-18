@@ -15,6 +15,7 @@ export const courierPrime = Font({
 
 export const courierNew = Font({
   src: [
+    {path: '../public/fonts/courier-new.otf', weight: '400'},
     {path: '../public/fonts/courier-new-bold.otf', weight: '700'},
   ]
 })

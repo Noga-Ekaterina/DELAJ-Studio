@@ -15,3 +15,5 @@ export interface ProjectItem {
   id: number
   preview: string
 }
+
+export type Breakpoint = 'max' | 'lg' | 'md' | 'sm' 

@@ -17,6 +17,7 @@ import car from '../../../public/images/kids/screen-red-car.png';
 import TextLogo from '../text-logo/TextLogo';
 
 import { Transition } from 'react-transition-group';
+import { transitionStyles } from '@/vars';
  
 interface Props {
   isOpened: boolean
@@ -36,12 +37,15 @@ const KidsScreen: FC<Props> = (props) => {
             <div 
               className="picture-content"
               style={{
-                unmounted: {height: '100%', transition: '0.7s cubic-bezier(0.16, 1, 0.3, 1);'}, 
-                entering: {height: 'calc(100vh * 2 / 3)'},
-                entered: {height: 'calc(100vh * 2 / 3)', transition: '0s'},
-                exiting:  { height: '100%'},
-                exited:  { height: '100%', transition: '0s'},
-              }[state]}
+                ...transitionStyles,
+                ...{
+                  unmounted: {height: '100%'}, 
+                  entering: {height: 'calc(100vh * 2 / 3)'},
+                  entered: {height: 'calc(100vh * 2 / 3)'},
+                  exiting:  { height: '100%'},
+                  exited:  { height: '100%'},
+                }[state]
+              }}
             >
               <Image src={blackGirlPicture} alt=''/>
             </div>
@@ -67,15 +71,20 @@ const KidsScreen: FC<Props> = (props) => {
               ref={logoRef}
               className="kids-screen__picture-logo"
               style={{
-                unmounted: {width: '50vw', left: '0%', transition: '0.7s cubic-bezier(0.16, 1, 0.3, 1); 0.2s'}, 
-                entering: {width: '60vw', left: '25%', },
-                entered: {width: '60vw', left: '25%', },
-                exiting:  {width: '50vw', left: '0%', },
-                exited:  { width: '50vw', left: '0%', },
-              }[state]}
+                ...transitionStyles,
+                ...{
+                  unmounted: {width: '50vw', left: '0%'}, 
+                  entering: {width: '60vw', left: '25%', },
+                  entered: {width: '60vw', left: '25%', },
+                  exiting:  {width: '50vw', left: '0%', },
+                  exited:  { width: '50vw', left: '0%', },
+                }[state]
+              }}
             >
-              <Image src={logo} alt='' />
-              <TextLogo className='kids-screen__text-logo' />
+              <div className="kids-screen__picture-logo-wrap">
+                <Image src={logo} alt='' />
+                <TextLogo className='kids-screen__text-logo logo-subtitle' />
+              </div>
             </div>
           )}
         </Transition>

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import './project-list.scss';
 
 import Link from 'next/link';
@@ -8,9 +8,10 @@ import cn from 'classnames';
 
 interface Props extends IWithClass{
   data: ProjectItem[]
+  Wallpapper?: FC
 }
 
-const ProjectList: FC<Props> = ({ data, className }) => {
+const ProjectList: FC<Props> = ({ data, className, Wallpapper }) => {
   
   const getModifiedList = (data: any[]) => {
     let result: any[] = [];
@@ -78,6 +79,8 @@ const ProjectList: FC<Props> = ({ data, className }) => {
             </div>
           )
         })}
+
+        {Wallpapper && <Wallpapper />}
       </div>
     </div>
   );

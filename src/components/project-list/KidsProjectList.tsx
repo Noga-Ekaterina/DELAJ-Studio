@@ -1,5 +1,6 @@
 import ProjectList from '@/components/project-list/ProjectList';
 import { ProjectItem } from '@/types';
+import KidsWallpapper from '../kids-wallpapper/KidsWallpapper';
 
 const projects: ProjectItem[] = [
   {
@@ -75,7 +76,7 @@ const projects: ProjectItem[] = [
 const KidsProjectList = () => {
   
   return (
-    <ProjectList className="for-kids__projects" data={projects}/>
+    <ProjectList className="for-kids__projects" data={projects} Wallpapper={KidsWallpapper}/>
   );
 };
 

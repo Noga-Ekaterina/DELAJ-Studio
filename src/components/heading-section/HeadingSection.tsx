@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image';
 import { FC } from 'react';
 import cn from 'classnames';
 import './heading-section.scss';
-import { circe, halvar } from '@/fonts';
+import { halvar, courierNew } from '@/fonts';
 
 interface Props extends IWithClass {
   title: string
@@ -18,7 +18,7 @@ const HeadingSection: FC<Props> = (props) => {
       <div className="container">
         <h1 className={halvar.className}>{props.title}</h1>
         
-        <div className={cn('heading-section__text', circe.className)}>
+        <div className={cn('heading-section__text', courierNew.className)}>
           <p>ДЕЛАЙ — профессиональная анимационная студия полного цикла и анимационное агентство, специализируемся на создании различного анимационного контента. Наша команда занимается полным циклом производства анимационных коротких метров, полных метров и сериалов в 2D и 3D технике.</p>
           <p>А еще мы осуществляем помощь в производстве на разных этапах: от сценария до звукорежиссуры.</p>
         </div>

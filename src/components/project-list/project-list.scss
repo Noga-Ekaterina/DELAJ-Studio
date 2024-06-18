@@ -1,13 +1,11 @@
 .project-list {
-  position: relative;
-  z-index: 2;
   .container {
-    max-width: 1496px;
+    max-width: 1506px;
     padding: 0 112px;
   }
   &__row {
-    gap: 14px;
-    padding-bottom: 14px;
+    gap: 10px;
+    padding-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     aspect-ratio: 1000 / 180;
@@ -25,10 +23,27 @@
     }
   }
 
-  @media screen and (max-width: 1199px) {
+  @media screen and (min-width: 1680px) {
+    &__row {
+      gap: 14px;
+      padding-bottom: 14px;
+    }
+  }
+
+  @media screen and (max-width: 1025px) {
+    .container {
+      padding: 0 70px;
+    }
     &__row {
       padding-bottom: 9px;
       column-gap: 9px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    &__row {
+      padding-bottom: 6px;
+      column-gap: 6px;
     }
   }
 }

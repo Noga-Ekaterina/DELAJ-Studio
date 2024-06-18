@@ -4,78 +4,69 @@
   background-color: #000;
   display: flex;
   align-items: center;
-  justify-content: center;
   &__logo-wrap {
     width: 100%;
-    height: 100% / 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 20px;
     position: relative;
-    bottom: 22px;
+    bottom: 2%;
+    display: flex;
+    justify-content: center;
   }
 
   &__text-logo {
     font-size: 14px;
     color: #fff;
+    &-wrap {
+      top: 69%;
+    }
   }
 
   &__big-logo {
-    width: 465px;
+    width: 38.75vw;
     height: auto;
+    svg {
+      width: 100%;
+      height: auto;
+      path {
+        fill: #fff;
+      }
+    }
   }
 
   &__jap-logo {
-    max-height: 40px;
-  }
-
-  &__bottom-text {
-    color: #fff;
-    max-width: 220px;
-    position: absolute;
-    bottom: 40px;
-    left: 40px;
-    p {
-      font-size: 10px;
-      &:first-child {
-        font-size: 12px;
-        margin-bottom: 8px;
-      }
+    width: 14.2%;
+    height: auto;
+    &-wrap {
+      bottom: 66.65%;
     }
   }
 
   &__bandit {
     position: absolute;
     bottom: 0;
-    width: 350px;
-    height: auto;
+    height: 57%;
   }
 
   &.opened {
     .adult-screen__jap-logo {
-      max-height: 123px;
+      width: 10.25%;
     }
     .adult-screen__big-logo {
       width: 100%;
-      height: auto;
     }
-    .adult-screen__bottom-text {
-      max-width: 300px;
-      p {
-        font-size: 13px;
-        line-height: 140%;
-        &:first-child {
-          font-size: 16px;
-        }
-      }
+    .adult-screen__text-logo {
+      font-size: 20px;
     }
-  }
+  } 
 
   @media screen and (min-width: 1680px) {
-    &__big-logo {
-      width: 500px;
+    &__text-logo {
+      font-size: 16px;
+    }
+
+    &.opened {
+      .adult-screen__text-logo {
+        font-size: 31px;
+      }
     }
   }
 }
