@@ -1,6 +1,6 @@
 .page-menu {
   display: flex;
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100vh;
   position: relative;
   &__screen {
@@ -9,5 +9,15 @@
     bottom: 0;
     overflow: hidden; 
     flex-shrink: 1;
+  }
+
+  @media screen and (max-width: 1024px) {
+    &__screen {
+      right: 0;
+      left: 0;
+      top: auto;
+      bottom: auto;
+      width: 100%;
+    }
   }
 }

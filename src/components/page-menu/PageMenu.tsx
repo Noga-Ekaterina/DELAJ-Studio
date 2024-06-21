@@ -3,39 +3,73 @@ import { usePathname } from "next/navigation";
 import AdultScreen from "../adult-screen/AdultScreen";
 import KidsScreen from "../kids-screen/KidsScreen";
 import './page-menu.scss';
-import PageMenuSide from './PageMenuSide';
+import PageMenuScreen from './PageMenuScreen';
 import { transitionStyles } from "@/vars";
 
 const styles = {
-  kids: {
-    defaultStyles: {width: '50vw', left:"-50%" , transition: transitionStyles.transition},
-    onOpen : {
-      entering: {width: '50vw', left: "0%"},
-      entered: {width: '50vw', left: "0%"},
-      exiting:  { width: '50vw', left: "-50%"},
-      exited:  { width: '50vw', left: "-50%"},
+  largeScreen: {
+    kids: {
+      defaultStyles: {width: '50vw', left:"-50%" , transition: transitionStyles.transition},
+      onOpen : {
+        entering: {width: '50vw', left: "0%"},
+        entered: {width: '50vw', left: "0%"},
+        exiting:  { width: '50vw', left: "-50%"},
+        exited:  { width: '50vw', left: "-50%"},
+      },
+      onCurrentPage : {
+        entering: {width: '100vw', left: "0%"},
+        entered: {width: '100vw', left: "0%", flexShrink: 0},
+        exiting:  { width: '50vw', left: "0%"},
+        exited:  { width: '50vw', left: "0%"},
+      },
     },
-    onCurrentPage : {
-      entering: {width: '100vw', left: "0%"},
-      entered: {width: '100vw', left: "0%", flexShrink: 0},
-      exiting:  { width: '50vw', left: "0%"},
-      exited:  { width: '50vw', left: "0%"},
-    },
+    adult: {
+      defaultStyles: {width: '50vw', right:"-50%" , transition: transitionStyles.transition},
+      onOpen : {
+        entering: {width: '50vw', right: "0%"},
+        entered: {width: '50vw', right: "0%"},
+        exiting:  { width: '50vw', right: "-50%"},
+        exited:  { width: '50vw', right: "-50%" },
+      },
+      onCurrentPage : {
+        entering: {width: '100vw', right: "0%"},
+        entered: {width: '100vw', right: "0%", flexShrink: 0},
+        exiting:  { width: '50vw', right: "0%"},
+        exited:  { width: '50vw', right: "0%"},
+      },
+    }
   },
-  adult: {
-    defaultStyles: {width: '50vw', right:"-50%" , transition: transitionStyles.transition},
-    onOpen : {
-      entering: {width: '50vw', right: "0%"},
-      entered: {width: '50vw', right: "0%"},
-      exiting:  { width: '50vw', right: "-50%"},
-      exited:  { width: '50vw', right: "-50%" },
+  mediumScreen: {
+    kids: {
+      defaultStyles: {height: '50vh', top: '-50%', transition: transitionStyles.transition},
+      onOpen : {
+        entering: {height: '50vh', top: "0%"},
+        entered: {height: '50vh', top: "0%"},
+        exiting:  { height: '50vh', top: "-50%"},
+        exited:  { height: '50vh', top: "-50%"},
+      },
+      onCurrentPage : {
+        entering: { height: '100vh', top: "0%"},
+        entered: { height: '100vh', top: "0%", flexShrink: 0},
+        exiting:  { height: '50vh', top: "0%"},
+        exited:  { height: '50vh', top: "0%"},
+      },
     },
-    onCurrentPage : {
-      entering: {width: '100vw', right: "0%"},
-      entered: {width: '100vw', right: "0%", flexShrink: 0},
-      exiting:  { width: '50vw', right: "0%"},
-      exited:  { width: '50vw', right: "0%"},
-    },
+    adult: {
+      defaultStyles: { height: '50vh', bottom:"-50%" , transition: transitionStyles.transition},
+      onOpen : {
+        entering: { height: '50vh', bottom: "0%"},
+        entered: { height: '50vh', bottom: "0%"},
+        exiting:  { height: '50vh', bottom: "-50%"},
+        exited:  { height: '50vh', bottom: "-50%" },
+      },
+      onCurrentPage : {
+        entering: { height: '100vh', bottom: "0%"},
+        entered: { height: '100vh', bottom: "0%", flexShrink: 0},
+        exiting:  { height: '50vh', bottom: "0%"},
+        exited:  { height: '50vh', bottom: "0%"},
+      },
+    }
   }
 }
 
@@ -46,19 +80,19 @@ const PageMenu = () => {
 
   return (
     <nav className="page-menu">
-      <PageMenuSide 
-        styles={styles.kids}
+      <PageMenuScreen 
+        styles={styles.mediumScreen.kids}
         path="/for-kids"
         Component={KidsScreen}
       >
         
-      </PageMenuSide>
-      <PageMenuSide 
-        styles={styles.adult}
+      </PageMenuScreen>
+      <PageMenuScreen 
+        styles={styles.mediumScreen.adult}
         path="/for-adult"
         Component={AdultScreen}
       >
-      </PageMenuSide>
+      </PageMenuScreen>
     </nav>
   );
 };
