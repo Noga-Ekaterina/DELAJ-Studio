@@ -81,14 +81,14 @@ const PageMenu = () => {
   return (
     <nav className="page-menu">
       <PageMenuScreen 
-        styles={styles.mediumScreen.kids}
+        styles={styles.largeScreen.kids}
         path="/for-kids"
         Component={KidsScreen}
       >
         
       </PageMenuScreen>
       <PageMenuScreen 
-        styles={styles.mediumScreen.adult}
+        styles={styles.largeScreen.adult}
         path="/for-adult"
         Component={AdultScreen}
       >
