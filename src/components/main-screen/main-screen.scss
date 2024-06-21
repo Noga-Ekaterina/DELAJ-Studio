@@ -7,15 +7,16 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  padding: 0 20px;
   z-index: -1;
 
   &__logo {
-    height: 54rem;
+    width: min(218px, 100%);
   }
 
   &__language {
     position: absolute;
-    bottom: 60rem;
+    bottom: 60px;
     align-items: flex-start;
     text-transform: uppercase;
     font-size: 20rem;
@@ -29,5 +30,11 @@
   &__arrow {
     rotate: 90deg;
     transition: var(--transition);
+  }
+
+  @media screen and (max-width: 1199px) {
+    &__language {
+      font-size: 20px;
+    }
   }
 }
