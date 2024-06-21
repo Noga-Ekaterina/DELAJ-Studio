@@ -52,18 +52,19 @@ const page = () => {
         </section>
 
         <section className='about-hero'>
-          <div className="about-hero__column">
-            <Image src={aboutHero} alt="" />
+            
+            <Image className="about-hero__picture" src={aboutHero} alt="" />
+          
+            <div className='about-hero__paragraph'>
+              <p>Студия образовалась в 2017 году командой профессионалов из CG индустрии и анимации. За нашими плечами участие в больших международных и российских проектах. </p>
+              <p> Мы сотрудничаем с крупными брендами, агентствами и киностудиями.</p>
+            </div>
+            
             <div className="about-text">
               <h2 className={halvar.className}>Что мы <br/>делаем?</h2>
               <p>Мы хотим вам показать подробный процесс работы над анимационным роликом в технике 2D рисованной анимации и аниме. Здесь собраны самые мельчайшие нюансы, дабы продемонстрировать, какие этапы и подэтапы пройдет проект прежде чем обрести свои финальные черты.</p>
             </div>
-          </div>
-          <div className="about-hero__column">
-            <p>Студия образовалась в 2017 году командой профессионалов из CG индустрии и анимации. За нашими плечами участие в больших международных и российских проектах. 
-            Мы сотрудничаем с крупными брендами, агентствами и киностудиями.</p>
-            <Image src={aboutHeroSketch} alt="" />
-          </div>
+            <Image className='about-hero__sketch' src={aboutHeroSketch} alt="" />
         </section>
 
         <section className='about-animation'>
@@ -104,9 +105,9 @@ const page = () => {
       
       <div className="container">
         <section className='about-work'>
-          <Image src={aboutSketch} alt=""/>
+          <Image className='about-work__sketch' src={aboutSketch} alt=""/>
           <div className="about-text">
-            <h2>как мы работаем?</h2>
+            <h2 className={halvar.className}>как мы <br/>работаем?</h2>
             <p>Мы хотим вам показать подробный процесс работы над анимационным роликом в технике 2D рисованной анимации и аниме. Здесь собраны самые мельчайшие нюансы, дабы продемонстрировать, какие этапы и подэтапы пройдет проект прежде чем обрести свои финальные черты.</p>
           </div>
         </section>
@@ -154,9 +155,7 @@ const page = () => {
             </div>
           ))}
         </div>
-      </section>
-
-      <MenuFooter />
+      </section> 
     </div>
   );
 };

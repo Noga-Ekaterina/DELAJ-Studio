@@ -11,16 +11,19 @@ import fb from '../../../../public/images/modals/Fb.svg';
 import vi from '../../../../public/images/modals/Vi.svg';
 import tg from '../../../../public/images/modals/Tg.svg';
 import be from '../../../../public/images/modals/be.svg';
-import rabbit from '../../../../public/images/modals/contacts-bg.png';
+import rabbit from '../../../../public/images/modals/contacts-bg.svg';
 
 import Image from 'next/image';
+import cn from 'classnames';
 
 const page = () => {
   return (
     <div className='menu-inner contacts'>
-      <div className="menu-section contacts-content">
+      <div className="menu-section">
         <h1 className='menu-link'>Контакты</h1>
-        <h2 className={halvar.className}>заходите <br />в гости!</h2>
+      </div>
+      <div className="menu-section contacts-content">
+        <h2 className={cn('menu-calling', halvar.className)}>заходите <br />в гости!</h2>
         <div className="contacts-list">
           <Link className='contacts-list__link' href="/" id="contacts-vk">
             <Image src={vk} alt=""/>
@@ -47,7 +50,9 @@ const page = () => {
           <Link href="mailto:hello@delai.studio">hello@delai.studio</Link>
           <p>По всем вопросам, связанным с разработкой проектов или сотрудничеством, пишите нам на почту </p>
         </div>
-        <Image className='contacts-bg' src={rabbit} alt=""/>
+        <div className='contacts-bg'>
+          <Image src={rabbit} alt=""/>
+        </div>
       </div>  
       <div className="menu-underline">
         <div className="menu-underline__item main-blue"></div>

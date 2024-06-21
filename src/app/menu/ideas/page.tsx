@@ -4,6 +4,7 @@ import './ideas.scss';
 import { halvar } from '@/fonts';
 import Link from 'next/link';
 import ExamplesSlider from '@/components/examples-slider/ExamplesSlider';
+import cn from 'classnames';
 
 const page = () => {
   return (
@@ -12,7 +13,7 @@ const page = () => {
 
         <h1 className='menu-link'>Идеи</h1>
 
-        <h2 className={halvar.className}>заходите <br />в гости!</h2>
+        <h2 className={cn('menu-calling', halvar.className)}>мы всегда <br/>в поиске идей!</h2>
 
         <div className="ideas-mail menu-mail">
           <Link href="/">invest@delai.studio </Link>
@@ -29,7 +30,7 @@ const page = () => {
             </ol>
           </div>
 
-          <ExamplesSlider />
+          <ExamplesSlider className='ideas-slider'/>
         </div>
       </div>
 

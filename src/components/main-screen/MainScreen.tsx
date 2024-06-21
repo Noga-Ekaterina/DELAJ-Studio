@@ -32,6 +32,7 @@ const MainScreen: FC = () => {
     <div 
       className='main-screen' 
       onWheel={handleEvent} 
+      onTouchMove={handleEvent}
       style={{zIndex: isMenuOpened ? -1 : 1}}
     >
       {isMenuOpened

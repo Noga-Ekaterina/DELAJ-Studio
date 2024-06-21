@@ -1,6 +1,7 @@
 import React from 'react';
 import '../menu.scss';
 import './faq.scss';
+import QuestionItem from '@/components/question-item/QuestionItem';
 
 const questions = [
   ['Я отправил портфолио, когда мне ответят?', 'Противоположная точка зрения подразумевает, что многие известные личности описаны максимально подробно. Следует отметить, что консультация с широким активом не оставляет шанса для глубокомысленных рассуждений. '],
@@ -21,10 +22,7 @@ const page = () => {
 
         <div className="faq-list">
           {questions.map((item, index) => (
-            <div className="faq-list__row" key={'faq-list' + index}>
-              <p className='faq-list__row-title'>{item[0]}</p>
-              <p>{item[1]}</p>
-            </div>
+            <QuestionItem title={item[0]} answer={item[1]} key={'faq-list' + index}/>
           ))}
         </div>
       </div>

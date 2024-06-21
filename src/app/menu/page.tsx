@@ -6,9 +6,10 @@ import { halvar } from '@/fonts';
 import './menu-home.scss';
 
 //Images
-import logo from '../../../public/images/logo.svg'
 import LanguageToggle from '@/components/language-toggle/LanguageToggle';
 import bg from '../../../public/images/modals/menu-bg.png';
+import bgTablet from '../../../public/images/modals/menu-bg-tablet.png';
+import bgMobile from '../../../public/images/modals/menu-bg-mobile.png';
 
 import cn from 'classnames';
 
@@ -16,10 +17,6 @@ const page: FC = () => {
   return (
     <>
       <div className='menu-home'>
-        <Link href="/">
-          <Image className='menu-logo' src={logo} alt=''/>
-        </Link>
-
         <div className="menu-home__links">
           <a href="/menu/about" className="menu-link" id="menu-about">
             о нас
@@ -41,6 +38,8 @@ const page: FC = () => {
         <LanguageToggle className={cn('menu-home__language', halvar.className)}/>
       </div>
       <Image className='menu-home__bg' src={bg} alt="" fill/>
+      <Image className='menu-home__bg menu-home__bg-tablet' src={bgTablet} alt="" fill/>
+      <Image className='menu-home__bg menu-home__bg-mobile' src={bgMobile} alt="" fill/>
     </>
   );
 };

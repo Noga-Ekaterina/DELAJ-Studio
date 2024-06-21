@@ -1,11 +1,10 @@
 .project-list {
   .container {
-    max-width: 1506px;
-    padding: 0 112px;
+    width: 975rem;
   }
   &__row {
-    gap: 10px;
-    padding-bottom: 10px;
+    gap: 10rem;
+    padding-bottom: 10rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     aspect-ratio: 1000 / 180;
@@ -23,27 +22,10 @@
     }
   }
 
-  @media screen and (min-width: 1680px) {
-    &__row {
-      gap: 14px;
-      padding-bottom: 14px;
-    }
-  }
-
-  @media screen and (max-width: 1025px) {
+  @media screen and (max-width: 640px) {
     .container {
-      padding: 0 70px;
-    }
-    &__row {
-      padding-bottom: 9px;
-      column-gap: 9px;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    &__row {
-      padding-bottom: 6px;
-      column-gap: 6px;
+      width: 100%;
+      padding-bottom: 30rem;
     }
   }
 }

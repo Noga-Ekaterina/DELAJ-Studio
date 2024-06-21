@@ -26,9 +26,7 @@ const AdultScreen: FC<Props> = ({ isOpened }) => {
   const ref = useRef<LottieRefCurrentProps>(null);
 
   useEffect(() => {
-
     if (!ref.current) return;
-    console.log(ref.current);
 
     if (isOpened) {
        ref.current.play();

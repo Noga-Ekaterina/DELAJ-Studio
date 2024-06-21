@@ -13,7 +13,7 @@
     
     position: relative;
     img {
-      max-width: 15%;
+      width: 140rem;
       height: auto;
       position: absolute;
       top: 0;
@@ -30,12 +30,14 @@
     }
     &:nth-child(4n) {
       img {
-        right: 3%;
+        right: 50rem;
       }
     }
     &:last-child {
-      height: 200px;
+      height: 400rem;
       img {
+        height: 100%;
+        width: auto;
         left: 0 !important;
         bottom: 0;
         top: auto;
@@ -49,20 +51,16 @@
   }
 
   @media screen and (min-width: 1680px) {
-   &__row {
-    img {
+    &__row {
+      img {
+        width: 13%;
+      }
+
       
     }
-   }
   }
 
-  @media screen and (max-width: 1025px) {
-    &__row {
-      &:last-child {
-        img {
-          left: -3% !important;
-        }
-      }
-    }
+  @media screen and (max-width: 640px) {
+    display: none;
   }
 }

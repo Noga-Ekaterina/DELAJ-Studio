@@ -48,7 +48,6 @@ const KidsWallpapper: FC = () => {
         'md' : 170,
         'sm' : 120,
       }[clientBreakpoint];
-      console.log(clientBreakpoint)
       rowsCount = Math.floor((containerRef.current.clientHeight) / rowHeight);
 
       let count = 0;

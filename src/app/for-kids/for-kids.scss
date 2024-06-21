@@ -2,12 +2,13 @@
   color: var(--text-gray);
   &__heading {
     img {
-      top: -30px;
+      top: -30rem;
     }
   }
   &__projects-wrap {
     overflow: hidden;
     position: relative;
+    width: 100%;
     .project-list__row {
       z-index: 2;
       position: relative;
@@ -16,15 +17,7 @@
 
   &__projects {
     .project-list__item {
-      border-radius: 20px;
-    }
-  }
-
-  @media screen and (min-width: 2000px) {
-    &__projects-wrap {
-      .container {
-        position: relative;
-      }
+      border-radius: 20rem;
     }
   }
 }

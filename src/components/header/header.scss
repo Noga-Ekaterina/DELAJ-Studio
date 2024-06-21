@@ -4,8 +4,18 @@
   z-index: 5;
   width: 100%;
 
+  &-logo {
+    width: 95rem;
+    height: auto;
+  }
+
+  &-burger {
+    width: 27rem;
+    height: auto;
+  }
+
   .container {
-    padding: 0 35px 0 28px;
+    padding: 0 35rem 0 28rem;
     max-width: 100%;
     display: flex;
     justify-content: space-between;

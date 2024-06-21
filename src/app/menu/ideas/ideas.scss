@@ -1,13 +1,19 @@
 .ideas {
   border-color: var(--green);
-  h1 {
-    margin-bottom: 20px;
-  }
+  min-height: inherit;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-bottom: 0;
+  overflow: hidden;
 
   &-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    position: relative;
+    padding-bottom: 30rem;
   }
 
   &-mail {
@@ -22,16 +28,50 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    row-gap: 50px;
   }
 
   &-conditions {
-    max-width: 277px;
-    font-size: 10px;
+    width: 277rem;
+    font-size: 10rem;
     line-height: 1.1em;
+    flex-shrink: 0;
     &__title {
       text-transform: uppercase;
-      font-size: 17px;
-      margin-bottom: 16px;
+      font-size: 17rem;
+      margin-bottom: 16rem;
+    }
+    ol {
+      padding-left: 1em;
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    &-conditions {
+      width: min(277px, 100%);
+      font-size: 10px;
+      &__title {
+        font-size: 17px;
+        margin-bottom: 16px;
+      }
+    }
+
+    &-content {
+      padding-bottom: 9vh;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    &-bottom {
+      flex-direction: column;
+    }
+
+    &-conditions {
+      align-self: flex-start;
+    }
+
+    &-mail {
+      margin: 70px 0;
     }
   }
 }

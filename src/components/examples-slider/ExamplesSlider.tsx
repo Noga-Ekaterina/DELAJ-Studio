@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react';
+import { FC, useRef } from 'react';
 import './examples-slider.scss';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
@@ -7,12 +7,14 @@ import Image from 'next/image';
 import { Navigation } from 'swiper/modules';
 import example1 from '../../../public/images/data/adult-data/1.png';
 import example2 from '../../../public/images/data/adult-data/2.png';
-import example3 from '../../../public/images/data/kids-data/1.png';
+import example3 from '../../../public/images/data/kids-data/8.png';
 import example4 from '../../../public/images/data/kids-data/2.png';
 import arrow from '../../../public/images/arrow.svg';
 import 'swiper/css';
+import { IWithClass } from '@/types';
+import cn from 'classnames';
 
-const ExamplesSlider = () => {
+const ExamplesSlider: FC<IWithClass> = ({ className }) => {
   const ref = useRef<SwiperRef>(null);
 
   const toNextSlide = () => {
@@ -21,12 +23,12 @@ const ExamplesSlider = () => {
   }
 
   return (
-    <div className="examples-slider">
+    <div className={cn(className, "examples-slider")}>
       <div className="examples-slider__head">
         <div className="examples-slider__head-title">
           реализованные <br />проекты
         </div>
-        <button onClick={toNextSlide}>
+        <button className='examples-slider__head-button' onClick={toNextSlide}>
           <Image src={arrow} alt=""/>
         </button>
       </div>
