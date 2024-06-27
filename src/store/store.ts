@@ -1,4 +1,4 @@
-import { HeaderTheme } from './../types';
+import { CurrentPageType, HeaderTheme } from './../types';
 import {makeAutoObservable} from 'mobx';
 
 class Store {
@@ -7,14 +7,22 @@ class Store {
   }
 
   isMenuOpened = false;
-  headerTheme: HeaderTheme = 'light';
+  currentPage: CurrentPageType = null;
 
   changeMenuOpened = (value: boolean) => {
     this.isMenuOpened = value;
   }
 
-  setHeaderTheme = (theme: HeaderTheme) => {
-    this.headerTheme = theme;
+  changeCurrentPage = (value: CurrentPageType) => {
+    this.currentPage = value;
+  }
+
+  toggleCurrentPage = () => {
+    if (this.currentPage) {
+      if (this.currentPage === 'kids') {
+        this.changeMenuOpened
+      }
+    }
   }
 }
 

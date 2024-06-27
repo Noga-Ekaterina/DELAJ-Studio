@@ -1,11 +1,10 @@
 'use client';
-import { FC, useEffect, useRef } from "react";
+import { FC, memo, useEffect, useRef } from "react";
 import store from "@/store/store";
 import { Transition } from 'react-transition-group';
-import { IWithClass } from "@/types";
 import { observer } from "mobx-react-lite";
-import { usePathname, useRouter } from "next/navigation";
-
+import { CurrentPageType } from "@/types";
+import { transitionStyles } from "@/vars";
 type StyleObject = Record<string, string | number>
 
 interface Props {
@@ -14,20 +13,25 @@ interface Props {
     onOpen : Record<string, StyleObject>
     onCurrentPage: Record<string, StyleObject>
   }
-  path: string
+  page: CurrentPageType
   Component: FC<{isOpened: boolean}>
 }
 
-const PageMenuSide: FC<Props> = observer(({path, styles, Component}) => {
-  const { isMenuOpened, changeMenuOpened } = store;
-  const ref = useRef(null);
+const PageMenuSide: FC<Props> = observer(({page, styles, Component}) => {
+  const { 
+    isMenuOpened, 
+    changeMenuOpened, 
+    currentPage, 
+    changeCurrentPage 
+  } = store;
 
-  const router = useRouter();
-  const currentPath = usePathname();
-  const isThisPath = currentPath.includes(path);
+  const ref = useRef(null);
+  const isThisPath = currentPage === page;
+  
   const redirectOnPage = () => {
-    if (!isThisPath) {
-      router.push(path);
+    if (window) {
+      changeCurrentPage(page);
+      window.location.hash = 'first-landing'; 
     }
   }
 
@@ -49,6 +53,7 @@ const PageMenuSide: FC<Props> = observer(({path, styles, Component}) => {
           style={{
             ...styles.defaultStyles, 
             ...styles[styleToggle][state],
+            ...transitionStyles
           }}
         >
           <Component isOpened={isThisPath}/>

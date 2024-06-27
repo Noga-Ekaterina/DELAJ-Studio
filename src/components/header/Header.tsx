@@ -1,61 +1,76 @@
 'use client';
-import { IWithClass } from '@/types';
-import { FC } from 'react';
+import { HeaderTheme, IWithClass } from '@/types';
+import { FC, useEffect, useState } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image';
 
 //Images
-import logo from '../../../public/images/header-logo.svg';
-import darkLogo from '../../../public/images/logo.svg';
+import kidsLogo from '../../../public/images/kids-header-logo.svg';  
+import adultLogo from '../../../public/images/adult-header-logo.svg';
+import logo from '../../../public/images/logo.svg';
 import burger from '../../../public/images/header-burger.svg';
-import close from '../../../public/images/close.svg';
+import blueBurger from '../../../public/images/blue-burger.svg';
 import darkBurger from '../../../public/images/dark-burger.svg';
+import mail from '../../../public/images/mail.svg';
+import darkMail from '../../../public/images/white-mail.svg';
+import blueMail from '../../../public/images/blue-mail.svg';
 
-import { usePathname, useRouter } from 'next/navigation';
 import './header.scss';
-import { observer } from 'mobx-react-lite';
-import store from '@/store/store';
+import { useHash } from '@/utils/useHash';
 
-const icons = {
-  light: {
+const styles = {
+  default: {
+    mail: mail,
     logo: logo,
-    burger: burger
+    burger: darkBurger,
   },
-  dark: {
-    logo: darkLogo,
-    burger: darkBurger
+  kids: {
+    mail: blueMail,
+    logo: kidsLogo,
+    burger: blueBurger,
+  },
+  adult: {
+    mail: darkMail,
+    logo: adultLogo,
+    burger: burger,
+  },
+  mainScreen: {
+    mail: darkMail,
+    logo: logo,
+    burger: burger,
   }
 }
 
 const Header: FC<IWithClass> = (props) => {
   const className = cn('header', props.className);
-  const path = usePathname();
-  const router = useRouter();
-  const isMainSceen = path === '/';
-  const isMenu = path.includes('/menu');
-  const { headerTheme } = store;
+  const [theme, setTheme] = useState<HeaderTheme>('default');
+  const hash = useHash();
+
+  useEffect(() => {
+    
+  },[hash])
+
 
     return (
-    <header className={className}>
+    <header className={className} >
       <div className="container">
-        {(!isMainSceen && !isMenu) 
-          ? <Link href="/">
-              <Image className='header-logo' src={icons[headerTheme].logo} alt=""/>
-            </Link>
-          : <div></div> 
-        }
+        <a href="#contacts" className='header-burger'>
+          <Image src={styles[theme].mail} alt=""/>
+        </a>
+
+        {theme !== 'mainScreen' && (
+          <a href="#main-screen">
+            <Image className='header-logo' src={styles[theme].logo} alt=""/>
+          </a>
+        )}
         
-        {(!isMenu) 
-          ? <Link href="/menu" className='header-burger' prefetch>
-            <Image src={icons[headerTheme].burger} alt=""/>
-          </Link>
-          : <div></div>
-        }
-        
+        <a href="#menu" className='header-burger'>
+          <Image src={styles[theme].burger} alt=""/>
+        </a>
       </div>
     </header>
   );
 };
 
-export default observer(Header);
+export default Header;

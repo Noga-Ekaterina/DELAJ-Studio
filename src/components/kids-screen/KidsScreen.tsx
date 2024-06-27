@@ -18,6 +18,7 @@ import TextLogo from '../text-logo/TextLogo';
 
 import { Transition } from 'react-transition-group';
 import { transitionStyles } from '@/vars';
+import { useMediaQuery } from 'react-responsive';
  
 interface Props {
   isOpened: boolean
@@ -26,13 +27,15 @@ interface Props {
 const KidsScreen: FC<Props> = (props) => {
   const blackGirlRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
-  const className = cn('kids-screen', props.isOpened ? 'opened' : '');
+  const isMediumScreen = useMediaQuery({maxWidth: 1024, minWidth: 640});
+  const opened = isMediumScreen || props.isOpened;
+  const className = cn('kids-screen', opened ? 'opened' : '');
 
   return (
     <div className={className}>
       {/* Девочка на черном фоне */}
       <div className="kids-screen__picture" id="kids-screen-black">
-        <Transition nodeRef={blackGirlRef} in={props.isOpened} timeout={0}>
+        <Transition nodeRef={blackGirlRef} in={opened} timeout={0}>
           {state => (
             <div 
               className="picture-content"
@@ -40,8 +43,8 @@ const KidsScreen: FC<Props> = (props) => {
                 ...transitionStyles,
                 ...{
                   unmounted: {height: '100%'}, 
-                  entering: {height: 'calc(100vh * 2 / 3)'},
-                  entered: {height: 'calc(100vh * 2 / 3)'},
+                  entering: {height: '200%'},
+                  entered: {height: '200%'},
                   exiting:  { height: '100%'},
                   exited:  { height: '100%'},
                 }[state]
@@ -65,7 +68,7 @@ const KidsScreen: FC<Props> = (props) => {
 
       {/* Лого */}
       <div className="kids-screen__picture " id="kids-screen-logo">
-        <Transition in={props.isOpened} nodeRef={logoRef} timeout={0}>
+        <Transition in={opened} nodeRef={logoRef} timeout={0}>
           {state => (
             <div 
               ref={logoRef}

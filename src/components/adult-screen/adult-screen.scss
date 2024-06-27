@@ -13,7 +13,7 @@
   }
 
   &__text-logo {
-    font-size: 14px;
+    font-size: 14rem;
     color: #fff;
     &-wrap {
       top: 69%;
@@ -36,6 +36,7 @@
     width: 14.2%;
     height: auto;
     &-wrap {
+      max-height: 10.7%;
       bottom: 66.65%;
     }
   }

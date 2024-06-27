@@ -1,0 +1,31 @@
+.landings {
+  width: 100%;
+  &-container {
+    width: 200%;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &-page {
+    &.hidden {
+      max-height: 100vh;
+      overflow: hidden;
+    }
+  }
+
+  &-showreel {
+    max-height: 300rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    &-showreel {
+     max-height: 300px;
+    }
+  }
+
+  @media screen and (max-width: 1025px) {
+    &-showreel {
+     max-height: 230pxpx;
+    }
+  }
+}

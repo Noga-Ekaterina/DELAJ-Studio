@@ -1,23 +1,13 @@
 .page-menu {
   display: flex;
   overflow: hidden;
-  height: 100vh;
-  position: relative;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 100%;
   &__screen {
     position: absolute;
-    top: 0;
-    bottom: 0;
     overflow: hidden; 
     flex-shrink: 1;
-  }
-
-  @media screen and (max-width: 1024px) {
-    &__screen {
-      right: 0;
-      left: 0;
-      top: auto;
-      bottom: auto;
-      width: 100%;
-    }
   }
 }

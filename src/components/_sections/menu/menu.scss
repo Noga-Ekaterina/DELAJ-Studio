@@ -1,0 +1,147 @@
+.menu {
+  min-height: 100%;
+  position: relative;
+  h2 {
+    text-transform: uppercase;
+    line-height: 90%;
+    font-weight: 500;
+  }
+
+  &-link {
+    display: block;
+    font-weight: 800;
+    font-size: 127px;
+    text-transform: uppercase;
+    line-height: 0.855em;
+    overflow: hidden;
+    letter-spacing: -3px;
+    position: relative;
+    &#menu-about {
+      &:hover {
+        color: var(--red);
+      } 
+    }
+    &#menu-career {
+      &:hover {
+        color: var(--blue);
+      } 
+    }
+    &#menu-contact {
+      &:hover {
+        color: var(--main-blue);
+      } 
+    }
+    &#menu-faq {
+      &:hover {
+        color: var(--pink);
+      } 
+    }
+    &#menu-ideas {
+      &:hover {
+        color: var(--green);
+      } 
+    }
+  }
+  &-inner {
+    padding-top: 26rem;
+    border-top: 5px solid;
+    padding-bottom: 43rem;
+  }
+
+  &-section {
+    padding: 0 30rem;
+  }
+
+  &-calling {
+    font-size: 23rem;
+    margin-top: 15rem;
+    text-transform: uppercase;
+  }
+
+  &-underline {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    &__item {
+      height: 5px;
+      flex: 1;
+      background-color: currentColor;
+    }
+  }
+
+  &-mail {
+    a {
+      font-size: 70rem;
+      font-weight: 300;
+      line-height: 0.9em;
+      border-bottom: 3px solid;
+      border-color: currentColor;
+      margin-bottom: 20rem;
+      &:hover {
+        border-color: transparent;
+      }
+    }
+    p {
+      max-width: 236rem;
+      color:#AFAFAF;
+      font-weight: 700;
+      line-height: 120%;
+      font-size: 13rem;
+    }
+  }
+
+  @media screen and (min-width: 1680px) {
+    &-link {
+      font-size: 110rem; 
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    &-calling {
+      font-size: 23px;
+      margin-top: 15px;
+    }
+
+    &-mail {
+      a {
+        font-size: 75px;
+      }
+      p {
+        max-width: 236px;
+        font-size: 13px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    &-mail {
+      a {
+        font-size: 117rem;
+        border-bottom-width: 0.05em;
+      }
+    }
+  }
+
+  @media screen and (max-width: 660px) {
+    min-height: 100vw;
+    &-section {
+      padding: 0 20px;
+    } 
+  }
+
+  @media screen and (max-width: 500px) {
+    &-calling {
+      font-size: 15px;
+    }
+  }
+}
+
+h1.menu-link {
+  border-bottom: 1px solid #C8C8C8;
+
+  @media screen and (max-width: 767px) {
+    font-size: 198rem;
+  }
+}

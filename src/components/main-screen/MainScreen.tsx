@@ -1,5 +1,5 @@
 'use client'
-import { FC, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import Lottie from "lottie-react";
 
 //Animation
@@ -17,59 +17,105 @@ import cn from 'classnames';
 import { halvar } from '@/fonts';
 import Image from 'next/image';
 import { Transition } from 'react-transition-group';
+import { useHash } from '@/utils/useHash';
+import PageMenu from '../page-menu/PageMenu';
+import { transitionStyles } from '@/vars';
+
+const menuStyles = {
+  unmounted: { top: "0%",},
+  entering: { top: "0%",},
+  entered: { top: "0%",},
+  exiting:  {  top: "-100%",},
+  exited:  {  top: "-100%",},
+};
 
 const MainScreen: FC = () => {
-  const {isMenuOpened} = store;
-  const {changeMenuOpened} = store;
+  const {
+    isMenuOpened, 
+    changeMenuOpened, 
+    changeCurrentPage
+  } = store;
+  const [show, setShow] = useState(true);
+  const [delay, setDelay] = useState(0);
   const [showArrow, setShowArrow] = useState(false);
+  const hash = useHash();
   const arrowRef = useRef(null)
 
   const handleEvent = () => {
     changeMenuOpened(true);
   }
 
+  useEffect(() => {
+    if (hash === 'main-screen') {
+      setShow(true);
+      changeMenuOpened(true);
+      changeCurrentPage(null);
+      setDelay(0);
+    } 
+
+    if (!hash) {
+      changeMenuOpened(false);
+      setShow(true)
+    } else if (hash === 'first-landing'){
+      setDelay(1);
+      setShow(false);
+    }
+  },[hash])
+
   return (
-    <div 
-      className='main-screen' 
-      onWheel={handleEvent} 
-      onTouchMove={handleEvent}
-      style={{zIndex: isMenuOpened ? -1 : 1}}
-    >
-      {isMenuOpened
-        ? <Lottie 
-            className='main-screen__logo'  
-            animationData={logoAnimationOut} 
-            loop={false}
-            onEnterFrame={() => setShowArrow(false)}
-          /> 
-        : <Lottie 
-            className='main-screen__logo'  
-            animationData={logoAnimationOn} 
-            loop={false} 
-            onComplete={() => setShowArrow(true)}
-          /> 
-      }
-
-      <Transition nodeRef={arrowRef} in={showArrow} timeout={0}>
-        {state => (
-          <Image 
-            className='main-screen__arrow' 
-            src={arrow} 
-            alt=""
-            ref={arrowRef}
+    <Transition in={show} timeout={0}>
+      {state => (
+        <>
+          <div 
+            className='main-screen' 
+            onWheel={handleEvent} 
+            onTouchMove={handleEvent}
             style={{
-              unmounted: { opacity: 0 },
-              entering: { opacity: 1 },
-              entered: { opacity: 1 },
-              exiting:  { opacity: 0 },
-              exited:  { opacity: 0 },
-            }[state]}
-          />
-        )}
-      </Transition>
+              ...transitionStyles,
+              ...menuStyles[state],
+              transitionDelay: delay + 's',
+              zIndex: isMenuOpened ? 2 : 4 ,
+            }}
+          >
+            {isMenuOpened
+              ? <Lottie 
+                  className='main-screen__logo'  
+                  animationData={logoAnimationOut} 
+                  loop={false}
+                  onEnterFrame={() => setShowArrow(false)}
+                /> 
+              : <Lottie 
+                  className='main-screen__logo'  
+                  animationData={logoAnimationOn} 
+                  loop={false} 
+                  onComplete={() => setShowArrow(true)}
+                /> 
+            }
 
-      <LanguageToggle className={cn('main-screen__language', halvar.className)}/>
-    </div>
+            <Transition nodeRef={arrowRef} in={showArrow} timeout={0}>
+              {state => (
+                <Image 
+                  className='main-screen__arrow' 
+                  src={arrow} 
+                  alt=""
+                  ref={arrowRef}
+                  style={{
+                    unmounted: { opacity: 0 },
+                    entering: { opacity: 1 },
+                    entered: { opacity: 1 },
+                    exiting:  { opacity: 0 },
+                    exited:  { opacity: 0 },
+                  }[state]}
+                />
+              )}
+            </Transition>
+
+            <LanguageToggle className={cn('main-screen__language', halvar.className)}/>
+            <PageMenu />
+          </div>
+        </>
+      )}
+    </Transition>
   );
 };
 

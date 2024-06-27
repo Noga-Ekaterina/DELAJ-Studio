@@ -1,0 +1,38 @@
+.for-adult {
+  background-color: var(--text-gray);
+  width: 100vw;
+  flex-shrink: 0;
+  position: relative;
+  &__heading {
+    color: #fff;
+    h1 {
+      position: relative;
+      z-index: 2;
+      white-space: nowrap;
+      grid-row: 1 / 2;
+    }
+
+    img {
+      grid-row: 1 / 3;
+      grid-column: 2 / 3;
+    }
+  }
+
+  &__projects-wrap {
+    position: relative;
+  }
+
+  &__switch {
+    left: 0;
+  }
+
+  @media screen and (max-width: 640px) {
+    &__heading {
+      img {
+        grid-row: 3 / 4;
+        grid-column: 1 / 2;
+        top: -38rem;
+      }
+    }
+  }
+}

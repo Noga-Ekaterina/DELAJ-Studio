@@ -1,15 +1,23 @@
 'use client';
-import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import AdultScreen from "../adult-screen/AdultScreen";
 import KidsScreen from "../kids-screen/KidsScreen";
 import './page-menu.scss';
 import PageMenuScreen from './PageMenuScreen';
 import { transitionStyles } from "@/vars";
+import { useMediaQuery } from "react-responsive";
+import { observer } from "mobx-react-lite";
+import store from "@/store/store";
 
-const styles = {
+const sideStyles = {
   largeScreen: {
     kids: {
-      defaultStyles: {width: '50vw', left:"-50%" , transition: transitionStyles.transition},
+      defaultStyles: {
+        top: 0, 
+        bottom: 0, 
+        width: '50vw', 
+        left:"-50%" , 
+      },
       onOpen : {
         entering: {width: '50vw', left: "0%"},
         entered: {width: '50vw', left: "0%"},
@@ -24,7 +32,12 @@ const styles = {
       },
     },
     adult: {
-      defaultStyles: {width: '50vw', right:"-50%" , transition: transitionStyles.transition},
+      defaultStyles: {
+        top: 0,
+        bottom: 0,
+        width: '50vw', 
+        right:"-50%" , 
+      },
       onOpen : {
         entering: {width: '50vw', right: "0%"},
         entered: {width: '50vw', right: "0%"},
@@ -41,7 +54,13 @@ const styles = {
   },
   mediumScreen: {
     kids: {
-      defaultStyles: {height: '50vh', top: '-50%', transition: transitionStyles.transition},
+      defaultStyles: {
+        right: 0,
+        left: 0,
+        height: '50vh', 
+        top: '-50%', 
+        transition: transitionStyles.transition
+      },
       onOpen : {
         entering: {height: '50vh', top: "0%"},
         entered: {height: '50vh', top: "0%"},
@@ -56,7 +75,13 @@ const styles = {
       },
     },
     adult: {
-      defaultStyles: { height: '50vh', bottom:"-50%" , transition: transitionStyles.transition},
+      defaultStyles: { 
+        right: 0,
+        left: 0,
+        height: '50vh', 
+        bottom:"-50%" , 
+        transition: transitionStyles.transition
+      },
       onOpen : {
         entering: { height: '50vh', bottom: "0%"},
         entered: { height: '50vh', bottom: "0%"},
@@ -74,22 +99,29 @@ const styles = {
 }
 
 const PageMenu = () => {
-  const path = usePathname();
+  const { currentPage } = store;
+  const ref = useRef<HTMLDivElement>(null);
+  const mediumScreen = useMediaQuery({maxWidth: 1024});
+  const screenStyles = mediumScreen ? 'mediumScreen' : 'largeScreen';
 
-  if (path.includes('/menu')) return null;
-
-  return (
-    <nav className="page-menu">
+  return (  
+    <nav 
+      ref={ref} 
+      className="page-menu"
+      style={{
+        zIndex: currentPage ? 5 : 3
+      }}
+    > 
       <PageMenuScreen 
-        styles={styles.largeScreen.kids}
-        path="/for-kids"
+        styles={sideStyles[screenStyles].kids}
+        page="kids"
         Component={KidsScreen}
       >
         
       </PageMenuScreen>
       <PageMenuScreen 
-        styles={styles.largeScreen.adult}
-        path="/for-adult"
+        styles={sideStyles[screenStyles].adult}
+        page="adult"
         Component={AdultScreen}
       >
       </PageMenuScreen>
@@ -97,4 +129,4 @@ const PageMenu = () => {
   );
 };
 
-export default PageMenu;
+export default observer(PageMenu);
