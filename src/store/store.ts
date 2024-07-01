@@ -1,4 +1,4 @@
-import { CurrentPageType, HeaderTheme } from './../types';
+import { CurrentPageType } from './../types';
 import {makeAutoObservable} from 'mobx';
 
 class Store {

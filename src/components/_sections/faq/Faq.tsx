@@ -4,7 +4,6 @@ import './faq.scss';
 import QuestionItem from '@/components/question-item/QuestionItem';
 import cn from 'classnames';
 import { circe } from '@/fonts';
-import SectionWrap from '@/components/section-wrap/SectionWrap';
 
 const questions = [
   ['Я отправил портфолио, когда мне ответят?', 'Противоположная точка зрения подразумевает, что многие известные личности описаны максимально подробно. Следует отметить, что консультация с широким активом не оставляет шанса для глубокомысленных рассуждений. '],

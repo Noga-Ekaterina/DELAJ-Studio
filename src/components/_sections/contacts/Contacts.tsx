@@ -15,7 +15,6 @@ import rabbit from '../../../../public/images/modals/contacts-bg.svg';
 
 import Image from 'next/image';
 import cn from 'classnames';
-import SectionWrap from '@/components/section-wrap/SectionWrap';
 
 const Contacts = () => {
   return (

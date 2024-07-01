@@ -12,7 +12,6 @@ import bgTablet from '../../../../public/images/modals/menu-bg-tablet.png';
 import bgMobile from '../../../../public/images/modals/menu-bg-mobile.png';
 
 import cn from 'classnames';
-import SectionWrap from '@/components/section-wrap/SectionWrap';
 
 const Menu: FC = () => {
   return (

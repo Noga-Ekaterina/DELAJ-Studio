@@ -5,7 +5,6 @@ import { halvar, circe } from '@/fonts';
 import Link from 'next/link';
 import ExamplesSlider from '@/components/examples-slider/ExamplesSlider';
 import cn from 'classnames';
-import SectionWrap from '@/components/section-wrap/SectionWrap';
 
 const Ideas = () => {
   return (
