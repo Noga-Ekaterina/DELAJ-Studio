@@ -5,6 +5,7 @@ import { Transition } from 'react-transition-group';
 import { observer } from "mobx-react-lite";
 import { CurrentPageType } from "@/types";
 import { transitionStyles } from "@/vars";
+import { useHash } from "@/utils/useHash";
 type StyleObject = Record<string, string | number>
 
 interface Props {
@@ -15,23 +16,24 @@ interface Props {
   }
   page: CurrentPageType
   Component: FC<{isOpened: boolean}>
+  handleClick: () => void
 }
 
-const PageMenuSide: FC<Props> = observer(({page, styles, Component}) => {
+const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
   const { 
     isMenuOpened, 
     changeMenuOpened, 
     currentPage, 
     changeCurrentPage 
   } = store;
-
   const ref = useRef(null);
-  const isThisPath = currentPage === page;
+  const isThisPath = currentPage === props.page;
   
   const redirectOnPage = () => {
     if (window) {
-      changeCurrentPage(page);
+      changeCurrentPage(props.page);
       window.location.hash = 'first-landing'; 
+      props.handleClick();
     }
   }
 
@@ -51,9 +53,9 @@ const PageMenuSide: FC<Props> = observer(({page, styles, Component}) => {
           ref={ref}
           onClick={redirectOnPage}
           style={{
-            ...styles.defaultStyles, 
-            ...styles[styleToggle][state],
-            ...transitionStyles
+            ...props.styles.defaultStyles, 
+            ...props.styles[styleToggle][state],
+            ...transitionStyles,
           }}
         >
           <Component isOpened={isThisPath}/>

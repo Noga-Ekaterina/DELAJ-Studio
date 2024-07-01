@@ -36,7 +36,6 @@ import sponsor21 from '../../../../public/images/modals/sponsor-21.png'
 import sponsor22 from '../../../../public/images/modals/sponsor-22.png'
 import sponsor23 from '../../../../public/images/modals/sponsor-23.png'
 import sponsor24 from '../../../../public/images/modals/sponsor-24.png'
-import SectionWrap from '@/components/section-wrap/SectionWrap';
 
 const sponsors = [
 sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9,sponsor10,sponsor11,sponsor12,sponsor13,sponsor14,sponsor15,sponsor16,sponsor17,sponsor18,sponsor29,sponsor20,sponsor21,sponsor22,sponsor23,sponsor24
@@ -147,14 +146,16 @@ const About = () => {
           </section>
         </div>
 
-        <section className="menu-section about-sponsors">
-          <h2>наши <br />клиенты</h2>
-          <div className="about-sponsors__list">
-            {sponsors.map((item, index) => (
-              <div className='about-sponsors__list-item' key={'sponsor' + index}>
-                <Image src={item} alt="" />
-              </div>
-            ))}
+        <section className="about-sponsors">
+          <div className="menu-section">
+            <h2 className={halvar.className}>наши <br />клиенты</h2>
+            <div className="about-sponsors__list">
+              {sponsors.map((item, index) => (
+                <div className='about-sponsors__list-item' key={'sponsor' + index}>
+                  <Image src={item} alt="" />
+                </div>
+              ))}
+            </div>
           </div>
         </section> 
       </div>

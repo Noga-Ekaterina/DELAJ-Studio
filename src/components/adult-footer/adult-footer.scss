@@ -41,7 +41,11 @@
 
   #adult-footer-blue {
     padding-left: 2.5vw;
-    border-color: var(--main-blue);
+    .footer-link {
+      &:hover {
+        color: var(--main-blue);
+      }
+    }
     li a {
       color: #A0A0A0;
     }
@@ -51,6 +55,11 @@
     width: 50%;
     border-color: var(--yellow);
     padding-left: 3.9%;
+    .footer-link {
+      &:hover {
+        color: var(--yellow);
+      }
+    }
   }
 
   #adult-footer-red {
@@ -65,6 +74,11 @@
       width: 100%;
       align-items: flex-end;
       padding-left: 11.3%;
+    }
+    .footer-link {
+      &:hover {
+        color: var(--red);
+      }
     }
   }
 

@@ -4,60 +4,64 @@ import dynamic from "next/dynamic";
 import MainScreen from "@/components/main-screen/MainScreen"
 import ForAdult from "@/components/_sections/for-adult/ForAdult";
 import ForKids from "@/components/_sections/for-kids/ForKids";
-import SectionWrap from "@/components/section-wrap/SectionWrap";
+import Section from "@/components/section/Section";
 import Landings from "@/components/_sections/_landings/Landings";
 import { ISection } from "@/types";
 import Scroller from "@/components/scroller/Scroller";
-
-const sections: ISection[] = [
-  {id: 'menu', Component: dynamic(() => import('@/components/_sections/menu/Menu')), prevId: 'first-landing'},
-  {id: 'about', Component: dynamic(() => import('@/components/_sections/about/About'))},
-  {id: 'career', Component: dynamic(() => import('@/components/_sections/career/Career'))},
-  {id: 'contacts', Component: dynamic(() => import('@/components/_sections/contacts/Contacts'))},
-  {id: 'faq', Component: dynamic(() => import('@/components/_sections/faq/Faq'))},
-  {id: 'ideas', Component: dynamic(() => import('@/components/_sections/ideas/Ideas')), nextId: 'main-screen'},
-]
+import Menu from "@/components/_sections/menu/Menu";
+import About from "@/components/_sections/about/About";
+import Career from "@/components/_sections/career/Career";
+import Contacts from "@/components/_sections/contacts/Contacts";
+import Faq from "@/components/_sections/faq/Faq";
+import Ideas from "@/components/_sections/ideas/Ideas";
+import KidsButton from "@/components/landing-switch-button/KidsButton";
+import AdultButton from "@/components/landing-switch-button/AdultButton";
 
 const Page = () => {
-
-
   return (
+    <>
     <Scroller>
-      <SectionWrap
-        id="first-landing"
-        prevId={null}
-        nextId="menu"
-        className="no-overflow"
-      >
-        <Landings first="kids"/>
-      </SectionWrap>
+      <Section id="first-landing">
+        <Landings 
+          FirstLanding={[<ForKids />, <KidsButton />]}
+          SecondLanding={[<ForAdult />, <AdultButton />]}
+        />
+      </Section>
         
-      {/* <SectionWrap 
-        id="second-landing"
-        prevId="first-landing"
-        nextId="menu"
-        className="no-overflow"
-      >
-        <Landings first="adult"/>
-      </SectionWrap> */}
-      {sections.map((section, index) => {
-        const { Component } = section;
-        const prevId = section.prevId || sections[index - 1]?.id;
-        const nextId = section.nextId || sections[index + 1]?.id || "";
+      <Section id="second-landing">
+        <Landings 
+          FirstLanding={[<ForAdult />, <AdultButton />]}
+          SecondLanding={[<ForKids />, <KidsButton />]}
+        />
+      </Section>
 
-        return (
-          <SectionWrap 
-            id={section.id} 
-            nextId={nextId} 
-            prevId={prevId} 
-            key={section.id}
-          >
-            <Component {...section.props}/>
-          </SectionWrap>
-        );
-      })}
-      <MainScreen />
+      <Section id="menu">
+        <Menu />
+      </Section>
+
+      <Section id="about">
+        <About />
+      </Section>
+
+      <Section id="career">
+        <Career />
+      </Section>
+
+      <Section id="contacts">
+        <Contacts />
+      </Section>
+
+      <Section id="faq">
+        <Faq />
+      </Section>
+
+      <Section id="ideas">
+        <Ideas />
+      </Section>
+
     </Scroller>
+    <MainScreen />
+    </>
   )
 }
 

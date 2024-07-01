@@ -14,6 +14,7 @@ import TextLogo from '../text-logo/TextLogo';
 import cn from 'classnames';
 import { Transition } from 'react-transition-group';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import store from '@/store/store';
 
 interface Props {
   isOpened: boolean

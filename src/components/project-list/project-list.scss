@@ -16,12 +16,23 @@
   }
   &__item {
     overflow: hidden;
+    
     img {
-      width: 100%;
+      width: 105%;
       height: auto;
       min-height: 100%;
+      max-width: unset;
       object-fit: cover;
       object-position: center;
+      transition: var(--transition);
+      position: relative;
+      left: -2.5%;
+    }
+    &:hover {
+      img {
+        width: 110%;
+        left: -5%;
+      }
     }
   }
 

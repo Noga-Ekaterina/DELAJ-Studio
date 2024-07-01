@@ -1,11 +1,10 @@
 .menu-home {
   position: relative;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 23rem;
-  padding-bottom: 50rem;
+  padding-top: 50rem;
+  padding-bottom: 30rem;
   height: 100vh;
   max-height: 100%;
   &__links {
@@ -34,10 +33,11 @@
     }
   }
   &__language {
-    font-size: 20px;
+    font-size: 19rem;
     text-transform: uppercase;
     font-weight: 700;
     margin-top: 54px;
+    z-index: 2;
   }
 
   &__logo {
@@ -54,11 +54,14 @@
   }
 
   @media screen and (max-width: 1025px) {
-    padding-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    &__language {
+      font-size: 20px;
+    }
   }
 
   @media screen and (max-width: 800px) {
-    padding-bottom: 100px;
     &__bg {
       display: none;
       &-tablet {
@@ -75,6 +78,7 @@
   }
 
   @media screen and (max-width: 540px) {
+    padding-top: max(20vh);
     &__links {
       flex: unset;
     }

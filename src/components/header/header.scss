@@ -1,7 +1,8 @@
 .header {
   position: fixed;
-  top: 22px;
-  z-index: 4;
+  top: 0;
+  height: 56rem;
+  z-index: 2;
   width: 100%;
 
   &-logo {
@@ -10,15 +11,65 @@
   }
 
   &-burger {
-    width: 27rem;
+    width: 19rem;
     height: auto;
+  }
+
+  &-mail {
+    height: 11.875rem;
+    &.menu-mail {
+      height: 19rem;
+    }
+  }
+
+  &-close {
+    height: 19rem;
   }
 
   .container {
     padding: 0 35rem 0 28rem;
+    height: 100%;
     max-width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &.header-first {
+      justify-content: flex-end;
+    }
+  }
+  &.white-header {
+    background-color: #fff;
+  } 
+
+  &.black-header {
+    background-color: var(--text-gray);
+  }
+
+  &.white-header, &.black-header {
+    box-shadow: 0px 24px 69.4px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 60px;
+    padding: 0 7px;
+
+    &-logo {
+      width: 95px;
+    }
+
+    &-mail {
+      height: 19px;
+      &.menu-mail {
+        height: 19px;
+      }
+    }
+
+    &-burger {
+      width: 24px;
+    }
+
+    &-close {
+      height: 19px;
+    }
   }
 }

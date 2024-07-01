@@ -9,6 +9,13 @@ class Store {
   isMenuOpened = false;
   currentPage: CurrentPageType = null;
 
+  isLandingSwiped = false;
+
+  swipeLanding = (value: boolean) => {
+    this.isLandingSwiped = value;
+    console.log(this.isLandingSwiped)
+  } 
+
   changeMenuOpened = (value: boolean) => {
     this.isMenuOpened = value;
   }

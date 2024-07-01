@@ -1,3 +1,4 @@
+'use client';
 import HeadingSection from '@/components/heading-section/HeadingSection';
 import './for-adult.scss';
 
@@ -37,11 +38,6 @@ const ForAdult: FC = () => {
       />
       <div className="for-adult__projects-wrap ">
         <ProjectList data={data}/>
-        <LandingSwitchButton 
-          className='for-adult__switch' 
-          render={() => <AdultButton />}
-          to='kids'
-        />
       </div>
 
       <AdultFooter />

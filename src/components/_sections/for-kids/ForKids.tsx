@@ -1,3 +1,4 @@
+'use client';
 import { FC } from 'react';
 import './for-kids.scss';
 
@@ -20,12 +21,6 @@ const ForKids = () => {
       />
       <div className="for-kids__projects-wrap">
         <KidsProjectList />
-
-        <LandingSwitchButton 
-          className='for-kids__switch' 
-          render={() => <KidsButton />}
-          to='adult'
-        />
       </div>
 
       <KidsFooter />

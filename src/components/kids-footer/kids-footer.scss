@@ -4,6 +4,12 @@
   color: #fff; 
 
   &__item {
+    a.footer-link {
+      &:hover {
+        opacity: 0.3;
+      }
+    }
+
     &-list {
       font-size: 10rem;
       line-height: 1.5em;

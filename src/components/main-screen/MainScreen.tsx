@@ -33,7 +33,8 @@ const MainScreen: FC = () => {
   const {
     isMenuOpened, 
     changeMenuOpened, 
-    changeCurrentPage
+    changeCurrentPage,
+    currentPage
   } = store;
   const [show, setShow] = useState(true);
   const [delay, setDelay] = useState(0);
@@ -46,18 +47,21 @@ const MainScreen: FC = () => {
   }
 
   useEffect(() => {
-    if (hash === 'main-screen') {
+    if (!hash) {
+      changeMenuOpened(false);
+      changeCurrentPage(null)
+      setShow(true)
+      setDelay(0);
+    } else if (hash === 'first-landing'){
+      setDelay(1);
+      setShow(false);
+    }else if (hash === 'main-screen') {
       setShow(true);
       changeMenuOpened(true);
       changeCurrentPage(null);
       setDelay(0);
-    } 
-
-    if (!hash) {
-      changeMenuOpened(false);
-      setShow(true)
-    } else if (hash === 'first-landing'){
-      setDelay(1);
+    }  
+    else {
       setShow(false);
     }
   },[hash])
@@ -74,43 +78,44 @@ const MainScreen: FC = () => {
               ...transitionStyles,
               ...menuStyles[state],
               transitionDelay: delay + 's',
-              zIndex: isMenuOpened ? 2 : 4 ,
+              zIndex: currentPage ? 4 : 3 
             }}
           >
-            {isMenuOpened
-              ? <Lottie 
-                  className='main-screen__logo'  
-                  animationData={logoAnimationOut} 
-                  loop={false}
-                  onEnterFrame={() => setShowArrow(false)}
-                /> 
-              : <Lottie 
-                  className='main-screen__logo'  
-                  animationData={logoAnimationOn} 
-                  loop={false} 
-                  onComplete={() => setShowArrow(true)}
-                /> 
-            }
+            <div className="main-screen__content" >
+              {isMenuOpened
+                ? <Lottie 
+                    className='main-screen__logo'  
+                    animationData={logoAnimationOut} 
+                    loop={false}
+                    onEnterFrame={() => setShowArrow(false)}
+                  /> 
+                : <Lottie 
+                    className='main-screen__logo'  
+                    animationData={logoAnimationOn} 
+                    loop={false} 
+                    onComplete={() => setShowArrow(true)}
+                  /> 
+              }
 
-            <Transition nodeRef={arrowRef} in={showArrow} timeout={0}>
-              {state => (
-                <Image 
-                  className='main-screen__arrow' 
-                  src={arrow} 
-                  alt=""
-                  ref={arrowRef}
-                  style={{
-                    unmounted: { opacity: 0 },
-                    entering: { opacity: 1 },
-                    entered: { opacity: 1 },
-                    exiting:  { opacity: 0 },
-                    exited:  { opacity: 0 },
-                  }[state]}
-                />
-              )}
-            </Transition>
-
-            <LanguageToggle className={cn('main-screen__language', halvar.className)}/>
+              <Transition nodeRef={arrowRef} in={showArrow} timeout={0}>
+                {state => (
+                  <Image 
+                    className='main-screen__arrow' 
+                    src={arrow} 
+                    alt=""
+                    ref={arrowRef}
+                    style={{
+                      unmounted: { opacity: 0 },
+                      entering: { opacity: 1 },
+                      entered: { opacity: 1 },
+                      exiting:  { opacity: 0 },
+                      exited:  { opacity: 0 },
+                    }[state]}
+                  />
+                )}
+              </Transition>
+              <LanguageToggle className={cn('main-screen__language', halvar.className)}/>
+            </div>
             <PageMenu />
           </div>
         </>

@@ -6,22 +6,18 @@ import './landing-switch-button.scss';
 import store from '@/store/store';
 
 interface Props extends IWithClass {
-  render: () => JSX.Element
-  to: CurrentPageType
+  render: () => ReactNode 
+  handleClick: () => void
 }
 
-const LandingSwitchButton: FC<Props> = (props) => {
-  const className = classNames('landing-switch-button', props.className); 
-  const { changeCurrentPage } = store;
-
-  const handleClick = () => {
-    changeCurrentPage(props.to)
-  }
+const LandingSwitchButton: FC<Props> = (props) => { 
 
   return (
-    <button onClick={handleClick} className={className} type='button'>
-        {props.render()}
-    </button>
+    <div className={classNames('landing-switch-button__wrap', props.className)}>
+      <button onClick={props.handleClick} className={'landing-switch-button'} type='button'>
+          {props.render()}
+      </button>
+    </div>
   );
 };
 

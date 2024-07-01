@@ -47,7 +47,7 @@
     }
 
     &__paragraph {
-      padding: 60rem;
+      padding: 70rem 130rem 60rem 60rem;
       font-size: 18rem;
       line-height: 1.2em;
       p {
@@ -193,7 +193,8 @@
   }
 
   &-sponsors {
-    margin-bottom: 70rem;
+    padding: 40rem 0;
+    background-color:rgba(217, 217, 217, 0.2);
     h2 {
       margin-bottom: 70px;
       font-size: 23rem;

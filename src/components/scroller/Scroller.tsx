@@ -6,27 +6,24 @@ import { useHash } from '@/utils/useHash';
 import { useViewport } from '@/utils/useViewport';
 
 const Scroller: FC<IWithChildren> = (props) => {
-  // const hash = useHash();
-  // const viewport = useViewport();
-  // const ref = useRef<HTMLDivElement>(null);
-  // const [translate, setTranslate] = useState(0);
+  const hash = useHash();
+  const viewport = useViewport();
+  const [translate, setTranslate] = useState(0);
 
-  // useEffect(() => {
-  //   if (hash) {
-  //     const section = document.getElementById(hash);
-  //     const sectionTop = section && section.getBoundingClientRect().top;
-  //     if (ref.current && sectionTop) {
-  //       setTranslate(sectionTop);
-  //     }
-  //   }
-  // },[hash, viewport])
+  useEffect(() => {
+    if (hash) {
+      const section = document.getElementById(hash);
+      
+      section?.scrollIntoView({behavior: 'smooth'})
+    }
+  },[hash, viewport]);
 
 
   return (
     <div className='scroller'>
       <div 
         className="scroller-content"
-        style={{transform:  `translateY(0)px`}}
+        style={{transform:  `translateY(-${translate}px)`}}
       >
       
         {props.children}  

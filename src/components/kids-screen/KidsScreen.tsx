@@ -19,6 +19,8 @@ import TextLogo from '../text-logo/TextLogo';
 import { Transition } from 'react-transition-group';
 import { transitionStyles } from '@/vars';
 import { useMediaQuery } from 'react-responsive';
+import { observer } from 'mobx-react-lite';
+import store from '@/store/store';
  
 interface Props {
   isOpened: boolean
@@ -27,7 +29,7 @@ interface Props {
 const KidsScreen: FC<Props> = (props) => {
   const blackGirlRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
-  const isMediumScreen = useMediaQuery({maxWidth: 1024, minWidth: 640});
+  const isMediumScreen = useMediaQuery({maxWidth: 1024});
   const opened = isMediumScreen || props.isOpened;
   const className = cn('kids-screen', opened ? 'opened' : '');
 

@@ -18,28 +18,28 @@ const AdultFooter: FC = () => {
       <div className="adult-footer__content">
         <div className="footer-item adult-footer__item" id="adult-footer-blue">
           <div className="footer-item__content">
-            <Link href="/menu/contacts" className='footer-link'>Contact us</Link>
+            <a href="#contacts" className='footer-link'>Contact us</a>
             <ul>
-              <li>Head <Link href="/">hello@delai.studio</Link></li>
-              <li>HR <Link href="/">@jenechkina1</Link></li>
-              <li>Work <Link href="/">documents@horshield.com</Link></li>
+              <li>Head <a href="/">hello@delai.studio</a></li>
+              <li>HR <a href="/">@jenechkina1</a></li>
+              <li>Work <a href="/">documents@horshield.com</a></li>
             </ul>
-            <Link href='/'>
+            <a href='/'>
               <Image src={logo} className='footer-item__logo' alt=""/>
-            </Link>
+            </a>
           </div>
         </div>
 
         <div className="footer-item adult-footer__item" id="adult-footer-yellow">
           <div className="footer-item__content">
-            <Link href="/menu/career" className='footer-link'>career</Link>
+            <a href="#career" className='footer-link'>career</a>
             <ul>
-              <li><Link href="/">Animator</Link></li>
-              <li><Link href="/">Art-director</Link></li>
-              <li><Link href="/">3D-Character artist</Link></li>
-              <li><Link href="/">CG Generalist</Link></li>
-              <li><Link href="/">Motion designer</Link></li>
-              <li><Link href="/">Web designer</Link></li>
+              <li><a href="/">Animator</a></li>
+              <li><a href="/">Art-director</a></li>
+              <li><a href="/">3D-Character artist</a></li>
+              <li><a href="/">CG Generalist</a></li>
+              <li><a href="/">Motion designer</a></li>
+              <li><a href="/">Web designer</a></li>
             </ul>
             <LanguageToggle className='footer-language'/>
           </div>
@@ -47,12 +47,12 @@ const AdultFooter: FC = () => {
 
         <div className="footer-item adult-footer__item" id="adult-footer-purple">
           <div className="footer-item__content">
-            <Link href="/menu/about" className='footer-link'>about us</Link>
+            <a href="#about" className='footer-link'>about us</a>
             <div className="adult-footer__item-row">
               <div className="footer-socials">
-                <Link href='/'>Be</Link>
-                <Link href='/'>Vk</Link>
-                <Link href='/'>Tg</Link>
+                <a href='/'>Be</a>
+                <a href='/'>Vk</a>
+                <a href='/'>Tg</a>
               </div>
               <span>All rights reserved</span>
             </div>

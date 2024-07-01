@@ -24,12 +24,15 @@ const images = [
 
 interface WallpapperImageProps extends IWithClass{
   src: StaticImageData
+  height?: number 
 } 
 
 const WallpapperImage: FC<WallpapperImageProps> = (props) => {
+  const height = props.height && props.height * 0.7;
+
   return (
     <div className={cn("kids-wallpapper__row", props.className)}>
-      <Image src={props.src} alt=''/>
+      <Image style={{height: height + 'rem'}} src={props.src} alt=''/>
     </div>
   );
 }
@@ -38,16 +41,10 @@ const KidsWallpapper: FC = () => {
   const [imgList, setImgList] = useState<StaticImageData[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   let rowsCount = 0;
+  const rowHeight = 200;
 
   useEffect(() => {
     if (containerRef.current) {
-      const clientBreakpoint = getBreakpoint(containerRef.current.clientWidth);
-      const rowHeight = {
-        'max': 250,
-        'lg' : 200,
-        'md' : 170,
-        'sm' : 120,
-      }[clientBreakpoint];
       rowsCount = Math.floor((containerRef.current.clientHeight) / rowHeight);
 
       let count = 0;
@@ -67,12 +64,15 @@ const KidsWallpapper: FC = () => {
     <>
     <div ref={containerRef} className='kids-wallpapper'>
       {imgList.map((item, index) => {
-        const src = (index + 1 === imgList.length) ? boy : item;
+        const data = (index + 1 === imgList.length) 
+        ? {src: boy} 
+        : {src: item, height: rowHeight};
         const className = (index + 1 === imgList.length - 1) ? 'pre-last' : '';
-
+        
         return (
           <WallpapperImage
-            src={src} 
+            src={data.src}
+            height={data.height}
             className={className}
             key={'wallpapper-' + index}
           />

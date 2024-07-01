@@ -5,7 +5,7 @@
   position: relative;
   &__heading {
     img {
-      top: -30rem;
+      top: -50rem;
     }
   }
   &__projects-wrap {
@@ -22,9 +22,5 @@
     .project-list__item {
       border-radius: 20rem;
     }
-  }
-
-  &__switch {
-    right: 0;
   }
 }

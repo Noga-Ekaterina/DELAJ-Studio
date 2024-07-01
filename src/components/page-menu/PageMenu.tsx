@@ -58,8 +58,8 @@ const sideStyles = {
         right: 0,
         left: 0,
         height: '50vh', 
+        width: '100%',
         top: '-50%', 
-        transition: transitionStyles.transition
       },
       onOpen : {
         entering: {height: '50vh', top: "0%"},
@@ -79,8 +79,8 @@ const sideStyles = {
         right: 0,
         left: 0,
         height: '50vh', 
+        width: '100%',
         bottom:"-50%" , 
-        transition: transitionStyles.transition
       },
       onOpen : {
         entering: { height: '50vh', bottom: "0%"},
@@ -99,23 +99,31 @@ const sideStyles = {
 }
 
 const PageMenu = () => {
-  const { currentPage } = store;
+  const { isLandingSwiped,  swipeLanding} = store;
   const ref = useRef<HTMLDivElement>(null);
   const mediumScreen = useMediaQuery({maxWidth: 1024});
   const screenStyles = mediumScreen ? 'mediumScreen' : 'largeScreen';
 
+  const swipeToKids = () => {
+    if (isLandingSwiped) {
+      console.log()
+      swipeLanding(false);
+    }
+  }
+
+  const swipeToAdult = () => {
+    if (!isLandingSwiped) {
+      swipeLanding(true);
+    }
+  }
+
   return (  
-    <nav 
-      ref={ref} 
-      className="page-menu"
-      style={{
-        zIndex: currentPage ? 5 : 3
-      }}
-    > 
+    <nav ref={ref} > 
       <PageMenuScreen 
         styles={sideStyles[screenStyles].kids}
         page="kids"
         Component={KidsScreen}
+        handleClick={() => swipeToKids()}
       >
         
       </PageMenuScreen>
@@ -123,6 +131,7 @@ const PageMenu = () => {
         styles={sideStyles[screenStyles].adult}
         page="adult"
         Component={AdultScreen}
+        handleClick={() => swipeToAdult()}
       >
       </PageMenuScreen>
     </nav>

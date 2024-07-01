@@ -10,13 +10,13 @@
   justify-content: space-between;
   &__row {
     width: 100%;
-    
     position: relative;
     img {
-      width: 140rem;
-      height: auto;
+      object-fit: contain;
       position: absolute;
+      width: auto;
       top: 0;
+      max-width: 20%;
     }
     &:nth-child(2n + 1) {
       img {
@@ -34,10 +34,9 @@
       }
     }
     &:last-child {
-      height: 400rem;
+      height: 300rem;
       img {
         height: 100%;
-        width: auto;
         left: 0 !important;
         bottom: 0;
         top: auto;
@@ -46,17 +45,13 @@
     &.pre-last {
       img {
         right: 0 !important;
+        top: 20rem ;
       }
     }
   }
 
   @media screen and (min-width: 1680px) {
     &__row {
-      img {
-        width: 13%;
-      }
-
-      
     }
   }
 

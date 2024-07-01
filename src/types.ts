@@ -1,8 +1,6 @@
 import { StaticImageData } from "next/image"
 import { ReactNode, FC, ComponentType } from "react"
 
-export type HeaderTheme = 'default' | 'kids' | 'adult' | "mainScreen";
-
 export type CurrentPageType = null | 'kids' | 'adult'
 
 export interface IWithClass {

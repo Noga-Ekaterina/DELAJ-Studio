@@ -1,12 +1,46 @@
 .landing-switch-button {
-  position: absolute;
-  z-index: 3;
-  top: 0;
+  &__wrap {
+    position: absolute;
+    z-index: 3;
+    top: 200rem;
+    bottom: 0;
+    transition: transform var(--transition);
+
+    &.button-right {
+      right: 0;
+      button {
+        transform: translateX(100%);
+        transition: transform var(--transition);
+      }
+      .adult-button, .kids-button {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+    
+    &.button-left {
+      left: 0;
+      button {
+        transform: translateX(-100%);
+        transition: transform var(--transition);
+      }
+      .adult-button, .kids-button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+
+    &:hover {
+      button {
+        transform: translateX(0);
+      }
+    }
+  }
 }
 
 .kids-button {
   background-color: var(--text-gray);
-  border-radius: 10rem 0rem 0rem 10rem;
+  border-radius: 10rem;
   position: relative;
   height: 94.5rem;
   transition: var(--transition);
@@ -50,7 +84,7 @@
 }
 
 .adult-button {
-  border-radius: 0 35rem 35rem 0;
+  border-radius: 35rem;
   overflow: hidden;
   max-height: 95rem;
   transition: var(--transition);
@@ -80,7 +114,7 @@
 
   &:hover {
     max-height: 270rem;
-    border-radius: 0 13rem 13rem 0;
+    border-radius: 13rem;
     .adult-button__section.blue {
       height: 90rem;
     }

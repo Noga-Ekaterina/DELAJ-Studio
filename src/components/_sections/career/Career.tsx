@@ -3,7 +3,7 @@ import './career.scss';
 import { circe } from '@/fonts';
 import cn from 'classnames';
 import Link from 'next/link';
-import SectionWrap from '../../section-wrap/SectionWrap';
+import SectionWrap from '../../section/Section';
 
 const data = [
   {title: '2D-Аниматор', description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.'},

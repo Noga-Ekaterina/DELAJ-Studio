@@ -5,7 +5,10 @@ export const useHash = () => {
   useEffect(() => {
     if (window) {
       setHash(window.location.hash);
-      const onHashChange = () => {
+      //@ts-ignore
+      const onHashChange = (e) => {
+        e.preventDefault();
+        console.log(hash)
         setHash(window.location.hash);
       };
       window.addEventListener('hashchange', onHashChange);
