@@ -16,7 +16,6 @@ import boy from '../../../public/images/kids/wall-boy.png';
 import Image, { StaticImageData } from 'next/image';
 import { IWithClass } from '@/types';
 import cn from 'classnames';
-import getBreakpoint from '@/utils/getBreakpoint';
 
 const images = [
   fst, scd, thr, frt, fvt, sxt, svn, egh, nin,

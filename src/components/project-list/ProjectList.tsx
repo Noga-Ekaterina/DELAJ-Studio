@@ -1,4 +1,5 @@
-import { FC, ReactNode } from 'react';
+'use client'
+import { FC, ReactNode, useEffect, useState } from 'react';
 import './project-list.scss';
 
 import Link from 'next/link';
@@ -7,40 +8,54 @@ import { IWithClass, ProjectItem } from '@/types';
 import cn from 'classnames';
 
 interface Props extends IWithClass{
-  data: ProjectItem[]
+  title: string
   Wallpapper?: FC
 }
 
-const ProjectList: FC<Props> = ({ data, className, Wallpapper }) => {
-  
+const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
+  const [data, setData] = useState<ProjectItem[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`/api/projects/${title}`);
+      const json = await response.json();
+
+      setData(json);
+    })();
+  },[])
+
   const getModifiedList = (data: any[]) => {
-    let result: any[] = [];
+    if (data.length > 3){ 
+      let result: any[] = [];
+      let chunkSize = 3;
+      let index = 0;
 
-    let chunkSize = 3;
-    let index = 0;
+      const increase = (newChunkSizeValue: number) => {
+        const subArray = data.slice(index, index + chunkSize); 
 
-    const increase = (newChunkSizeValue: number) => {
-      const subArray = data.slice(index, index + chunkSize); 
-
-      if (subArray.length <= 1) {
-        let last = result.length - 1;
-        result[last] = result[last].concat(subArray);
-      } else {
-        result.push(subArray);
+        if (subArray.length <= 1) {
+          let last = result.length - 1;
+          result[last] = result[last].concat(subArray);
+        } else {
+          result.push(subArray);
+        }
+        index += chunkSize;
+        chunkSize = newChunkSizeValue;
       }
-      index += chunkSize;
-      chunkSize = newChunkSizeValue;
-    }
 
-    while (index < data.length) { 
-      if (chunkSize === 3) {
-        increase(2);
-      } else {
-        increase(3);
+      while (index < data.length) { 
+        if (chunkSize === 3) {
+          increase(2);
+        } else {
+          increase(3);
+        }
       }
+    
+      return result;
+
+    } else {
+      return data;
     }
-  
-    return result;
   };
 
   const itemsGrid = getModifiedList(data);
@@ -61,7 +76,7 @@ const ProjectList: FC<Props> = ({ data, className, Wallpapper }) => {
               {row.map((item: ProjectItem, index: number) => {
                 return (
                   <Link 
-                    href={`/${item.id}`} 
+                    href={`projects/${item.href}`} 
                     className='project-list__item' 
                     key={item.id + index}>
                     <Image 
@@ -80,7 +95,7 @@ const ProjectList: FC<Props> = ({ data, className, Wallpapper }) => {
           )
         })}
 
-        {Wallpapper && <Wallpapper />}
+        {Wallpapper && data.length && <Wallpapper />}
       </div>
     </div>
   );

@@ -1,8 +1,7 @@
 'use client';
 import { IWithClass } from '@/types';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import cn from 'classnames';
-import Link from 'next/link';
 import Image from 'next/image';
 
 //Images
@@ -19,11 +18,11 @@ import whiteLogo from '../../../public/images/white-logo.svg'
 import close from '../../../public/images/close.svg';
 
 import './header.scss';
-import { useHash } from '@/utils/useHash';
+import { useHash } from '../_hooks/useHash';
 import { P, match } from 'ts-pattern';
 import { observer } from 'mobx-react-lite';
 import store from '@/store/store';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 const styles = {
   default: {
@@ -52,16 +51,16 @@ type HeaderTheme = {
   hash: string, 
   isLandingSwiped: boolean, 
   isMenuOpened: boolean
+  pathname: string
 }
 
 const Header: FC<IWithClass> = (props) => {
   const className = cn('header', props.className);
   const hash = useHash();
-  const router = useRouter();
+  const pathname = usePathname();
   const { isLandingSwiped, isMenuOpened, changeMenuOpened } = store;
-  const theme: HeaderTheme = {hash, isLandingSwiped, isMenuOpened};
+  const theme: HeaderTheme = {hash, isLandingSwiped, isMenuOpened, pathname};
   const modalHashes = ['about', 'ideas', 'career', 'contacts', 'faq'];
-
     return (
       <>
         {match(theme)
@@ -154,13 +153,39 @@ const Header: FC<IWithClass> = (props) => {
               </header>
             )
           )
-          // Разделы меню
+          // Разделы Меню
           .with(
-            {hash: P.when(hash => modalHashes.includes(hash))},
+            {hash: P.when(() => modalHashes.includes(hash))},
+            () => (
+              <header className={cn(className)} >
+                <div className='container header-first'>
+                  <a href='#menu'>
+                    <Image className='header-close' src={close} alt=""/>
+                  </a>
+                </div>
+              </header>
+            )
+          )
+          // Страница проекта
+          .when(
+            () => pathname.includes('projects'),
             () => (
               <header className={cn(className)} >
                   <div className="container header-first">
                     <a href="#menu">
+                      <Image className='header-close' src={close} alt=""/>
+                    </a>
+                  </div>
+              </header>
+            )
+          )
+          // Страница вакансии 
+          .when(
+            () => hash.includes('career?id='),
+            () => (
+              <header className={cn(className)} >
+                  <div className="container header-first">
+                    <a href="#career">
                       <Image className='header-close' src={close} alt=""/>
                     </a>
                   </div>

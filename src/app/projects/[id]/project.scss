@@ -1,0 +1,134 @@
+.project {
+  .container {
+    max-width: 812rem;
+  }
+  h1 {
+    margin-top: 43rem;
+    font-size: 45rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &-data {
+    font-size: 15rem;
+    margin-bottom: 55rem;
+    &__bottom {
+      margin-top: 35rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &-type {
+    font-weight: 700;
+    color: #AAD031;
+  }
+
+  &-params {
+    width: 230rem;
+    li {
+      display: flex;
+      color: #A7A7A7;
+      column-gap: 14rem;
+      span {
+        flex: 1;
+      }
+    }
+    &__title {
+      font-weight: 700;
+      color: #000;
+    }
+  }
+  &-description {
+    width: 483rem;
+  }
+
+  &-materials {
+    width: 100%;
+    overflow: hidden;
+    img, video {
+      width: 100%;
+      height: auto;
+      display: inline-block;
+      object-fit: cover;
+      object-position: top;
+      line-height: 1;
+      vertical-align: middle;
+    }
+  }
+
+  @media screen and (max-width: 1025px) {
+    .container {
+      max-width: 812px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-top: 43px;
+    }
+
+    &-data {
+      font-size: 13px;
+      margin-bottom: 50px;
+      &__bottom {
+        margin-top: 35px;
+        column-gap: 20px;
+      }
+    }
+
+    &-params {
+      width: 230px;
+      li {
+        column-gap: 12px;
+      }
+    }
+
+    &-description {
+      width: 100%;
+      max-width: 432px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    
+    .container {
+      padding: 0;
+    }
+    &-data {
+      padding: 38px 20px 30px;
+      margin-bottom: 0;
+
+      h1 {
+        margin-top: 0;
+      }
+
+      &__bottom {
+        flex-direction: column;
+        row-gap: 30px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    &-params {
+      width: 180px;
+    }
+
+    &-data {
+      font-size: 10px;
+      h1 {
+        font-size: 35px;
+      }
+
+      &__bottom {
+        margin-top: 25px;
+        row-gap: 25px;
+      }
+    }
+
+    &-description {
+      max-width: 300px;
+    }
+  }
+}

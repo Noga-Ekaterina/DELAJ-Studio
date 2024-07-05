@@ -1,74 +1,30 @@
-const data = {
-  "kids" : [
-    {
-      id : 1,
-      preview: '/images/data/kids-data/1.png',
-    },
-    {
-      id : 2,
-      preview: '/images/data/kids-data/2.png',
-    },
-    {
-      id : 3,
-      preview: '/images/data/kids-data/3.png',
-    },
-    {
-      id : 4,
-      preview: '/images/data/kids-data/4.png',
-    },
-    {
-      id : 5,
-      preview: '/images/data/kids-data/5.png',
-    },
-    {
-      id : 1,
-      preview: '/images/data/kids-data/6.png',
-    },
-    {
-      id : 2,
-      preview: '/images/data/kids-data/7.png',
-    },
-    {
-      id : 3,
-      preview: '/images/data/kids-data/8.png',
-    },
-    {
-      id : 4,
-      preview: '/images/data/kids-data/9.png',
-    },
-    {
-      id : 5,
-      preview: '/images/data/kids-data/10.png',
-    },
-    {
-      id : 1,
-      preview: '/images/data/kids-data/11.png',
-    },
-    {
-      id : 2,
-      preview: '/images/data/kids-data/12.png',
-    },
-    {
-      id : 3,
-      preview: '/images/data/kids-data/13.png',
-    },
-    {
-      id : 5,
-      preview: '/images/data/kids-data/12.png',
-    },
-    {
-      id : 5,
-      preview: '/images/data/kids-data/15.png',
-    },
-    {
-      id : 5,
-      preview: '/images/data/kids-data/13.png',
-    },
-    {
-      id : 5,
-      preview: '/images/data/kids-data/11.png',
-    },
-  ]
-};
+const projects = [
+  {
+    id: '1703-twins',
+    data: {
+      title: '1703 близнецы',
+      type: 'Анимационный сериал',
+      date: '2023',
+      animation: '2D-анимация',
+      duration: {
+        minutes: 60
+      },
+      description: 'В фантазиях девочки Сони существует целый мир, наполненный приключениями, в котором она и ее воображаемый друг – волчонок Леня – постоянно попадают в разные передряги. У Сони любое дело, даже уборка, превращается в фантастическое приключение!',
+    }
+  },
+  {
+    id: 'meteo-patrol',
+    data: {
+      title: 'Метео патруль',
+      type: 'Анимационный сериал',
+      date: '2023',
+      animation: '2D-анимация',
+      duration: {
+        minutes: 60
+      },
+      description: 'В фантазиях девочки Сони существует целый мир, наполненный приключениями, в котором она и ее воображаемый друг – волчонок Леня – постоянно попадают в разные передряги. У Сони любое дело, даже уборка, превращается в фантастическое приключение!',
+    }
+  }
+];
 
-export default data;
+export default projects;

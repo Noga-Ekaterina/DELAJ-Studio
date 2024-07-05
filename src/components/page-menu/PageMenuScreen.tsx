@@ -5,7 +5,6 @@ import { Transition } from 'react-transition-group';
 import { observer } from "mobx-react-lite";
 import { CurrentPageType } from "@/types";
 import { transitionStyles } from "@/vars";
-import { useHash } from "@/utils/useHash";
 type StyleObject = Record<string, string | number>
 
 interface Props {

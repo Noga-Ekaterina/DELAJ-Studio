@@ -14,6 +14,7 @@ export interface IWithChildren {
 export interface ProjectItem {
   id: number
   preview: string
+  href: string
 }
 
 export interface ISection {
@@ -24,4 +25,23 @@ export interface ISection {
   nextId?: string | null
 }
 
-export type Breakpoint = 'max' | 'lg' | 'md' | 'sm' 
+export interface ICareer {
+  id: string
+  title: string
+  description: string
+}
+
+export interface IProject {
+  id: string,
+  data: {
+    title:  string,
+    type:  string,
+    date: string,
+    animation:  string,
+    duration: {
+      hours?: number
+      minutes: number
+    },
+    description: string
+  }
+}

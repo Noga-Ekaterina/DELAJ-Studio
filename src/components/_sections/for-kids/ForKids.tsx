@@ -1,4 +1,3 @@
-'use client';
 import { FC } from 'react';
 import './for-kids.scss';
 
@@ -7,9 +6,8 @@ import headingImage from '../../../../public/images/kids/heading.png';
 
 import HeadingSection from '@/components/heading-section/HeadingSection';
 import KidsFooter from '@/components/kids-footer/KidsFooter';
-import KidsProjectList from '../../../components/project-list/KidsProjectList';
-import LandingSwitchButton from '@/components/landing-switch-button/LandingSwitchButton';
-import KidsButton from '../../landing-switch-button/KidsButton'; 
+import KidsWallpapper from '@/components/kids-wallpapper/KidsWallpapper'; 
+import ProjectList from '@/components/project-list/ProjectList';
 
 const ForKids = () => {
   return (    
@@ -20,7 +18,7 @@ const ForKids = () => {
         className='for-kids__heading'
       />
       <div className="for-kids__projects-wrap">
-        <KidsProjectList />
+      <ProjectList className="for-kids__projects" title='kids' Wallpapper={KidsWallpapper}/>
       </div>
 
       <KidsFooter />

@@ -3,8 +3,8 @@ import { IWithChildren, IWithClass } from '@/types';
 import { FC, memo, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import './section-wrap.scss';
-import { useHash } from '@/utils/useHash';
-import { useViewport } from '@/utils/useViewport';
+import { useHash } from '@/components/_hooks/useHash';
+import { useViewport } from '@/components/_hooks/useViewport';
 import classNames from 'classnames';
 
 interface Props extends IWithClass, IWithChildren {

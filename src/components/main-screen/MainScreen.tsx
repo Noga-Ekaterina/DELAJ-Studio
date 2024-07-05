@@ -17,7 +17,7 @@ import cn from 'classnames';
 import { halvar } from '@/fonts';
 import Image from 'next/image';
 import { Transition } from 'react-transition-group';
-import { useHash } from '@/utils/useHash';
+import { useHash } from '@/components/_hooks/useHash';
 import PageMenu from '../page-menu/PageMenu';
 import { transitionStyles } from '@/vars';
 
