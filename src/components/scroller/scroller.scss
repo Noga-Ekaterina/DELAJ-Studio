@@ -1,7 +1,10 @@
 .scroller {
 	height: 100vh;
-	scroll-behavior: smooth;
   overflow: hidden;
-	transition: translate var(--transition);
 	position: relative;
+	&-content {
+		overflow: hidden;
+		transition: transform var(--transition);
+		transition-duration: 0.7s;
+	}
 }

@@ -88,7 +88,7 @@ const Page: FC<Props> = async ({ params }) => {
                   } 
 
                   return (
-                    <img src={src} alt="" key={'project-material' + index}/>
+                    <Image src={src} alt="" key={'project-material' + index} width={1000} height={700}/>
                   );
                 }) }
               </div>

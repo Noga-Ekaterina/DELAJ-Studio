@@ -3,8 +3,6 @@ import { IWithChildren, IWithClass } from '@/types';
 import { FC, memo, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import './section-wrap.scss';
-import { useHash } from '@/components/_hooks/useHash';
-import { useViewport } from '@/components/_hooks/useViewport';
 import classNames from 'classnames';
 
 interface Props extends IWithClass, IWithChildren {
@@ -14,25 +12,25 @@ interface Props extends IWithClass, IWithChildren {
 const Section: FC<Props> = (props) => {
   const containerRef = useRef<HTMLDivElement>(null); 
   const ref = useRef<HTMLDivElement>(null);
-  const nextId = containerRef.current?.nextElementSibling?.id;
-  const prevId = containerRef.current?.previousElementSibling?.id;
-  const hash = useHash();
-  const viewport = useViewport();
   const className = cn('section-wrap', props.className);
+  let nextName: string | null | undefined;
+  let prevName: string | null | undefined;
 
-  // useEffect(() => {
-  //   if (window && ref && window.location.hash === `#${props.id}`) {
-  //     containerRef.current?.scrollIntoView({});
-  //   }
-  // },[hash, viewport])
+  useEffect(() => {
+    const nextSection = containerRef.current?.nextElementSibling;
+    const prevSection = containerRef.current?.previousElementSibling;
+    nextName = nextSection?.getAttribute('data-name');
+    prevName = prevSection?.getAttribute('data-name');
+
+  },[ref])
 
   const swipeDown = () => {
     if (window && ref.current) {
       const { bottom } = ref.current.getBoundingClientRect();
       const bottomOffset = window.innerHeight - Math.floor(bottom) >= 0;
       if ( bottomOffset ) {
-        if (nextId) {
-          window.location.hash = nextId;
+        if (nextName) {
+          window.location.hash = nextName;
         } else {
           window.location.hash = '';
         }
@@ -45,8 +43,8 @@ const Section: FC<Props> = (props) => {
       const { top } = ref.current.getBoundingClientRect();
 
       if (top === 0) {
-          if (prevId) {
-            window.location.hash = prevId;
+          if (prevName) {
+            window.location.hash = prevName;
           } else {
             window.location.hash = 'main-screen';
           }
@@ -77,8 +75,8 @@ const Section: FC<Props> = (props) => {
       onWheel={handleScroll} 
       onTouchMove={handleTouch}
       className={className} 
-      id={props.id}
       ref={containerRef}
+      data-name={props.id}
     >
       <div 
         ref={ref} 
