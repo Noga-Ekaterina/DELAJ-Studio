@@ -5,7 +5,6 @@ import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
 import { useViewport } from '@/components/_hooks/useViewport';
 
-
 const Scroller: FC<IWithChildren> = (props) => {
   const hash = useHash();
   const viewport = useViewport();
@@ -23,6 +22,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   },[hash, viewport]);
 
   return (
+
     <div className='scroller'>
       <div 
         className="scroller-content"

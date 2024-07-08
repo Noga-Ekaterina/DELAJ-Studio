@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+import { createContext } from 'react';
 
 // Components
 import MainScreen from "@/components/main-screen/MainScreen"

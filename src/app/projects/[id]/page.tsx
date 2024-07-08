@@ -32,14 +32,16 @@ const getData = async (id: string): Promise<IProject | null> => {
 const Page: FC<Props> = async ({ params }) => {
   const { id } = params;
   const project: IProject | null = await getData(id);
-  const pathToMaterials = path.join(process.cwd(), 'public') + '/projects-materials/' + id; 
-  const files: string[] = fs.readdirSync(pathToMaterials).sort(
-    (a: string, b: string) => {
-      const aNum = +a.slice(0, a.indexOf('.'));
-      const bNum = +b.slice(0, b.indexOf('.'));
-      return (aNum > bNum) ? 1 : -1
-    }
-  );
+
+
+  // const pathToMaterials = path.join(process.cwd(), 'public') + '/projects-materials/' + id; 
+  // const files: string[] = fs.readdirSync(pathToMaterials).sort(
+  //   (a: string, b: string) => {
+  //     const aNum = +a.slice(0, a.indexOf('.'));
+  //     const bNum = +b.slice(0, b.indexOf('.'));
+  //     return (aNum > bNum) ? 1 : -1
+  //   }
+  // );
 
   return (
     <div className='project'>
@@ -48,6 +50,13 @@ const Page: FC<Props> = async ({ params }) => {
           (project)
             ? (
               <>
+              <Image 
+                className='project-cover' 
+                src={`/projects-materials/${id}/1.png` }
+                width={1200}
+                height={800}
+                alt=""
+              />
               <div className={classNames('project-data', circe.className)}>
                 <h1 className={halvar.className}>{project.data.title}</h1>  
                 <div className="project-type">{project.data.type}</div>
@@ -77,7 +86,7 @@ const Page: FC<Props> = async ({ params }) => {
                 <p className='project-description'>{project.data.description}</p>
                 </div>
               </div>
-              <div className="project-materials">
+              {/* <div className="project-materials">
                 {files.map((file, index) => {
                   const src = '/projects-materials/' + id + '/' + file;
                   
@@ -91,7 +100,7 @@ const Page: FC<Props> = async ({ params }) => {
                     <Image src={src} alt="" key={'project-material' + index} width={1000} height={700}/>
                   );
                 }) }
-              </div>
+              </div> */}
               </>
             )
             : <h1 className={halvar.className}>Проект не найден</h1>

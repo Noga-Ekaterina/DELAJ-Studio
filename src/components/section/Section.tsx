@@ -1,9 +1,10 @@
 'use client';
 import { IWithChildren, IWithClass } from '@/types';
-import { FC, memo, useEffect, useRef } from 'react';
+import { FC, memo, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import './section-wrap.scss';
 import classNames from 'classnames';
+import { useHash } from '../_hooks/useHash';
 
 interface Props extends IWithClass, IWithChildren {
   id: string
@@ -13,16 +14,21 @@ const Section: FC<Props> = (props) => {
   const containerRef = useRef<HTMLDivElement>(null); 
   const ref = useRef<HTMLDivElement>(null);
   const className = cn('section-wrap', props.className);
-  let nextName: string | null | undefined;
-  let prevName: string | null | undefined;
+  const [nextName, setNextName] = useState<string | null>(null);
+  const [prevName, setPrevName] = useState<string | null>(null);
+  const [touchStart, setTouchStart] = useState<null | number>(null)
+  const [touchEnd, setTouchEnd] = useState<null | number>(null)
+
+  const minSwipeDistance = 200;
 
   useEffect(() => {
     const nextSection = containerRef.current?.nextElementSibling;
     const prevSection = containerRef.current?.previousElementSibling;
-    nextName = nextSection?.getAttribute('data-name');
-    prevName = prevSection?.getAttribute('data-name');
+    setNextName(nextSection?.getAttribute('data-name') || null);
+    setPrevName(prevSection?.getAttribute('data-name') || null);
 
-  },[ref])
+  },[ref]);
+
 
   const swipeDown = () => {
     if (window && ref.current) {
@@ -30,6 +36,7 @@ const Section: FC<Props> = (props) => {
       const bottomOffset = window.innerHeight - Math.floor(bottom) >= 0;
       if ( bottomOffset ) {
         if (nextName) {
+          ref.current?.scrollTo(0,0);
           window.location.hash = nextName;
         } else {
           window.location.hash = '';
@@ -44,11 +51,31 @@ const Section: FC<Props> = (props) => {
 
       if (top === 0) {
           if (prevName) {
+            ref.current?.scrollTo(0,0);
             window.location.hash = prevName;
           } else {
             window.location.hash = 'main-screen';
           }
       } 
+    }
+  }
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLElement>) => {
+    setTouchEnd(null) 
+    setTouchStart(e.targetTouches[0].clientY)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLElement>) => {
+    setTouchEnd(e.targetTouches[0].clientY);
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isSwipeUp = distance > minSwipeDistance
+    const isSwipeDown = distance < -minSwipeDistance
+
+    if (isSwipeUp) {
+      swipeDown();
+    } else if (isSwipeDown) {
+      swipeUp();
     }
   }
 
@@ -60,20 +87,11 @@ const Section: FC<Props> = (props) => {
     }
   }
 
-  const handleTouch = (e: React.TouchEvent<HTMLElement>) => {
-    // console.log(e.touches, e.touches[1])
-    // const isUpGoing = e.touches[0].clientY < e.touches[1].clientY;
-    // if (e.touches[1] && isUpGoing ) {
-    //   swipeUp();
-    // } else {
-    //   swipeDown()
-    // }
-  }
-
   return (
     <section 
       onWheel={handleScroll} 
-      onTouchMove={handleTouch}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       className={className} 
       ref={containerRef}
       data-name={props.id}
@@ -90,4 +108,4 @@ const Section: FC<Props> = (props) => {
   );
 };
 
-export default Section;
+export default memo(Section);

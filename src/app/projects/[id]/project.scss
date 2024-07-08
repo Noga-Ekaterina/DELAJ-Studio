@@ -9,9 +9,16 @@
     text-transform: uppercase;
   }
 
+  &-cover {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
   &-data {
     font-size: 15rem;
     margin-bottom: 55rem;
+    min-height: 100vh;
     &__bottom {
       margin-top: 35rem;
       display: flex;
