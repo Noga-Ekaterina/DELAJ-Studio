@@ -50,11 +50,9 @@ const Page: FC<Props> = async ({ params }) => {
           (project)
             ? (
               <>
-              <Image 
+              <img 
                 className='project-cover' 
                 src={`/projects-materials/${id}/1.png` }
-                width={1200}
-                height={800}
                 alt=""
               />
               <div className={classNames('project-data', circe.className)}>
