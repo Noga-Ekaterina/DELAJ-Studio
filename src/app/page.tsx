@@ -16,7 +16,6 @@ import Faq from "@/components/_sections/faq/Faq";
 import Ideas from "@/components/_sections/ideas/Ideas";
 import KidsButton from "@/components/landing-switch-button/KidsButton";
 import AdultButton from "@/components/landing-switch-button/AdultButton";
-import getFilePaths from "@/utils/getFilePaths";
 
 const Page = () => {
   return (

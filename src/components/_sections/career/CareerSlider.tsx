@@ -57,7 +57,7 @@ const CareerSlider: FC<Props> = ({ career, vacancies }) => {
         <div className="career-slider__wrapper" ref={ref}>
           {vacancies.map(item => {
             return(
-            <div className="career-slider__item" id={'career-' + item.id}>
+            <div className="career-slider__item" id={'career-' + item.id} key={'career-' + item.id}>
               {item.duties?.map((duty, index) => (
                 <div className="career-slider__item-row"  key={'career-' + index}>
                   <h3>{duty.title}</h3>
