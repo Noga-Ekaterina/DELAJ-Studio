@@ -106,7 +106,6 @@ const PageMenu = () => {
 
   const swipeToKids = () => {
     if (isLandingSwiped) {
-      console.log()
       swipeLanding(false);
     }
   }

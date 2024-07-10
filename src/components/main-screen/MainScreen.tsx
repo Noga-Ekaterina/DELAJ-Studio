@@ -37,7 +37,6 @@ const MainScreen: FC = () => {
     currentPage
   } = store;
   const [show, setShow] = useState(true);
-  const [delay, setDelay] = useState(0);
   const [showArrow, setShowArrow] = useState(false);
   const hash = useHash();
   const arrowRef = useRef(null)
@@ -47,21 +46,13 @@ const MainScreen: FC = () => {
   }
 
   useEffect(() => {
-    if (!hash) {
+    if (!hash && hash === 'main-screen') {
       changeMenuOpened(false);
       changeCurrentPage(null)
       setShow(true)
-      setDelay(0);
     } else if (hash === 'first-landing'){
-      setDelay(1);
       setShow(false);
-    }else if (hash === 'main-screen') {
-      setShow(true);
-      changeMenuOpened(true);
-      changeCurrentPage(null);
-      setDelay(0);
-    }  
-    else {
+    } else {
       setShow(false);
     }
   },[hash])
@@ -77,7 +68,6 @@ const MainScreen: FC = () => {
             style={{
               ...transitionStyles,
               ...menuStyles[state],
-              transitionDelay: delay + 's',
               zIndex: currentPage ? 4 : 3 
             }}
           >

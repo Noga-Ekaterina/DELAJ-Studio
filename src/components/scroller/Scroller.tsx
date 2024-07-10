@@ -13,7 +13,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   useEffect(() => {
     if (hash) {
       const paramsIndex = hash.indexOf('?');
-      const pureHash = (paramsIndex > 0) ? hash.slice(0, paramsIndex + 1) : hash.slice(0);
+      const pureHash = (paramsIndex > 0) ? hash.slice(0, paramsIndex) : hash.slice(0);
       const section = document.querySelector(`[data-name="${pureHash}"]`);
       //@ts-ignore
       const offset = section?.offsetTop || 0;

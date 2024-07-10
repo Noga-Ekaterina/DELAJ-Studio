@@ -28,3 +28,9 @@ export const circe = Font({
     {path: '../public/fonts/circe-bold.ttf', weight: '700'},
   ]
 });
+
+export const raleway = Font({
+  src: [
+    {path: '../public/fonts/Raleway-ExtraBold.ttf', weight: '800'},
+  ]
+});

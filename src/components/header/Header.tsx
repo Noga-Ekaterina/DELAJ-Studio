@@ -1,6 +1,6 @@
 'use client';
 import { IWithClass } from '@/types';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import cn from 'classnames';
 import Image from 'next/image';
 
@@ -24,29 +24,6 @@ import { observer } from 'mobx-react-lite';
 import store from '@/store/store';
 import { usePathname } from 'next/navigation';
 
-const styles = {
-  default: {
-    mail: mail,
-    logo: logo,
-    burger: darkBurger,
-  },
-  kids: {
-    mail: blueMail,
-    logo: kidsLogo,
-    burger: blueBurger,
-  },
-  adult: {
-    mail: whiteMail,
-    logo: adultLogo,
-    burger: burger,
-  },
-  mainScreen: {
-    mail: whiteMail,
-    logo: logo,
-    burger: burger,
-  }
-}
-
 type HeaderTheme = {
   hash: string, 
   isLandingSwiped: boolean, 
@@ -64,12 +41,25 @@ const Header: FC<IWithClass> = (props) => {
     return (
       <>
         {match(theme)
-        // Первый экран
-          .with({hash: '', isMenuOpened: false}, () => (
+          // Страница проекта
+          .with(
+            {hash: '', pathname: P.when(() => pathname.includes('projects'))},
+            () => (
+              <header className={cn(className)} >
+                  <div className="container header-first">
+                    <a href="/">
+                      <Image className='header-close' src={close} alt=""/>
+                    </a>
+                  </div>
+              </header>
+            )
+          )
+          // Первый экран
+          .with({hash: '', isMenuOpened: false, pathname: '/'}, () => (
             <header className={className} >
               <div className={('container header-first')}>
                 <a href="#menu">
-                  <Image className='header-burger' src={styles.default.burger} alt=""/>
+                  <Image className='header-burger' src={darkBurger} alt=""/>
                 </a>
               </div>
             </header>
@@ -166,45 +156,24 @@ const Header: FC<IWithClass> = (props) => {
               </header>
             )
           )
-          // Страница проекта
-          .when(
-            () => pathname.includes('projects'),
-            () => (
-              <header className={cn(className)} >
-                  <div className="container header-first">
-                    <a href="#menu">
-                      <Image className='header-close' src={close} alt=""/>
-                    </a>
-                  </div>
-              </header>
-            )
-          )
           // Страница вакансии 
           .when(
             () => hash.includes('career?id='),
-            () => (
-              <header className={cn(className)} >
-                  <div className="container header-first">
-                    <a href="#career">
-                      <Image className='header-close' src={close} alt=""/>
-                    </a>
-                  </div>
-              </header>
-            )
+            () => null
           )
           .otherwise(() => (
             <header className={cn(className)} >
               <div className='container'>
                 <a href="#contacts">
-                  <Image className='header-mail menu-mail' src={styles.default.mail} alt=""/>
+                  <Image className='header-mail menu-mail' src={mail} alt=""/>
                 </a>
 
                 <a href="#main-screen">
-                  <Image className='header-logo' src={styles.default.logo} alt=""/>
+                  <Image className='header-logo' src={logo} alt=""/>
                 </a>
                 
                 <a href="#menu">
-                  <Image className='header-burger' src={styles.default.burger} alt=""/>
+                  <Image className='header-burger' src={darkBurger} alt=""/>
                 </a>
               </div>
             </header>

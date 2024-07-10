@@ -9,20 +9,20 @@ import { circe } from '@/fonts';
 interface Props extends IWithClass{
   links : {
     text: string
-    href?: string
+    onClick?: () => void
   }[]
 }
 
 const BreadCrumbs: FC<Props> = (props) => {
-  const className = classNames('bread-crumbs', props.className, circe.className);
+  const className = classNames('bread-crumbs', props.className);
 
   return (
     <div className={className}>
       {props.links.map((link, index, array) => (
-        <div className={'bread-crumbs__item'} key={'bread-crumb' + index}>
-          { (link.href) 
-              ? <a href={link.href}>{link.text}</a>
-              : <span>{link.text}</span>
+        <div className={('bread-crumbs__item')} key={'bread-crumb' + index}>
+          { (link.onClick) 
+              ? <button className='bread-crumbs__item-btn' onClick={link.onClick}>{link.text}</button>
+              : <div className='bread-crumbs__item-btn'>{link.text}</div>
           } 
           {index + 1 !== array.length && <Image className='bread-crumbs__icon' src={arrow} alt="" />}
         </div>

@@ -1,0 +1,142 @@
+.career-form {
+  flex: 1;
+  min-width: 430px;
+  &__field {
+    border-bottom: 1rem solid #EAEAEA;
+    padding: 0 2rem 3rem;
+    margin-bottom: 7rem;
+    display: block;
+    .input-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 35rem;
+    }
+    input {
+      font-size: 43rem;
+      text-transform: uppercase;
+      width: 100%;
+      background-color: transparent;
+      line-height: 50%;
+      position: relative;
+      top: -13rem;
+      &::-webkit-input-placeholder {
+        color: #EAEAEA;
+        font-weight: 300;
+      }
+    }
+
+    p {
+      color: #EAEAEA;
+      font-size: 7rem;
+      text-transform: uppercase;
+    }
+
+    &-notice {
+      display: flex;
+      column-gap: 5rem;
+      .red-notice {
+        padding-left: 5rem;
+        border-left: 1rem solid #EAEAEA;
+        color: #E5CECE;
+        strong {
+          color: #E5A6A6;
+        }
+      }
+    }
+  }
+
+  &__checkbox {
+    margin-top: 15rem;
+    display: flex;
+    align-items: center;
+    font-size: 8rem;
+    column-gap: 7rem;
+    color: #C8C8C8;
+    label {
+
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__submit {
+    position: relative;
+    top: -25rem;
+    width: 138rem;
+    height: 34rem;
+    background-color: #fff;
+    border: 1rem solid #C8C8C8;
+    border-radius: 30rem;
+    text-transform: uppercase;
+    font-size: 9rem;
+    color: #A1A1A1;
+    font-weight: 800;
+    &:hover {
+      background-color: #A1A1A1;
+      color: #fff;
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    &__field {
+      border-bottom: 1px solid #EAEAEA;
+      padding: 0 2px 3px;
+      margin-bottom: 7px;
+      .input-wrap {
+        height: 35px;
+      }
+      input {
+        font-size: 43px;
+        top: -13px;
+      }
+  
+      p {
+        font-size: 7px;
+        font-weight: 700;
+      }
+  
+      &-notice {
+        column-gap: 5px;
+        .red-notice {
+          padding-left: 5px;
+          border-left: 1px solid #EAEAEA;
+        }
+      }
+    }
+  
+    &__checkbox {
+      margin-top: 15px;
+      font-size: 8px;
+      column-gap: 7px;
+    }
+  
+    &__submit {
+      top: -25px;
+      width: 138px;
+      height: 34px;
+      border: 1px solid #C8C8C8;
+      border-radius: 30px;
+      font-size: 9px;
+    }
+  }
+
+  @media screen and (max-width: 1025px) {
+    align-self: center;
+  }
+
+  @media screen and (max-width: 540px){
+    min-width: unset;
+
+    &__bottom {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+
+    &__submit {
+      position: static;
+    }
+  }
+}

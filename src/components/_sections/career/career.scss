@@ -22,6 +22,7 @@
 
 .career {
   border-color: var(--blue);
+  position: relative;
   &-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -102,6 +103,69 @@
     }
   }
 
+  &-page {
+    padding: 70rem 30rem 100rem 100rem;
+    min-height: 100vh;
+    position: relative;
+    max-width: 100%;
+    h2 {
+      font-size: 70rem;
+      max-width: 50%;
+      font-weight: 300;
+      line-height: 90%;
+      text-transform: uppercase;
+    }
+    &__options {
+      display: flex;
+      align-items: center;
+      margin-top: 22rem;
+      .options-item {
+        height: 22rem;
+        font-size: 11.5rem;
+        padding: 0 10rem;
+        margin-right: 3rem;
+      }
+    }
+    &__body {
+      display: flex;
+      margin-top: 50rem;
+      max-width: 100%;
+    }
+    &__close {
+      height: 56rem;
+      position: absolute;
+      top: 0;
+      right: 35rem;
+      display: flex;
+      align-items: center;
+      img {
+        height: 19rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    &-page {
+      position: static;
+      h2 {
+        font-size: 70px;
+      }
+      &__body {
+        column-gap: 10px;
+      }
+      &__options {
+        margin-top: 22px;
+        .options-item {
+          height: 22px;
+          font-size: 11.5px;
+          padding: 0 10px;
+          margin-right: 3px;
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+
   @media screen and (max-width: 1025px) {
     &-list {
       grid-auto-rows: minmax(164px, auto);
@@ -123,7 +187,26 @@
           font-size: 7.95px;
           padding: 0 6px;
           height: 15px;
+          border-radius: 15px;
         }
+      }
+    }
+
+    &-page {
+      
+      width: 640px;
+      padding: 70px 20px 100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      &__body {
+        margin-top: 30px;
+        flex-direction: column;
+        row-gap: 30px;
+        width: 100%;
+      }
+      h2 {
+        max-width: 100%;
       }
     }
   }
@@ -152,6 +235,20 @@
         }
       }
     }
+
+    &-page {
+      width: min(520px, 100%);
+      h2 {
+        font-size: 109.4rem;
+      }
+      &__close {
+        height: 60px;
+        padding-right: 7px;
+        img {
+          height: 19px;
+        }
+      }
+    }
   }
 
   @media screen and (max-width: 560px) {
@@ -167,6 +264,10 @@
         max-width: 390px;
         font-size: 12px;
       }
+    }
+
+    &-page {
+      padding-top: 40px;
     }
   }
 

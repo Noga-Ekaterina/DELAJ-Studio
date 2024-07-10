@@ -3,91 +3,24 @@ import React, { useEffect, useState } from 'react';
 import './career.scss';
 import { circe } from '@/fonts';
 import cn from 'classnames';
-import Link from 'next/link';
-import SectionWrap from '../../section/Section';
-import { useSearchParams } from 'next/navigation';
 import { useHash } from '@/components/_hooks/useHash';
-import { match } from 'ts-pattern';
-import CareerSlider from '../../career-slider/CareerSlider';
 import { ICareer } from '@/types';
+import BreadCrumbs from '@/components/bread-crumbs/BreadCrumbs';
+import CareerSlider from './CareerSlider';
+import CareerItemForm from './CareerForm';
+import close from '../../../../public/images/close.svg';
+import Image from 'next/image';
 
-export const data = [
-  {
-    id: '1', 
-    title: '2D-Аниматор', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '2', 
-    title: 'сценарист', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '3', 
-    title: 'Композитинг артист', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '4', 
-    title: 'Режиссер анимации', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '5', 
-    title: '3D-Аниматор MAYA (персонажный)', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '6', 
-    title: 'Композитор', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '7', 
-    title: 'Арт-директор', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '8', 
-    title: '3D-аниматор', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '9', 
-    title: '2D-художник', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '10', 
-    title: 'Линейный продюсер', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '11', 
-    title: 'Моушн-дизайнер', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '12', 
-    title: '2D-Аниматор', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '13', 
-    title: 'сценарист', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-  {
-    id: '14', 
-    title: 'Композитинг артист', 
-    description: 'Мы ищем талантливого и опытного  линейного продюсера анимации, который будет ответственен за организацию и координацию процесса производства анимационного контента.', 
-  },
-]
+const getData = async () => {
+  const response = await fetch('/api/career');
+  const data = await response.json();
+  return data;
+}
 
 const Career = () => {
   const hash = useHash();  
   const [career, setCareer] = useState<ICareer | null>(null);
-
+  const [data, setData] = useState<ICareer[]>([]);
   function getSearchParams(key: string) {
     const paramsStart = hash?.indexOf('?')
     if (paramsStart) {
@@ -97,46 +30,72 @@ const Career = () => {
     return '';
   }
 
-  function getCareer(id: string) {
-    return data.find(item => item.id === id) || null;
+  function getCareer(id: string | null) {
+    if (id) {
+      return data.find(item => item.id === id) || null;
+    }
+    return null;
   }
 
   useEffect(() => {
+    if (data.length <= 0) {
+      getData()
+        .then((data) => {
+          setData(data);
+        })
+        .catch(() => console.log('no vacancies'))
+    } 
     const id = getSearchParams('id');
-    if (id) {
-      setCareer(getCareer(id));
-    } else {
-      setCareer(null);
-    }
-  }, [hash]);
+    setCareer(getCareer(id));
+
+  }, [hash, data]);
 
   return (
     <>
-      {
-        (!career)
-          ? (
-            <div  className={cn('menu-inner career', circe.className)}>
-              <div className="menu-section">
-                <h1 className='menu-link'>Вакансии</h1>
-                <div className="career-list">
-                  {data.map((item, index) => (
-                    <a href={`#career?id=${item.id}`} className="career-item" key={'career-item' + index}>
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
-                      <div className="career-item__options">
-                        <div className="options-item options-freelance">Freelance</div>
-                        &nbsp; 
-                        <div className="options-item options-opened">Открытая</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
+      { (!career) ? (
+          <div  className={cn('menu-inner career', circe.className)}>
+            <div className="menu-section">
+              <h1 className='menu-link'>Вакансии</h1>
+              <div className="career-list">
+                {data.map((item, index) => (
+                  <a href={`#career?id=${item.id}`} className="career-item" key={'career-item' + index}>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <div className="career-item__options">
+                      <div className="options-item options-freelance">Freelance</div>
+                      &nbsp; 
+                      <div className="options-item options-opened">Открытая</div>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
-          )
-          : (
-            <CareerSlider item={career}/>
-          )
+          </div>
+        ) : (
+          <div className={cn('career-page', circe.className)}>
+            <BreadCrumbs 
+                links={[
+                  {text: 'вакансии', onClick: () => setCareer(null)},
+                  {text: career.title}
+                ]}
+              />
+
+              <button className="career-page__close" onClick={() => setCareer(null)}> 
+                <Image src={close} alt="" />
+              </button>
+
+              <h2>{career.title}</h2>
+              <div className="career-page__options">
+                <div className=" options-item options-freelance">Freelance</div>
+                <div className=" options-item options-opened">Открытая</div>
+              </div>
+
+              <div className="career-page__body">
+                <CareerSlider career={career} vacancies={data} />
+                <CareerItemForm />
+              </div>
+          </div>
+        )
       }
     </>
   );

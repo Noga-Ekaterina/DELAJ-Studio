@@ -25,10 +25,16 @@ export interface ISection {
   nextId?: string | null
 }
 
+export interface ICareerDuties {
+  title: string
+  list: string[]
+}
+
 export interface ICareer {
   id: string
   title: string
   description: string
+  duties: Array<ICareerDuties>
 }
 
 export interface IProject {
@@ -44,4 +50,20 @@ export interface IProject {
     },
     description: string
   }
+}
+
+//Формы
+
+export interface IFormValues {
+  name: string
+  phone: string
+  email: string
+  portfolio: string
+  telegram: string
+  about: string
+}
+
+export interface IFormData {
+  id: string
+  values: IFormValues
 }
