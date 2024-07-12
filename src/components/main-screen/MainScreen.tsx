@@ -46,16 +46,16 @@ const MainScreen: FC = () => {
   }
 
   useEffect(() => {
-    if (!hash && hash === 'main-screen') {
+    if (!hash) {
       changeMenuOpened(false);
-      changeCurrentPage(null)
-      setShow(true)
-    } else if (hash === 'first-landing'){
-      setShow(false);
+      changeCurrentPage(null);
+      setShow(true);
+    } else if (hash === 'main-screen'){
+      setShow(true);
     } else {
       setShow(false);
     }
-  },[hash])
+  },[hash]);
 
   return (
     <Transition in={show} timeout={0}>
@@ -63,15 +63,17 @@ const MainScreen: FC = () => {
         <>
           <div 
             className='main-screen' 
-            onWheel={handleEvent} 
-            onTouchMove={handleEvent}
             style={{
               ...transitionStyles,
               ...menuStyles[state],
               zIndex: currentPage ? 4 : 3 
             }}
           >
-            <div className="main-screen__content" >
+            <div 
+              className="main-screen__content" 
+              onWheel={handleEvent} 
+              onTouchMove={handleEvent}
+            >
               {isMenuOpened
                 ? <Lottie 
                     className='main-screen__logo'  

@@ -16,7 +16,7 @@ import whiteMail from '../../../public/images/white-mail.svg';
 import blueMail from '../../../public/images/blue-mail.svg';
 import whiteLogo from '../../../public/images/white-logo.svg'
 import close from '../../../public/images/close.svg';
-
+import { modalHashes } from '@/vars';
 import './header.scss';
 import { useHash } from '../_hooks/useHash';
 import { P, match } from 'ts-pattern';
@@ -37,7 +37,7 @@ const Header: FC<IWithClass> = (props) => {
   const pathname = usePathname();
   const { isLandingSwiped, isMenuOpened, changeMenuOpened } = store;
   const theme: HeaderTheme = {hash, isLandingSwiped, isMenuOpened, pathname};
-  const modalHashes = ['about', 'ideas', 'career', 'contacts', 'faq'];
+  
     return (
       <>
         {match(theme)

@@ -1,0 +1,23 @@
+.options-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 7rem;
+  height: 15rem;
+  border-radius: 15rem;
+  border: 1px solid currentColor;
+  font-weight: 700;
+  font-size: 8rem;
+  margin-right: 0.5em;
+  color: #21241F;
+  &:last-child {
+    margin-right: 0;
+  }
+  &.opened {
+    background-color: #EDF3EB;
+    color: #406D47;
+  }
+  &.closed {
+    background-color: #FFE3D4;
+    color: #B03828;
+  }
+}

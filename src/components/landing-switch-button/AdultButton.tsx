@@ -11,12 +11,6 @@ const AdultButton = () => {
       <div className="adult-button__section blue">
         <Image src={icon} alt=''/>
       </div>
-      <div className="adult-button__section yellow">
-        <Image src={frog} alt=''/>
-      </div>
-      <div className="adult-button__section red">
-        <Image src={jap} alt=''/>
-      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IWithClass, ProjectItem } from '@/types';
 import cn from 'classnames';
+import { useMediaQuery } from 'react-responsive';
 
 interface Props extends IWithClass{
   title: string
@@ -14,20 +15,13 @@ interface Props extends IWithClass{
 
 const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   const [data, setData] = useState<ProjectItem[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/projects/${title}`);
-      const json = await response.json();
-
-      setData(json);
-    })();
-  },[])
+  const [baseChunkSize, setBaseChunkSize] = useState(3);
+  const mobileScreen = useMediaQuery({maxWidth: 640});
 
   const getModifiedList = (data: any[]) => {
     if (data.length > 3){ 
       let result: any[] = [];
-      let chunkSize = 3;
+      let chunkSize = baseChunkSize;
       let index = 0;
 
       const increase = (newChunkSizeValue: number) => {
@@ -44,10 +38,10 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
       }
 
       while (index < data.length) { 
-        if (chunkSize === 3) {
-          increase(2);
+        if (chunkSize === baseChunkSize) {
+          increase(chunkSize - 1);
         } else {
-          increase(3);
+          increase(baseChunkSize);
         }
       }
     
@@ -60,6 +54,24 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
 
   const itemsGrid = getModifiedList(data);
 
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`/api/projects/${title}`);
+      const json = await response.json();
+
+      setData(json);
+    })();
+  },[])
+
+  useEffect(() => {
+    console.log(itemsGrid)
+    if (mobileScreen) {
+      setBaseChunkSize(2);
+    } else {
+      setBaseChunkSize(3);
+    }
+  },[mobileScreen])
+
   return (
     <div className={cn(className, "project-list")}>
       <div className="container">
@@ -67,7 +79,7 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
         {itemsGrid.map((row, index) => {
           const rowClass = cn(
             "project-list__row",
-            (row.length !== 3) && 'large',
+            (row.length !== baseChunkSize) && 'large',
           )
 
           return (

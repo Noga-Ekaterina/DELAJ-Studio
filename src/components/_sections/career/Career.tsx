@@ -10,6 +10,7 @@ import CareerSlider from './CareerSlider';
 import CareerItemForm from './CareerForm';
 import close from '../../../../public/images/close.svg';
 import Image from 'next/image';
+import CareerOption from '@/components/career-option/CareerOptions';
 
 const getData = async () => {
   const response = await fetch('/api/career');
@@ -55,16 +56,16 @@ const Career = () => {
       { (!career) ? (
           <div  className={cn('menu-inner career', circe.className)}>
             <div className="menu-section">
-              <h1 className='menu-link'>Вакансии</h1>
+              <h1 className='menu-link'>Карьера</h1>
               <div className="career-list">
                 {data.map((item, index) => (
                   <a href={`#career?id=${item.id}`} className="career-item" key={'career-item' + index}>
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="career-item__options">
-                      <div className="options-item options-freelance">Freelance</div>
-                      &nbsp; 
-                      <div className="options-item options-opened">Открытая</div>
+                      {item.options.map((option, index) => (
+                        <CareerOption type={option} key={'career-list-option' + index} />
+                      ))}
                     </div>
                   </a>
                 ))}
@@ -86,8 +87,9 @@ const Career = () => {
 
               <h2>{career.title}</h2>
               <div className="career-page__options">
-                <div className=" options-item options-freelance">Freelance</div>
-                <div className=" options-item options-opened">Открытая</div>
+              {career.options.map((option, index) => (
+                <CareerOption type={option} key={'career-page-option' + index}/>
+              ))}
               </div>
 
               <div className="career-page__body">

@@ -5,7 +5,6 @@ import './about.scss';
 // Images
 import aboutHero from '../../../../public/images/modals/about-hero-image.png';
 import aboutHeroSketch from '../../../../public/images/modals/about-hero-image-2.png';
-import bigImage from '../../../../public/images/content-wrap-image.png';
 import aboutSketch from '../../../../public/images/modals/about-sketch.png';
 
 import Image from 'next/image';
@@ -36,6 +35,7 @@ import sponsor21 from '../../../../public/images/modals/sponsor-21.png'
 import sponsor22 from '../../../../public/images/modals/sponsor-22.png'
 import sponsor23 from '../../../../public/images/modals/sponsor-23.png'
 import sponsor24 from '../../../../public/images/modals/sponsor-24.png'
+import Showreel from '@/components/showreel/Showreel';
 
 const sponsors = [
 sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9,sponsor10,sponsor11,sponsor12,sponsor13,sponsor14,sponsor15,sponsor16,sponsor17,sponsor18,sponsor29,sponsor20,sponsor21,sponsor22,sponsor23,sponsor24
@@ -93,7 +93,8 @@ const About = () => {
           </div>
         </div>
 
-        <Image className='about-image' src={bigImage} alt=""/>
+        {/* <Image className='about-image' src={bigImage} alt=""/> */}
+        <Showreel className='about-showreel' />
 
         <section className="menu-section about-technologies">
           <div className="about-technologies__item">VFX</div>

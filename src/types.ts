@@ -30,10 +30,13 @@ export interface ICareerDuties {
   list: string[]
 }
 
+export type CareerOptionType = 'Закрытая' | 'Открытая' | 'Freelance' | 'Full time' | 'Part time';
+
 export interface ICareer {
   id: string
   title: string
   description: string
+  options: CareerOptionType[]
   duties: Array<ICareerDuties>
 }
 

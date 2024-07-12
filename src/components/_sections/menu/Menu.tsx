@@ -32,9 +32,8 @@ const Menu: FC = () => {
           <a href="#ideas" className="menu-link" id="menu-ideas" style={{left: '-7%'}}>
             идеи
           </a>
+          <LanguageToggle className={cn('menu-home__language', halvar.className)}/>
         </div>
-
-        <LanguageToggle className={cn('menu-home__language', halvar.className)}/>
 
         <Image className='menu-home__bg' src={bg} alt="" width={1000}/>
         <Image className='menu-home__bg menu-home__bg-tablet' width={1000} src={bgTablet} alt="" />

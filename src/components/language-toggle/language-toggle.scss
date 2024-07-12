@@ -2,7 +2,7 @@
   display: flex;
   gap: 3px;
   .disabled {
-    color: #C7C7C7;
+    opacity: 0.4;
   }
   button {
     text-transform: inherit;

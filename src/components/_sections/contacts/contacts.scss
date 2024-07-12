@@ -1,5 +1,4 @@
 .contacts {
-  border-color: var(--main-blue);
   min-height: inherit;
   height: 100vh;
   display: flex;
@@ -15,7 +14,6 @@
     position: relative;
     padding-bottom: 30rem;
   }
-
  
   &-list {
     flex: 1;
@@ -25,6 +23,8 @@
     justify-content: space-between;
     column-gap: 20rem;
     width: min(700rem, 100%);
+    position: relative;
+    top: -20rem;
     &__link {
       font-weight: 700;
       font-size: 15rem;
@@ -106,6 +106,7 @@
       justify-content: center;
       row-gap: 10vh;
       padding: 3vh 0;
+      top: 0;
     }
 
     &-bg {

@@ -4,12 +4,6 @@
   color: #fff; 
 
   &__item {
-    a.footer-link {
-      &:hover {
-        opacity: 0.3;
-      }
-    }
-
     &-list {
       font-size: 10rem;
       line-height: 1.5em;
@@ -23,6 +17,9 @@
     &#kids-footer-blue {
       background-color: #007BAD;
       width: 23.3%;
+      a.footer-link:hover {
+        color: var(--yellow);
+      }
 
       .footer-item__content {
         padding-left: 30rem;
@@ -40,11 +37,14 @@
       background-color: #DBFF00;
       color: var(--text-gray);  
       justify-content: center;
+      a.footer-link:hover {
+        color: var(--red);
+      }
     }
 
     &#kids-footer-red {
       background-color: #F12B00;
-      flex: 1;
+      flex: 1;     
       .footer-item__content {
         padding-left: 8.5%;
       }
@@ -65,6 +65,9 @@
       justify-content: center;
       text-align: center;
       width: 20%;
+      a.footer-link:hover {
+        color: var(--yellow);
+      }
       img {
         height: 70%;
         position: relative;

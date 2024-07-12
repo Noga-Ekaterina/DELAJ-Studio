@@ -5,6 +5,7 @@ import { Transition } from 'react-transition-group';
 import { observer } from "mobx-react-lite";
 import { CurrentPageType } from "@/types";
 import { transitionStyles } from "@/vars";
+import classNames from "classnames";
 type StyleObject = Record<string, string | number>
 
 interface Props {
@@ -27,16 +28,18 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
   } = store;
   const ref = useRef(null);
   const isThisPath = currentPage === props.page;
-  
-  const redirectOnPage = () => {
-    if (window) {
-      changeCurrentPage(props.page);
-      window.location.hash = 'first-landing'; 
-      props.handleClick();
-    }
+  const styleToggle = isThisPath ? 'onCurrentPage' : 'onOpen' ;
+
+  const chooseLanding = () => {
+    changeCurrentPage(props.page);
+    props.handleClick();
   }
 
-  const styleToggle = isThisPath ? 'onCurrentPage' : 'onOpen' ;
+  const swipeScreenUp = () => {
+    if (isThisPath && window) {
+      window.location.hash = 'first-landing';
+    }
+  }
 
   useEffect(() => {
     if (isThisPath) {
@@ -48,9 +51,11 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
     <Transition nodeRef={ref} in={isMenuOpened || isThisPath} timeout={0}>
       {state => (
         <div 
-          className="page-menu__screen" 
+          className={classNames("page-menu__screen", isThisPath ? 'opened' : '')} 
           ref={ref}
-          onClick={redirectOnPage}
+          onClick={chooseLanding}
+          onWheel={swipeScreenUp}
+          onTouchMove={swipeScreenUp}
           style={{
             ...props.styles.defaultStyles, 
             ...props.styles[styleToggle][state],

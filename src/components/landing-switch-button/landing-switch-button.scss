@@ -1,4 +1,6 @@
 .landing-switch-button {
+  position: sticky;
+  top: 100rem;
   &__wrap {
     position: absolute;
     z-index: 3;
@@ -36,6 +38,20 @@
       }
     }
   }
+
+  @media screen and (max-width: 1640px) {
+    &__wrap {
+      top: 250rem;
+    }
+  }
+
+  @media screen and (max-width: 1025px){
+    &__wrap {
+      button {
+        transform: translateX(0) !important;
+      }
+    }
+  }
 }
 
 .kids-button {
@@ -59,28 +75,6 @@
       transition: inherit;
     }
   }
-  &__image {
-    height: 100%;
-    height: auto;
-    &-wrap {
-      height: 200rem;
-      position: absolute;
-      top: 94.5rem;
-      right: 0;
-      left: -35%;
-      transition: inherit;
-    }
-  }
-
-  &:hover {
-    height: 220rem;
-    .kids-button__image-wrap {
-      top: 0;
-    } 
-    .kids-button__icon-wrap {
-      opacity: 0;
-    }
-  }
 }
 
 .adult-button {
@@ -98,25 +92,6 @@
     padding: 20rem;
     img {
       height: 100%;
-    }
-    &.blue {
-      transition: inherit;
-      height: 95rem;
-      img {
-        max-width: 90%;
-      }
-    }
-    &.yellow {
-      padding-bottom: 0;
-      align-items: flex-start;
-    }
-  }
-
-  &:hover {
-    max-height: 270rem;
-    border-radius: 13rem;
-    .adult-button__section.blue {
-      height: 90rem;
     }
   }
 }

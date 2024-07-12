@@ -12,9 +12,6 @@ const KidsButton = () => {
       <div className="kids-button__icon-wrap">
         <Image className='kids-button__icon' src={icon} alt="" />
       </div>
-      <div className="kids-button__image-wrap">
-        <Image className='kids-button__image' src={image} alt="" />
-      </div>
     </div>
   );
 };

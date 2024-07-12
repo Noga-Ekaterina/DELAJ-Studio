@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import AdultScreen from "../adult-screen/AdultScreen";
 import KidsScreen from "../kids-screen/KidsScreen";
 import './page-menu.scss';
@@ -98,7 +98,7 @@ const sideStyles = {
   }
 }
 
-const PageMenu = () => {
+const PageMenu: FC = () => {
   const { isLandingSwiped,  swipeLanding} = store;
   const ref = useRef<HTMLDivElement>(null);
   const mediumScreen = useMediaQuery({maxWidth: 1024});

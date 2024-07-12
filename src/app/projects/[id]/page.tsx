@@ -5,12 +5,7 @@ import './project.scss';
 import { circe, halvar } from '@/fonts';
 import getDuration from '@/utils/getDuration';
 import classNames from 'classnames';
-import Image from 'next/image';
-import ProjectVideo from '@/components/project-video/ProjectVideo';
 import BasicFooter from '@/components/basic-footer/BasicFooter';
-
-const fs = require('fs');
-const path = require('path');
 
 interface Props {
   params: {

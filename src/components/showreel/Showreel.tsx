@@ -15,17 +15,6 @@ const Showreel: FC<IWithClass> = (props) => {
           label="English"
         />
       </video>
-
-      {/* <video className='showreel-bg' width="320" height="240" controls={false} muted preload="none" autoPlay loop>
-        <source src="/videos/showreel.mp4" type="video/mp4" />
-        <track
-          src="/path/to/captions.vtt"
-          kind="subtitles"
-          srcLang="en"
-          label="English"
-        />
-        Your browser does not support the video tag.
-      </video> */}
     </div>
   );
 };

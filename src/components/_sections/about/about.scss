@@ -1,6 +1,4 @@
 .about {
-  border-color: var(--red);
-
   .container {
     max-width: unset;
     padding: 0 100rem;
@@ -10,9 +8,9 @@
     position: relative;
     padding-bottom: 40rem;
     &__side-lines {
-      width: 5px; 
+      width: 5rem; 
       position: absolute;
-      top: -30px;right: 0;
+      top: -26rem;right: 0;
       bottom: 0;
       .line {
         background-color: currentColor;
@@ -47,7 +45,7 @@
     }
 
     &__paragraph {
-      padding: 70rem 130rem 60rem 60rem;
+      padding: 70rem 110rem 60rem 60rem;
       font-size: 18rem;
       line-height: 1.2em;
       p {
@@ -71,6 +69,10 @@
     &__sketch {
       height: 280rem;
     }
+  }
+
+  &-showreel {
+    max-height: 343rem;
   }
 
   &-animation {
@@ -109,16 +111,11 @@
         color: #EAEAEA;
         line-height: 90%;
         &:hover {
-          font-weight: 800;
+          font-weight: 700;
           color: #000;
         }
       }
     }
-  }
-
-  &-image {
-    width: 100%;
-    height: auto;
   }
 
   &-technologies {
@@ -212,6 +209,7 @@
         padding: 0 10px;
         img {
           height: 40rem;
+          mix-blend-mode: multiply;
         }
       }
     }
@@ -279,6 +277,11 @@
   }
 
   @media screen and (max-width: 660px) {
+    &-top {
+      &__side-lines {
+        display: none;
+      }
+    }
     &-text {
       p {
         font-size: 10px;
@@ -291,14 +294,14 @@
       grid-template-columns: 100%;
       row-gap: 29px;
       &__picture {
-        width: 80%;
+        width: 100%;
         height: auto;
         min-height: 229px;
       }
       &__paragraph {
+        max-width: 440px;
         padding: 0 20px;
         font-size: 16px;
-        max-width: 75%;
       }
       &__sketch {
         margin: 0 auto;
@@ -309,6 +312,10 @@
         padding: 0 20px;
         grid-row: 4 / 5;
       }
+    }
+
+    &-showreel {
+      max-height: 218px;
     }
 
     &-animation {
