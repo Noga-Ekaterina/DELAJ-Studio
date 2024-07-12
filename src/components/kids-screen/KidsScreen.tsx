@@ -1,5 +1,5 @@
 'use client';
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import './kids-screen.scss';
 import Image from 'next/image';
 import cn from 'classnames';
@@ -21,6 +21,7 @@ import { transitionStyles } from '@/vars';
 import { useMediaQuery } from 'react-responsive';
 import { observer } from 'mobx-react-lite';
 import store from '@/store/store';
+import { P } from 'ts-pattern';
  
 interface Props {
   isOpened: boolean
@@ -30,8 +31,16 @@ const KidsScreen: FC<Props> = (props) => {
   const blackGirlRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const isMediumScreen = useMediaQuery({maxWidth: 1024});
-  const opened = isMediumScreen || props.isOpened;
+  const [opened, setOpened] = useState(props.isOpened);
   const className = cn('kids-screen', opened ? 'opened' : '');
+
+  useEffect(() => {
+    if (isMediumScreen || props.isOpened) {
+      setOpened(true);
+    } else {
+      setOpened(false);
+    }
+  },[isMediumScreen, props.isOpened])
 
   return (
     <div className={className}>

@@ -19,7 +19,7 @@ const Section: FC<Props> = (props) => {
   const [touchStart, setTouchStart] = useState<null | number>(null)
   const [touchEnd, setTouchEnd] = useState<null | number>(null)
 
-  const minSwipeDistance = 200;
+  const minSwipeDistance = 100;
 
   useEffect(() => {
     const nextSection = containerRef.current?.nextElementSibling;
@@ -51,7 +51,6 @@ const Section: FC<Props> = (props) => {
 
       if (top === 0) {
           if (prevName) {
-            ref.current?.scrollTo(0,0);
             window.location.hash = prevName;
           } else {
             window.location.hash = 'main-screen';

@@ -98,11 +98,13 @@ const sideStyles = {
   }
 }
 
+type ScreenStylesType = 'mediumScreen' | 'largeScreen';
+
 const PageMenu: FC = () => {
   const { isLandingSwiped,  swipeLanding} = store;
   const ref = useRef<HTMLDivElement>(null);
   const mediumScreen = useMediaQuery({maxWidth: 1024});
-  const screenStyles = mediumScreen ? 'mediumScreen' : 'largeScreen';
+  const [screenStyles, setScreenStyles] = useState<ScreenStylesType>('largeScreen');
 
   const swipeToKids = () => {
     if (isLandingSwiped) {
@@ -115,6 +117,14 @@ const PageMenu: FC = () => {
       swipeLanding(true);
     }
   }
+
+  useEffect(() => {
+    if (mediumScreen) {
+      setScreenStyles('mediumScreen');
+    } else {
+      setScreenStyles('largeScreen');
+    }
+  },[mediumScreen])
 
   return (  
     <nav ref={ref} > 
