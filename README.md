@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -14,23 +12,40 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Несколько моментов для понимани механики сайта
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Адаптив (Rem единицы)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+// globals.scss
+html {
+  font-size: calc(100vw / 1200);
+}
 
-## Learn More
+Это свойство позволяет использовать единицы измерения REM для масштабирования размеров относительно дизайна на 1200px
 
-To learn more about Next.js, take a look at the following resources:
+2. Навигация через #hash
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Вся главная страница обернута в компонент Scroller.tsx а секции обернуты в компоненты Section.tsx
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Scroller.tsx ограничен с помощью height: 100vh; overflow: hidden;
 
-## Deploy on Vercel
+У каждой секции есть аттрибут data-name. 
+Если window.location.hash === data-name, мы перемещаемся к секции с данным аттрибутом
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Переместиться к следующей/предыдущей секции можно проскроллив секцию до конца/начала и продолжить скролл
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Меню выбора страниц
+Состояния, отвечающие за меню выбора страниц описаны в store.ts на mobx-react.
+
+Если хэш в url отсутствует или равен "main-screen" мы возвращаемся к первому экрану
+
+### Состояние isMenuOpened:
+  false - открывается экран с лого и выбором языка
+  true - выезжают две половинки для выбора детскойц или взрослой анимации
+
+### Состояние currentPage:
+  "kids" - уезжает взрослый экран, раскрывается детский
+  "adult" - уезжает детский экран, раскрывается взрослый
+  null - экраны стоят на начальной позиции
+
+### За смену лэндинга после выбора экрана анимации отвечает свойство isLndingSwiped
