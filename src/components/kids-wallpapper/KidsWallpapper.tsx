@@ -72,7 +72,7 @@ const KidsWallpapper: FC = () => {
     <>
     <div ref={containerRef} className='kids-wallpapper'>
       {imgList.map((item, col) =>
-          <div className={cn("kids-wallpapper__col", `kids-wallpapper__col--${col+1}`)}>
+          <div className={cn("kids-wallpapper__col", `kids-wallpapper__col--${col+1}`)} key={Date.now()}>
             {
               item.map((img, index)=>{
                 const data = (index + 1 === item.length && col ==0)

@@ -57,8 +57,6 @@ const ButtonMenu = ({isOpen = false, cls = ''}) => {
     changeDirectionAnimation(menuRef);
     changeDirectionAnimation(closeRef);
 
-    console.log(menuRef.current?.getDuration());
-    console.log((isWasHover) ? -1 : 1)
   }, [isWasHover, isHover]);
 
   return (
