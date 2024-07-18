@@ -31,7 +31,7 @@ const menuStyles = {
 
 const MainScreen: FC = () => {
   const {
-    isMenuOpened, 
+    isMenuLandingsOpened,
     changeMenuOpened, 
     changeCurrentPage,
     currentPage
@@ -74,7 +74,7 @@ const MainScreen: FC = () => {
               onWheel={handleEvent} 
               onTouchMove={handleEvent}
             >
-              {isMenuOpened
+              {isMenuLandingsOpened
                 ? <Lottie 
                     className='main-screen__logo'  
                     animationData={logoAnimationOut} 
@@ -105,6 +105,7 @@ const MainScreen: FC = () => {
                     }[state]}
                   />
                 )}
+
               </Transition>
               <LanguageToggle className={cn('main-screen__language', halvar.className)}/>
             </div>

@@ -4,6 +4,7 @@ import './scroller.scss';
 import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
 import { useViewport } from '@/components/_hooks/useViewport';
+import store from '@/store/store';
 import { modalHashes } from '@/vars';
 
 const Scroller: FC<IWithChildren> = (props) => {
@@ -12,6 +13,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   const [translate, setTranslate] = useState(0);
   const [lineStyles, setLineStyles] = useState('default');
   const isModal = modalHashes.includes(hash) || hash === 'menu';
+  const {changeDidModal}= store
   const getPureHash = () => {
     const paramsIndex = hash.indexOf('?');
     return (paramsIndex > 0) ? hash.slice(0, paramsIndex) : hash.slice(0);
@@ -24,6 +26,8 @@ const Scroller: FC<IWithChildren> = (props) => {
       //@ts-ignore
       const offset = section?.offsetTop || 0;
       setTranslate(-offset);
+
+      isModal && changeDidModal(true)
     }
   },[hash, viewport]);
 

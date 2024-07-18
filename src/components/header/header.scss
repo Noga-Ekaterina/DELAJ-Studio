@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   height: 56rem;
-  z-index: 2;
+  z-index: 4;
   width: 100%;
 
   &-logo {
@@ -26,6 +26,18 @@
     height: 19rem;
   }
 
+  .icon{
+    &-blue svg *{
+      fill: var(--main-blue);
+      stroke: var(--main-blue);
+    }
+
+    &-white svg *{
+      fill: #ffffff;
+      stroke: #fff;
+    }
+  }
+
   .container {
     padding: 0 35rem 0 28rem;
     height: 100%;
@@ -34,7 +46,6 @@
     justify-content: space-between;
     align-items: center;
     &.header-first {
-      justify-content: flex-end;
     }
   }
   &.white-header {

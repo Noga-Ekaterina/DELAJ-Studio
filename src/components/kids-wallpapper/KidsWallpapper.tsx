@@ -27,17 +27,16 @@ interface WallpapperImageProps extends IWithClass{
 } 
 
 const WallpapperImage: FC<WallpapperImageProps> = (props) => {
-  const height = props.height && props.height * 0.7;
 
   return (
-    <div className={cn("kids-wallpapper__row", props.className)}>
-      <Image style={{height: height + 'rem'}} src={props.src} alt=''/>
+    <div className={cn("kids-wallpapper__item", props.className)} >
+      <Image src={props.src} alt='' style={{height: props.height? props.height + "rem" :""}}/>
     </div>
   );
 }
 
 const KidsWallpapper: FC = () => {
-  const [imgList, setImgList] = useState<StaticImageData[]>([]);
+  const [imgList, setImgList] = useState<StaticImageData[][]>([[]]);
   const containerRef = useRef<HTMLDivElement>(null);
   let rowsCount = 0;
   const rowHeight = 200;
@@ -46,37 +45,53 @@ const KidsWallpapper: FC = () => {
     if (containerRef.current) {
       rowsCount = Math.floor((containerRef.current.clientHeight) / rowHeight);
 
+      // Перемешиваем массив изображений
+      const shuffledImages = images.sort(() => Math.random() - 0.5);
+
       let count = 0;
       const result = [];
       for(let i = 0; i <= rowsCount; i++) {
-        if (count >= images.length) {
+        if (count >= shuffledImages.length) {
           count = 0;
         }
-        result.push(images[count]);
+        result.push(shuffledImages[count]);
         ++count;
       }
-      setImgList(result);
+
+      // Разделяем массив результатов на две части
+      const firstHalf = result.slice(0, result.length / 2 - 1);
+      const secondHalf = result.slice(result.length / 2);
+
+      setImgList([firstHalf, secondHalf]);
     }
-  },[]);
+  }, []);
+  console.log(imgList)
+
 
   return (
     <>
     <div ref={containerRef} className='kids-wallpapper'>
-      {imgList.map((item, index) => {
-        const data = (index + 1 === imgList.length) 
-        ? {src: boy} 
-        : {src: item, height: rowHeight};
-        const className = (index + 1 === imgList.length - 1) ? 'pre-last' : '';
-        
-        return (
-          <WallpapperImage
-            src={data.src}
-            height={data.height}
-            className={className}
-            key={'wallpapper-' + index}
-          />
-        )
-      })}
+      {imgList.map((item, col) =>
+          <div className={cn("kids-wallpapper__col", `kids-wallpapper__col--${col+1}`)}>
+            {
+              item.map((img, index)=>{
+                const data = (index + 1 === item.length && col ==0)
+                    ? {src: boy, height: 366}
+                    : {src: img};
+                const className = (index + 1 === imgList.length - 1) ? 'pre-last' : '';
+
+                return (
+                    <WallpapperImage
+                        src={data.src}
+                        height={data.height}
+                        className={className}
+                        key={'wallpapper-' + index}
+                    />
+                )
+              })
+            }
+          </div>
+      )}
     </div>
     </>
   );

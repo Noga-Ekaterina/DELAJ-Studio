@@ -1,5 +1,5 @@
 import { CurrentPageType } from './../types';
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable, values} from 'mobx';
 
 class Store {
   constructor() {
@@ -8,7 +8,7 @@ class Store {
 
   // открытие половинок детского и взрослого экрана меню
   // если false - при открытие главного экрана будет лого и выбор языка
-  isMenuOpened = false;
+  isMenuLandingsOpened = false;
 
   // Выбор конкретной половинки для открытия kids или adult
   currentPage: CurrentPageType = null;
@@ -17,13 +17,17 @@ class Store {
   // если false - первым будет детский лэндос, после него по скроллу будет взрослый
   isLandingSwiped = false;
 
+  //Открывалось ли главное меню
+
+  isDidModal = false
+
   swipeLanding = (value: boolean) => {
     this.isLandingSwiped = value;
     console.log(this.isLandingSwiped)
   } 
 
   changeMenuOpened = (value: boolean) => {
-    this.isMenuOpened = value;
+    this.isMenuLandingsOpened = value;
   }
 
   changeCurrentPage = (value: CurrentPageType) => {
@@ -36,6 +40,10 @@ class Store {
         this.changeMenuOpened
       }
     }
+  }
+
+  changeDidModal =(value: boolean)=>{
+    this.isDidModal= value
   }
 }
 

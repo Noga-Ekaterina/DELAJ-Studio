@@ -8,7 +8,7 @@ import cn from 'classnames';
 import screenPicture from '../../../public/images/kids/screen-picture.png';
 import blackGirlPicture from '../../../public/images/kids/screen-girl-1.png';
 import frogPicture from '../../../public/images/kids/screen-frog.png';
-import cloudPicture from '../../../public/images/kids/screen-cloud.svg';
+import cloudPicture from '../../../public/images/kids/screen-cloud.png';
 import lenyaPicture from '../../../public/images/kids/screen-lenya.png';
 import purpleGirlPicture from '../../../public/images/kids/screen-girl-2.png';
 import logo from '../../../public/images/kids/logo.svg';
@@ -35,7 +35,7 @@ const KidsScreen: FC<Props> = (props) => {
   const className = cn('kids-screen', opened ? 'opened' : '');
 
   useEffect(() => {
-    if (isMediumScreen || props.isOpened) {
+    if (props.isOpened) {
       setOpened(true);
     } else {
       setOpened(false);
@@ -51,14 +51,7 @@ const KidsScreen: FC<Props> = (props) => {
             <div 
               className="picture-content"
               style={{
-                ...transitionStyles,
-                ...{
-                  unmounted: {height: '100%'}, 
-                  entering: {height: '200%'},
-                  entered: {height: '200%'},
-                  exiting:  { height: '100%'},
-                  exited:  { height: '100%'},
-                }[state]
+                ...transitionStyles
               }}
             >
               <Image src={blackGirlPicture} alt=''/>
@@ -86,13 +79,6 @@ const KidsScreen: FC<Props> = (props) => {
               className="kids-screen__picture-logo"
               style={{
                 ...transitionStyles,
-                ...{
-                  unmounted: {width: '50vw', left: '0%'}, 
-                  entering: {width: '60vw', left: '25%', },
-                  entered: {width: '60vw', left: '25%', },
-                  exiting:  {width: '50vw', left: '0%', },
-                  exited:  { width: '50vw', left: '0%', },
-                }[state]
               }}
             >
               <div className="kids-screen__picture-logo-wrap">
@@ -117,7 +103,6 @@ const KidsScreen: FC<Props> = (props) => {
       {/* Машина на красном фоне */}
       <div className="kids-screen__picture" id="kids-screen-red">
         <Image src={japLogo} className='red-picture-logo' alt=""/>
-        <Image src={car} className='red-picture-car-small' alt=""/>
         <Image src={car} className='red-picture-car' alt=""/>
       </div>
 

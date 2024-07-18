@@ -11,6 +11,7 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
+    "lottie-colorify": "^0.8.0",
     "lottie-react": "^2.4.0",
     "mobx-react": "^9.1.1",
     "mobx-react-lite": "^4.0.7",

@@ -17,14 +17,4 @@
       grid-column: 2 / 3;
     }
   }
-
-  @media screen and (max-width: 640px) {
-    &__heading {
-      img {
-        grid-row: 3 / 4;
-        grid-column: 1 / 2;
-        top: -38rem;
-      }
-    }
-  }
 }

@@ -4,30 +4,21 @@
     overflow: hidden; 
     flex-shrink: 1;
     cursor: pointer;
-    &:before {
-      content: '';
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(
-        circle,
-        rgba(0,0,0,0) 0% ,
-        rgba(63,70,251,0) 80%,
-        #27f0ea 100%);
-      z-index: 2;
+
+    > div{
+      transform: scale(1);
+      transition: var(--transition);
     }
-    &:hover {
-      &::before {
-        display: block;
-      }
+
+    &:hover > div{
+      transform: scale(1.03);
     }
+
     &.opened {
       cursor: auto;
-      &::before {
-        display: none;
+
+      &:hover >div{
+        transform: scale(1);
       }
     }
   }

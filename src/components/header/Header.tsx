@@ -1,6 +1,6 @@
 'use client';
 import { IWithClass } from '@/types';
-import { FC, useEffect } from 'react';
+import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import cn from 'classnames';
 import Image from 'next/image';
 
@@ -23,20 +23,80 @@ import { P, match } from 'ts-pattern';
 import { observer } from 'mobx-react-lite';
 import store from '@/store/store';
 import { usePathname } from 'next/navigation';
+import Lottie, {LottieRefCurrentProps} from "lottie-react";
+import menuIn from "../../app/assets/lottie/menu_IN.json"
+import menuHover from "../../app/assets/lottie/menu_Mouse.json"
+import menuTrantionToClose from "../../app/assets/lottie/menu_transition_to_X.json"
+import closeHover from "../../app/assets/lottie/X_Mouse.json"
+import closeTrantionToMenu from "../../app/assets/lottie/X_transition_to_menu.json"
 
 type HeaderTheme = {
   hash: string, 
   isLandingSwiped: boolean, 
-  isMenuOpened: boolean
+  isMenuLandingsOpened: boolean
   pathname: string
 }
+
+const ButtonMenu = ({isOpen = false, cls = ''}) => {
+  const [isHover, setIsHover] = useState(false);
+  const { isDidModal } = store;
+  const [isWasHover, setIsWasHover] = useState(false);
+  const closeRef = useRef(null);
+  const menuRef = useRef(null);
+
+  const changeDirectionAnimation = (ref: MutableRefObject<LottieRefCurrentProps | null>) => {
+    ref.current?.play()
+    if (isWasHover && !isHover){
+      ref.current?.setDirection(-1)
+    }else {
+      ref.current?.setDirection(1)
+    }
+  };
+
+  useEffect(() => {
+    changeDirectionAnimation(menuRef);
+    changeDirectionAnimation(closeRef);
+
+    console.log(menuRef.current?.getDuration());
+    console.log((isWasHover) ? -1 : 1)
+  }, [isWasHover, isHover]);
+
+  return (
+      <a
+          href={!isOpen ? "#menu" : "#main-screen"}
+          className={`icon-${cls}`}
+          onMouseOver={() => {
+            setIsHover(true);
+            setIsWasHover(true);
+          }}
+          onMouseOut={() => setIsHover(false)}
+      >
+        { !isOpen?
+            <Lottie
+                className='header-burger'
+                animationData={isWasHover ? menuHover : isDidModal ? closeTrantionToMenu : menuIn}
+                loop={false}
+                lottieRef={menuRef}
+            />
+            : <Lottie
+                className='header-close'
+                animationData={isWasHover ? closeHover : menuTrantionToClose}
+                loop={false}
+                lottieRef={closeRef}
+            />
+
+
+        }
+      </a>
+  );
+};
 
 const Header: FC<IWithClass> = (props) => {
   const className = cn('header', props.className);
   const hash = useHash();
   const pathname = usePathname();
-  const { isLandingSwiped, isMenuOpened, changeMenuOpened } = store;
-  const theme: HeaderTheme = {hash, isLandingSwiped, isMenuOpened, pathname};
+  const { isLandingSwiped, isMenuLandingsOpened, changeMenuOpened } = store;
+  const theme: HeaderTheme = {hash, isLandingSwiped, isMenuLandingsOpened, pathname};
   
     return (
       <>
@@ -45,45 +105,41 @@ const Header: FC<IWithClass> = (props) => {
           .with(
             {hash: '', pathname: P.when(() => pathname.includes('projects'))},
             () => (
-              <header className={cn(className)} >
-                  <div className="container header-first">
-                    <a href="/">
-                      <Image className='header-close' src={close} alt=""/>
+                <header className={cn(className, "white-header")}>
+                  <div className='container'>
+                    <a href="#contacts">
+                      <Image className='header-mail' src={blueMail} alt=""/>
                     </a>
+
+                    <ButtonMenu/>
                   </div>
-              </header>
-            )
+                </header>
+          )
           )
           // Первый экран
-          .with({hash: '', isMenuOpened: false, pathname: '/'}, () => (
-            <header className={className} >
-              <div className={('container header-first')}>
-                <a href="#menu">
-                  <Image className='header-burger' src={darkBurger} alt=""/>
-                </a>
-              </div>
-            </header>
-          ))
-        // Открыто меню выбора лэндоса
-          .with({hash: '', isMenuOpened: true}, {hash: 'main-screen', isMenuOpened: true}, () => (
-            <header className={className} >
-              <div className='container'>
-                <button onClick={() => changeMenuOpened(false)} type="button">
-                  <Image className='header-logo' src={whiteLogo} alt=""/>
-                </button>
-                
-                <a href="#menu">
-                  <Image className='header-burger' src={burger} alt=""/>
-                </a>
-              </div>
-            </header>
+          .with({hash: '', isMenuLandingsOpened: false, pathname: '/'}, {hash: 'main-screen', isMenuLandingsOpened: false}, () => (
+                <header className={cn(className, "white-header", 'yes')}>
+                  <div className='container'>
+                    <a href="#contacts">
+                      <Image className='header-mail' src={mail} alt=""/>
+                    </a>
+
+                    <ButtonMenu/>
+                  </div>
+                </header>
+            ))
+            // Открыто меню выбора лэндоса
+            .with({hash: '', isMenuLandingsOpened: true}, {hash: 'main-screen', isMenuLandingsOpened: true}, () => (
+                <header className={className}>
+
+                </header>
           ))
           // Детский дэндос
           .with(
-            {hash: 'first-landing', isLandingSwiped: false},
-            {hash: 'second-landing', isLandingSwiped: true},
-            () => (
-              <header className={cn(className, "white-header")} >
+        {hash: 'first-landing', isLandingSwiped: false},
+        {hash: 'second-landing', isLandingSwiped: true},
+        () => (
+        <header className={cn(className, "white-header")} >
                 <div className='container'>
                   <a href="#contacts">
                     <Image className='header-mail' src={blueMail} alt=""/>
@@ -93,9 +149,7 @@ const Header: FC<IWithClass> = (props) => {
                     <Image className='header-logo' src={kidsLogo} alt=""/>
                   </a>
                   
-                  <a href="#menu">
-                    <Image className='header-burger' src={blueBurger} alt=""/>
-                  </a>
+                  <ButtonMenu cls="blue"/>
                 </div>
               </header>
             )
@@ -114,10 +168,8 @@ const Header: FC<IWithClass> = (props) => {
                   <a href="#main-screen">
                     <Image className='header-logo' src={adultLogo} alt=""/>
                   </a>
-                  
-                  <a href="#menu">
-                    <Image className='header-burger' src={burger} alt=""/>
-                  </a>
+
+                  <ButtonMenu cls="white"/>
                 </div>
               </header>
             )
@@ -136,9 +188,7 @@ const Header: FC<IWithClass> = (props) => {
                     <Image className='header-logo' src={logo} alt=""/>
                   </a>
 
-                  <a href='#second-landing'>
-                    <Image className='header-close' src={close} alt=""/>
-                  </a>
+                  <ButtonMenu isOpen={true}/>
                 </div>
               </header>
             )
@@ -149,9 +199,7 @@ const Header: FC<IWithClass> = (props) => {
             () => (
               <header className={cn(className)} >
                 <div className='container header-first'>
-                  <a href='#menu'>
-                    <Image className='header-close' src={close} alt=""/>
-                  </a>
+                  <ButtonMenu isOpen={true}/>
                 </div>
               </header>
             )
@@ -172,9 +220,7 @@ const Header: FC<IWithClass> = (props) => {
                   <Image className='header-logo' src={logo} alt=""/>
                 </a>
                 
-                <a href="#menu">
-                  <Image className='header-burger' src={darkBurger} alt=""/>
-                </a>
+                <ButtonMenu/>
               </div>
             </header>
           ))

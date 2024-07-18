@@ -18,6 +18,10 @@
 
 html {
   font-size: calc(100vw / 1200);
+
+  @include lg{
+    font-size: min(calc(100vw / 1200), 1px);
+  }
 }
 
 * {
@@ -138,14 +142,16 @@ legend {
 
 .container {
 	margin: 0 auto;
-	max-width: 1160rem;
-	@media screen and (min-width: 1680px) {
-		max-width: 800rem;
-	}
-	@media screen and (max-width: 640px) {
-		max-width: 100%;
-		padding: 0 61.5rem;
-	}
+	max-width: 833rem;
+
+  @include lg{
+    max-width: 976rem;
+  }
+
+	@include sm{
+     max-width: 100%;
+     padding: 0 61.5rem;
+   }
 }
 
 .logo-subtitle {

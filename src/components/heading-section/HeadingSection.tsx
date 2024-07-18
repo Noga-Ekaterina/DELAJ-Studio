@@ -16,14 +16,15 @@ const HeadingSection: FC<Props> = (props) => {
   return (
     <section className={className}>
       <div className="container">
-        <h1 className={halvar.className}>{props.title}</h1>
-        
+
         <div className={cn('heading-section__text', courierNew.className)}>
-          <p>Наша команда занимается полным циклом производства детской анимации коротких метров, полных метров и сериалов в 2D и 3D технике.</p>
+          <h1 className={halvar.className}>{props.title}</h1>
+          <p>Наша команда занимается полным циклом производства детской анимации коротких метров, полных метров и
+            сериалов в 2D и 3D технике.</p>
         </div>
 
-          <Image 
-            src={props.image} 
+        <Image
+            src={props.image}
             className='heading-section__image' 
             alt="" 
           />

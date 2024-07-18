@@ -21,7 +21,7 @@ interface Props {
 
 const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
   const { 
-    isMenuOpened, 
+    isMenuLandingsOpened,
     changeMenuOpened, 
     currentPage, 
     changeCurrentPage 
@@ -48,7 +48,7 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
   }, [isThisPath, changeMenuOpened])
 
   return (
-    <Transition nodeRef={ref} in={isMenuOpened || isThisPath} timeout={0}>
+    <Transition nodeRef={ref} in={isMenuLandingsOpened || isThisPath} timeout={0}>
       {state => (
         <div 
           className={classNames("page-menu__screen", isThisPath ? 'opened' : '')} 
