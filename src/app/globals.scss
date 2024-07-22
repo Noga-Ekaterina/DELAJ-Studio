@@ -40,7 +40,10 @@ html {
 
 body{
   overscroll-behavior: none;
-  overflow: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 /* Links */

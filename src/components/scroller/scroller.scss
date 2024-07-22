@@ -1,15 +1,10 @@
 .scroller {
-	height: 100vh;
   padding-block: 3px;
-   overflow-y: auto;
   overflow-x: hidden;
 
-  &::-webkit-scrollbar {
-    width: 0;
-  }
 
 	&-content {
-		overflow: hidden;
+      min-height: 100vh;
 		transition: transform var(--transition);
 		transition-duration: 1s;
 	}
