@@ -1,9 +1,13 @@
 .section-wrap {
-  height: 100vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  &::-webkit-scrollbar {
-    width: 0;
+  overflow: hidden;
+  min-height: calc(100vh + 80px);
+  padding-top: 56rem;
+  
+  &[data-name="empty-place"]{
+    min-height: 5px;
+    height: 5px;
+    padding-top: 0;
+    overflow: hidden;
   }
 
   &__content {

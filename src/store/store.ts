@@ -17,8 +17,7 @@ class Store {
   // если false - первым будет детский лэндос, после него по скроллу будет взрослый
   isLandingSwiped = false;
 
-  //Открывалось ли главное меню
-
+  //Открывалось ли главное меню или модальное окно
   isDidModal = false
 
   swipeLanding = (value: boolean) => {

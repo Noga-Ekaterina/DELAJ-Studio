@@ -21,6 +21,7 @@ const Page = () => {
   return (
     <>
     <Scroller>
+      <Section id="empty-place"/>
       <Section id="first-landing">
         <Landings 
           FirstLanding={[<ForKids key="1-kids-page"/>, <KidsButton key="1-kids-btn"/>]}

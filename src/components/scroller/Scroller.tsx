@@ -1,5 +1,5 @@
 'use client'
-import { createContext, FC, useEffect, useRef, useState } from 'react';
+import React, { createContext, FC, useEffect, useRef, useState } from 'react';
 import './scroller.scss';
 import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
@@ -11,42 +11,114 @@ const Scroller: FC<IWithChildren> = (props) => {
   const hash = useHash();
   const viewport = useViewport();
   const [translate, setTranslate] = useState(0);
+  const {changeMenuOpened, changeDidModal}= store
   const [lineStyles, setLineStyles] = useState('default');
   const isModal = modalHashes.includes(hash) || hash === 'menu';
-  const {changeDidModal}= store
+  const scrollerContainerRef =useRef<HTMLDivElement | null>(null)
+  const scrollerRef =useRef<HTMLDivElement | null>(null)
+  const [scrollNumber, setScrollNumber] = useState(0)
+  const [scrollDirection, setScrollDirection] = useState(true)
+  const [isAnimationPlay, setIsAnimationPlay] = useState(false)
   const getPureHash = () => {
     const paramsIndex = hash.indexOf('?');
     return (paramsIndex > 0) ? hash.slice(0, paramsIndex) : hash.slice(0);
   }
 
   useEffect(() => {
-    if (hash) {
-      const pureHash = getPureHash();
-      const section = document.querySelector(`[data-name="${pureHash}"]`);
-      //@ts-ignore
-      const offset = section?.offsetTop || 0;
-      setTranslate(-offset);
+    if (hash && scrollerContainerRef.current) {
+    //   const pureHash = getPureHash();
+    //   const section = document.querySelector(`[data-name="${pureHash}"]`);
+    //   //@ts-ignore
+    //   const offset = section?.offsetTop || 0;
+    //   console.log(section)
+    //   console.log(offset)
+    //   console.log(scrollerContainerRef.current.getBoundingClientRect())
+      // setTranslate(offset)
+      const items = Array.from((scrollerContainerRef.current as HTMLDivElement).children)
+      console.log(items)
+      const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==hash)
+      if (activeItem){
+        const {bottom, top}=activeItem.getBoundingClientRect()
+        console.log(activeItem.getBoundingClientRect().top)
+        setIsAnimationPlay(true);
+        (scrollerRef.current as HTMLDivElement).scrollBy({
+          top: scrollDirection? top: -window.innerHeight +bottom,
+          behavior: "smooth"
+        })
+      }
+   }
+  },[hash, viewport, scrollerContainerRef.current ?(scrollerContainerRef.current as HTMLDivElement).clientHeight :0]);
 
-      isModal && changeDidModal(true)
-    }
-  },[hash, viewport]);
+  useEffect(() => {
+    if ((scrollerRef.current as HTMLDivElement).scrollTop==0)
+      setIsAnimationPlay(false)
+  }, [scrollerRef.current]);
 
   useEffect(() => {
     const pureHash = getPureHash();
-    
+
     switch(pureHash) {
       case 'career': {
         setLineStyles('caree')
       }
     }
+
+    if (isModal)
+      changeDidModal(true)
   },[hash])
+
+  useEffect(() => {
+    if (hash=="main-screen" && scrollerRef.current)
+      (scrollerRef.current as HTMLDivElement).scrollTo(0,0)
+  }, [hash]);
+  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    // console.log(scrollerRef.current.getBoundingClientRect())
+
+    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
+    const scroll= (e.target as HTMLDivElement).scrollTop
+    if (activeItem){
+      const nextSection = activeItem
+          .nextElementSibling;
+      const prevSection = activeItem.previousElementSibling;
+      const {bottom, top}=activeItem.getBoundingClientRect()
+      // console.log(window.innerHeight - bottom)
+
+      if (!isAnimationPlay && window.innerHeight - bottom>10 && scroll>scrollNumber){
+        if (nextSection){
+          window.location.hash= (nextSection as HTMLDivElement).dataset.name ||''
+        }else {
+          window.location.hash= "main-screen"
+          changeMenuOpened(false)
+          console.log("end")
+        }
+        setScrollDirection(true)
+      }else if (!isAnimationPlay && top>0 && scroll< scrollNumber && prevSection) {
+        window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
+        setScrollDirection(false)
+      }
+      console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
+      if (isAnimationPlay){
+        if (scrollDirection && top<1){
+          setIsAnimationPlay(false)
+        }else if (!scrollDirection && window.innerHeight - bottom<10){
+          setIsAnimationPlay(false)
+        }
+      }
+    }
+    // console.log(scrollerRef.current.scrollTop)
+    setScrollNumber(scroll)
+  }
 
   return (
 
-    <div className='scroller'>
+    <div className='scroller'
+         onScroll={e=>onScroll(e)}
+         ref={scrollerRef}
+    >
       <div 
         className="scroller-content"
-        style={{transform:  `translateY(${translate}px)`}}
+        style={{transform:  `translateY(calc(${translate}px - 56rem))`}}
+        ref={scrollerContainerRef}
       >
       
         {props.children}  

@@ -65,7 +65,7 @@ const KidsWallpapper: FC = () => {
       setImgList([firstHalf, secondHalf]);
     }
   }, []);
-  console.log(imgList)
+  // console.log(imgList)
 
 
   return (
