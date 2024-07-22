@@ -39,11 +39,8 @@ html {
 }
 
 body{
-  overscroll-behavior: none;
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
+  overscroll-behavior: contain;
+  overflow: hidden;
 }
 
 /* Links */

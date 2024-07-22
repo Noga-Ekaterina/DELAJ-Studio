@@ -34,44 +34,25 @@ const Scroller: FC<IWithChildren> = (props) => {
     //   console.log(offset)
     //   console.log(scrollerContainerRef.current.getBoundingClientRect())
       // setTranslate(offset)
-      const start= scrollNumber
       const items = Array.from((scrollerContainerRef.current as HTMLDivElement).children)
+      console.log(items)
       const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==hash)
       if (activeItem){
         const {bottom, top}=activeItem.getBoundingClientRect()
         console.log(activeItem.getBoundingClientRect().top)
-        // setIsAnimationPlay(true);
-        window.scrollTo({
-          top: scrollDirection? start+top: start -window.innerHeight + bottom,
-          // behavior: "smooth"
+        setIsAnimationPlay(true);
+        (scrollerRef.current as HTMLDivElement).scrollBy({
+          top: scrollDirection? top: -window.innerHeight +bottom,
+          behavior: "smooth"
         })
       }
    }
-    },[hash, viewport, scrollerContainerRef.current ?(scrollerContainerRef.current as HTMLDivElement).clientHeight :0]);
+  },[hash, viewport, scrollerContainerRef.current ?(scrollerContainerRef.current as HTMLDivElement).clientHeight :0]);
 
-    useEffect(() => {
-      // if (document.documentElement.scrollTop || document.body.scrollTop==0)
-      //   setIsAnimationPlay(false)
-
-    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
-    if (isAnimationPlay && activeItem){
-      const {bottom, top}=activeItem.getBoundingClientRect()
-
-      if (scrollDirection && top<1){
-        setIsAnimationPlay(false)
-        console.log("top anim end")
-        console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
-      }else if (!scrollDirection && window.innerHeight - bottom<6){
-        setIsAnimationPlay(false)
-        console.log("botton anim end ")
-        console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
-      }
-      console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
-
-    }
-
-
-  }, [scrollNumber]);
+  useEffect(() => {
+    if ((scrollerRef.current as HTMLDivElement).scrollTop==0)
+      setIsAnimationPlay(false)
+  }, [scrollerRef.current]);
 
   useEffect(() => {
     const pureHash = getPureHash();
@@ -88,49 +69,67 @@ const Scroller: FC<IWithChildren> = (props) => {
 
   useEffect(() => {
     if (hash=="main-screen" && scrollerRef.current)
-      window.scrollTo(0,0)
+      (scrollerRef.current as HTMLDivElement).scrollTo(0,0)
   }, [hash]);
+  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    // console.log(scrollerRef.current.getBoundingClientRect())
+
+    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
+    const scroll= (e.target as HTMLDivElement).scrollTop
+    if (activeItem){
+      const nextSection = activeItem
+          .nextElementSibling;
+      const prevSection = activeItem.previousElementSibling;
+      const {bottom, top}=activeItem.getBoundingClientRect()
+      // console.log(window.innerHeight - bottom)
+
+      if (!isAnimationPlay && window.innerHeight - bottom>10 && scroll>scrollNumber){
+        if (nextSection){
+          window.location.hash= (nextSection as HTMLDivElement).dataset.name ||''
+        }else {
+          window.location.hash= "main-screen"
+          changeMenuOpened(false)
+          console.log("end")
+        }
+        setScrollDirection(true)
+      }else if (!isAnimationPlay && top>0 && scroll< scrollNumber && prevSection) {
+        window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name: "main-screen"
+        setScrollDirection(false)
+      }
+      console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
+      if (isAnimationPlay){
+        if (scrollDirection && top<1){
+          setIsAnimationPlay(false)
+        }else if (!scrollDirection && window.innerHeight - bottom<10){
+          setIsAnimationPlay(false)
+        }
+      }
+    }
+    // console.log(scrollerRef.current.scrollTop)
+    setScrollNumber(scroll)
+  }
 
   useEffect(() => {
-    window.addEventListener("scroll", (e: Event) => {
-      // console.log(scrollerRef.current.getBoundingClientRect())
+    let touchStartY = 0;
 
-      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
-      const scroll = document.documentElement.scrollTop || document.body.scrollTop;
-      if (activeItem){
-        const nextSection = activeItem
-            .nextElementSibling;
-        const prevSection = activeItem.previousElementSibling;
-        const {bottom, top}=activeItem.getBoundingClientRect()
-        // console.log(window.innerHeight - bottom)
+    document.addEventListener('touchstart', function(event) {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: false });
 
-        if (window.innerHeight - bottom>6 && scroll>scrollNumber){
-          if (nextSection){
-            window.location.hash= (nextSection as HTMLDivElement).dataset.name ||''
-            console.log("next hash")
-          }else {
-            window.location.hash= "main-screen"
-            changeMenuOpened(false)
-            console.log("end")
-          }
-          setScrollDirection(true)
-        }else if ( top>0 && scroll< scrollNumber && prevSection) {
-          window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
-          setScrollDirection(false)
-          console.log("prev hash")
-        }
-        // console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
+    document.addEventListener('touchend', function(event) {
+      let touchEndY = event.changedTouches[0].clientY;
+      if (touchEndY > touchStartY) {
+        event.preventDefault();
       }
-      console.log(isAnimationPlay)
-      setScrollNumber(scroll)
-    })
+    }, { passive: false });
+
 
   }, []);
 
   return (
 
     <div className='scroller'
-         // onScroll={e=>onScroll(e)}
+         onScroll={e=>onScroll(e)}
          ref={scrollerRef}
     >
       <div 

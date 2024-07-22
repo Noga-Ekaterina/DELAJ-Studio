@@ -1,14 +1,7 @@
 .section-wrap {
   overflow: hidden;
-  min-height: calc(100vh + 120px);
+  min-height: calc(100vh + 80px);
   padding-top: 56rem;
-  
-  &[data-name="empty-place"]{
-    min-height: 5px;
-    height: 5px;
-    padding-top: 0;
-    overflow: hidden;
-  }
 
   &__content {
     min-height: 100%;
