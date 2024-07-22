@@ -71,7 +71,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     }
 
 
-  }, [document.documentElement.scrollTop || document.body.scrollTop]);
+  }, [scrollNumber]);
 
   useEffect(() => {
     const pureHash = getPureHash();
@@ -91,38 +91,41 @@ const Scroller: FC<IWithChildren> = (props) => {
       window.scrollTo(0,0)
   }, [hash]);
 
-  window.addEventListener("scroll", (e: Event) => {
-    // console.log(scrollerRef.current.getBoundingClientRect())
+  useEffect(() => {
+    window.addEventListener("scroll", (e: Event) => {
+      // console.log(scrollerRef.current.getBoundingClientRect())
 
-    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
-    const scroll = document.documentElement.scrollTop || document.body.scrollTop;
-    if (activeItem){
-      const nextSection = activeItem
-          .nextElementSibling;
-      const prevSection = activeItem.previousElementSibling;
-      const {bottom, top}=activeItem.getBoundingClientRect()
-      // console.log(window.innerHeight - bottom)
+      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
+      const scroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (activeItem){
+        const nextSection = activeItem
+            .nextElementSibling;
+        const prevSection = activeItem.previousElementSibling;
+        const {bottom, top}=activeItem.getBoundingClientRect()
+        // console.log(window.innerHeight - bottom)
 
-      if (window.innerHeight - bottom>6 && scroll>scrollNumber){
-        if (nextSection){
-          window.location.hash= (nextSection as HTMLDivElement).dataset.name ||''
-          console.log("next hash")
-        }else {
-          window.location.hash= "main-screen"
-          changeMenuOpened(false)
-          console.log("end")
+        if (window.innerHeight - bottom>6 && scroll>scrollNumber){
+          if (nextSection){
+            window.location.hash= (nextSection as HTMLDivElement).dataset.name ||''
+            console.log("next hash")
+          }else {
+            window.location.hash= "main-screen"
+            changeMenuOpened(false)
+            console.log("end")
+          }
+          setScrollDirection(true)
+        }else if ( top>0 && scroll< scrollNumber && prevSection) {
+          window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
+          setScrollDirection(false)
+          console.log("prev hash")
         }
-        setScrollDirection(true)
-      }else if ( top>0 && scroll< scrollNumber && prevSection) {
-        window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
-        setScrollDirection(false)
-        console.log("prev hash")
+        // console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
       }
-      // console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
-    }
-    console.log(isAnimationPlay)
-    setScrollNumber(scroll)
-  })
+      console.log(isAnimationPlay)
+      setScrollNumber(scroll)
+    })
+
+  }, []);
 
   return (
 
