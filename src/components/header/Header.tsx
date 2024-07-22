@@ -196,22 +196,30 @@ const Header: FC<IWithClass> = (props) => {
             {hash: P.when(() => modalHashes.includes(hash))},
             () => (
               <header className={cn(className)} >
-                <div className='container header-first'>
+                <div className='container'>
+                  <a>
+                    <Image className='header-mail menu-mail' src={mail} alt=""/>
+                  </a>
+
+                  <a href="#main-screen">
+                    <Image className='header-logo' src={logo} alt=""/>
+                  </a>
+
                   <ButtonMenu isOpen={true}/>
                 </div>
               </header>
             )
           )
-          // Страница вакансии 
-          .when(
-            () => hash.includes('career?id='),
-            () => null
-          )
-          .otherwise(() => (
-            <header className={cn(className)} >
-              <div className='container'>
-                <a href="#contacts">
-                  <Image className='header-mail menu-mail' src={mail} alt=""/>
+            // Страница вакансии
+            .when(
+                () => hash.includes('career?id='),
+                () => null
+            )
+            .otherwise(() => (
+                <header className={cn(className)}>
+                  <div className='container'>
+                    <a href="#contacts">
+                    <Image className='header-mail menu-mail' src={mail} alt=""/>
                 </a>
 
                 <a href="#main-screen">
