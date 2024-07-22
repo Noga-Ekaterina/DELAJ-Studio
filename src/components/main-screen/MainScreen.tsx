@@ -25,8 +25,8 @@ const menuStyles = {
   unmounted: { top: "0%",},
   entering: { top: "0%",},
   entered: { top: "0%",},
-  exiting:  {  top: "-100%",},
-  exited:  {  top: "-100%",},
+  exiting:  {  top: "-100vh",},
+  exited:  {  top: "-100vh",},
 };
 
 const MainScreen: FC = () => {
