@@ -93,7 +93,7 @@ const Scroller: FC<IWithChildren> = (props) => {
         }
         setScrollDirection(true)
       }else if (!isAnimationPlay && top>0 && scroll< scrollNumber && prevSection) {
-        window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name: "main-screen"
+        window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
         setScrollDirection(false)
       }
       console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
