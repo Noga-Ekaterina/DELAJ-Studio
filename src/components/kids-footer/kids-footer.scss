@@ -37,6 +37,11 @@
       background-color: #DBFF00;
       color: var(--text-gray);  
       justify-content: center;
+
+      .footer-item__content{
+        max-width: 135rem;
+      }
+
       a.footer-link:hover {
         color: var(--red);
       }
