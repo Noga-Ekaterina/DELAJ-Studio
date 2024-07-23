@@ -146,7 +146,7 @@ const PageMenu: FC = () => {
         page="kids"
         Component={KidsScreen}
         handleClick={() => swipeToKids()}
-        hidden={hiden.kids}
+        // hidden={hiden.kids}
       >
         
       </PageMenuScreen>
@@ -155,7 +155,7 @@ const PageMenu: FC = () => {
         page="adult"
         Component={AdultScreen}
         handleClick={() => swipeToAdult()}
-        hidden={hiden.adult}
+        // hidden={hiden.adult}
       >
       </PageMenuScreen>
     </nav>
