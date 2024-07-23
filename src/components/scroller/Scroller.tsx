@@ -29,7 +29,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     setTimeout(() => {
       setIsAnimationPlay(false)
       console.log("anim end")
-    }, 100)
+    }, 300)
   }
 
   // прокрутка
@@ -99,7 +99,7 @@ const Scroller: FC<IWithChildren> = (props) => {
           console.log("end")
         }
         setScrollDirection(true)
-      }else if (!isAnimationPlay && top>5 && scroll< scrollNumber && prevSection) {
+      }else if (!isAnimationPlay && top>10 && scroll< scrollNumber && prevSection) {
         window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
         setScrollDirection(false)
       }
