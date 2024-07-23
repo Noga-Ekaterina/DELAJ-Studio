@@ -8,6 +8,7 @@ import { transitionStyles } from "@/vars";
 import { useMediaQuery } from "react-responsive";
 import { observer } from "mobx-react-lite";
 import store from "@/store/store";
+import {useHash} from "@/components/_hooks/useHash";
 
 const sideStyles = {
   largeScreen: {
@@ -105,6 +106,18 @@ const PageMenu: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const mediumScreen = useMediaQuery({maxWidth: 1024});
   const [screenStyles, setScreenStyles] = useState<ScreenStylesType>('largeScreen');
+  const hash= useHash()
+  const [hiden, setHiden] = useState({kids: false, adult: false})
+
+  useEffect(() => {
+    if (hash!=="" && hash!=="main-screen" && !isLandingSwiped){
+      setTimeout(()=>{
+        setHiden({...hiden, kids: true})
+      },700)
+    }else if (hash=="" || hash=="main-screen"){
+      setHiden({kids: false, adult: false})
+    }
+  }, [hash]);
 
   const swipeToKids = () => {
     if (isLandingSwiped) {
@@ -133,6 +146,7 @@ const PageMenu: FC = () => {
         page="kids"
         Component={KidsScreen}
         handleClick={() => swipeToKids()}
+        hidden={hiden.kids}
       >
         
       </PageMenuScreen>
@@ -141,6 +155,7 @@ const PageMenu: FC = () => {
         page="adult"
         Component={AdultScreen}
         handleClick={() => swipeToAdult()}
+        hidden={hiden.adult}
       >
       </PageMenuScreen>
     </nav>
