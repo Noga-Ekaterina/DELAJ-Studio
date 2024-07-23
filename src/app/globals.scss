@@ -20,7 +20,7 @@ html {
   font-size: calc(100vw / 1200);
 
   @include lg{
-    font-size: min(calc(100vw / 1200), 1px);
+    font-size: clamp(0.2px, calc(100vw / 1200), 1px);
   }
 }
 
