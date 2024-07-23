@@ -40,6 +40,7 @@ const MainScreen: FC = () => {
   const [showArrow, setShowArrow] = useState(false);
   const hash = useHash();
   const arrowRef = useRef(null)
+  const [hidden, setHidden] = useState(false)
 
   const handleEvent = () => {
     changeMenuOpened(true);
@@ -52,10 +53,14 @@ const MainScreen: FC = () => {
       setShow(true);
     } else if (hash === 'main-screen'){
       setShow(true);
-    } else {
+      setHidden(false)
+    } else if (hash !== 'main-screen'){
       setShow(false);
-    }
-  },[hash]);
+      setTimeout(()=>{
+        setHidden(true)
+      },700)
+  }
+  },[hash])
 
   return (
     <Transition in={show} timeout={0}>
@@ -66,7 +71,7 @@ const MainScreen: FC = () => {
             style={{
               ...transitionStyles,
               ...menuStyles[state],
-              zIndex: currentPage ? 4 : 3 
+              zIndex: hidden ? -1 :4
             }}
           >
             <div 
