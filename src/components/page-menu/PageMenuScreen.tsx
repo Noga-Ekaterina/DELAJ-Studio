@@ -17,7 +17,7 @@ interface Props {
   page: CurrentPageType
   Component: FC<{isOpened: boolean}>
   handleClick: () => void
-  hidden: boolean
+  // hidden: boolean
 }
 
 const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
@@ -61,7 +61,7 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
             ...props.styles.defaultStyles, 
             ...props.styles[styleToggle][state],
             ...transitionStyles,
-            display: props.hidden? "none":""
+            // display: props.hidden? "none":""
           }}
         >
           <Component isOpened={isThisPath}/>

@@ -54,7 +54,7 @@ const MainScreen: FC = () => {
     } else if (hash === 'main-screen'){
       setShow(true);
       setHidden(false)
-    } else if (hash !== 'main-screen'){
+    } else if (hash !== 'main-screen' && hash!=""){
       setShow(false);
       setTimeout(()=>{
         setHidden(true)
