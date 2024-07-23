@@ -24,6 +24,15 @@ const Scroller: FC<IWithChildren> = (props) => {
     return (paramsIndex > 0) ? hash.slice(0, paramsIndex) : hash.slice(0);
   }
 
+// Функция для включения скролла
+  function enableScroll() {
+    setTimeout(() => {
+      setIsAnimationPlay(false)
+      console.log("anim end")
+    }, 100)
+  }
+
+  // прокрутка
   useEffect(() => {
     if (hash && scrollerContainerRef.current) {
     //   const pureHash = getPureHash();
@@ -42,17 +51,15 @@ const Scroller: FC<IWithChildren> = (props) => {
         console.log(activeItem.getBoundingClientRect().top)
         setIsAnimationPlay(true);
         (scrollerRef.current as HTMLDivElement).scrollBy({
-          top: scrollDirection? top: -window.innerHeight +bottom,
+          top: top,
           behavior: "smooth"
-        })
+        });
+
       }
+
    }
   },[hash, viewport, scrollerContainerRef.current ?(scrollerContainerRef.current as HTMLDivElement).clientHeight :0]);
 
-  useEffect(() => {
-    if ((scrollerRef.current as HTMLDivElement).scrollTop==0)
-      setIsAnimationPlay(false)
-  }, [scrollerRef.current]);
 
   useEffect(() => {
     const pureHash = getPureHash();
@@ -83,7 +90,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       const {bottom, top}=activeItem.getBoundingClientRect()
       // console.log(window.innerHeight - bottom)
 
-      if (!isAnimationPlay && window.innerHeight - bottom>10 && scroll>scrollNumber){
+      if (!isAnimationPlay && window.innerHeight - bottom>5 && scroll>scrollNumber){
         if (nextSection){
           window.location.hash= (nextSection as HTMLDivElement).dataset.name ||''
         }else {
@@ -92,16 +99,16 @@ const Scroller: FC<IWithChildren> = (props) => {
           console.log("end")
         }
         setScrollDirection(true)
-      }else if (!isAnimationPlay && top>0 && scroll< scrollNumber && prevSection) {
+      }else if (!isAnimationPlay && top>5 && scroll< scrollNumber && prevSection) {
         window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
         setScrollDirection(false)
       }
       console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
       if (isAnimationPlay){
         if (scrollDirection && top<1){
-          setIsAnimationPlay(false)
+          enableScroll()
         }else if (!scrollDirection && window.innerHeight - bottom<10){
-          setIsAnimationPlay(false)
+          enableScroll()
         }
       }
     }

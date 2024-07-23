@@ -71,7 +71,7 @@ const MainScreen: FC = () => {
             style={{
               ...transitionStyles,
               ...menuStyles[state],
-              zIndex: hidden ? -1 :4
+              zIndex: hidden ? -1 : currentPage? 4:3
             }}
           >
             <div 

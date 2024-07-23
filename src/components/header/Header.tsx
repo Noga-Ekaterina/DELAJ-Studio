@@ -127,7 +127,7 @@ const Header: FC<IWithClass> = (props) => {
                 </header>
             ))
             // Открыто меню выбора лэндоса
-            .with({hash: '', isMenuLandingsOpened: true}, {hash: 'main-screen', isMenuLandingsOpened: true}, () => (
+            .with({hash: ''}, {hash: 'main-screen'}, () => (
                 <header className={className}>
 
                 </header>

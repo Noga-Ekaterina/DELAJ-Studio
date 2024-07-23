@@ -20,6 +20,7 @@ const Section: FC<Props> = (props) => {
       className={className} 
       ref={containerRef}
       data-name={props.id}
+      // id={props.id}
     >
       <div 
         ref={ref} 
