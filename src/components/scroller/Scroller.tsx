@@ -19,6 +19,10 @@ const Scroller: FC<IWithChildren> = (props) => {
   const [scrollNumber, setScrollNumber] = useState(0)
   const [scrollDirection, setScrollDirection] = useState(true)
   const [isAnimationPlay, setIsAnimationPlay] = useState(false)
+  let isScrollingTimeout: NodeJS.Timeout | number
+  const [isScrolling, setIsScrolling] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
+  const [scrollDuration, setScrollDuration] = useState(0)
   const getPureHash = () => {
     const paramsIndex = hash.indexOf('?');
     return (paramsIndex > 0) ? hash.slice(0, paramsIndex) : hash.slice(0);
@@ -28,6 +32,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   function enableScroll() {
     setTimeout(() => {
       setIsAnimationPlay(false)
+      setIsDisabled(false)
       console.log("anim end")
     }, 300)
   }
@@ -35,14 +40,6 @@ const Scroller: FC<IWithChildren> = (props) => {
   // прокрутка
   useEffect(() => {
     if (hash && scrollerContainerRef.current) {
-    //   const pureHash = getPureHash();
-    //   const section = document.querySelector(`[data-name="${pureHash}"]`);
-    //   //@ts-ignore
-    //   const offset = section?.offsetTop || 0;
-    //   console.log(section)
-    //   console.log(offset)
-    //   console.log(scrollerContainerRef.current.getBoundingClientRect())
-      // setTranslate(offset)
       const items = Array.from((scrollerContainerRef.current as HTMLDivElement).children)
       console.log(items)
       const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==hash)
@@ -59,7 +56,6 @@ const Scroller: FC<IWithChildren> = (props) => {
 
    }
   },[hash, viewport, scrollerContainerRef.current ?(scrollerContainerRef.current as HTMLDivElement).clientHeight :0]);
-
 
   useEffect(() => {
     const pureHash = getPureHash();
@@ -79,10 +75,32 @@ const Scroller: FC<IWithChildren> = (props) => {
       (scrollerRef.current as HTMLDivElement).scrollTo(0,0)
   }, [hash]);
   const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    // console.log(scrollerRef.current.getBoundingClientRect())
+    // console.log('scroll')
+    setIsScrolling(true)
 
-    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
     const scroll= (e.target as HTMLDivElement).scrollTop
+    // Если позиция прокрутки не изменилась
+    if (scroll === scrollNumber) {
+      setScrollDuration(scrollDuration+100) // Увеличиваем счетчик времени на 100 мс (или любое значение, соответствующее вашему таймеру)
+
+      // Если достигли 1000 мс (1 секунда)
+      if (scrollDuration >= 600) {
+        console.log('Пользователь прокручивает в одном месте уже 1 секунду.');
+        setIsDisabled(false)
+      }
+    } else {
+      // Если позиция изменилась, сбросить время
+      setScrollDuration(0); // Сбрасываем счетчик времени
+    }
+
+    window.clearTimeout((isScrollingTimeout as number));
+
+    isScrollingTimeout = setTimeout(function () {
+      setIsScrolling(false)
+      console.log('Пользователь перестал скроллить.');
+    }, 200); // Таймаут в миллисекундах
+
+    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as             HTMLDivElement).dataset.name==hash)
     if (activeItem){
       const nextSection = activeItem
           .nextElementSibling;
@@ -90,26 +108,51 @@ const Scroller: FC<IWithChildren> = (props) => {
       const {bottom, top}=activeItem.getBoundingClientRect()
       // console.log(window.innerHeight - bottom)
 
-      if (!isAnimationPlay && window.innerHeight - bottom>5 && scroll>scrollNumber){
-        if (nextSection){
-          window.location.hash= (nextSection as HTMLDivElement).dataset.name ||''
-        }else {
-          window.location.hash= "main-screen"
-          changeMenuOpened(false)
-          console.log("end")
+      let stop
+      if ((scrollDirection && window.innerHeight - bottom>=0) || (!scrollDirection && top>0 )) {
+        const positionScroll = (scrollerRef.current as HTMLDivElement).scrollTop;
+        console.log("disab")
+        setIsDisabled(true)
+      }
+
+
+      if (scroll>scrollNumber){
+        if (!isAnimationPlay  && window.innerHeight - bottom>2) {
+          if (scrollDuration<600) {
+            (e.target as HTMLDivElement).scrollTo({top: scrollNumber, behavior: "instant"})
+          }else {
+            setScrollDuration(0)
+            setIsDisabled(false)
+            if (nextSection) {
+              window.location.hash = (nextSection as HTMLDivElement).dataset.name || ''
+            } else {
+              window.location.hash = "main-screen"
+              changeMenuOpened(false)
+              console.log("end")
+            }
+          }
         }
         setScrollDirection(true)
-      }else if (!isAnimationPlay && top>10 && scroll< scrollNumber && prevSection) {
-        window.location.hash = (prevSection as HTMLDivElement).dataset.name!= "empty-place"? (prevSection as HTMLDivElement).dataset.name ||'': "main-screen"
+      }else if (scroll<scrollNumber) {
+        if (!isAnimationPlay && top > 2 && prevSection) {
+          if (scrollDuration<600) {
+            (e.target as HTMLDivElement).scrollTo({top: scrollNumber, behavior: "instant"})
+          }else {
+            setScrollDuration(0)
+            setIsDisabled(false)
+            window.location.hash = (prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen"
+          }
+        }
         setScrollDirection(false)
       }
       console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
       if (isAnimationPlay){
-        if (scrollDirection && top<1){
-          enableScroll()
-        }else if (!scrollDirection && window.innerHeight - bottom<10){
+        if (top<0.4){
           enableScroll()
         }
+        // else if (!scrollDirection && window.innerHeight - bottom<10){
+        //   enableScroll()
+        // }
       }
     }
     // console.log(scrollerRef.current.scrollTop)

@@ -16,7 +16,7 @@ interface Props extends IWithClass{
 const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   const [data, setData] = useState<ProjectItem[]>([]);
   const [baseChunkSize, setBaseChunkSize] = useState(3);
-  const mobileScreen = useMediaQuery({maxWidth: 768});
+  const mobileScreen = useMediaQuery({maxWidth: 640});
 
   const getModifiedList = (data: any[]) => {
     if (data.length > 3){ 
