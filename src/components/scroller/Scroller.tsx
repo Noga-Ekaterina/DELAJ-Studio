@@ -34,7 +34,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       setIsAnimationPlay(false)
       setIsDisabled(false)
       console.log("anim end")
-    }, 300)
+    }, 500)
   }
 
   // прокрутка
@@ -84,7 +84,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       setScrollDuration(scrollDuration+100) // Увеличиваем счетчик времени на 100 мс (или любое значение, соответствующее вашему таймеру)
 
       // Если достигли 1000 мс (1 секунда)
-      if (scrollDuration >= 600) {
+      if (scrollDuration >= 1000) {
         console.log('Пользователь прокручивает в одном месте уже 1 секунду.');
         setIsDisabled(false)
       }
@@ -118,7 +118,7 @@ const Scroller: FC<IWithChildren> = (props) => {
 
       if (scroll>scrollNumber){
         if (!isAnimationPlay  && window.innerHeight - bottom>2) {
-          if (scrollDuration<600) {
+          if (scrollDuration<1000) {
             (e.target as HTMLDivElement).scrollTo({top: scrollNumber, behavior: "instant"})
           }else {
             setScrollDuration(0)
@@ -135,7 +135,7 @@ const Scroller: FC<IWithChildren> = (props) => {
         setScrollDirection(true)
       }else if (scroll<scrollNumber) {
         if (!isAnimationPlay && top > 2 && prevSection) {
-          if (scrollDuration<600) {
+          if (scrollDuration<1000) {
             (e.target as HTMLDivElement).scrollTo({top: scrollNumber, behavior: "instant"})
           }else {
             setScrollDuration(0)
