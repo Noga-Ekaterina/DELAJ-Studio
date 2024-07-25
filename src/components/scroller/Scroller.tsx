@@ -48,7 +48,7 @@ const Scroller: FC<IWithChildren> = (props) => {
         console.log(activeItem.getBoundingClientRect().top)
         setIsAnimationPlay(true);
         (scrollerRef.current as HTMLDivElement).scrollBy({
-          top: top,
+          top: top+8,
           behavior: "smooth"
         });
 
