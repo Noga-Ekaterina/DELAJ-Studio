@@ -16,6 +16,7 @@ import Faq from "@/components/_sections/faq/Faq";
 import Ideas from "@/components/_sections/ideas/Ideas";
 import KidsButton from "@/components/landing-switch-button/KidsButton";
 import AdultButton from "@/components/landing-switch-button/AdultButton";
+import LandingSwitchButtonsGrup from "@/components/landing-switch-button/LandingSwitchButtonsGrup";
 
 const Page = () => {
   return (
@@ -61,6 +62,7 @@ const Page = () => {
       </Section>
 
     </Scroller>
+      <LandingSwitchButtonsGrup/>
     <MainScreen />
     </>
   )
