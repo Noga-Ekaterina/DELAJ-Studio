@@ -10,13 +10,6 @@ import AdultButton from "@/components/landing-switch-button/AdultButton";
 import {useHash} from "@/components/_hooks/useHash";
 import {observer} from "mobx-react-lite";
 
-const styles = {
-  unmounted: {translate: 'calc(100vw - 100rem)'},
-  entering: {translate: 'calc(100vw - 100rem)'},
-  entered: {translate: 'calc(100vw - 100rem)'},
-  exiting:  {translate: 'calc(-100vw + 100rem)'},
-  exited:  {translate: 'calc(-100vw + 100rem)'},
-}
 const LandingSwitchButtonsGrup = () => {
   const { isLandingSwiped, swipeLanding } = store;
   const hash =useHash()
@@ -27,7 +20,7 @@ const LandingSwitchButtonsGrup = () => {
           style={{
             ...transitionStyles,
             left: isLandingSwiped? "-100rem": "calc(100vw - 100rem)",
-            top: hash == "first-landing" ? 0 : hash == "second-landing" ? "-100vh" : "-200vh",
+            bottom: hash == "first-landing" ? "-100vh" : hash == "second-landing" ? 0 : "100vh",
             display: (hash != "first-landing" && hash != "second-landing") ? "none" : ""
           }}
       >

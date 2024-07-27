@@ -8,10 +8,6 @@
     top: min(500px, 100vh - 110rem);
   }
 
-  @include sm{
-    top: min(380px, 100vh - 110rem);
-  }
-
   &__wrap {
     position: relative;
     height: 100vh;
