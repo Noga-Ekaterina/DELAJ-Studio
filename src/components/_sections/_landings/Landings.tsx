@@ -43,19 +43,9 @@ const Landings: FC<Props> = ({FirstLanding, SecondLanding}) => {
           >
             <div className={classNames("landings-page", isLandingSwiped ? 'hidden' : '')}>
               {FirstComponent}
-              <LandingSwitchButton
-                className='button-right' 
-                handleClick={() => swipeLanding(true)}
-                render={() => FirstButton}
-              />
             </div>
             <div className={classNames("landings-page", !isLandingSwiped ? 'hidden' : '')}>
               {SecondComponent}
-              <LandingSwitchButton 
-                className='button-left'
-                handleClick={() => swipeLanding(false)}
-                render={() => SecondButton}
-              />
             </div>
           </div>
         </div>

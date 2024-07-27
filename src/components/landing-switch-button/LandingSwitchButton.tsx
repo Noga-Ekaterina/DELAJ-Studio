@@ -2,7 +2,6 @@
 import { CurrentPageType, IWithClass } from '@/types';
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
-import './landing-switch-button.scss';
 import store from '@/store/store';
 
 interface Props extends IWithClass {
