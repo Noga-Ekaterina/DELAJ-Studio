@@ -18,9 +18,14 @@
   }
   &__text-logo {
     color: #fff;
-    font-size: 10rem;
+    font-size: min(15rem, 2.24vh);
     text-align: center;
-    position: static;
+    position: relative;
+    left: 3%;
+
+    @include sm{
+      bottom: 0;
+    }
   }
   &__picture {
     overflow: hidden;
@@ -33,19 +38,29 @@
       position: relative;
       height: 100%;
 
-      padding: 0 20px;
+      padding: 3% 20px 0;
       bottom: 5%;
+
+      @include sm{
+        padding-top: 1%;
+      }
       &-wrap {
-        min-width: 78%;
+        min-width: 86%;
         max-height: 68%;
       }
       img {
         transition: width var(--transition);
         width: 100%;
         max-height: 84%;
-        margin-bottom: 1%;
+        margin-bottom: 3%;
+
+        @include sm{
+          max-height: 80%;
+          margin-bottom: 2%;
+        }
       }
     }
+
 
     &#kids-screen-black {
       position: relative;
@@ -117,6 +132,7 @@
         height: 100%;
         position: relative;
         left: 5%;
+        top: 5%;
 
         @include sm{
           width: 95%;
@@ -181,8 +197,8 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 100%;
-        max-height: 120%;
+        width: 90%;
+        max-height: 114%;
         object-position: bottom right;
       }
     }
@@ -190,7 +206,7 @@
     &#kids-screen-red {
       background-color: #F12B00;
       grid-column: 3 / 4;
-      padding: 5%;
+      padding: 8%;
       padding-right: 0;
       position: relative;
       display: flex;
@@ -208,7 +224,6 @@
       }
 
       .red-picture-logo {
-        min-height: 26%;
         width: 56%;
         object-position: left top;
 
@@ -226,11 +241,14 @@
 
         @include md{
           max-width: 60%;
-          top: -10%;
+          top: -80%;
+          height: auto;
+          max-height: 152%;
         }
 
         @include sm{
           width: 60%;
+          top: -10%;
         }
       }
     }
@@ -258,11 +276,10 @@
         height: auto;
         max-height: 95%;
         width: 100%;
-        position: absolute;
-        top: 14.33%;
         flex-shrink: 0;
 
         @include sm{
+          position: absolute;
           height: 238%;
           max-height: 238%;
           top: -28%;
@@ -272,15 +289,39 @@
   }
 
   &.opened {
+    @include md-book{
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
     @include sm{
       grid-template-columns: repeat(2, 50%);
       grid-template-rows: repeat(5, 1fr);
     }
+    .kids-screen__text-logo {
+      @include md-book{
+        font-size: 23rem;
+      }
+    }
     #kids-screen-black{
       grid-row: 1/3;
+
+      @include md-book{
+        grid-row: 1/2;
+      }
+
+      img{
+        @include md-book{
+          top: 4px;
+          max-height: 167%;
+        }
+      }
     }
 
     #kids-screen-picture{
+
+      @include md-book{
+        grid-column: 3/4;
+      }
 
       @include sm{
         grid-column: 2/3;
@@ -289,6 +330,11 @@
     }
 
     #kids-screen-white{
+      @include md-book{
+        grid-column: 2/3;
+        grid-row: 1/2;
+      }
+
       @include sm{
         grid-column: 2/3;
         display: flex;
@@ -297,6 +343,10 @@
 
     #kids-screen-logo {
       grid-column: 2/5;
+
+      @include md-book{
+        grid-column: 1/4;
+      }
 
       @include sm{
         grid-column: 1/3;
@@ -308,12 +358,17 @@
       @include sm{
         grid-column: 2/3;
         grid-row: 4/5;
+        padding-bottom: 7%;
       }
     }
 
     .kids-screen__picture {
       &#kids-screen-red {
         grid-column: 3 / 5;
+
+        @include md-book{
+          grid-column: 3/4;
+        }
 
         @include sm{
           grid-column: 1/2;
@@ -322,6 +377,10 @@
 
         .red-picture-logo{
           width: 30%;
+
+          @include md-book{
+            width: 44%;
+          }
         }
 
         .red-picture-car {
@@ -330,6 +389,12 @@
           bottom: 0;
           right: 0;
           transition-delay: 0.1s;
+
+          @include md-book{
+            min-width: 74%;
+            object-position: bottom;
+            bottom: 8%;
+          }
         }
       }
     }
@@ -343,6 +408,10 @@
     }
 
     #kids-screen-purple{
+      @include md-book{
+        display: none;
+      }
+
       @include sm{
         display: block;
         grid-column: 2/3;
@@ -355,7 +424,6 @@
   @media screen and (max-width: 1024px) {
     &__text-logo {
       font-size: 8px;
-      bottom: -15px;
     }
   }
 }

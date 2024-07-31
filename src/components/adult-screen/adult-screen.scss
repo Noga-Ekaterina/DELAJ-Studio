@@ -1,3 +1,5 @@
+@import "@/app/mixins";
+
 .adult-screen {
   display: block;
   height: 100%;
@@ -45,6 +47,10 @@
     position: absolute;
     bottom: 0;
     height: 57%;
+
+    @include sm{
+      height: 50%;
+    }
   }
 
   &.opened {
@@ -55,19 +61,17 @@
       width: 100%;
     }
     .adult-screen__text-logo {
-      font-size: 20px;
+      font-size: 20rem;
+
+      @include sm{
+        font-size: 10px;
+      }
     }
   } 
 
   @media screen and (min-width: 1680px) {
     &__text-logo {
       font-size: 16px;
-    }
-
-    &.opened {
-      .adult-screen__text-logo {
-        font-size: 31px;
-      }
     }
   }
 }

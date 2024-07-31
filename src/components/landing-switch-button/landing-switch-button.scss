@@ -2,23 +2,23 @@
 
 .landing-switch-button {
   position: absolute;
-  top: min(400px, 100vh - 110rem);
+  top: min(500rem, 100vh - 110rem);
 
   @include md{
-    top: min(500px, 100vh - 110rem);
+    top: min(435px, 100vh - 110rem);
   }
 
   &__wrap {
     position: relative;
     height: 100vh;
-    width: 100rem;
+    width: 90rem;
     transition: transform var(--transition);
   }
 
   &-grup{
     position: fixed;
     height: 200vh;
-    width: 200rem;
+    width: 180rem;
     display: flex;
 
     .button-right {
@@ -53,7 +53,7 @@
     position: relative;
     right: -2%;
     &-wrap {
-      width: 100rem;
+      width: 90rem;
       height: 94.5rem;
       display: flex;
       align-items: center;
@@ -66,12 +66,12 @@
 .adult-button {
   border-radius: 35rem;
   overflow: hidden;
-  max-height: 100rem;
+  max-height: 90rem;
   transition: var(--transition);
   &__section {
     background-color: currentColor;
     height: 90rem;
-    width: 110rem;
+    width: 100rem;
     display: flex;
     justify-content: center;
     align-items: center;

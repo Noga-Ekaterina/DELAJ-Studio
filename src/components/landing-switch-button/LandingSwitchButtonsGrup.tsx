@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useEffect} from 'react';
 import store from "@/store/store";
 import './landing-switch-button.scss';
 import { Transition } from 'react-transition-group';
@@ -11,15 +11,19 @@ import {useHash} from "@/components/_hooks/useHash";
 import {observer} from "mobx-react-lite";
 
 const LandingSwitchButtonsGrup = () => {
-  const { isLandingSwiped, swipeLanding } = store;
+  const { isLandingSwiped, swipeLanding, changeCurrentPage } = store;
   const hash =useHash()
+
+  useEffect(() => {
+    changeCurrentPage(isLandingSwiped? "adult":"kids")
+  }, [isLandingSwiped]);
 
   return (
       <div
           className="landing-switch-button-grup"
           style={{
             ...transitionStyles,
-            left: isLandingSwiped? "-100rem": "calc(100vw - 100rem)",
+            left: isLandingSwiped? "-90rem": "calc(100vw - 90rem)",
             bottom: hash == "first-landing" ? "-100vh" : hash == "second-landing" ? 0 : "100vh",
             display: (hash != "first-landing" && hash != "second-landing") ? "none" : ""
           }}

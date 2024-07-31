@@ -10,8 +10,14 @@
   }
 }
 
+@mixin md-book{
+  @media (min-width: 660px) and (min-height: 100vw){
+    @content
+  }
+}
+
 @mixin sm{
-  @media (max-width: 768px) {
+  @media (max-width: 660px) {
     @content
   }
 }
