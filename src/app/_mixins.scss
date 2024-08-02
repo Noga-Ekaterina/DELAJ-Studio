@@ -4,6 +4,13 @@
   }
 }
 
+@mixin lg-book{
+  @media (min-width: 1024px) and (min-height: 80vw){
+    @content
+  }
+}
+
+
 @mixin md {
   @media screen and (max-width: 1024px) {
     @content;
@@ -11,7 +18,7 @@
 }
 
 @mixin md-book{
-  @media (min-width: 660px) and (min-height: 100vw){
+  @media (min-width: 660px) and (min-height: 80vw){
     @content
   }
 }

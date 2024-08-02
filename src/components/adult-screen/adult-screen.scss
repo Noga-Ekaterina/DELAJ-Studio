@@ -15,16 +15,36 @@
   }
 
   &__text-logo {
-    font-size: 14rem;
+    font-size: min(18rem, 2.24vh);
     color: #fff;
+
+    @include md-book{
+      font-size: 25rem;
+    }
+
+    @include sm{
+      font-size: 25rem;
+    }
+
     &-wrap {
-      top: 69%;
+      left: 4%;
+      top: 72%;
     }
   }
 
   &__big-logo {
     width: 38.75vw;
     height: auto;
+    max-height: 58vh;
+
+    @include md-book{
+      width: 72.2vw;
+    }
+
+    @include sm{
+      width: 77.7vw;
+    }
+
     svg {
       width: 100%;
       height: auto;
@@ -59,6 +79,7 @@
     }
     .adult-screen__big-logo {
       width: 100%;
+      max-height: unset;
     }
     .adult-screen__text-logo {
       font-size: 20rem;
@@ -66,12 +87,11 @@
       @include sm{
         font-size: 10px;
       }
+
+      &-wrap{
+        top: 69%;
+      }
     }
   } 
 
-  @media screen and (min-width: 1680px) {
-    &__text-logo {
-      font-size: 16px;
-    }
-  }
 }

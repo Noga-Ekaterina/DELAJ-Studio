@@ -2,11 +2,7 @@
 
 .landing-switch-button {
   position: absolute;
-  top: min(500rem, 100vh - 110rem);
-
-  @include md{
-    top: min(435px, 100vh - 110rem);
-  }
+  top: calc(50vh - 38rem);
 
   &__wrap {
     position: relative;

@@ -18,10 +18,14 @@
   }
   &__text-logo {
     color: #fff;
-    font-size: min(15rem, 2.24vh);
+    font-size: min(18rem, 2.24vh);
     text-align: center;
     position: relative;
-    left: 3%;
+    left: 4%;
+
+    @include md-book{
+      font-size: min(18rem, 1.12vh);
+    }
 
     @include sm{
       bottom: 0;
@@ -38,8 +42,8 @@
       position: relative;
       height: 100%;
 
-      padding: 3% 20px 0;
-      bottom: 5%;
+      padding: 0 20px;
+      bottom: 3%;
 
       @include sm{
         padding-top: 1%;
@@ -67,7 +71,7 @@
       overflow: visible;
       grid-row: 1/2;
 
-      @include md{
+      @include md-book{
         grid-row: 1/3;
       }
 
@@ -87,13 +91,14 @@
       }
       img {
         position: relative;
-        top: min(15%, 10vw);
-        max-height: 126%;
+        top: 5px;
+        max-height: 190%;
         width: 100%;
+        right: 5%;
         height: auto;
 
-        @include sm{
-          max-height: 180%;
+        @include lg-book{
+          width: 90%;
         }
       }
     }
@@ -148,7 +153,7 @@
       grid-row: 2 / 3;
       grid-column: 1/ 4;
 
-      @include md{
+      @include md-book{
         grid-column: 2/5;
       }
 
@@ -200,13 +205,17 @@
         width: 90%;
         max-height: 114%;
         object-position: bottom right;
+
+        @include md-book{
+          max-height: 100%;
+        }
       }
     }
 
     &#kids-screen-red {
       background-color: #F12B00;
       grid-column: 3 / 4;
-      padding: 8%;
+      padding: min(10%, 30px);
       padding-right: 0;
       position: relative;
       display: flex;
@@ -214,7 +223,7 @@
       justify-content: space-between;
       align-items: flex-start;
 
-      @include md{
+      @include md-book{
         grid-column: 3 / 5;
       }
 
@@ -224,30 +233,43 @@
       }
 
       .red-picture-logo {
-        width: 56%;
+        width: 44%;
+        max-height: 40%;
         object-position: left top;
 
         @include md{
+          width: 55%;
+        }
+
+        @include md-book{
           width: 30%;
+          max-height: 60%;
+        }
+
+        @include sm{
+          max-height: 30%;
         }
       }
 
       .red-picture-car {
         align-self: flex-end;
-        height: 90%;
-        max-width: 86%;
+        max-height: 66%;
+        max-width: 72%;
+        min-width: 61%;
         object-position: right;
-        position: relative;
+        position: absolute;
+        bottom: 2%;
 
-        @include md{
-          max-width: 60%;
-          top: -80%;
-          height: auto;
-          max-height: 152%;
+        @include md-book{
+          max-width: 44%;
+          max-height: 90%;
         }
 
         @include sm{
-          width: 60%;
+          max-width: unset;
+          width: 74%;
+          height: auto;
+          max-height: 54%;
           top: -10%;
         }
       }
@@ -310,8 +332,17 @@
       }
 
       img{
+        top: 50px;
+        right: 5%;
+
+        @include sm{
+          top: 5px;
+          right: 0;
+          max-height: 132%;
+        }
         @include md-book{
-          top: 4px;
+          top: 5px;
+          right: 0;
           max-height: 167%;
         }
       }
@@ -376,24 +407,30 @@
         }
 
         .red-picture-logo{
-          width: 30%;
+          width: 26%;
+          max-height: 80%;
 
           @include md-book{
             width: 44%;
           }
+
+          @include sm{
+            width: 40%;
+          }
         }
 
         .red-picture-car {
-          max-width: 60%;
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          transition-delay: 0.1s;
+          width: 48%;
+          max-height: 90%;
 
           @include md-book{
-            min-width: 74%;
+            max-width: 74%;
+            height: 58%;
             object-position: bottom;
-            bottom: 8%;
+          }
+
+          @include sm{
+            max-width: unset;
           }
         }
       }
@@ -418,12 +455,6 @@
         grid-row: 5/6;
       }
 
-    }
-  }
-
-  @media screen and (max-width: 1024px) {
-    &__text-logo {
-      font-size: 8px;
     }
   }
 }

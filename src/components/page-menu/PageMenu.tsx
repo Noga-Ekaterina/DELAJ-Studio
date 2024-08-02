@@ -9,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import { observer } from "mobx-react-lite";
 import store from "@/store/store";
 import {useHash} from "@/components/_hooks/useHash";
+import {useViewport} from "@/components/_hooks/useViewport";
 
 const sideStyles = {
   largeScreen: {
@@ -16,40 +17,40 @@ const sideStyles = {
       defaultStyles: {
         top: 0, 
         bottom: 0, 
-        width: '50vw', 
+        width: '50.1vw',
         left:"-50%" , 
       },
       onOpen : {
-        entering: {width: '50vw', left: "0%"},
-        entered: {width: '50vw', left: "0%"},
-        exiting:  { width: '50vw', left: "-50%"},
-        exited:  { width: '50vw', left: "-50%"},
+        entering: {width: '50.1vw', left: "0%"},
+        entered: {width: '50.1vw', left: "0%"},
+        exiting:  { width: '50.1vw', left: "-50.1%"},
+        exited:  { width: '50.1vw', left: "-50.1%"},
       },
       onCurrentPage : {
         entering: {width: '100vw', left: "0%"},
         entered: {width: '100vw', left: "0%", flexShrink: 0},
-        exiting:  { width: '50vw', left: "0%"},
-        exited:  { width: '50vw', left: "0%"},
+        exiting:  { width: '50.1vw', left: "0%"},
+        exited:  { width: '50.1vw', left: "0%"},
       },
     },
     adult: {
       defaultStyles: {
         top: 0,
         bottom: 0,
-        width: '50vw', 
+        width: '50.1vw',
         right:"-50%" , 
       },
       onOpen : {
-        entering: {width: '50vw', right: "0%"},
-        entered: {width: '50vw', right: "0%"},
-        exiting:  { width: '50vw', right: "-50%"},
-        exited:  { width: '50vw', right: "-50%" },
+        entering: {width: '50.1vw', right: "0%"},
+        entered: {width: '50.1vw', right: "0%"},
+        exiting:  { width: '50.1vw', right: "-50.1%"},
+        exited:  { width: '50.1vw', right: "-50.1%" },
       },
       onCurrentPage : {
         entering: {width: '100vw', right: "0%"},
         entered: {width: '100vw', right: "0%", flexShrink: 0},
-        exiting:  { width: '50vw', right: "0%"},
-        exited:  { width: '50vw', right: "0%"},
+        exiting:  { width: '50.1vw', right: "0%"},
+        exited:  { width: '50.1vw', right: "0%"},
       },
     }
   },
@@ -102,9 +103,11 @@ const sideStyles = {
 type ScreenStylesType = 'mediumScreen' | 'largeScreen';
 
 const PageMenu: FC = () => {
+  const viewport= useViewport()
   const { isLandingSwiped,  swipeLanding} = store;
   const ref = useRef<HTMLDivElement>(null);
   const mediumScreen = useMediaQuery({maxWidth: 1024});
+  const mobileScreen = useMediaQuery({maxWidth: 660});
   const [screenStyles, setScreenStyles] = useState<ScreenStylesType>('largeScreen');
   const hash= useHash()
   const [hiden, setHiden] = useState({kids: false, adult: false})
@@ -133,11 +136,12 @@ const PageMenu: FC = () => {
 
   useEffect(() => {
     if (mediumScreen) {
-      setScreenStyles('mediumScreen');
+      setScreenStyles((viewport>1.25 && !mobileScreen)?'largeScreen':'mediumScreen');
     } else {
-      setScreenStyles('largeScreen');
+      setScreenStyles(viewport>1.25 ?'largeScreen': 'mediumScreen');
     }
-  },[mediumScreen])
+    console.log(viewport)
+  },[mediumScreen, viewport])
 
   return (  
     <nav ref={ref} > 
