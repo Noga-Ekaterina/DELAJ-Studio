@@ -6,6 +6,7 @@ import { useHash } from '@/components/_hooks/useHash';
 import { useViewport } from '@/components/_hooks/useViewport';
 import store from '@/store/store';
 import { modalHashes } from '@/vars';
+import SmoothScrolling from "@/app/SmoothScrolling";
 
 const Scroller: FC<IWithChildren> = (props) => {
   const hash = useHash();
@@ -16,13 +17,15 @@ const Scroller: FC<IWithChildren> = (props) => {
   const isModal = modalHashes.includes(hash) || hash === 'menu';
   const scrollerContainerRef =useRef<HTMLDivElement | null>(null)
   const scrollerRef =useRef<HTMLDivElement | null>(null)
-  const [scrollNumber, setScrollNumber] = useState(0)
-  const [scrollDirection, setScrollDirection] = useState(true)
+  let scrollDirection= true
   const [isAnimationPlay, setIsAnimationPlay] = useState(false)
-  let isScrollingTimeout: NodeJS.Timeout | number
-  const [isScrolling, setIsScrolling] = useState(false)
+  let scrollTimeout: NodeJS.Timeout | number
+  let scrollEndTimeout: NodeJS.Timeout | number
+  let isEndTimeout: NodeJS.Timeout | number
+  let isScrolling=false
+  let isHiddenSection= false
   const [isDisabled, setIsDisabled] = useState(false)
-  const [scrollDuration, setScrollDuration] = useState(0)
+  let scrollDuration=0
   const getPureHash = () => {
     const paramsIndex = hash.indexOf('?');
     return (paramsIndex > 0) ? hash.slice(0, paramsIndex) : hash.slice(0);
@@ -37,9 +40,11 @@ const Scroller: FC<IWithChildren> = (props) => {
     }, 500)
   }
 
+
   // прокрутка
   useEffect(() => {
     if (hash && scrollerContainerRef.current) {
+      console.log('hash scroll')
       const items = Array.from((scrollerContainerRef.current as HTMLDivElement).children)
       console.log(items)
       const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==hash)
@@ -47,7 +52,7 @@ const Scroller: FC<IWithChildren> = (props) => {
         const {bottom, top}=activeItem.getBoundingClientRect()
         console.log(activeItem.getBoundingClientRect().top)
         setIsAnimationPlay(true);
-        (scrollerRef.current as HTMLDivElement).scrollBy({
+        window.scrollBy({
           top: top+8,
           behavior: "smooth"
         });
@@ -72,96 +77,350 @@ const Scroller: FC<IWithChildren> = (props) => {
 
   useEffect(() => {
     if (hash=="main-screen" && scrollerRef.current)
-      (scrollerRef.current as HTMLDivElement).scrollTo(0,0)
+      window.scrollTo(0,0)
   }, [hash]);
-  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    // console.log('scroll')
-    setIsScrolling(true)
+  // const onScroll = (e: Event) => {
+  //   // console.log('scroll')
+  //   setIsScrolling(true)
+  //
+  //   const scroll= window.scrollY
+  //   const previousScrollNumber=scrollNumber
+  //   console.log({scroll, previousScrollNumber})
+  //   // Если позиция прокрутки не изменилась
+  //   if (scroll === previousScrollNumber) {
+  //     scrollDuration= scrollDuration+100 // Увеличиваем счетчик времени на 100 мс (или любое значение, соответствующее вашему таймеру)
+  //
+  //     // Если достигли 1000 мс (1 секунда)
+  //     if (scrollDuration >= 1000) {
+  //       console.log('Пользователь прокручивает в одном месте уже 1 секунду.');
+  //       setIsDisabled(false)
+  //     }
+  //   } else
+  //   {
+  //     // Если позиция изменилась, сбросить время
+  //     scrollDuration=0; // Сбрасываем счетчик времени
+  //   }
+  //
+  //   window.clearTimeout((isScrollingTimeout as number));
+  //
+  //   isScrollingTimeout = setTimeout(function () {
+  //     setIsScrolling(false)
+  //     console.log('Пользователь перестал скроллить.');
+  //   }, 200); // Таймаут в миллисекундах
+  //
+  //   const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as             HTMLDivElement).dataset.name==window.location.hash.slice(1))
+  //   // console.log({scrollDuration, isAnimationPlay})
+  //   // console.log(activeItem)
+  //   // console.log(window.location.hash)
+  //   if (activeItem){
+  //     const nextSection = activeItem
+  //         .nextElementSibling;
+  //     const prevSection = activeItem.previousElementSibling;
+  //     const {bottom, top}=activeItem.getBoundingClientRect()
+  //     // console.log(window.innerHeight - bottom)
+  //
+  //     let stop
+  //     if ((scrollDirection && window.innerHeight - bottom>=0) || (!scrollDirection && top>0 )) {
+  //       console.log("disab")
+  //       setIsDisabled(true)
+  //     }
+  //
+  //     console.log(scrollDuration)
+  //
+  //
+  //     if (scroll>previousScrollNumber){
+  //       console.log("down")
+  //       if (!isAnimationPlay  && window.innerHeight - bottom>2) {
+  //         console.log("end")
+  //         if (scrollDuration<1000) {
+  //           window.scrollTo({top: previousScrollNumber, behavior: "instant"})
+  //           console.log("stop")
+  //         }else {
+  //           scrollDuration=0
+  //           setIsDisabled(false)
+  //           if (nextSection) {
+  //             window.location.hash = (nextSection as HTMLDivElement).dataset.name || ''
+  //           } else {
+  //             window.location.hash = "main-screen"
+  //             changeMenuOpened(false)
+  //             console.log("end")
+  //           }
+  //         }
+  //       }
+  //       setScrollDirection(true)
+  //     }else if (scroll<previousScrollNumber) {
+  //       if (!isAnimationPlay && top > 2 && prevSection) {
+  //         if (scrollDuration<1000) {
+  //           window.scrollTo({top: previousScrollNumber, behavior: "instant"})
+  //         }else {
+  //           scrollDuration=0
+  //           setIsDisabled(false)
+  //           window.location.hash = (prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen"
+  //         }
+  //       }
+  //       setScrollDirection(false)
+  //     }
+  //     // console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
+  //     if (isAnimationPlay){
+  //       if (top<0.4){
+  //
+  //         enableScroll()
+  //       }
+  //       // else if (!scrollDirection && window.innerHeight - bottom<10){
+  //       //   enableScroll()
+  //       // }
+  //     }
+  //   }
+  //   // console.log(scrollerRef.current.scrollTop)
+  //   scrollNumber=scroll
+  // }
 
-    const scroll= (e.target as HTMLDivElement).scrollTop
-    // Если позиция прокрутки не изменилась
-    if (scroll === scrollNumber) {
-      setScrollDuration(scrollDuration+100) // Увеличиваем счетчик времени на 100 мс (или любое значение, соответствующее вашему таймеру)
+  let isAtBottom =false;
+  let isAtTop=true
+  let touchStartY = 0;
 
-      // Если достигли 1000 мс (1 секунда)
-      if (scrollDuration >= 1000) {
-        console.log('Пользователь прокручивает в одном месте уже 1 секунду.');
-        setIsDisabled(false)
+  function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
-    } else {
-      // Если позиция изменилась, сбросить время
-      setScrollDuration(0); // Сбрасываем счетчик времени
-    }
+      timeoutId = setTimeout(() => {
+        func.apply(null, args);
+      }, delay);
+    };
+  }
 
-    window.clearTimeout((isScrollingTimeout as number));
 
-    isScrollingTimeout = setTimeout(function () {
-      setIsScrolling(false)
-      console.log('Пользователь перестал скроллить.');
-    }, 200); // Таймаут в миллисекундах
 
-    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as             HTMLDivElement).dataset.name==hash)
+  const checkIfAtEnd = () => {
+    clearTimeout((isEndTimeout as number))
+    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as             HTMLDivElement).dataset.name==window.location.hash.slice(1))
+    console.log(scrollDirection)
     if (activeItem){
-      const nextSection = activeItem
-          .nextElementSibling;
-      const prevSection = activeItem.previousElementSibling;
-      const {bottom, top}=activeItem.getBoundingClientRect()
-      // console.log(window.innerHeight - bottom)
+      const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect()
 
-      let stop
-      if ((scrollDirection && window.innerHeight - bottom>=0) || (!scrollDirection && top>0 )) {
-        const positionScroll = (scrollerRef.current as HTMLDivElement).scrollTop;
-        console.log("disab")
-        setIsDisabled(true)
+      console.log({bottom, top})
+
+      if (window.innerHeight - bottom >=-5 && top<=0){
+        isEndTimeout= setTimeout(()=>{
+          isAtBottom= true;
+        }, 500)
+        isAtTop=false
+        isScrolling= false
+      }else {
+        isAtBottom=false
       }
 
+      if (top>=-1){
+        isEndTimeout= setTimeout(()=>{
+          isAtTop= true;
+        }, 500)
+        isAtBottom=false
+        isScrolling= false
+      }else {
+        isAtTop=false
+      }
+    }
+  };
 
-      if (scroll>scrollNumber){
-        if (!isAnimationPlay  && window.innerHeight - bottom>2) {
-          if (scrollDuration<1000) {
-            (e.target as HTMLDivElement).scrollTo({top: scrollNumber, behavior: "instant"})
-          }else {
-            setScrollDuration(0)
-            setIsDisabled(false)
+
+  const performScrollAction = (timeout) => {
+    // Если пользователь начал прокрутку или касание, сбросим таймер
+    clearTimeout((scrollTimeout as number));
+    isScrolling = true;
+
+    scrollTimeout = setTimeout(() => {
+      if (isScrolling) {
+        console.log('Пользователь непрерывно прокручивает/листает в течение 1 секунды');
+        const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+        if (activeItem){
+          const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
+          const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
+          const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
+
+          console.log({isAtBottom, isAtTop})
+
+          if (isAtBottom){
             if (nextSection) {
+              (nextSection as HTMLDivElement).style.display="block"
               window.location.hash = (nextSection as HTMLDivElement).dataset.name || ''
             } else {
               window.location.hash = "main-screen"
               changeMenuOpened(false)
               console.log("end")
             }
-          }
-        }
-        setScrollDirection(true)
-      }else if (scroll<scrollNumber) {
-        if (!isAnimationPlay && top > 2 && prevSection) {
-          if (scrollDuration<1000) {
-            (e.target as HTMLDivElement).scrollTo({top: scrollNumber, behavior: "instant"})
-          }else {
-            setScrollDuration(0)
-            setIsDisabled(false)
+          }else if (isAtTop){
+            if (prevSection) {
+              (prevSection as HTMLDivElement).style.cssText = `
+              display: block;
+              position: absolute;`;
+              const prevSectionHeight=(prevSection as HTMLDivElement).clientHeight;
+              (prevSection as HTMLDivElement).style.top= -prevSectionHeight+"px";
+
+              setTimeout(()=>{
+                (activeItem as HTMLDivElement).style.transform = 'translateY(100vh)';
+                (prevSection as HTMLDivElement).style.top='0';
+              }, 50)
+
+              setTimeout(()=>{
+                (activeItem as HTMLDivElement).style.cssText=`
+                  display: none;
+                  transform: transplateY(0)
+                `;
+                (prevSection as HTMLDivElement).style.position="static";
+              }, 550)
+            }
             window.location.hash = (prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen"
           }
         }
-        setScrollDirection(false)
+        clearTimeout((scrollTimeout as number));
       }
-      console.log({item: (activeItem as HTMLDivElement).dataset.name, bottom, top})
-      if (isAnimationPlay){
-        if (top<0.4){
-          enableScroll()
+      // isHiddenSection=false
+      isScrolling = false;  // Сбросим флаг
+      setIsAnimationPlay(true)
+    }, timeout);
+  };
+
+  const eventDisabled = (event: Event) => {
+    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+    if (activeItem) {
+      const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
+
+      if (top>1 || bottom< window.innerHeight)
+        event.preventDefault()
+    }
+  }
+
+  const handleTouchStart = (event) => {
+    touchStartY = event.touches[0].clientY;
+  };
+
+  const handleTouchMove = (event) => {
+    let touchMoveY = event.touches[0].clientY;
+    console.log({isAtBottom})
+    if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
+      performScrollAction(10);
+    }
+  };
+
+  useEffect(() => {
+    const debouncedCheckIfAtEnd = debounce(checkIfAtEnd, 100);
+
+    const handleScroll = () => {
+      debouncedCheckIfAtEnd();
+
+      clearTimeout((scrollTimeout as number))
+      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+      if (activeItem){
+        const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
+        const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
+        const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
+
+        if (top>=0 && top<=8) {
+          setIsAnimationPlay(false)
         }
-        // else if (!scrollDirection && window.innerHeight - bottom<10){
-        //   enableScroll()
-        // }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('wheel', (event) => {
+      clearTimeout((scrollEndTimeout as number))
+      scrollDirection=event.deltaY>0
+      if ((isAtBottom && event.deltaY > 0) || (isAtTop && event.deltaY < 0)) {
+        performScrollAction(300);
+        // console.log("end")
+      }
+
+      // eventDisabled(event)
+    }, {passive: false});
+    window.addEventListener('keydown', (event) => {
+      if ((isAtBottom && (event.key === 'ArrowDown' || event.key === 'PageDown')) || (isAtTop && (event.key === 'ArrowUp' || event.key === 'PageUp'))) {
+        performScrollAction(500);
+      }
+    });
+    window.addEventListener('touchstart', handleTouchStart, false);
+    window.addEventListener('touchmove', handleTouchMove, false);
+    window.addEventListener('touchend', e=> isScrolling=false)
+
+    // Очистка эффектов при размонтировании
+    return () => {
+      window.removeEventListener('scroll', checkIfAtEnd);
+      window.removeEventListener('wheel', performScrollAction);
+      window.removeEventListener('keydown', performScrollAction);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [isAtBottom, isAtTop]);
+
+  // Проверка начального состояния при загрузке компонента
+  useEffect(() => {
+    checkIfAtEnd();
+  }, []);
+
+  useEffect(() => {
+    if (isAnimationPlay) return
+    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+    console.log('isA '+isAnimationPlay)
+    console.log({scrollDirection})
+    if (activeItem) {
+      const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
+      const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
+      const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
+
+
+      if (scrollDirection && prevSection) {
+        (prevSection as HTMLDivElement).style.display = "none"
+        isHiddenSection= true
+        console.clear()
+        console.log("next")
+        // setTimeout(()=>window.scrollTo({top:0, behavior: "smooth"}), 6)
+      }else if (!scrollDirection && nextSection) {
+        (nextSection as HTMLDivElement).style.display = "none"
+        isHiddenSection=true
+        console.clear()
+        console.log('prev')
+        // setTimeout(()=>window.scrollTo({top:0, behavior: "smooth"}), 6)
       }
     }
-    // console.log(scrollerRef.current.scrollTop)
-    setScrollNumber(scroll)
-  }
+  }, [isAnimationPlay]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      console.log(isHiddenSection)
+      if (scrollerRef.current && isHiddenSection) {
+        console.log("Высота блока изменилась:", scrollerRef.current.clientHeight);
+
+        const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+        if (activeItem){
+          const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
+          console.log({top, isAtBottom})
+
+          if (top<=8) {
+            window.scrollTo({top:0, behavior: "smooth"})
+          }
+
+        }
+      }
+    };
+
+    const observer = new ResizeObserver(handleResize);
+    if (scrollerRef.current) {
+      observer.observe((scrollerRef.current as HTMLDivElement));
+    }
+
+    return () => {
+      if (scrollerRef.current) {
+        observer.unobserve((scrollerRef.current as HTMLDivElement));
+      }
+    };
+  }, []);
 
   useEffect(() => {
     let touchStartY = 0;
 
+    // wi-
     document.addEventListener('touchstart', function(event) {
       touchStartY = event.touches[0].clientY;
     }, { passive: false });
@@ -179,7 +438,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   return (
 
     <div className='scroller'
-         onScroll={e=>onScroll(e)}
+         // onScroll={e=>onScroll(e)}
          ref={scrollerRef}
     >
       <div 

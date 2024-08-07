@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageMenu from "@/components/page-menu/PageMenu";
 import Header from "@/components/header/Header";
 import "../globals.scss";
+import SmoothScrolling from "@/app/SmoothScrolling";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,7 @@ export default function RootLayout({
     <html lang="ru">
       <body>
         <Header />
-        {children}
+        <SmoothScrolling>{children}</SmoothScrolling>
       </body>
     </html>
   );
