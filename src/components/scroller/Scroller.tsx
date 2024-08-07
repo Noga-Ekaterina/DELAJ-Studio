@@ -6,7 +6,6 @@ import { useHash } from '@/components/_hooks/useHash';
 import { useViewport } from '@/components/_hooks/useViewport';
 import store from '@/store/store';
 import { modalHashes } from '@/vars';
-import SmoothScrolling from "@/app/SmoothScrolling";
 
 const Scroller: FC<IWithChildren> = (props) => {
   const hash = useHash();
@@ -179,7 +178,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   let isAtTop=true
   let touchStartY = 0;
 
-  function debounce(func, delay) {
+  function debounce(func: ()=> void, delay: number) {
     let timeoutId;
     return function (...args) {
       if (timeoutId) {
@@ -225,7 +224,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   };
 
 
-  const performScrollAction = (timeout) => {
+  const performScrollAction = (timeout: number| Event) => {
     // Если пользователь начал прокрутку или касание, сбросим таймер
     clearTimeout((scrollTimeout as number));
     isScrolling = true;
@@ -279,7 +278,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       // isHiddenSection=false
       isScrolling = false;  // Сбросим флаг
       setIsAnimationPlay(true)
-    }, timeout);
+    }, (timeout as number));
   };
 
   const eventDisabled = (event: Event) => {
@@ -292,11 +291,11 @@ const Scroller: FC<IWithChildren> = (props) => {
     }
   }
 
-  const handleTouchStart = (event) => {
+  const handleTouchStart = (event: TouchEvent) => {
     touchStartY = event.touches[0].clientY;
   };
 
-  const handleTouchMove = (event) => {
+  const handleTouchMove = (event: TouchEvent) => {
     let touchMoveY = event.touches[0].clientY;
     console.log({isAtBottom})
     if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
@@ -390,7 +389,6 @@ const Scroller: FC<IWithChildren> = (props) => {
     const handleResize = () => {
       console.log(isHiddenSection)
       if (scrollerRef.current && isHiddenSection) {
-        console.log("Высота блока изменилась:", scrollerRef.current.clientHeight);
 
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
         if (activeItem){
