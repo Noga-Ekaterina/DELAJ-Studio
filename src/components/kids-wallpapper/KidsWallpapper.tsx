@@ -70,29 +70,30 @@ const KidsWallpapper: FC = () => {
 
   return (
     <>
-    <div ref={containerRef} className='kids-wallpapper'>
-      {imgList.map((item, col) =>
-          <div className={cn("kids-wallpapper__col", `kids-wallpapper__col--${col+1}`)} key={Date.now()}>
-            {
-              item.map((img, index)=>{
-                const data = (index + 1 === item.length && col ==0)
-                    ? {src: boy, height: 366}
-                    : {src: img};
-                const className = (index + 1 === imgList.length - 1) ? 'pre-last' : '';
+    {/*<div ref={containerRef} className='kids-wallpapper'>*/}
+    {/*  {imgList.map((item, col) =>*/}
+    {/*      <div className={cn("kids-wallpapper__col", `kids-wallpapper__col--${col+1}`)} key={Date.now()}>*/}
+    {/*        {*/}
+    {/*          item.map((img, index)=>{*/}
+    {/*            const data = (index + 1 === item.length && col ==0)*/}
+    {/*                ? {src: boy, height: 366}*/}
+    {/*                : {src: img};*/}
+    {/*            const className = (index + 1 === imgList.length - 1) ? 'pre-last' : '';*/}
 
-                return (
-                    <WallpapperImage
-                        src={data.src}
-                        height={data.height}
-                        className={className}
-                        key={'wallpapper-' + index}
-                    />
-                )
-              })
-            }
-          </div>
-      )}
-    </div>
+    {/*            return (*/}
+    {/*                <WallpapperImage*/}
+    {/*                    src={data.src}*/}
+    {/*                    height={data.height}*/}
+    {/*                    className={className}*/}
+    {/*                    key={'wallpapper-' + index}*/}
+    {/*                />*/}
+    {/*            )*/}
+    {/*          })*/}
+    {/*        }*/}
+    {/*      </div>*/}
+    {/*  )}*/}
+    {/*</div>*/}
+      <Image src={boy} alt='' className="kids-wallpapper__boy"/>
     </>
   );
 };

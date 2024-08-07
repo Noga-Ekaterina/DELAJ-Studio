@@ -50,12 +50,6 @@ a {
 	&:hover {
 		text-decoration: none;
 	}
-  &.footer-link {
-    transition: letter-spacing var(--text-grayt);
-    &:hover {
-      letter-spacing: 3rem;
-    }
-  }
 }
 
 a, a:link, a:visited  {
@@ -155,7 +149,11 @@ legend {
 	max-width: 833rem;
 
   @include lg{
-    max-width: 976rem;
+    max-width: 807rem;
+  }
+
+  @include md{
+    max-width: 960rem;
   }
 
 	@include sm{

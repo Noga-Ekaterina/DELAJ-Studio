@@ -25,6 +25,8 @@
       object-fit: cover;
       object-position: center;
       transition: var(--transition);
+      transition-d
+      : 0.8s;
       position: absolute;
       left: -1%;
       top: -1%;
@@ -43,7 +45,9 @@
     }
     &__row {
       grid-template-columns: 1fr 1fr;
-      .large {
+      gap: 20rem;
+      padding-bottom: 20rem;
+      &.large {
         grid-template-columns: 1fr;
       }
       .project-list__item:nth-child(3) {

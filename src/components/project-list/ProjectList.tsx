@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { IWithClass, ProjectItem } from '@/types';
 import cn from 'classnames';
 import { useMediaQuery } from 'react-responsive';
+import {getShuffleArray} from "@/utils/getShuffleArray";
 
 interface Props extends IWithClass{
   title: string
@@ -17,42 +18,52 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   const [data, setData] = useState<ProjectItem[]>([]);
   const [baseChunkSize, setBaseChunkSize] = useState(3);
   const mobileScreen = useMediaQuery({maxWidth: 640});
+  const [isBigItem, setIsBigItem] = useState(false)
 
   const getModifiedList = (data: any[]) => {
-    if (data.length > 3){ 
-      let result: any[] = [];
-      let chunkSize = baseChunkSize;
-      let index = 0;
+    const chunkSizes = [baseChunkSize, baseChunkSize-1]; // Чередование размеров порций
+    let result: any[] = [];
+    let index = 0;
+    let chunkIndex = 0;
+    console.log(data)
 
-      const increase = (newChunkSizeValue: number) => {
-        const subArray = data.slice(index, index + chunkSize); 
+    while (index < data.length) {
+      const currentChunkSize = chunkSizes[chunkIndex % chunkSizes.length];
+      const subArray = data.slice(index, index + currentChunkSize);
 
-        if (subArray.length <= 1) {
-          let last = result.length - 1;
-          result[last] = result[last].concat(subArray);
-        } else {
-          result.push(subArray);
-        }
-        index += chunkSize;
-        chunkSize = newChunkSizeValue;
+
+      if (subArray.length > 0) {
+        // Добавляем новую порцию
+        result.push(subArray);
       }
 
-      while (index < data.length) { 
-        if (chunkSize === baseChunkSize) {
-          increase(chunkSize - 1);
-        } else {
-          increase(baseChunkSize);
-        }
-      }
-    
-      return result;
-
-    } else {
-      return data;
+      index += currentChunkSize;
+      chunkIndex++;
     }
+
+    // Если result не пустой, проверяем последнюю порцию на предмет недостающих элементов
+    if (result.length > 0) {
+      const lastChunk = result[result.length - 1];
+      const needed =  (index-data.length)
+
+      if (needed > 0) {
+        const extraElements = data.slice(0, needed);
+        lastChunk.push(...extraElements);
+      }
+    }
+
+    console.log(result)
+
+    return result;
   };
 
-  const itemsGrid = getModifiedList(data);
+  const [itemsGrid, setItemsGrid] = useState<any[]>([]);
+
+  useEffect(() => {
+    const shuffleData = getShuffleArray([...data]);
+    setItemsGrid(getModifiedList(shuffleData));
+  }, [data, baseChunkSize]);
+
 
   useEffect(() => {
     (async () => {
@@ -76,28 +87,30 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
     <div className={cn(className, "project-list")}>
       <div className="container">
 
-        {itemsGrid.map((row, index) => {
+        {itemsGrid.map((row, rowIndex) => {
           const rowClass = cn(
             "project-list__row",
             (row.length !== baseChunkSize) && 'large',
           )
 
           return (
-            <div className={rowClass} key={'project-list-row' + index}>
+            <div className={rowClass}
+                 key={`project-list-row-${rowIndex}`}>
 
               {row.map((item: ProjectItem, index: number) => {
                 return (
-                  <Link 
-                    href={`projects/${item.href}`} 
-                    className='project-list__item' 
-                    key={item.id + index}>
-                    <Image 
-                      src={item.preview} 
-                      key={'project-list-' + item.id} 
+                  <Link
+                    href={`projects/${item.href}`}
+                    className='project-list__item'
+
+                    key={`project-list-item-${item.id}`}>
+                    <Image
+                      src={item.preview}
+                      key={'project-list-' + item.id}
                       width={400}
                       height={200}
                       quality={100}
-                      alt="" 
+                      alt=""
                     />
                   </Link>
                 );
