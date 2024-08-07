@@ -179,10 +179,10 @@ const Scroller: FC<IWithChildren> = (props) => {
   let touchStartY = 0;
 
   function debounce(func: ()=> void, delay: number) {
-    let timeoutId;
+    let timeoutId: NodeJS.Timeout | number;
     return function (...args) {
       if (timeoutId) {
-        clearTimeout(timeoutId);
+        clearTimeout((timeoutId as number));
       }
       timeoutId = setTimeout(() => {
         func.apply(null, args);
