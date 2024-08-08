@@ -178,14 +178,15 @@ const Scroller: FC<IWithChildren> = (props) => {
   let isAtTop=true
   let touchStartY = 0;
 
-  function debounce(func: ()=> void, delay: number) {
-    let timeoutId: NodeJS.Timeout | number;
-    return function (...args: any[]) {
+  function debounce<T extends any[]>(func: (...args: T) => void, delay: number) {
+    let timeoutId: NodeJS.Timeout | undefined;
+
+    return function (...args: T) {
       if (timeoutId) {
-        clearTimeout((timeoutId as number));
+        clearTimeout(timeoutId);
       }
       timeoutId = setTimeout(() => {
-        func.apply(null, args);
+        func(...args);
       }, delay);
     };
   }
