@@ -12,7 +12,7 @@ import store from '@/store/store';
 import { usePathname } from 'next/navigation';
 import Lottie, {LottieRefCurrentProps} from "lottie-react";
 
-import contactsIn from "@/app/assets/lottie/header/contacts/contacts_in.json"
+import contactsIn from "@/app/assets/lottie/header/contacts/contacts_In.json"
 import contactsHover from "@/app/assets/lottie/header/contacts/contacts_Mouse.json"
 import contactOut from "@/app/assets/lottie/header/contacts/contacts_Out.json"
 
@@ -21,9 +21,7 @@ import logoAdults from "@/app/assets/lottie/logo/delai_to_adults.json"
 
 import menuIn from "@/app/assets/lottie/header/menu/menu_IN.json"
 import menuHover from "@/app/assets/lottie/header/menu/menu_Mouse.json"
-import menuTrantionToClose from "@/app/assets/lottie/header/menu/menu_transition_to_X.json"
-import closeHover from "@/app/assets/lottie/header/menu/X_Mouse.json"
-import closeTrantionToMenu from "@/app/assets/lottie/header/menu/X_transition_to_menu.json"
+
 import {useIsHome} from "@/components/_hooks/useIsHome";
 import Link from "next/link";
 
