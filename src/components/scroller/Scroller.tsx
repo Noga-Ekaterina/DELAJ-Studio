@@ -299,7 +299,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     let touchMoveY = event.touches[0].clientY;
     console.log({isAtBottom})
     if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
-      performScrollAction(10);
+      performScrollAction(500);
     }
     eventDisabled(event)
   };
