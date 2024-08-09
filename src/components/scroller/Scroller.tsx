@@ -11,7 +11,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   const hash = useHash();
   const viewport = useViewport();
   const [translate, setTranslate] = useState(0);
-  const {changeMenuOpened, changeDidModal}= store
+  const {changeMenuOpened, isModalMenuOpened}= store
   const [lineStyles, setLineStyles] = useState('default');
   const isModal = modalHashes.includes(hash) || hash === 'menu';
   const scrollerContainerRef =useRef<HTMLDivElement | null>(null)
@@ -49,13 +49,14 @@ const Scroller: FC<IWithChildren> = (props) => {
       const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==hash)
       if (activeItem){
         const {bottom, top}=activeItem.getBoundingClientRect()
-        console.log(activeItem.getBoundingClientRect().top)
-        setIsAnimationPlay(true);
-        window.scrollBy({
-          top: top+8,
-          behavior: "smooth"
-        });
+        console.log(activeItem.getBoundingClientRect().top);
+        // setIsAnimationPlay(true);
+        // window.scrollBy({
+        //   top: top+8,
+        //   behavior: "smooth"
+        // });
 
+            (activeItem as HTMLDivElement).style.display="block"
       }
 
    }
@@ -69,9 +70,6 @@ const Scroller: FC<IWithChildren> = (props) => {
         setLineStyles('caree')
       }
     }
-
-    if (isModal)
-      changeDidModal(true)
   },[hash])
 
   useEffect(() => {
@@ -231,9 +229,10 @@ const Scroller: FC<IWithChildren> = (props) => {
     isScrolling = true;
 
     scrollTimeout = setTimeout(() => {
-      if (isScrolling) {
+      if (isScrolling && !isModalMenuOpened) {
         console.log('Пользователь непрерывно прокручивает/листает в течение 1 секунды');
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+        isHiddenSection=false
         if (activeItem){
           const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
           const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
@@ -302,6 +301,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
       performScrollAction(10);
     }
+    eventDisabled(event)
   };
 
   useEffect(() => {
@@ -313,8 +313,6 @@ const Scroller: FC<IWithChildren> = (props) => {
       clearTimeout((scrollTimeout as number))
       const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
       if (activeItem){
-        const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
-        const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
         const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
 
         if (top>=0 && top<=8) {
@@ -332,8 +330,7 @@ const Scroller: FC<IWithChildren> = (props) => {
         performScrollAction(300);
         // console.log("end")
       }
-
-      // eventDisabled(event)
+      eventDisabled(event)
     }, {passive: false});
     window.addEventListener('keydown', (event) => {
       if ((isAtBottom && (event.key === 'ArrowDown' || event.key === 'PageDown')) || (isAtTop && (event.key === 'ArrowUp' || event.key === 'PageUp'))) {
@@ -361,46 +358,55 @@ const Scroller: FC<IWithChildren> = (props) => {
 
   useEffect(() => {
     if (isAnimationPlay) return
-    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+
+    const items=Array.from((scrollerContainerRef.current as HTMLDivElement).children)
+    const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==window.location.hash.slice(1))
+    const menuSection= items.find(item=> (item as HTMLDivElement).dataset.name=="menu")
     console.log('isA '+isAnimationPlay)
     console.log({scrollDirection})
     if (activeItem) {
       const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
-      const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
+      const prevSections = items.slice(0, items.indexOf(activeItem))
       const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
+      prevSections.forEach(item=> (item as HTMLDivElement).style.display="none")
 
-      if (scrollDirection && prevSection) {
-        (prevSection as HTMLDivElement).style.display = "none"
-        isHiddenSection= true
-        console.clear()
-        console.log("next")
-        // setTimeout(()=>window.scrollTo({top:0, behavior: "smooth"}), 6)
-      }else if (!scrollDirection && nextSection) {
-        (nextSection as HTMLDivElement).style.display = "none"
-        isHiddenSection=true
-        console.clear()
-        console.log('prev')
-        // setTimeout(()=>window.scrollTo({top:0, behavior: "smooth"}), 6)
-      }
+      // if (scrollDirection && prevSection && menuSection) {
+      //   (prevSection as HTMLDivElement).style.display = "none";
+      //   (menuSection as HTMLDivElement).style.display = "none"
+      //   isHiddenSection= true
+      //   // console.clear()
+      //   console.log("next")
+      //   // setTimeout(()=>window.scrollTo({top:0, behavior: "smooth"}), 6)
+      // }else if (!scrollDirection && nextSection) {
+      //   (nextSection as HTMLDivElement).style.display = "none"
+      //   isHiddenSection=true
+      //   console.clear()
+      //   console.log('prev')
+      //   // setTimeout(()=>window.scrollTo({top:0, behavior: "smooth"}), 6)
+      // }
     }
   }, [isAnimationPlay]);
 
   useEffect(() => {
     const handleResize = () => {
-      console.log(isHiddenSection)
-      if (scrollerRef.current && isHiddenSection) {
-
-        const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
-        if (activeItem){
-          const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
-          console.log({top, isAtBottom})
-
-          if (top<=8) {
-            window.scrollTo({top:0, behavior: "smooth"})
-          }
-
+      checkIfAtEnd()
+      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+      if (activeItem){
+        const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
+        console.log({isHiddenSection})
+        if (top<=0) {
+          window.scrollTo({top:0, behavior: "smooth"})
+          // isHiddenSection=false
+        }else if (top >=window.innerHeight-4){
+          setIsAnimationPlay(true);
+          window.scrollBy({
+            top: top,
+            behavior: "smooth"
+          })
+          console.log("end")
         }
+        console.log({top, height: window.innerHeight})
       }
     };
 

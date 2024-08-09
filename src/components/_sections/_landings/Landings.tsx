@@ -33,8 +33,7 @@ const Landings: FC<Props> = ({FirstLanding, SecondLanding}) => {
         <div 
           className='landings'
         >
-          <Showreel className='landings-showreel'/>
-          <div 
+          <div
             className="landings-container"
             style={{
               ...styles[state],

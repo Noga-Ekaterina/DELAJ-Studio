@@ -1,0 +1,22 @@
+@import "@/app/mixins";
+.close-modal-button{
+  height: 19rem;
+
+  @include sm{
+    height: 19px;
+  }
+  &__wrapp{
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    padding: 0 35rem 0 28rem;
+    height: 56rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    @include sm{
+      height: 60px;
+    }
+  }
+}

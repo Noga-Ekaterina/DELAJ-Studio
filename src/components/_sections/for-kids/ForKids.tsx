@@ -8,11 +8,13 @@ import HeadingSection from '@/components/heading-section/HeadingSection';
 import KidsFooter from '@/components/kids-footer/KidsFooter';
 import KidsWallpapper from '@/components/kids-wallpapper/KidsWallpapper'; 
 import ProjectList from '@/components/project-list/ProjectList';
+import Showreel from "@/components/showreel/Showreel";
 
 const ForKids = () => {
   return (    
     <div className='for-kids'>
-      <HeadingSection 
+      <Showreel className='landings-showreel'/>
+      <HeadingSection
         title="детская анимация"
         image={headingImage}
         className='for-kids__heading'

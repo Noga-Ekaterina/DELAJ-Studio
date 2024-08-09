@@ -2,9 +2,11 @@
 import { IWithChildren, IWithClass } from '@/types';
 import { FC, memo, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
+import { observer } from 'mobx-react-lite';
 import './section-wrap.scss';
 import classNames from 'classnames';
 import { useHash } from '../_hooks/useHash';
+import store from "@/store/store";
 
 interface Props extends IWithClass, IWithChildren {
   id: string
@@ -15,7 +17,8 @@ const Section: FC<Props> = (props) => {
   const ref = useRef(null);
   const className = cn('section-wrap', props.className)
   const hash = useHash()
-  const [hiden, setHiden] = useState(true)
+  const [hidden, setHidden] = useState(true)
+  const {isModalMenuOpened}=store
 
   useEffect(() => {
       // const {top, bottom}= (ref.current as HTMLDivElement).getBoundingClientRect()
@@ -24,19 +27,28 @@ const Section: FC<Props> = (props) => {
       //   setHiden(true)
       // }
     // setHiden(props.id==hash)
-    if (props.id==hash) {
-      setHiden(false)
-    } else if (hash=="" || hash=="main-screen"){
-      setHiden(true)
+    console.log(hash)
+    if (props.id==hash && !isModalMenuOpened) {
+      setHidden(false)
+      console.log("show block")
+    } else if (hash=="" || hash=="main-screen" || isModalMenuOpened){
+      setTimeout(()=> setHidden(true), 1000)
     }
-  }, [hash]);
+  }, [hash, isModalMenuOpened]);
+
+  useEffect(() => {
+    if (props.id==hash && !isModalMenuOpened) {
+      setHidden(false)
+    }
+  }, [hidden]);
+
 
   return (
     <section
       className={className} 
       ref={containerRef}
       data-name={props.id}
-      style={{display: hiden? "none": "block"}}
+      style={{display: hidden? "none": "block"}}
       // id={props.id}
     >
       <div 
@@ -51,4 +63,4 @@ const Section: FC<Props> = (props) => {
   );
 };
 
-export default memo(Section);
+export default observer(Section);

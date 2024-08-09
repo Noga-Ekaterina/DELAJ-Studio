@@ -70,6 +70,16 @@ const data = {
       preview: '/images/data/kids-data/14.png',
       href: ''
     },
+    {
+      id : 15,
+      preview: '/images/data/kids-data/5.png',
+      href: ''
+    },
+    {
+      id : 16,
+      preview: '/images/data/kids-data/7.png',
+      href: ''
+    },
   ],
   "adult" : [
     { 

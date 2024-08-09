@@ -4,7 +4,9 @@
   height: 56rem;
   z-index: 4;
   width: 100%;
-
+  transition: var(--transition);
+  transition-property: top;
+  transition-duration: 0.4s;
   &-logo {
     width: 95rem;
     height: auto;
@@ -16,17 +18,14 @@
   }
 
   &-mail {
-    height: 11.875rem;
-    &.menu-mail {
-      height: 19rem;
-    }
+    height: 19rem;
   }
 
   &-close {
     height: 19rem;
   }
 
-  .icon{
+  &-icon{
     &-blue svg *{
       fill: var(--main-blue);
       stroke: var(--main-blue);
@@ -56,13 +55,21 @@
     background-color: var(--text-gray);
   }
 
+  &.hidden-header{
+    top: -56rem;
+  }
+
   &.white-header, &.black-header {
     box-shadow: 0px 24px 69.4px 0px rgba(0, 0, 0, 0.15);
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 640px) {
     height: 60px;
     padding: 0 7px;
+
+    &.hidden-header{
+      top: -60px;
+    }
 
     &-logo {
       width: 95px;

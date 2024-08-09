@@ -3,6 +3,8 @@ import { ReactNode, FC, ComponentType } from "react"
 
 export type CurrentPageType = null | 'kids' | 'adult'
 
+export type HeaderVariant= "normal" | "kids"| "adult"
+
 export interface IWithClass {
   className?: string
 } 

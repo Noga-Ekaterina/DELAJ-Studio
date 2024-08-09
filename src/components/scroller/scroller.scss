@@ -1,17 +1,14 @@
 .scroller {
-	//height: 100vh;
-  //padding-bottom: 40px;
-  // overflow-y: auto;
-  overflow-x: hidden;
-	position: relative;
-  top: 56rem;
+  overflow: hidden;
+  position: relative;
 
 
 	&-content {
 		overflow: hidden;
 		transition: transform var(--transition);
 		transition-duration: 1s;
-     margin-bottom: -56rem;
+     position: relative;
+     top: 56rem;
 	}
   &-shield{
     position: fixed;

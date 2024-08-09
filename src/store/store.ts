@@ -1,4 +1,4 @@
-import { CurrentPageType } from './../types';
+import {CurrentPageType, HeaderVariant} from './../types';
 import {makeAutoObservable, values} from 'mobx';
 
 class Store {
@@ -13,12 +13,15 @@ class Store {
   // Выбор конкретной половинки для открытия kids или adult
   currentPage: CurrentPageType = null;
 
+  // Предыдущий вариант шапки normal, kids или adult
+  prevHeaderVariant: HeaderVariant="normal"
+
   // Какой лэндос будет показан первым
   // если false - первым будет детский лэндос, после него по скроллу будет взрослый
   isLandingSwiped = false;
 
-  //Открывалось ли главное меню или модальное окно
-  isDidModal = false
+  //Открыто ли модальное меню
+  isModalMenuOpened = false
 
   swipeLanding = (value: boolean) => {
     this.isLandingSwiped = value;
@@ -33,6 +36,10 @@ class Store {
     this.currentPage = value;
   }
 
+  changePrevHeaderVariant= (value: HeaderVariant)=>{
+    this.prevHeaderVariant= value
+  }
+
   toggleCurrentPage = () => {
     if (this.currentPage) {
       if (this.currentPage === 'kids') {
@@ -41,8 +48,8 @@ class Store {
     }
   }
 
-  changeDidModal =(value: boolean)=>{
-    this.isDidModal= value
+  changeModalMenuOpened =(value: boolean)=>{
+    this.isModalMenuOpened= value
   }
 }
 

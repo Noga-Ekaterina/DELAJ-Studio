@@ -1,3 +1,5 @@
+@import "@/app/mixins";
+
 .section-wrap {
   overflow: hidden;
   min-height: calc(100vh + 80px);
@@ -5,6 +7,10 @@
   left: 0;
   width: 100vw;
   transition: 0.5s;
+
+  @include sm{
+    padding-top: 60px;
+  }
 
   &__content {
     min-height: 100%;
@@ -19,6 +25,6 @@
   }
 
   &[data-name='menu']{
-    padding-bottom: 20px;
+    padding-block: 0 20px;
   }
 }

@@ -10,7 +10,7 @@
   &-link {
     display: block;
     font-weight: 800;
-    font-size: 127px;
+    font-size: min(127px, 16vh);
     text-transform: uppercase;
     line-height: 0.855em;
     overflow: hidden;
