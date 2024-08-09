@@ -229,7 +229,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     isScrolling = true;
 
     scrollTimeout = setTimeout(() => {
-      if (isScrolling && !isModalMenuOpened) {
+      if (isScrolling && !isModalMenuOpened && !isAnimationPlay) {
         console.log('Пользователь непрерывно прокручивает/листает в течение 1 секунды');
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
         isHiddenSection=false
@@ -268,6 +268,9 @@ const Scroller: FC<IWithChildren> = (props) => {
                   transform: transplateY(0)
                 `;
                 (prevSection as HTMLDivElement).style.position="static";
+
+                clearTimeout((scrollTimeout as number));
+                setIsAnimationPlay(false)
               }, 550)
             }
             window.location.hash = (prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen"
@@ -299,7 +302,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     let touchMoveY = event.touches[0].clientY;
     console.log({isAtBottom})
     if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
-      performScrollAction(200);
+      performScrollAction(40);
     }
     eventDisabled(event)
   };
