@@ -289,7 +289,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     if (activeItem) {
       const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
-      if (top>1 || bottom< window.innerHeight)
+      if (top>=0 || bottom< window.innerHeight)
         event.preventDefault()
     }
   }
@@ -302,7 +302,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     let touchMoveY = event.touches[0].clientY;
     console.log({isAtBottom})
     if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
-      performScrollAction(10);
+      performScrollAction(40);
     }
     eventDisabled(event)
   };
