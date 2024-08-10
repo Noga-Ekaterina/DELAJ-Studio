@@ -251,27 +251,27 @@ const Scroller: FC<IWithChildren> = (props) => {
             }
           }else if (isAtTop){
             if (prevSection) {
-              (prevSection as HTMLDivElement).style.cssText = `
-              display: block;
-              position: absolute;`;
-              const prevSectionHeight=(prevSection as HTMLDivElement).clientHeight;
-              (prevSection as HTMLDivElement).style.top= -prevSectionHeight+"px";
-
-              setTimeout(()=>{
-                (activeItem as HTMLDivElement).style.transform = 'translateY(100vh)';
-                (prevSection as HTMLDivElement).style.top='0';
-              }, 50)
-
-              setTimeout(()=>{
-                (activeItem as HTMLDivElement).style.cssText=`
-                  display: none;
-                  transform: transplateY(0)
-                `;
-                (prevSection as HTMLDivElement).style.position="static";
-
-                clearTimeout((scrollTimeout as number));
-                setIsAnimationPlay(false)
-              }, 550)
+              // (prevSection as HTMLDivElement).style.cssText = `
+              // display: block;
+              // position: absolute;`;
+              // const prevSectionHeight=(prevSection as HTMLDivElement).clientHeight;
+              // (prevSection as HTMLDivElement).style.top= -prevSectionHeight+"px";
+              //
+              // setTimeout(()=>{
+              //   (activeItem as HTMLDivElement).style.transform = 'translateY(100vh)';
+              //   (prevSection as HTMLDivElement).style.top='0';
+              // }, 50)
+              //
+              // setTimeout(()=>{
+              //   (activeItem as HTMLDivElement).style.cssText=`
+              //     display: none;
+              //     transform: transplateY(0)
+              //   `;
+              //   (prevSection as HTMLDivElement).style.position="static";
+              //
+              //   clearTimeout((scrollTimeout as number));
+              //   setIsAnimationPlay(false)
+              // }, 550)
             }
             window.location.hash = (prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen"
           }
@@ -359,20 +359,20 @@ const Scroller: FC<IWithChildren> = (props) => {
     checkIfAtEnd();
   }, []);
 
-  useEffect(() => {
-    if (isAnimationPlay) return
-
-    const items=Array.from((scrollerContainerRef.current as HTMLDivElement).children)
-    const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==window.location.hash.slice(1))
-    const menuSection= items.find(item=> (item as HTMLDivElement).dataset.name=="menu")
-    console.log('isA '+isAnimationPlay)
-    console.log({scrollDirection})
-    if (activeItem) {
-      const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
-      const prevSections = items.slice(0, items.indexOf(activeItem))
-      const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
-
-      prevSections.forEach(item=> (item as HTMLDivElement).style.display="none")
+  // useEffect(() => {
+  //   if (isAnimationPlay) return
+  //
+  //   const items=Array.from((scrollerContainerRef.current as HTMLDivElement).children)
+  //   const activeItem= items.find(item=> (item as HTMLDivElement).dataset.name==window.location.hash.slice(1))
+  //   const menuSection= items.find(item=> (item as HTMLDivElement).dataset.name=="menu")
+  //   console.log('isA '+isAnimationPlay)
+  //   console.log({scrollDirection})
+  //   if (activeItem) {
+  //     const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
+  //     const prevSections = items.slice(0, items.indexOf(activeItem))
+  //     const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
+  //
+  //     prevSections.forEach(item=> (item as HTMLDivElement).style.display="none")
 
       // if (scrollDirection && prevSection && menuSection) {
       //   (prevSection as HTMLDivElement).style.display = "none";
@@ -388,29 +388,30 @@ const Scroller: FC<IWithChildren> = (props) => {
       //   console.log('prev')
       //   // setTimeout(()=>window.scrollTo({top:0, behavior: "smooth"}), 6)
       // }
-    }
-  }, [isAnimationPlay]);
+  //   }
+  // }, [isAnimationPlay]);
 
   useEffect(() => {
     const handleResize = () => {
       checkIfAtEnd()
-      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
-      if (activeItem){
-        const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
-        console.log({isHiddenSection})
-        if (top<=0) {
-          window.scrollTo({top:0, behavior: "smooth"})
-          // isHiddenSection=false
-        }else if (top >=window.innerHeight-4){
-          setIsAnimationPlay(true);
-          window.scrollBy({
-            top: top,
-            behavior: "smooth"
-          })
-          console.log("end")
-        }
-        console.log({top, height: window.innerHeight})
-      }
+      // const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+      // if (activeItem){
+      //   const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
+      //   console.log({isHiddenSection})
+      //   if (top<=0) {
+      //     window.scrollTo({top:0, behavior: "smooth"})
+      //     // isHiddenSection=false
+      //   }else if (top >=window.innerHeight-4){
+      //     setIsAnimationPlay(true);
+      //     window.scrollBy({
+      //       top: top,
+      //       behavior: "smooth"
+      //     })
+      //     console.log("end")
+      //   }
+      //   console.log({top, height: window.innerHeight})
+      // }
+      window.scrollTo(0,2)
     };
 
     const observer = new ResizeObserver(handleResize);
