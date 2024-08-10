@@ -392,6 +392,10 @@ const Scroller: FC<IWithChildren> = (props) => {
   // }, [isAnimationPlay]);
 
   useEffect(() => {
+    document.documentElement.style.overflow="hidden"
+  }, [hash]);
+
+  useEffect(() => {
     const handleResize = () => {
       checkIfAtEnd()
       // const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
@@ -412,6 +416,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       //   console.log({top, height: window.innerHeight})
       // }
       window.scrollTo(0,2)
+      setTimeout(()=> document.documentElement.style.overflow="", 400)
     };
 
     const observer = new ResizeObserver(handleResize);
