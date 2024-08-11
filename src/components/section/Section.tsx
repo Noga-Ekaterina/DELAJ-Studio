@@ -28,21 +28,19 @@ const Section: FC<Props> = (props) => {
       // }
     // setHiden(props.id==hash)
     console.log(hash)
-    if (containerRef.current && props.id==hash && !isModalMenuOpened) {
-      // setHidden(false)
-      (containerRef.current as HTMLDivElement).style.display="block"
+    if (props.id==hash && !isModalMenuOpened) {
+      setHidden(false)
       console.log("show block")
-    } else if (containerRef.current && (props.id!=hash || isModalMenuOpened)){
-      // setTimeout(()=> setHidden(true), 1000)
-      (containerRef.current as HTMLDivElement).style.display="none"
+    } else if (hash=="" || hash=="main-screen" || isModalMenuOpened){
+      setTimeout(()=> setHidden(true), 1000)
     }
-  }, [containerRef.current, hash, isModalMenuOpened]);
+  }, [hash, isModalMenuOpened]);
 
-  // useEffect(() => {
-  //   if (props.id==hash && !isModalMenuOpened) {
-  //     setHidden(false)
-  //   }
-  // }, [hidden]);
+  useEffect(() => {
+    if (props.id==hash && !isModalMenuOpened) {
+      setHidden(false)
+    }
+  }, [hidden]);
 
 
   return (
@@ -50,7 +48,7 @@ const Section: FC<Props> = (props) => {
       className={className} 
       ref={containerRef}
       data-name={props.id}
-      // style={{display: hidden? "none": "block"}}
+      style={{display: hidden? "none": "block"}}
       // id={props.id}
     >
       <div 
