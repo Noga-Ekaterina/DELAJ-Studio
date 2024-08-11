@@ -174,7 +174,7 @@ const Scroller: FC<IWithChildren> = (props) => {
 
   let isAtBottom =false;
   let isAtTop=true
-  let touchStartY = 0;
+  let touchStartY: number|undefined = 0;
 
   function debounce<T extends any[]>(func: (...args: T) => void, delay: number) {
     let timeoutId: NodeJS.Timeout | undefined;
@@ -280,6 +280,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       }
       // isHiddenSection=false
       isScrolling = false;  // Сбросим флаг
+      touchStartY=undefined
       setIsAnimationPlay(true)
     }, (timeout as number));
   };
