@@ -6,7 +6,6 @@ import './language-toggle.scss';
 import {usePathname, useRouter} from "next/navigation";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {useHash} from "@/components/_hooks/useHash";
-import {Html} from "next/document";
 
 
 type SpanProps = {
