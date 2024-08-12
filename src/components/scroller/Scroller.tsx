@@ -193,31 +193,33 @@ const Scroller: FC<IWithChildren> = (props) => {
 
   const checkIfAtEnd = () => {
     clearTimeout((isEndTimeout as number))
-    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as             HTMLDivElement).dataset.name==window.location.hash.slice(1))
-    console.log(scrollDirection)
-    if (activeItem){
-      const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect()
+    if (scrollerContainerRef.current){
+      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as             HTMLDivElement).dataset.name==window.location.hash.slice(1))
+      console.log(scrollDirection)
+      if (activeItem){
+        const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect()
 
-      console.log({bottom, top})
+        console.log({bottom, top})
 
-      if (window.innerHeight - bottom >=-5 && top<=0){
-        isEndTimeout= setTimeout(()=>{
-          isAtBottom= true;
-        }, 500)
-        isAtTop=false
-        isScrolling= false
-      }else {
-        isAtBottom=false
-      }
+        if (window.innerHeight - bottom >=-5 && top<=0){
+          isEndTimeout= setTimeout(()=>{
+            isAtBottom= true;
+          }, 500)
+          isAtTop=false
+          isScrolling= false
+        }else {
+          isAtBottom=false
+        }
 
-      if (top>=-1){
-        isEndTimeout= setTimeout(()=>{
-          isAtTop= true;
-        }, 500)
-        isAtBottom=false
-        isScrolling= false
-      }else {
-        isAtTop=false
+        if (top>=-1){
+          isEndTimeout= setTimeout(()=>{
+            isAtTop= true;
+          }, 500)
+          isAtBottom=false
+          isScrolling= false
+        }else {
+          isAtTop=false
+        }
       }
     }
   };
@@ -229,7 +231,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     isScrolling = true;
 
     scrollTimeout = setTimeout(() => {
-      if (isScrolling && !isModalMenuOpened && !isAnimationPlay) {
+      if (isScrolling && !isModalMenuOpened && !isAnimationPlay && scrollerContainerRef.current) {
         console.log('Пользователь непрерывно прокручивает/листает в течение 1 секунды');
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
         isHiddenSection=false
@@ -286,12 +288,14 @@ const Scroller: FC<IWithChildren> = (props) => {
   };
 
   const eventDisabled = (event: Event) => {
-    const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
-    if (activeItem) {
-      const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
+    if (scrollerContainerRef.current){
+      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+      if (activeItem) {
+        const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
-      if (top>1 || bottom< window.innerHeight)
-        event.preventDefault()
+        if (top>1 || bottom< window.innerHeight)
+          event.preventDefault()
+      }
     }
   }
 
@@ -317,12 +321,15 @@ const Scroller: FC<IWithChildren> = (props) => {
       debouncedCheckIfAtEnd();
 
       clearTimeout((scrollTimeout as number))
-      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
-      if (activeItem){
-        const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
 
-        if (top>=0 && top<=8) {
-          setIsAnimationPlay(false)
+      if (scrollerContainerRef.current){
+        const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+        if (activeItem){
+          const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
+
+          if (top>=0 && top<=8) {
+            setIsAnimationPlay(false)
+          }
         }
       }
     };
@@ -397,22 +404,25 @@ const Scroller: FC<IWithChildren> = (props) => {
   useEffect(() => {
     const handleResize = () => {
       checkIfAtEnd()
-      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
-      if (activeItem){
-        const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
-        console.log({isHiddenSection})
-        if (top<=0) {
-          window.scrollTo({top:0, behavior: "smooth"})
-          // isHiddenSection=false
-        }else if (top >=window.innerHeight-4){
-          setIsAnimationPlay(true);
-          window.scrollBy({
-            top: top,
-            behavior: "smooth"
-          })
-          console.log("end")
+
+      if (scrollerContainerRef.current){
+        const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+        if (activeItem){
+          const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
+          console.log({isHiddenSection})
+          if (top<=0) {
+            window.scrollTo({top:0, behavior: "smooth"})
+            // isHiddenSection=false
+          }else if (top >=window.innerHeight-4){
+            setIsAnimationPlay(true);
+            window.scrollBy({
+              top: top,
+              behavior: "smooth"
+            })
+            console.log("end")
+          }
+          console.log({top, height: window.innerHeight})
         }
-        console.log({top, height: window.innerHeight})
       }
     };
 

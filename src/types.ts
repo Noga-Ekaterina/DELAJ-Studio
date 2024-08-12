@@ -1,6 +1,8 @@
 import { StaticImageData } from "next/image"
 import { ReactNode, FC, ComponentType } from "react"
 
+export type langType = 'ru' | 'en';
+
 export type CurrentPageType = null | 'kids' | 'adult'
 
 export type HeaderVariant= "normal" | "kids"| "adult"

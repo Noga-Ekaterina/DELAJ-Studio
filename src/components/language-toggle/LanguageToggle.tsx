@@ -1,25 +1,45 @@
 'use client';
-import { FC, useState } from 'react';
-import { IWithClass } from '@/types';
+import {FC, useEffect, useState} from 'react';
+import {IWithClass, langType} from '@/types';
 import cn from 'classnames';
 import './language-toggle.scss';
+import {usePathname, useRouter} from "next/navigation";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {useHash} from "@/components/_hooks/useHash";
+import {Html} from "next/document";
 
-type langType = 'ru' | 'en';
 
 type SpanProps = {
-  currentLang: langType
   lang: langType
-  handleClick: (lang: langType) => void
 };
 
 const LanguageToggleSpan: FC<SpanProps> = (props) => {
+  const locale=useLocale()
+  const pathname=usePathname()
+  const hash=useHash()
   const className = cn(
-    props.currentLang !== props.lang ? 'disabled' : ''
+    locale !== props.lang ? 'disabled' : ''
   );
+  const router=useRouter()
+
+  const changeLangauge = (lang:langType) => {
+    if (lang!=locale){
+      if (locale=="en"){
+        router.push(`/${lang}${pathname}#${hash}`)
+      }else {
+        router.push(`${pathname.replace(locale, lang)}#${hash}`)
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.documentElement.setAttribute("lang", locale)
+  }, [locale]);
+
   return (
     <button 
       className={className} 
-      onClick={() => props.handleClick(props.lang)}
+      onClick={() => changeLangauge(props.lang)}
     >
       {props.lang}
     </button>
@@ -28,13 +48,12 @@ const LanguageToggleSpan: FC<SpanProps> = (props) => {
 
 const LanguageToggle: FC<IWithClass> = (props) => {
   const className = cn('language-toggle', props.className);
-  const [currentLang, setCurrentlang] = useState<langType>('ru');
 
   return (
     <div className={className}>
-      <LanguageToggleSpan lang='ru' currentLang={currentLang} handleClick={setCurrentlang} />
+      <LanguageToggleSpan lang='ru'/>
       <span>/</span>
-      <LanguageToggleSpan lang='en' currentLang={currentLang} handleClick={setCurrentlang}/>
+      <LanguageToggleSpan lang='en'/>
     </div>
   );
 };

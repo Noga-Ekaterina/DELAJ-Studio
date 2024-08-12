@@ -42,6 +42,7 @@ const addHash= (hash: string) => {
 const Logo = ({ variant= 'normal'}: LogoProps) => {
   const pathname=usePathname()
   const hash=useHash()
+  const isHome=useIsHome()
   const {isLandingSwiped, prevHeaderVariant, changePrevHeaderVariant, changeMenuOpened}=store
   const ref= useRef(null)
   const objAnimation={
@@ -92,7 +93,7 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   }, [animations]);
 
   return (
-      <Link href="/#main-screen" onClick={()=> {
+      <Link href={isHome? "": "/#main-screen"} onClick={()=> {
         changeMenuOpened(false)
         addHash("main-screen")
       }}>
@@ -120,7 +121,7 @@ const Mail = ({ color = ""}) => {
   }, [ref.current, isHover]);
   return (
       <Link
-          href={isHome? "#contacts":"/#contacts"}
+          href={isHome? "":"/#contacts"}
           onClick={()=>addHash("contacts")}
           onMouseOver={() => {
             setIsHover(true);
@@ -181,7 +182,7 @@ const Header: FC<IWithClass> = (props) => {
   const className = cn('header', props.className);
   const hash = useHash();
   const pathname = usePathname();
-  const isHome= pathname=="/" || pathname=="/ru/"
+  const isHome= useIsHome()
   const {isLandingSwiped, isMenuLandingsOpened, changeMenuOpened} = store;
   const theme: HeaderTheme = {hash, isLandingSwiped, isMenuLandingsOpened, pathname, isHome};
   console.log({pathname, hash, isHome})
