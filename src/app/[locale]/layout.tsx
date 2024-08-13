@@ -3,6 +3,8 @@ import PageMenu from "@/components/page-menu/PageMenu";
 import Header from "@/components/header/Header";
 import "../globals.scss";
 import SmoothScrolling from "@/app/SmoothScrolling";
+import ModalMenu from "@/components/_modals/modal-menu/ModalMenu";
+import ModalContacts from "@/components/_modals/modal-contacts/ModalContacts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +21,8 @@ export default function RootLayout({
       <body>
         <Header />
         <SmoothScrolling>{children}</SmoothScrolling>
+        <ModalMenu/>
+        <ModalContacts/>
       </body>
     </html>
   );

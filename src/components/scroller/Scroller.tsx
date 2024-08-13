@@ -5,15 +5,16 @@ import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
 import { useViewport } from '@/components/_hooks/useViewport';
 import store from '@/store/store';
-import { modalHashes } from '@/vars';
+import { sectionsMenuHashes } from '@/vars';
+import { observer } from 'mobx-react-lite';
 
 const Scroller: FC<IWithChildren> = (props) => {
   const hash = useHash();
   const viewport = useViewport();
   const [translate, setTranslate] = useState(0);
-  const {changeMenuOpened, isModalMenuOpened}= store
+  const {changeMenuOpened, isModalMenuOpened, isModalContactsOpened}= store
   const [lineStyles, setLineStyles] = useState('default');
-  const isModal = modalHashes.includes(hash) || hash === 'menu';
+  const isSectionMenu = sectionsMenuHashes.includes(hash) || hash === 'menu';
   const scrollerContainerRef =useRef<HTMLDivElement | null>(null)
   const scrollerRef =useRef<HTMLDivElement | null>(null)
   let scrollDirection= true
@@ -231,7 +232,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     isScrolling = true;
 
     scrollTimeout = setTimeout(() => {
-      if (isScrolling && !isModalMenuOpened && !isAnimationPlay && scrollerContainerRef.current) {
+      if (isScrolling && !isModalMenuOpened && !isModalContactsOpened && !isAnimationPlay && scrollerContainerRef.current) {
         console.log('Пользователь непрерывно прокручивает/листает в течение 1 секунды');
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
         isHiddenSection=false
@@ -484,7 +485,7 @@ const Scroller: FC<IWithChildren> = (props) => {
         ></div>
       <div 
         className="outline underlines"
-        style={{display: isModal ? 'flex' : 'none'}}
+        style={{display: isSectionMenu ? 'flex' : 'none'}}
       >
         <div className="underlines-item blue"></div>
         <div className="underlines-item yellow"></div>
@@ -495,4 +496,4 @@ const Scroller: FC<IWithChildren> = (props) => {
   );
 };
 
-export default Scroller;
+export default observer(Scroller);

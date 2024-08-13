@@ -23,6 +23,8 @@ class Store {
   //Открыто ли модальное меню
   isModalMenuOpened = false
 
+  //Открыто ли модальное окно контактов
+  isModalContactsOpened = false
   swipeLanding = (value: boolean) => {
     this.isLandingSwiped = value;
     console.log(this.isLandingSwiped)
@@ -50,6 +52,10 @@ class Store {
 
   changeModalMenuOpened =(value: boolean)=>{
     this.isModalMenuOpened= value
+  }
+
+  changeModalContactsOpened =(value: boolean)=>{
+    this.isModalContactsOpened= value
   }
 }
 

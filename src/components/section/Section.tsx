@@ -18,7 +18,7 @@ const Section: FC<Props> = (props) => {
   const className = cn('section-wrap', props.className)
   const hash = useHash()
   const [hidden, setHidden] = useState(true)
-  const {isModalMenuOpened}=store
+  const {isModalMenuOpened, isModalContactsOpened}=store
 
   useEffect(() => {
       // const {top, bottom}= (ref.current as HTMLDivElement).getBoundingClientRect()
@@ -28,13 +28,13 @@ const Section: FC<Props> = (props) => {
       // }
     // setHiden(props.id==hash)
     console.log(hash)
-    if (props.id==hash && !isModalMenuOpened) {
+    if (props.id==hash && !isModalMenuOpened && isModalContactsOpened) {
       setHidden(false)
       console.log("show block")
-    } else if (hash=="" || hash=="main-screen" || isModalMenuOpened){
+    } else if (hash=="" || hash=="main-screen" || isModalMenuOpened || isModalContactsOpened){
       setTimeout(()=> setHidden(true), 1000)
     }
-  }, [hash, isModalMenuOpened]);
+  }, [hash, isModalMenuOpened, isModalContactsOpened]);
 
   useEffect(() => {
     if (props.id==hash && !isModalMenuOpened) {

@@ -3,7 +3,7 @@ import {HeaderVariant, IWithClass} from '@/types';
 import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import cn from 'classnames';
 
-import { modalHashes } from '@/vars';
+import { sectionsMenuHashes } from '@/vars';
 import './header.scss';
 import { useHash } from '../_hooks/useHash';
 import { P, match } from 'ts-pattern';
@@ -109,8 +109,8 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   )
 }
 
-const Mail = ({ color = ""}) => {
-  const isHome= useIsHome()
+const Mail = () => {
+  const {changeModalContactsOpened} = store;
   const [isHover, setIsHover] = useState(false);
   const [isWasHover, setIsWasHover] = useState(false);
   const ref= useRef(null)
@@ -120,9 +120,8 @@ const Mail = ({ color = ""}) => {
       (ref as unknown as MutableRefObject<LottieRefCurrentProps>).current.setSpeed(0.3)
   }, [ref.current, isHover]);
   return (
-      <Link
-          href={isHome? "":"/#contacts"}
-          onClick={()=>addHash("contacts")}
+      <button
+          onClick={()=>changeModalContactsOpened(true)}
           onMouseOver={() => {
             setIsHover(true);
             setIsWasHover(true);
@@ -135,7 +134,7 @@ const Mail = ({ color = ""}) => {
             lottieRef={ref}
             className='header-mail'
         />
-      </Link>
+      </button>
   )
 }
 
@@ -249,7 +248,7 @@ const Header: FC<IWithClass> = (props) => {
             () => (
               <header className={cn(className, "black-header", "header-icon-white")} >
                 <div className='container'>
-                  <Mail color="#fff"/>
+                  <Mail/>
 
 
                   <Logo variant="adult"/>
@@ -278,7 +277,7 @@ const Header: FC<IWithClass> = (props) => {
           )
           // Разделы Меню
           .with(
-            {hash: P.when(() => modalHashes.includes(hash)), isHome: true},
+            {hash: P.when(() => sectionsMenuHashes.includes(hash)), isHome: true},
             () => (
               <header className={cn(className, "white-header")} >
                 <div className='container'>
