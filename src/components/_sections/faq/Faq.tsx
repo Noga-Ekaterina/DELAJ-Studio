@@ -1,9 +1,13 @@
+'use client'
 import React from 'react';
 import '../menu/menu.scss';
 import './faq.scss';
 import QuestionItem from '@/components/question-item/QuestionItem';
 import cn from 'classnames';
 import { circe } from '@/fonts';
+import menuSections from "@/store/text/menuSecton";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {observer} from "mobx-react-lite";
 
 const questions = [
   ['Я отправил портфолио, когда мне ответят?', 'Противоположная точка зрения подразумевает, что многие известные личности описаны максимально подробно. Следует отметить, что консультация с широким активом не оставляет шанса для глубокомысленных рассуждений. '],
@@ -17,10 +21,12 @@ const questions = [
 ]
 
 const Faq = () => {
+  const locale=useLocale()
+  const {menuSectionTitle}=menuSections
   return (
     <div className={cn('menu-inner faq', circe.className)}>
       <div className="menu-section">
-        <h1 className='menu-link'>FAQ</h1>
+        <h1 className='menu-link'>{menuSectionTitle&& menuSectionTitle.faq[locale]}</h1>
 
         <div className="faq-list">
           {questions.map((item, index) => (
@@ -32,4 +38,4 @@ const Faq = () => {
   );
 };
 
-export default Faq;
+export default observer(Faq);

@@ -3,8 +3,8 @@ import { FC, useEffect, useRef, useState } from 'react';
 import Lottie from "lottie-react";
 
 //Animation
-import logoAnimationOn from '../../app/assets/lottie/logo/delai_logo_In.json'
-import logoAnimationOut from '../../app/assets/lottie/logo/delai_logo_Out.json';
+import logoAnimationOn from '../../../public/Assets/Animations/logo/delai_logo_In.json'
+import logoAnimationOut from '../../../public/Assets/Animations/logo/delai_logo_Out.json';
 
 //Images
 import arrow from '../../../public/images/arrow.svg';
@@ -21,6 +21,7 @@ import { useHash } from '@/components/_hooks/useHash';
 import PageMenu from '../page-menu/PageMenu';
 import { transitionStyles } from '@/vars';
 import Curtain from "@/components/curtain/Сurtain";
+import {useLoad} from "@/components/_hooks/useLoad";
 
 const menuStyles = {
   unmounted: { top: "0%",},
@@ -39,12 +40,15 @@ const MainScreen: FC = () => {
   } = store;
   const [show, setShow] = useState(true);
   const [showArrow, setShowArrow] = useState(false);
+  const [isAnimationPlay, setIsAnimationPlay] = useState(true)
   const hash = useHash();
   const arrowRef = useRef(null)
   const [hidden, setHidden] = useState(false)
+  const isLoad=useLoad()
 
   const handleEvent = () => {
-    changeMenuOpened(true);
+    if (!isLoad)
+      changeMenuOpened(true);
   }
 
   useEffect(() => {
@@ -58,6 +62,11 @@ const MainScreen: FC = () => {
       setShow(false);
   }
   },[hash])
+
+  useEffect(() => {
+    if (!isLoad &&!isAnimationPlay)
+      setShowArrow(true)
+  }, [isLoad, isAnimationPlay]);
 
   return (
       <Curtain show={show} zIndex={currentPage? 4:3} className="main-screen">
@@ -77,7 +86,7 @@ const MainScreen: FC = () => {
                   className='main-screen__logo'
                   animationData={logoAnimationOn}
                   loop={false}
-                  onComplete={() => setShowArrow(true)}
+                  onComplete={() => setIsAnimationPlay(false)}
               />
           }
 

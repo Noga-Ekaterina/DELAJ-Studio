@@ -11,6 +11,9 @@ import CareerItemForm from './CareerForm';
 import close from '../../../../public/images/close.svg';
 import Image from 'next/image';
 import CareerOption from '@/components/career-option/CareerOptions';
+import {useLocale} from "@/components/_hooks/useLocale";
+import menuSections from "@/store/text/menuSecton";
+import {observer} from "mobx-react-lite";
 
 const getData = async () => {
   const response = await fetch('/api/career');
@@ -19,6 +22,8 @@ const getData = async () => {
 }
 
 const Career = () => {
+  const locale=useLocale()
+  const {menuSectionTitle}=menuSections
   const hash = useHash();  
   const [career, setCareer] = useState<ICareer | null>(null);
   const [data, setData] = useState<ICareer[]>([]);
@@ -56,7 +61,7 @@ const Career = () => {
       { (!career) ? (
           <div  className={cn('menu-inner career', circe.className)}>
             <div className="menu-section">
-              <h1 className='menu-link'>Карьера</h1>
+              <h1 className='menu-link'>{menuSectionTitle&& menuSectionTitle.career[locale]}</h1>
               <div className="career-list">
                 {data.map((item, index) => (
                   <a href={`#career?id=${item.id}`} className="career-item" key={'career-item' + index}>
@@ -103,4 +108,4 @@ const Career = () => {
   );
 };
 
-export default Career;
+export default observer(Career);

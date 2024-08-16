@@ -3,9 +3,13 @@ import HeadingSection from '@/components/heading-section/HeadingSection';
 import './for-adult.scss';
 
 // Images
-import headingImage from '../../../../public/images/adult/heading.png';
+import headingImage from '../../../../public/Assets/Slides/Animations/Images/Adults/heading.png';
+import subtitle from "../../../../public/Assets/Slides/Animations/Images/Adults/subtitle.svg"
 import AdultFooter from '@/components/adult-footer/AdultFooter';
 import ProjectList from '@/components/project-list/ProjectList';
+import homeText from "@/store/text/home";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {observer} from "mobx-react-lite";
 
 import { ProjectItem } from '@/types';
 import { FC } from 'react';
@@ -15,12 +19,19 @@ import Showreel from "@/components/showreel/Showreel";
 
 
 const ForAdult: FC = () => {
+  const {landingsText}=homeText
+  const locale= useLocale()
+
+  if (!landingsText) return <div className="for-adult"/>
+
   return (
     <div className='for-adult'>
       <Showreel className='landings-showreel'/>
       <HeadingSection
         className='for-adult__heading'
-        title='взрослая анимация'
+        title={landingsText.adult.title[locale]}
+        subtitle={subtitle}
+        text={landingsText.adult.text[locale]}
         image={headingImage}
       />
       <div className="for-adult__projects-wrap ">
@@ -33,4 +44,4 @@ const ForAdult: FC = () => {
   );
 };
 
-export default ForAdult;
+export default observer(ForAdult);

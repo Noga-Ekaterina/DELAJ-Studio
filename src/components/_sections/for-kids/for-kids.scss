@@ -4,6 +4,9 @@
   flex-shrink: 0;
   position: relative;
   &__heading {
+    h1{
+      color: var(--main-blue);
+    }
     img {
       top: -50rem;
     }

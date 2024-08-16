@@ -5,6 +5,7 @@ import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
 import { useViewport } from '@/components/_hooks/useViewport';
 import store from '@/store/store';
+import homeText from "@/store/text/home";
 import { sectionsMenuHashes } from '@/vars';
 import { observer } from 'mobx-react-lite';
 
@@ -13,6 +14,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   const viewport = useViewport();
   const [translate, setTranslate] = useState(0);
   const {changeMenuOpened, isModalMenuOpened, isModalContactsOpened}= store
+  const {fetchAll}=homeText
   const [lineStyles, setLineStyles] = useState('default');
   const isSectionMenu = sectionsMenuHashes.includes(hash) || hash === 'menu';
   const scrollerContainerRef =useRef<HTMLDivElement | null>(null)
@@ -39,6 +41,10 @@ const Scroller: FC<IWithChildren> = (props) => {
       console.log("anim end")
     }, 500)
   }
+
+  useEffect(() => {
+    fetchAll()
+  }, []);
 
 
   // прокрутка

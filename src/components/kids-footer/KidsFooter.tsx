@@ -1,27 +1,44 @@
+'use client'
 import Link from 'next/link';
-import React, { FC } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import './kids-footer.scss';
 import { circe } from '../../fonts';
 import cn from 'classnames';
 import Image from 'next/image';
+import homeText from "@/store/text/home";
+import menuSections from "@/store/text/menuSecton";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {observer} from "mobx-react-lite";
+
 
 //Images
-import footerLogo from '../../../public/images/footer-logo.svg';
-import footerPhone from '../../../public/images/footer-phone.png';
-import footerGirl from '../../../public/images/footer-girl.png';
-import footerCarrot from '../../../public/images/footer-carrot.png';
+import footerLogo from '../../../public/Assets/Slides/Animations/Images/Kids/footer-logo.svg';
+import footerPhone from '../../../public/Assets/Slides/Animations/Images/Kids/footer-phone.png';
+import footerGirl from '../../../public/Assets/Slides/Animations/Images/Kids/footer-girl.png';
+import footerCarrot from '../../../public/Assets/Slides/Animations/Images/Kids/footer-carrot.png';
 
 import LanguageToggle from '../language-toggle/LanguageToggle';
 
 const KidsFooter: FC = () => {
   const className = cn('kids-footer', circe.className);
+  const locale=useLocale()
+  const {landingsText}=homeText
+  const {menuSectionTitle}=menuSections
+  const [words, setWords] = useState<string[]>([])
+
+  useEffect(() => {
+    if (landingsText){
+      const obj=landingsText.kids.footerText[locale]
+      setWords(obj.text.split(obj.highlighted))
+    }
+  }, [landingsText, locale]);
 
   return (
     <footer className={className}>
       <div className="footer-item kids-footer__item" id="kids-footer-blue">
         <div className="footer-item__content">
           <a href="#contacts" className='footer-link'>
-            Контакты
+            {menuSectionTitle&& menuSectionTitle.contacts[locale]}
           </a>
           <ul className='kids-footer__item-list'>
             <li>Head <a href="/">hello@delai.studio</a></li>
@@ -38,7 +55,7 @@ const KidsFooter: FC = () => {
       <div className="footer-item kids-footer__item" id="kids-footer-yellow">
         <div className="footer-item__content">
           <a href="#career" className='footer-link'>
-            Карьера
+            {menuSectionTitle&& menuSectionTitle.career[locale]}
           </a>
           <ul>
             <li><a href="/">Animator</a></li>
@@ -55,7 +72,33 @@ const KidsFooter: FC = () => {
       <div className="footer-item kids-footer__item" id="kids-footer-red">
         <div className="footer-item__content">
           <p className='footer-link'>
-            заходите <br /> в <span>гости</span>
+            {
+              words.map((item, index) => {
+                if (landingsText){
+                  const obj=landingsText.kids.footerText[locale]
+
+                  if (index === 0) {
+                    if (obj.text.indexOf(obj.highlighted)>0){
+                      return (
+                          <span key={index}>
+                            {item}
+                            <span className="yellow">{obj.highlighted}</span>
+                          </span>
+                      )
+                    }else {
+                      return (
+                          <span key={index}>
+                            <span className="yellow">{obj.highlighted}</span>
+                            {item}
+                          </span>
+                      )
+                    }
+                  } else {
+                    return <span key={index}>{item}</span>;
+                  }
+                }
+              })
+            }
           </p>
           <div className="footer-socials">
             <a href='/'>Be</a>
@@ -69,9 +112,16 @@ const KidsFooter: FC = () => {
       <div className="footer-item kids-footer__item" id="kids-footer-purple">
         <div className="footer-item__content">
           <a href="#about" className='footer-link'>
-            О нас
+            {menuSectionTitle&& menuSectionTitle.about[locale]}
           </a>
-          <Image src={footerCarrot} alt=""/>
+          <div className="footer-item__row">
+            <div className="footer-item__links">
+              <a href="#faq" className={circe.className}>{menuSectionTitle && menuSectionTitle.faq[locale]}</a><br/>
+              <a
+                href="#ideas" className={circe.className}>{menuSectionTitle && menuSectionTitle.ideas[locale]}</a>
+            </div>
+            <Image src={footerCarrot} alt=""/>
+          </div>
         </div>
       </div>
 
@@ -79,4 +129,4 @@ const KidsFooter: FC = () => {
   );
 };
 
-export default KidsFooter;
+export default observer(KidsFooter);

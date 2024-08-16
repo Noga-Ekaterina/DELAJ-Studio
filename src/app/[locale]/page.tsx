@@ -17,8 +17,6 @@ import Ideas from "@/components/_sections/ideas/Ideas";
 import KidsButton from "@/components/landing-switch-button/KidsButton";
 import AdultButton from "@/components/landing-switch-button/AdultButton";
 import LandingSwitchButtonsGrup from "@/components/landing-switch-button/LandingSwitchButtonsGrup";
-import {useTranslation} from "react-i18next";
-import ModalMenu from "@/components/_modals/modal-menu/ModalMenu";
 
 const Page = () => {
   // const {i18n}= useTranslation()

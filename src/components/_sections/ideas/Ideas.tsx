@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import '../menu/menu.scss';
 import './ideas.scss';
@@ -5,12 +6,17 @@ import { halvar, circe } from '@/fonts';
 import Link from 'next/link';
 import ExamplesSlider from '@/components/examples-slider/ExamplesSlider';
 import cn from 'classnames';
+import menuSections from "@/store/text/menuSecton";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {observer} from "mobx-react-lite";
 
 const Ideas = () => {
+  const locale=useLocale()
+  const {menuSectionTitle}=menuSections
   return (
     <div className={cn("menu-inner ideas", circe.className)}>
       <div className="menu-section ideas-content">
-        <h1 className='menu-link'>Идеи</h1>
+        <h1 className='menu-link'>{menuSectionTitle&& menuSectionTitle.ideas[locale]}</h1>
 
         <h2 className={cn('menu-calling', halvar.className)}>мы всегда <br/>в поиске идей!</h2>
 
@@ -36,4 +42,4 @@ const Ideas = () => {
   );
 };
 
-export default Ideas;
+export default observer(Ideas);

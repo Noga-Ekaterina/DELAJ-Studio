@@ -12,15 +12,15 @@ import store from '@/store/store';
 import { usePathname } from 'next/navigation';
 import Lottie, {LottieRefCurrentProps} from "lottie-react";
 
-import contactsIn from "@/app/assets/lottie/header/contacts/contacts_In.json"
-import contactsHover from "@/app/assets/lottie/header/contacts/contacts_Mouse.json"
-import contactOut from "@/app/assets/lottie/header/contacts/contacts_Out.json"
+import contactsIn from "../../../public/Assets/Animations/header/contacts/contacts_In.json"
+import contactsHover from "../../../public/Assets/Animations/header/contacts/contacts_Mouse.json"
+import contactOut from "../../../public/Assets/Animations/header/contacts/contacts_Out.json"
 
-import logoKids from "@/app/assets/lottie/logo/delai_to_kids.json"
-import logoAdults from "@/app/assets/lottie/logo/delai_to_adults.json"
+import logoKids from "../../../public/Assets/Animations/logo/delai_to_kids.json"
+import logoAdults from "../../../public/Assets/Animations/logo/delai_to_adults.json"
 
-import menuIn from "@/app/assets/lottie/header/menu/menu_IN.json"
-import menuHover from "@/app/assets/lottie/header/menu/menu_Mouse.json"
+import menuIn from "../../../public/Assets/Animations/header/menu/menu_IN.json"
+import menuHover from "../../../public/Assets/Animations/header/menu/menu_Mouse.json"
 
 import {useIsHome} from "@/components/_hooks/useIsHome";
 import Link from "next/link";

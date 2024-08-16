@@ -1,6 +1,9 @@
+'use client'
 import React from 'react';
 import '../menu/menu.scss' ;
 import './about.scss';
+import menuSections from "@/store/text/menuSecton";
+import {observer} from "mobx-react-lite";
 
 // Images
 import aboutHero from '../../../../public/images/modals/about-hero-image.png';
@@ -36,19 +39,22 @@ import sponsor22 from '../../../../public/images/modals/sponsor-22.png'
 import sponsor23 from '../../../../public/images/modals/sponsor-23.png'
 import sponsor24 from '../../../../public/images/modals/sponsor-24.png'
 import Showreel from '@/components/showreel/Showreel';
+import {useLocale} from "@/components/_hooks/useLocale";
 
 const sponsors = [
 sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9,sponsor10,sponsor11,sponsor12,sponsor13,sponsor14,sponsor15,sponsor16,sponsor17,sponsor18,sponsor29,sponsor20,sponsor21,sponsor22,sponsor23,sponsor24
 ]
 
 const About = () => {
+  const locale=useLocale()
+  const {menuSectionTitle}=menuSections
   return (
     <div className={cn("menu", circe.className)}>
       <div className={'menu-inner about'}>
         <div className="about-top">
 
           <section className='menu-section'>
-            <h1 className={('menu-link')}>О нас</h1>
+            <h1 className={('menu-link')}>{menuSectionTitle&&menuSectionTitle.about[locale]}</h1>
           </section>
 
           <section className='about-hero'>
@@ -164,4 +170,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default observer(About);

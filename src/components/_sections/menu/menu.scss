@@ -17,26 +17,50 @@
     letter-spacing: -3px;
     position: relative;
     &#menu-about {
+      &.menu-link--ru{
+        right: 11%;
+      }
+
+      &.menu-link--en{
+        left: 3%;
+      }
+
       &:hover {
         color: var(--red);
       } 
     }
     &#menu-career {
+      &.menu-link--en{
+        align-self: flex-start;
+      }
+
       &:hover {
         color: var(--blue);
       } 
     }
-    &#menu-contact {
+    &#menu-contacts {
+      &.menu-link--en{
+        left: 10%;
+      }
       &:hover {
         color: var(--main-blue);
       } 
     }
     &#menu-faq {
+      &.menu-link--ru{
+        left: 10%;
+      }
+      &.menu-link--en{
+        left: 7.5%;
+      }
       &:hover {
         color: var(--pink);
       } 
     }
     &#menu-ideas {
+      &.menu-link--en{
+        right: 14%;
+      }
       &:hover {
         color: var(--green);
       } 

@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from 'react';
 import cn from 'classnames';
 import { circe } from '@/fonts';
@@ -5,12 +6,18 @@ import './adult-footer.scss';
 import Link from 'next/link';
 import LanguageToggle from '../language-toggle/LanguageToggle';
 import Image from 'next/image';
+import menuSections from "@/store/text/menuSecton";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {observer} from "mobx-react-lite";
+
 
 //Images
-import logo from '../../../public/images/logo.svg'
-import footerMan from '../../../public/images/adult/footer-man.svg'
+import logo from '../../../public/Assets/Slides/Animations/Images/Adults/footer-logo.svg'
+import footerMan from '../../../public/Assets/Slides/Animations/Images/Adults/footer-man.png'
 
 const AdultFooter: FC = () => {
+  const locale=useLocale()
+  const {menuSectionTitle}=menuSections
   const className = cn('adult-footer', circe.className)
 
   return (
@@ -18,7 +25,7 @@ const AdultFooter: FC = () => {
       <div className="adult-footer__content">
         <div className="footer-item adult-footer__item" id="adult-footer-blue">
           <div className="footer-item__content">
-            <a href="#contacts" className='footer-link'>Contact us</a>
+            <a href="#contacts" className='footer-link'>{menuSectionTitle&& menuSectionTitle.contacts[locale]}</a>
             <ul>
               <li>Head <a href="/">hello@delai.studio</a></li>
               <li>HR <a href="/">@jenechkina1</a></li>
@@ -32,7 +39,7 @@ const AdultFooter: FC = () => {
 
         <div className="footer-item adult-footer__item" id="adult-footer-yellow">
           <div className="footer-item__content">
-            <a href="#career" className='footer-link'>career</a>
+            <a href="#career" className='footer-link'>{ menuSectionTitle&& menuSectionTitle.career[locale]}</a>
             <ul>
               <li><a href="/">Animator</a></li>
               <li><a href="/">Art-director</a></li>
@@ -47,7 +54,7 @@ const AdultFooter: FC = () => {
 
         <div className="footer-item adult-footer__item" id="adult-footer-purple">
           <div className="footer-item__content">
-            <a href="#about" className='footer-link'>about us</a>
+            <a href="#about" className='footer-link'>{menuSectionTitle&& menuSectionTitle.about[locale]}</a>
             <div className="adult-footer__item-row">
               <div className="footer-socials">
                 <a href='/'>Be</a>
@@ -74,4 +81,4 @@ const AdultFooter: FC = () => {
   );
 };
 
-export default AdultFooter;
+export default observer(AdultFooter);

@@ -29,6 +29,11 @@ export interface ISection {
   nextId?: string | null
 }
 
+export interface TranslationTypes<T> {
+  ru: T,
+  en: T
+}
+
 export interface ICareerDuties {
   title: string
   list: string[]

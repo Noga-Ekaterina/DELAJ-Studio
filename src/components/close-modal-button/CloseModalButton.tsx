@@ -3,8 +3,8 @@ import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import "./close-modal-button.scss"
 import cn from "classnames";
 import Lottie, {LottieRefCurrentProps} from "lottie-react";
-import closeHover from "@/app/assets/lottie/header/menu/X_Mouse.json";
-import closeIn from "@/app/assets/lottie/header/menu/menu_transition_to_X.json";
+import closeHover from "../../../public/Assets/Animations/header/menu/X_Mouse.json";
+import closeIn from "../../../public/Assets/Animations/header/menu/menu_transition_to_X.json";
 
 interface CloseModalButtonProps {
   func: ()=> void,

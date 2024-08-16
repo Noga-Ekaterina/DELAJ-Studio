@@ -1,9 +1,13 @@
-import { FC } from 'react';
+'use client'
+import {FC, useEffect, useState} from 'react';
 import './menu.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { halvar, circe } from '@/fonts';
 import './menu-home.scss';
+import {useLocale} from "@/components/_hooks/useLocale";
+import menuSections from "@/store/text/menuSecton";
+import {observer} from "mobx-react-lite";
 
 //Images
 import LanguageToggle from '@/components/language-toggle/LanguageToggle';
@@ -14,24 +18,30 @@ import bgMobile from '../../../../public/images/modals/menu-bg-mobile.png';
 import cn from 'classnames';
 
 const Menu: FC = () => {
+  const locale=useLocale()
+  const {menuSectionTitle}=menuSections
+  const [links, setLinks] = useState<any[]>([])
+
+  useEffect(() => {
+    if (menuSectionTitle){
+      const newArr: any[]=[]
+      const keys = Object.keys(menuSectionTitle) as Array<keyof typeof menuSectionTitle>;
+      for (let key of keys) {
+        newArr.push(
+            <a href={`#${key}`} className={cn("menu-link", `menu-link--${locale}`)} id={`menu-${key}`}>{menuSectionTitle[key][locale]}</a>
+        );
+      }
+
+
+      setLinks(newArr)
+    }
+  }, [menuSectionTitle]);
   return (
       <div className={cn('menu menu-home', circe.className)}>
-        <div className="menu-home__links">
-          <a href="#about" className="menu-link" id="menu-about">
-            о нас
-          </a>
-          <a href="#career" className="menu-link" id="menu-career">
-            карьера
-          </a>
-          <a href="#contacts" className="menu-link" id="menu-contact">
-            контакты
-          </a>
-          <a href="#faq" className="menu-link" id="menu-faq" style={{left: '10%'}}>
-            faq
-          </a>
-          <a href="#ideas" className="menu-link" id="menu-ideas" style={{left: '-7%'}}>
-            идеи
-          </a>
+        <div className={cn("menu-home__links", `menu-home__links--${locale}`)}>
+          {
+            links.map(link=>link)
+          }
           <LanguageToggle className={cn('menu-home__language', halvar.className)}/>
         </div>
 
@@ -42,4 +52,4 @@ const Menu: FC = () => {
   );
 };
 
-export default Menu;
+export default observer(Menu);

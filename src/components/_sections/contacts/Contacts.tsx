@@ -1,9 +1,13 @@
+'use client'
 import React from 'react';
 import '../menu/menu.scss';
 import './contacts.scss';
 import '../../../components/_sections/about/about.scss';
 import { halvar, circe } from '@/fonts';
 import Link from 'next/link';
+import menuSections from "@/store/text/menuSecton";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {observer} from "mobx-react-lite";
 
 // Images
 import vk from '../../../../public/images/modals/Vk.svg';
@@ -17,11 +21,13 @@ import Image from 'next/image';
 import cn from 'classnames';
 
 const Contacts = () => {
+  const locale=useLocale()
+  const {menuSectionTitle}=menuSections
   return (
     <div className={cn("menu", circe.className)}>
       <div className='menu-inner contacts'>
         <div className="menu-section">
-          <h1 className='menu-link'>Контакты</h1>
+          <h1 className='menu-link'>{menuSectionTitle&& menuSectionTitle.contacts[locale]}</h1>
         </div>
         <div className="menu-section contacts-content">
           <h2 className={cn('menu-calling', halvar.className)}>заходите <br />в гости!</h2>
@@ -60,4 +66,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default observer(Contacts);

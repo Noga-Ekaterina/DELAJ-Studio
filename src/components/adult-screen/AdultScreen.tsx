@@ -8,7 +8,7 @@ import japLogo from '../../../public/images/kids/sceen-red-logo.svg';
 import screenBandit from '../../../public/images/adult/screen-bandit.png';
 
 //Animation
-import logoAnimation from '@/app/assets/lottie/logo/delai_to_adults.json'
+import logoAnimation from '../../../public/Assets/Animations/logo/delai_to_adults.json'
 
 import TextLogo from '../text-logo/TextLogo';
 import cn from 'classnames';

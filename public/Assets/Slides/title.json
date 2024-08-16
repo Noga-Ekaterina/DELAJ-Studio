@@ -1,0 +1,22 @@
+{
+  "about": {
+    "ru": "о нас",
+    "en": "about us"
+  },
+  "career": {
+    "ru": "карьера",
+    "en": "career"
+  },
+  "contacts": {
+    "ru": "контакты",
+    "en": "contact"
+  },
+  "faq": {
+    "ru": "faq",
+    "en": "faq"
+  },
+  "ideas": {
+    "ru": "идеи",
+    "en": "ideas"
+  }
+}
