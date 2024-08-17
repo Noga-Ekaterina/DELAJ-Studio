@@ -267,8 +267,10 @@ const Scroller: FC<IWithChildren> = (props) => {
               (prevSection as HTMLDivElement).style.top= -prevSectionHeight+"px";
 
               setTimeout(()=>{
-                (activeItem as HTMLDivElement).style.transform = 'translateY(100vh)';
                 (prevSection as HTMLDivElement).style.top='0';
+
+                if ((prevSection as HTMLDivElement).dataset.name!="empty-place")
+                  (activeItem as HTMLDivElement).style.transform = 'translateY(100vh)';
               }, 50)
 
               setTimeout(()=>{
@@ -300,11 +302,41 @@ const Scroller: FC<IWithChildren> = (props) => {
       if (activeItem) {
         const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
-        if (top>1 || bottom< window.innerHeight)
+        if (top>1 || bottom< window.innerHeight){
           event.preventDefault()
+          console.log("preventD")
+        }
       }
     }
   }
+
+  function smoothScroll(distance: number) {
+    isScrolling = true;
+
+    const startScrollPosition = window.scrollY;
+    const duration = 400; // продолжительность скролла в миллисекундах
+    const startTime = performance.now();
+
+    function animation(currentTime: number) {
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      // Easing function (You can change to another easing function if you want)
+      const ease = progress * (2 - progress); // easeInOutQuad
+      const currentScrollPosition = startScrollPosition + distance * ease;
+
+      window.scrollTo(0, currentScrollPosition);
+
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      } else {
+        isScrolling = false; // Завершение анимации
+      }
+    }
+
+    requestAnimationFrame(animation);
+  }
+
 
   const handleTouchStart = (event: TouchEvent) => {
     touchStartY = event.touches[0].clientY;
@@ -347,9 +379,10 @@ const Scroller: FC<IWithChildren> = (props) => {
       clearTimeout((scrollEndTimeout as number))
       scrollDirection=event.deltaY>0
       if ((isAtBottom && event.deltaY > 0) || (isAtTop && event.deltaY < 0)) {
-        performScrollAction(300);
+        performScrollAction(400);
         // console.log("end")
       }
+
       eventDisabled(event)
     }, {passive: false});
     window.addEventListener('keydown', (event) => {
@@ -389,7 +422,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       const prevSections = items.slice(0, items.indexOf(activeItem))
       const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
-      prevSections.forEach(item=> (item as HTMLDivElement).style.display="none")
+      // prevSections.forEach(item=> (item as HTMLDivElement).style.display="none")
 
       // if (scrollDirection && prevSection && menuSection) {
       //   (prevSection as HTMLDivElement).style.display = "none";
@@ -413,19 +446,27 @@ const Scroller: FC<IWithChildren> = (props) => {
       checkIfAtEnd()
 
       if (scrollerContainerRef.current){
-        const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
+        const items=Array.from((scrollerContainerRef.current as HTMLDivElement).children)
+        const activeItem= items.find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
         if (activeItem){
+          const prevSections = items.slice(0, items.indexOf(activeItem))
           const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
           console.log({isHiddenSection})
           if (top<=0) {
-            window.scrollTo({top:0, behavior: "smooth"})
+            window.scrollTo({top:0,})
+            console.log("hidden")
             // isHiddenSection=false
           }else if (top >=window.innerHeight-4){
             setIsAnimationPlay(true);
-            window.scrollBy({
-              top: top,
-              behavior: "smooth"
-            })
+            // window.scrollBy({
+            //   top: top,
+            //   behavior: "smooth"
+            // })
+
+            smoothScroll(top)
+            setTimeout(()=>{
+              prevSections.forEach(item=> (item as HTMLDivElement).style.display="none")
+            }, 400)
             console.log("end")
           }
           console.log({top, height: window.innerHeight})
