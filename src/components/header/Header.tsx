@@ -24,6 +24,7 @@ import menuHover from "../../../public/Assets/Animations/header/menu/menu_Mouse.
 
 import {useIsHome} from "@/components/_hooks/useIsHome";
 import Link from "next/link";
+import {useLocale} from "@/components/_hooks/useLocale";
 
 type HeaderTheme = {
   hash: string, 
@@ -43,7 +44,8 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   const pathname=usePathname()
   const hash=useHash()
   const isHome=useIsHome()
-  const {isLandingSwiped, prevHeaderVariant, changePrevHeaderVariant, changeMenuOpened}=store
+  const locale=useLocale()
+  const {isLandingSwiped, prevHeaderVariant, changePrevHeaderVariant, changeMenuOpened, changeCurrentPage}=store
   const ref= useRef(null)
   const objAnimation={
     kids: logoKids,
@@ -93,7 +95,8 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   }, [animations]);
 
   return (
-      <Link href={isHome? "": "/#main-screen"} onClick={()=> {
+      <Link href={isHome? "": `/${locale}/#main-screen`} onClick={()=> {
+        changeCurrentPage(null)
         changeMenuOpened(false)
         addHash("main-screen")
       }}>

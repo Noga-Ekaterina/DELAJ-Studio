@@ -64,9 +64,9 @@ const MainScreen: FC = () => {
   },[hash])
 
   useEffect(() => {
-    if (!isLoad &&!isAnimationPlay)
+    if (!isLoad &&!isAnimationPlay && !isMenuLandingsOpened)
       setShowArrow(true)
-  }, [isLoad, isAnimationPlay]);
+  }, [isLoad, isAnimationPlay, isMenuLandingsOpened]);
 
   return (
       <Curtain show={show} zIndex={currentPage? 4:3} className="main-screen">
@@ -75,7 +75,7 @@ const MainScreen: FC = () => {
             onWheel={handleEvent}
             onTouchMove={handleEvent}
         >
-          {isMenuLandingsOpened
+          {(isMenuLandingsOpened && !currentPage)
               ? <Lottie
                   className='main-screen__logo'
                   animationData={logoAnimationOut}

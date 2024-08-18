@@ -13,7 +13,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   const hash = useHash();
   const viewport = useViewport();
   const [translate, setTranslate] = useState(0);
-  const {changeMenuOpened, isModalMenuOpened, isModalContactsOpened}= store
+  const {changeMenuOpened, changeCurrentPage, isModalMenuOpened, isModalContactsOpened}= store
   const {fetchAll}=homeText
   const [lineStyles, setLineStyles] = useState('default');
   const isSectionMenu = sectionsMenuHashes.includes(hash) || hash === 'menu';
@@ -254,9 +254,13 @@ const Scroller: FC<IWithChildren> = (props) => {
               (nextSection as HTMLDivElement).style.display="block"
               window.location.hash = (nextSection as HTMLDivElement).dataset.name || ''
             } else {
-              window.location.hash = "main-screen"
+              window.location.hash = ""
+              changeCurrentPage(null)
               changeMenuOpened(false)
               console.log("end")
+              setTimeout(()=>{
+                (activeItem as HTMLDivElement).style.display="none"
+              }, 1000)
             }
           }else if (isAtTop){
             if (prevSection) {

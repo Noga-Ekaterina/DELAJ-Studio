@@ -61,7 +61,7 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
             ...props.styles.defaultStyles, 
             ...props.styles[styleToggle][state],
             ...transitionStyles,
-            // display: props.hidden? "none":""
+            // display: !isMenuLandingsOpened? "none":""
           }}
         >
           <Component isOpened={isThisPath}/>

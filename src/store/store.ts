@@ -34,7 +34,7 @@ class Store {
     this.isMenuLandingsOpened = value;
   }
 
-  changeCurrentPage = (value: CurrentPageType) => {
+  changeCurrentPage = (value: CurrentPageType | null) => {
     this.currentPage = value;
   }
 
