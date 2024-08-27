@@ -1,0 +1,97 @@
+@import "@/app/mixins";
+
+.career-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30rem;
+
+  &__wrap{
+    max-width: 100%;
+    flex-grow: 1;
+  }
+
+  &__content{
+    padding: 30rem 30rem 100rem 100rem;
+    position: relative;
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 70rem;
+    max-width: 50%;
+    font-weight: 300;
+    line-height: 90%;
+    text-transform: uppercase;
+  }
+  &__options {
+    display: flex;
+    align-items: center;
+    margin-top: 22rem;
+    .options-item {
+      height: 22rem;
+      font-size: 11.5rem;
+      padding: 0 10rem;
+      margin-right: 3rem;
+    }
+  }
+  &__body {
+    display: flex;
+    margin-top: 50rem;
+    max-width: 100%;
+  }
+
+  &__more {
+    font-weight: 800;
+    font-size: 20rem;
+    color: #000;
+    text-transform: uppercase;
+    margin: 0 30rem;
+
+    @include md{
+      font-size: 20px;
+    }
+
+    @include sm{
+      font-size: 15px;
+    }
+  }
+
+  @include sm{
+    &__wrap{
+      width: min(520px, 100%);
+    }
+    h2 {
+      font-size: 109.4rem;
+    }
+    &__close {
+      height: 60px;
+      padding-right: 7px;
+      img {
+        height: 19px;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    &__wrap{
+      width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    &__content{
+      position: static;
+      padding: 70px 20px 100px;
+    }
+    &__body {
+      margin-top: 30px;
+      flex-direction: column;
+      row-gap: 30px;
+      width: 100%;
+    }
+    h2 {
+      max-width: 100%;
+    }
+  }
+}

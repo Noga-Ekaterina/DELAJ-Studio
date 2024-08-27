@@ -64,16 +64,6 @@
     }
   }
 
-  &__more {
-    font-weight: 800;
-    font-size: 20rem;
-    color: #000;
-    text-transform: uppercase;
-    position: absolute;
-    left: 30rem;
-    bottom: 30rem;
-  }
-
   @media screen and (max-width: 1199px) {
     width: 600px;
     margin-top: 30px;
@@ -107,10 +97,6 @@
           height: unset;
         }
       }
-    }
-
-    &__more {
-      font-size: 20px;
     }
   }
 
@@ -171,11 +157,6 @@
         display: block;
         position: static;
       }
-    }
-
-    &__more {
-      position: static;
-      font-size: 15px;
     }
   }
 

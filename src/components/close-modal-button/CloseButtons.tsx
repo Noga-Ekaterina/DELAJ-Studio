@@ -5,13 +5,14 @@ import cn from "classnames";
 import Lottie, {LottieRefCurrentProps} from "lottie-react";
 import closeHover from "../../../public/Assets/Animations/header/menu/X_Mouse.json";
 import closeIn from "../../../public/Assets/Animations/header/menu/menu_transition_to_X.json";
+import {IWithChildren} from "@/types";
 
-interface CloseModalButtonProps {
+interface CloseModalButtonProps extends IWithChildren{
   func: ()=> void,
   className?: string
 }
 
-const CloseModalButton = ({func, className}:CloseModalButtonProps) => {
+const CloseButtons = ({func, className, children}:CloseModalButtonProps) => {
   const [isHover, setIsHover] = useState(false);
   const [isWasHover, setIsWasHover] = useState(false);
   const ref = useRef(null);
@@ -32,6 +33,7 @@ const CloseModalButton = ({func, className}:CloseModalButtonProps) => {
 
   return (
       <div className="close-modal-button__wrapp">
+        {children}
         <button
             onMouseOver={() => {
               setIsHover(true);
@@ -51,4 +53,4 @@ const CloseModalButton = ({func, className}:CloseModalButtonProps) => {
 );
 };
 
-export default CloseModalButton;
+export default CloseButtons;

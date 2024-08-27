@@ -1,0 +1,21 @@
+.outline {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  background-color: currentColor;
+  z-index: 2;
+
+  &.topline {
+    top: 0;
+  }
+  &.underlines {
+    bottom: 0;
+    display: flex;
+  }
+}
+
+.underlines-item {
+   flex: 1;
+   background-color: currentColor;
+ }
