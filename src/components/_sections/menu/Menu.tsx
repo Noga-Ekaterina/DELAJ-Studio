@@ -28,14 +28,14 @@ const Menu: FC = () => {
       const keys = Object.keys(menuSectionTitle) as Array<keyof typeof menuSectionTitle>;
       for (let key of keys) {
         newArr.push(
-            <a href={`#${key}`} className={cn("menu-link", `menu-link--${locale}`)} id={`menu-${key}`}>{menuSectionTitle[key][locale]}</a>
+            <a href={`#${key}`} key={`menu-${key}`} className={cn("menu-link", `menu-link--${locale}`)} id={`menu-${key}`}>{menuSectionTitle[key][locale]}</a>
         );
       }
 
 
       setLinks(newArr)
     }
-  }, [menuSectionTitle]);
+  }, [menuSectionTitle, locale]);
   return (
       <div className={cn('menu menu-home', circe.className)}>
         <div className={cn("menu-home__links", `menu-home__links--${locale}`)}>

@@ -22,6 +22,7 @@ import PageMenu from '../page-menu/PageMenu';
 import { transitionStyles } from '@/vars';
 import Curtain from "@/components/curtain/Сurtain";
 import {useLoad} from "@/components/_hooks/useLoad";
+import {changeOverflow} from "@/utils/changeOverflow";
 
 const menuStyles = {
   unmounted: { top: "0%",},
@@ -36,32 +37,67 @@ const MainScreen: FC = () => {
     isMenuLandingsOpened,
     changeMenuOpened,
     changeCurrentPage,
-    currentPage
+    currentPage,
+    showMainPage,
+    changeShowMainPage,
+    showMainScreen,
+    changeShowMainScreen,
+    isLandingSwiped,
+    isScrollOn
   } = store;
-  const [show, setShow] = useState(true);
   const [showArrow, setShowArrow] = useState(false);
   const [isAnimationPlay, setIsAnimationPlay] = useState(true)
   const hash = useHash();
   const arrowRef = useRef(null)
-  const [hidden, setHidden] = useState(false)
+  const containrRef=useRef(null)
   const isLoad=useLoad()
 
+  const disabled = () => {
+    if (containrRef.current!=null){
+      (containrRef.current as HTMLDivElement).style.pointerEvents="none"
+      setTimeout(()=>{
+        if(containrRef.current)
+          (containrRef.current as HTMLDivElement).style.pointerEvents=""
+        // window.scrollTo(0,0)
+      }, 900)
+    }
+  }
   const handleEvent = () => {
     if (!isLoad)
       changeMenuOpened(true);
   }
 
   useEffect(() => {
-    if (!hash) {
+    console.log({isAnimationPlay, isLoad})
+    if (!hash || !showMainPage) {
       changeMenuOpened(false);
       changeCurrentPage(null);
-      setShow(true);
+      changeShowMainScreen(true);
+      disabled()
     } else if (hash === 'main-screen'){
-      setShow(true);
+      changeShowMainScreen(true);
+      disabled()
     } else if (hash !== 'main-screen' && hash!=""){
-      setShow(false);
-  }
-  },[hash])
+      changeShowMainScreen(false);
+
+      if (hash!="first-landing")
+        changeCurrentPage(null)
+      else{
+        if (isScrollOn)
+          changeCurrentPage(isLandingSwiped? "adult":"kids")
+      }
+    }
+
+  },[hash, showMainPage, isScrollOn])
+
+  useEffect(() => {
+    changeOverflow(hash=="" || hash=="main-screen" || !showMainPage)
+  }, [hash, showMainPage]);
+
+  useEffect(() => {
+    if (!isLoad && !isAnimationPlay)
+      changeShowMainPage(true)
+  }, [isLoad, isAnimationPlay]);
 
   useEffect(() => {
     if (!isLoad &&!isAnimationPlay && !isMenuLandingsOpened)
@@ -69,11 +105,12 @@ const MainScreen: FC = () => {
   }, [isLoad, isAnimationPlay, isMenuLandingsOpened]);
 
   return (
-      <Curtain show={show} zIndex={currentPage? 4:3} className="main-screen">
+      <Curtain show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 4:3} className="main-screen">
         <div
             className="main-screen__content"
             onWheel={handleEvent}
             onTouchMove={handleEvent}
+            ref={containrRef}
         >
           {(isMenuLandingsOpened && !currentPage)
               ? <Lottie

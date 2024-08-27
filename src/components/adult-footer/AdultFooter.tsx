@@ -14,6 +14,7 @@ import {observer} from "mobx-react-lite";
 //Images
 import logo from '../../../public/Assets/Slides/Animations/Images/Adults/footer-logo.svg'
 import footerMan from '../../../public/Assets/Slides/Animations/Images/Adults/footer-man.png'
+import FooterCareerList from "@/components/footer-career-list/FooterCareerList";
 
 const AdultFooter: FC = () => {
   const locale=useLocale()
@@ -40,14 +41,7 @@ const AdultFooter: FC = () => {
         <div className="footer-item adult-footer__item" id="adult-footer-yellow">
           <div className="footer-item__content">
             <a href="#career" className='footer-link'>{ menuSectionTitle&& menuSectionTitle.career[locale]}</a>
-            <ul>
-              <li><a href="/">Animator</a></li>
-              <li><a href="/">Art-director</a></li>
-              <li><a href="/">3D-Character artist</a></li>
-              <li><a href="/">CG Generalist</a></li>
-              <li><a href="/">Motion designer</a></li>
-              <li><a href="/">Web designer</a></li>
-            </ul>
+            <FooterCareerList/>
             <LanguageToggle className='footer-language'/>
           </div>
         </div>

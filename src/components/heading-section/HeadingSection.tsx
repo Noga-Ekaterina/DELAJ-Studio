@@ -19,7 +19,7 @@ const HeadingSection: FC<Props> = (props) => {
     <section className={className}>
       <div className="container">
 
-        <div className={cn('heading-section__text', courierNew.className)}>
+        <div className={cn('heading-section__text', circe.className)}>
           <h1 className={circe.className}>{props.title}</h1>
           <Image src={props.subtitle} alt="" className="heading-section__subtitle"/>
           <p>{props.text}</p>

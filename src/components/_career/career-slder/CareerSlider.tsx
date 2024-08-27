@@ -1,12 +1,16 @@
+'use client'
 import { FC, useEffect, useRef, useState } from "react";
 
-import "./career.scss";
+import "../../_sections/career/career.scss";
 import './career-slider.scss';
-import { ICareer, IWithClass } from "@/types";
+import {IWithClass} from "@/types";
+import {ICareer, ICareerDuties} from "@/typesData";
 import Image from "next/image";
 import arrow from '../../../../public/images/arrow.svg';
 import { useViewport } from "@/components/_hooks/useViewport";
 import classNames from "classnames";
+import {useLocale} from "@/components/_hooks/useLocale";
+import {usePathname, useRouter} from "next/navigation";
 
 type ChangeIdParam = 'prev' | 'next'
 
@@ -20,15 +24,22 @@ const CareerSlider: FC<Props> = ({ career, vacancies }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const viewport = useViewport();
   const [newCareerIndex, setNewCareerIndex] =  useState(-1);
+  const locale=useLocale()
+  const router=useRouter()
+  const pathname=usePathname()
 
   const changeCareer = (param: ChangeIdParam) => {
     const index = vacancies.indexOf(career);
     if (param === 'prev') {
       const prevIndex = index - 1;
       setNewCareerIndex(prevIndex);
+
+      router.push(pathname.replace(String(id), String(id==1? vacancies.length: id-1)))
     } else {
       const prevIndex = index + 1;
       setNewCareerIndex(prevIndex);
+
+      router.push(pathname.replace(String(id), id==vacancies.length? "1": String(id+1)))
     }
   }
 
@@ -36,7 +47,7 @@ const CareerSlider: FC<Props> = ({ career, vacancies }) => {
     if (window && newCareerIndex > -1) {
       const newId = vacancies.find((item, index) => index === newCareerIndex)
       if (newId) {
-        window.location.hash = `#career?id=${newId.id}`;
+        // router.push(pathname.replace(id, newId.id))
       }
     }
   },[newCareerIndex]);
@@ -58,11 +69,11 @@ const CareerSlider: FC<Props> = ({ career, vacancies }) => {
           {vacancies.map(item => {
             return(
             <div className="career-slider__item" id={'career-' + item.id} key={'career-' + item.id}>
-              {item.duties?.map((duty, index) => (
+              {item.data.duties.map((duty, index) => (
                 <div className="career-slider__item-row"  key={'career-' + index}>
-                  <h3>{duty.title}</h3>
+                  <h3>{duty.title[locale]}</h3>
                   <ul>
-                    {duty.list.map((li, liIndex) => <li key={`career-${index}-${liIndex}`}>{li}</li>)}
+                    {duty.list[locale].map((li, liIndex) => <li key={`career-${index}-${liIndex}`}>{li}</li>)}
                   </ul>
                 </div>
               ))}
@@ -76,7 +87,6 @@ const CareerSlider: FC<Props> = ({ career, vacancies }) => {
             <Image src={arrow} alt=""/>
           </button>
         </div>
-        <a className='career-slider__more' href="#career">еще вакансии</a>
         <div className="career-slider__controls-btn controls-next">
           <button onClick={() => changeCareer('next')} type="button">
             <Image src={arrow} alt=""/>

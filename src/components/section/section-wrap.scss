@@ -2,20 +2,20 @@
 
 .section-wrap {
   overflow: hidden;
-  min-height: calc(100vh + 80px);
+  min-height: 100vh;
   padding-top: 56rem;
   left: 0;
   width: 100vw;
   background: #fff;
-  transition-duration: 0.4s, 0.6s;
-  transition-property: top, transform;
+  transition-duration: 0.4s, 0.6s, 0.4s;
+  transition-property: top, transform, height;
 
   @include sm{
     padding-top: 60px;
   }
 
   &__content {
-    min-height: 100%;
+    min-height: 100vh;
     position: relative;
   }
 
@@ -24,6 +24,10 @@
     height: 0px;
     padding-top: 0;
     overflow: hidden;
+  }
+
+  &[data-name='second-landing']{
+    padding-top: 0;
   }
 
   &[data-name='menu']{

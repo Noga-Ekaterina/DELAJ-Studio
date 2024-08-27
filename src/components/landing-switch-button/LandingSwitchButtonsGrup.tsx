@@ -14,9 +14,10 @@ const LandingSwitchButtonsGrup = () => {
   const { isLandingSwiped, swipeLanding, changeCurrentPage } = store;
   const hash =useHash()
 
-  useEffect(() => {
-    changeCurrentPage(isLandingSwiped? "adult":"kids")
-  }, [isLandingSwiped]);
+  const changeSwiped = (swiped: boolean) => {
+    swipeLanding(swiped)
+    changeCurrentPage(swiped? "adult":"kids")
+  }
 
   return (
       <div
@@ -30,21 +31,21 @@ const LandingSwitchButtonsGrup = () => {
       >
         <div className="button-right">
           <LandingSwitchButton
-              handleClick={() => swipeLanding(true)}
+              handleClick={() => changeSwiped(true)}
               render={() => <KidsButton/>}
           />
           <LandingSwitchButton
-              handleClick={() => swipeLanding(true)}
+              handleClick={() => changeSwiped(true)}
               render={() => <AdultButton/>}
           />
         </div>
         <div className="button-left">
           <LandingSwitchButton
-              handleClick={() => swipeLanding(false)}
+              handleClick={() => changeSwiped(false)}
               render={() => <AdultButton/>}
           />
           <LandingSwitchButton
-              handleClick={() => swipeLanding(false)}
+              handleClick={() => changeSwiped(false)}
               render={() => <KidsButton/>}
           />
         </div>

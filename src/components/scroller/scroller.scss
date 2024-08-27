@@ -8,30 +8,10 @@
 		transition: transform var(--transition);
 		transition-duration: 1s;
      position: relative;
-     top: 56rem;
+     min-height: 100.1vh;
 	}
   &-shield{
     position: fixed;
     inset: 0;
   }
-}
-
-.outline {
-	position: fixed;
-	left: 0;
-	right: 0;
-	height: 5rem;
-	background-color: currentColor;
-	&.topline {
-		top: 0;
-	}
-	&.underlines {
-		bottom: 0;
-		display: flex;
-	}
-}
-
-.underlines-item {
-	flex: 1;
-	background-color: currentColor;
 }

@@ -1,6 +1,6 @@
 'use client';
 import {FC, useEffect, useState} from 'react';
-import {IWithClass, langType} from '@/types';
+import {IWithClass, LangType} from '@/types';
 import cn from 'classnames';
 import './language-toggle.scss';
 import {usePathname, useRouter} from "next/navigation";
@@ -9,7 +9,7 @@ import {useHash} from "@/components/_hooks/useHash";
 
 
 type SpanProps = {
-  lang: langType
+  lang: LangType
 };
 
 const LanguageToggleSpan: FC<SpanProps> = (props) => {
@@ -21,7 +21,7 @@ const LanguageToggleSpan: FC<SpanProps> = (props) => {
   );
   const router=useRouter()
 
-  const changeLangauge = (lang:langType) => {
+  const changeLangauge = (lang:LangType) => {
     if (lang!=locale){
       if (locale=="en"){
         router.push(`/${lang}${pathname}#${hash}`)

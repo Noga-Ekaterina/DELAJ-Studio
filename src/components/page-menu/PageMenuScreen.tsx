@@ -55,7 +55,7 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
           className={classNames("page-menu__screen", isThisPath ? 'opened' : '')} 
           ref={ref}
           onClick={chooseLanding}
-          onWheel={swipeScreenUp}
+          onWheel={e=> e.deltaY>0&&swipeScreenUp()}
           onTouchMove={swipeScreenUp}
           style={{
             ...props.styles.defaultStyles, 

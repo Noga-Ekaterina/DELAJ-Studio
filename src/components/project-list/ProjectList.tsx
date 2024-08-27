@@ -8,6 +8,7 @@ import { IWithClass, ProjectItem } from '@/types';
 import cn from 'classnames';
 import { useMediaQuery } from 'react-responsive';
 import {getShuffleArray} from "@/utils/getShuffleArray";
+import projects from "@/store/text/Projects";
 
 interface Props extends IWithClass{
   title: string
@@ -16,6 +17,7 @@ interface Props extends IWithClass{
 
 const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   const [data, setData] = useState<ProjectItem[]>([]);
+  const {projectsList}=projects
   const [baseChunkSize, setBaseChunkSize] = useState(3);
   const mobileScreen = useMediaQuery({maxWidth: 640});
   const [isBigItem, setIsBigItem] = useState(false)
@@ -25,7 +27,6 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
     let result: any[] = [];
     let index = 0;
     let chunkIndex = 0;
-    console.log(data)
 
     while (index < data.length) {
       const currentChunkSize = chunkSizes[chunkIndex % chunkSizes.length];
@@ -52,7 +53,6 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
       }
     }
 
-    console.log(result)
 
     return result;
   };
@@ -73,6 +73,9 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
       setData(json);
     })();
   },[])
+  useEffect(() => {
+    console.log(projectsList)
+  }, [projectsList]);
 
   useEffect(() => {
     console.log(itemsGrid)

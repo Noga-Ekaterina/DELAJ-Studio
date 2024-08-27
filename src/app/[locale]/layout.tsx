@@ -20,7 +20,11 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <App>{children}</App>
+      <SmoothScrolling>
+        <App>
+          {children}
+        </App>
+      </SmoothScrolling>
       </body>
     </html>
   );

@@ -1,21 +1,23 @@
 import homeText from "@/store/text/home";
 import menuSections from "@/store/text/menuSecton";
+import career from "@/store/text/career";
 import {useEffect, useState} from "react";
 
 export const useLoad=()=>{
   const {landingsText}=homeText
   const {menuSectionTitle}=menuSections
+  const {careerList} =career
   const [isLoad, setIsLoad] = useState(true)
 
   useEffect(() => {
-    if (landingsText && menuSectionTitle){
+    if (landingsText && menuSectionTitle && careerList){
       setIsLoad(false)
       console.log("load end")
     }else {
       console.log("load")
       setIsLoad(true)
     }
-  }, [menuSectionTitle, landingsText]);
+  }, [menuSectionTitle, landingsText, careerList]);
 
   return isLoad
 }

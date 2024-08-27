@@ -1,6 +1,7 @@
 .curtain{
-  overflow-x: hidden;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: fixed;
   height: 100vh;
   width: 100%;

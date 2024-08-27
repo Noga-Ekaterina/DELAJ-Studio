@@ -18,6 +18,7 @@ import footerGirl from '../../../public/Assets/Slides/Animations/Images/Kids/foo
 import footerCarrot from '../../../public/Assets/Slides/Animations/Images/Kids/footer-carrot.png';
 
 import LanguageToggle from '../language-toggle/LanguageToggle';
+import FooterCareerList from "@/components/footer-career-list/FooterCareerList";
 
 const KidsFooter: FC = () => {
   const className = cn('kids-footer', circe.className);
@@ -57,14 +58,7 @@ const KidsFooter: FC = () => {
           <a href="#career" className='footer-link'>
             {menuSectionTitle&& menuSectionTitle.career[locale]}
           </a>
-          <ul>
-            <li><a href="/">Animator</a></li>
-            <li><a href="/">Art-director</a></li>
-            <li><a href="/">3D-Character artist</a></li>
-            <li><a href="/">CG Generalist</a></li>
-            <li><a href="/">Motion designer</a></li>
-            <li><a href="/">Web designer</a></li>
-          </ul>
+          <FooterCareerList/>
           <LanguageToggle className='footer-language'/>
         </div>
       </div>

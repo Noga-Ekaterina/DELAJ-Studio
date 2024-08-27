@@ -1,18 +1,10 @@
 // store.js
 import { makeAutoObservable } from "mobx";
 import {fetchData} from "@/utils/fetchData";
-import {TranslationTypes} from "@/types";
-
-interface menuSectionTitleTypes {
-  about: TranslationTypes<string>,
-  career: TranslationTypes<string>,
-  contacts: TranslationTypes<string>,
-  faq: TranslationTypes<string>,
-  ideas: TranslationTypes<string>
-}
+import {IMenuSectionTitle} from "@/typesData";
 
 class Store {
-  menuSectionTitle: null | menuSectionTitleTypes = null;
+  menuSectionTitle: null | IMenuSectionTitle = null;
 
   constructor() {
     makeAutoObservable(this);

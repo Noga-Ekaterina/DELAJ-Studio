@@ -120,7 +120,7 @@ const Mail = () => {
 
   useEffect(() => {
     if (ref.current && isWasHover)
-      (ref as unknown as MutableRefObject<LottieRefCurrentProps>).current.setSpeed(0.3)
+      (ref as unknown as MutableRefObject<LottieRefCurrentProps>).current.setSpeed(0.6)
   }, [ref.current, isHover]);
   return (
       <button
@@ -193,8 +193,8 @@ const Header: FC<IWithClass> = (props) => {
       <>
         {match(theme)
             // Страница проекта
-            .with(
-                {hash: '', pathname: P.when(() => pathname.includes('projects'))},
+            .when(
+                () => pathname.includes('projects'),
                 () => (
                     <header className={cn(className, "white-header")}>
                       <div className='container'>
@@ -238,13 +238,13 @@ const Header: FC<IWithClass> = (props) => {
 
                   <Logo variant="kids"/>
 
-                  
+
                   <ButtonMenu/>
                 </div>
               </header>
             )
           )
-          // Взрослый лэндос 
+          // Взрослый лэндос
           .with(
             {hash: 'first-landing', isLandingSwiped: true, isHome: true},
             {hash: 'second-landing', isLandingSwiped: false, isHome: true},
@@ -296,24 +296,30 @@ const Header: FC<IWithClass> = (props) => {
           )
             // Страница вакансии
             .when(
-                () => hash.includes('career?id='),
-                () => null
+                () => pathname.includes('career'),
+                () => (
+                    <header className={cn(className, "hidden-header")}>
+                      <div className='container'>
+                        <Mail />
+                        <Logo variant="normal" />
+                        <ButtonMenu />
+                      </div>
+                    </header>
+                )
             )
-            .otherwise(() => (
-                <header className={cn(className)}>
+            .otherwise(()=> (
+                <header className={cn(className, "white-header")}>
                   <div className='container'>
-                    <Mail />
+                    <Mail/>
 
                     <Logo variant="normal"/>
-
 
                     <ButtonMenu/>
                   </div>
                 </header>
-          ))
-
-      }
-    </>
+            ))
+        }
+      </>
   );
 };
 

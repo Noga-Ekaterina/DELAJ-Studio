@@ -9,7 +9,8 @@ import BasicFooter from '@/components/basic-footer/BasicFooter';
 
 interface Props {
   params: {
-    id: string
+    id: string,
+    locale: string
   }
 }
 
@@ -27,6 +28,8 @@ const getData = async (id: string): Promise<IProject | null> => {
 const Page: FC<Props> = async ({ params }) => {
   const { id } = params;
   const project: IProject | null = await getData(id);
+  console.log(params.locale)
+  console.log("project page")
 
 
   // const pathToMaterials = path.join(process.cwd(), 'public') + '/projects-materials/' + id; 

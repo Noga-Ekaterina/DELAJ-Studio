@@ -1,7 +1,9 @@
 import { StaticImageData } from "next/image"
 import { ReactNode, FC, ComponentType } from "react"
 
-export type langType = 'ru' | 'en';
+export type LangType = 'ru' | 'en';
+
+export type PageTransitionType = "normal" | "back"
 
 export type CurrentPageType = null | 'kids' | 'adult'
 
@@ -27,26 +29,6 @@ export interface ISection {
   props?: {} 
   prevId?: string | null
   nextId?: string | null
-}
-
-export interface TranslationTypes<T> {
-  ru: T,
-  en: T
-}
-
-export interface ICareerDuties {
-  title: string
-  list: string[]
-}
-
-export type CareerOptionType = 'Закрытая' | 'Открытая' | 'Freelance' | 'Full time' | 'Part time';
-
-export interface ICareer {
-  id: string
-  title: string
-  description: string
-  options: CareerOptionType[]
-  duties: Array<ICareerDuties>
 }
 
 export interface IProject {

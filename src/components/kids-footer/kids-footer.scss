@@ -69,6 +69,10 @@
       background-color: #38044C;
       justify-content: center;
       width: 20%;
+
+      .footer-item__content{
+        min-width: 58%;
+      }
       .footer-item__links{
         line-height: 1em;
       }

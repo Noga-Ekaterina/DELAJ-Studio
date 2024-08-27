@@ -235,9 +235,18 @@ footer {
        justify-content: center;
      }
 		ul {
-			flex: 1;
-			line-height: 1.2em;
+       flex: 1;
+
+        li{
+          line-height: 1.2em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
 			a {
+           display: inline;
+           max-width: 100%;
+           white-space: nowrap;
 				&:hover {
 					text-decoration: underline;
 				}

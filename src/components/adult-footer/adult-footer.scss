@@ -55,6 +55,11 @@
     width: 50%;
     border-color: var(--yellow);
     padding-left: 3.9%;
+
+    .footer-item__content{
+      max-width: 135rem;
+    }
+
     .footer-link {
       &:hover {
         color: var(--green);
