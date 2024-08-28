@@ -91,14 +91,17 @@
       }
       img {
         position: relative;
-        top: 5px;
+        top: 25px;
         max-height: 190%;
         width: 100%;
-        right: 5%;
         height: auto;
 
         @include lg-book{
           width: 90%;
+        }
+
+        @include sm{
+          top: 10px;
         }
       }
     }
@@ -134,12 +137,13 @@
 
       img {
         max-width: 100%;
-        height: 100%;
+        height: 117%;
         position: relative;
-        left: 5%;
-        top: 5%;
+        left: 11%;
+        top: -6%;
 
         @include sm{
+          top: 5%;
           width: 95%;
           height: fit-content;
           max-height: 130%;
@@ -166,6 +170,7 @@
 
     &#kids-screen-green {
       position: relative;
+      z-index: 3;
       grid-column: 1/2;
       grid-row: 3/4;
       background-color: #DBFF00;
@@ -191,6 +196,7 @@
       grid-row: 3/span 1;
       background-color: #00C2FF;
       position: relative;
+      z-index: 2;
       overflow: visible;
 
       @include sm{
@@ -201,13 +207,23 @@
       img {
         position: absolute;
         bottom: 0;
-        right: 0;
-        width: 90%;
-        max-height: 114%;
+        right: -6.2vh;
+        max-width: calc(100% + 6.2vh);
+        //width: 122%;
+        height: 111%;
         object-position: bottom right;
 
         @include md-book{
           max-height: 100%;
+          right: -3%;
+          max-width: 103%;
+        }
+
+        @include sm{
+          max-height: 117%;
+          width: 100%;
+          max-width: unset;
+          right: -3%;
         }
       }
     }
@@ -215,9 +231,10 @@
     &#kids-screen-red {
       background-color: #F12B00;
       grid-column: 3 / 4;
-      padding: min(10%, 30px);
+      padding: 10%;
       padding-right: 0;
       position: relative;
+      z-index: 3;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -225,11 +242,15 @@
 
       @include md-book{
         grid-column: 3 / 5;
+        padding: 6%;
+        padding-right: 0;
       }
 
       @include sm{
         grid-column: 3/4;
         grid-row: 3/4;
+        padding: 10%;
+        padding-right: 0;
       }
 
       .red-picture-logo {
@@ -255,7 +276,7 @@
         align-self: flex-end;
         max-height: 66%;
         max-width: 72%;
-        min-width: 61%;
+        min-width: 55%;
         object-position: right;
         position: absolute;
         bottom: 2%;
@@ -268,6 +289,7 @@
         @include sm{
           max-width: unset;
           width: 74%;
+          min-width: 66%;
           height: auto;
           max-height: 54%;
           top: -10%;
@@ -281,6 +303,7 @@
       grid-row: 1 / 4;
       grid-column: 5 / 6;
       position: relative;
+      z-index: 4;
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -333,11 +356,9 @@
 
       img{
         top: 50px;
-        right: 5%;
 
         @include sm{
           top: 5px;
-          right: 0;
           max-height: 132%;
         }
         @include md-book{
@@ -362,6 +383,7 @@
 
     #kids-screen-white{
       @include md-book{
+        justify-content: center;
         grid-column: 2/3;
         grid-row: 1/2;
       }
@@ -369,6 +391,14 @@
       @include sm{
         grid-column: 2/3;
         display: flex;
+      }
+
+      img{
+        @include md-book{
+          top: 5%;
+          left: 0;
+          height: 105%;
+        }
       }
     }
 
@@ -396,6 +426,8 @@
     .kids-screen__picture {
       &#kids-screen-red {
         grid-column: 3 / 5;
+        padding: 6%;
+        padding-right: 0;
 
         @include md-book{
           grid-column: 3/4;
@@ -415,7 +447,7 @@
           }
 
           @include sm{
-            width: 40%;
+            width: 35%;
           }
         }
 
@@ -430,6 +462,7 @@
           }
 
           @include sm{
+            max-height: 60%;
             max-width: unset;
           }
         }

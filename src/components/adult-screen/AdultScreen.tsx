@@ -4,8 +4,8 @@ import './adult-screen.scss';
 import Image from 'next/image';
 
 //Images
-import japLogo from '../../../public/images/kids/sceen-red-logo.svg';
-import screenBandit from '../../../public/images/adult/screen-bandit.png';
+import japLogo from '../../../public/Assets/Slides/Animations/Images/Curtain/Logo-china.png';
+import screenBandit from '../../../public/Assets/Slides/Animations/Images/Curtain/Bandit.png';
 
 //Animation
 import logoAnimation from '../../../public/Assets/Animations/logo/delai_to_adults.json'

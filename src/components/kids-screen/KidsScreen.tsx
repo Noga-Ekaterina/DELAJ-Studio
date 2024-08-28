@@ -5,15 +5,15 @@ import Image from 'next/image';
 import cn from 'classnames';
 
 // Images
-import screenPicture from '../../../public/images/kids/screen-picture.png';
-import blackGirlPicture from '../../../public/images/kids/screen-girl-1.png';
-import frogPicture from '../../../public/images/kids/screen-frog.png';
-import cloudPicture from '../../../public/images/kids/screen-cloud.png';
-import lenyaPicture from '../../../public/images/kids/screen-lenya.png';
-import purpleGirlPicture from '../../../public/images/kids/screen-girl-2.png';
-import logo from '../../../public/images/kids/logo.svg';
-import japLogo from '../../../public/images/kids/sceen-red-logo.svg';
-import car from '../../../public/images/kids/screen-red-car.png';
+import screenPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Book.png';
+import blackGirlPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Valya.png';
+import frogPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Frog.png';
+import cloudPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Cloud.png';
+import lenyaPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Lenya.png';
+import purpleGirlPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Sonya.png';
+import logo from '../../../public/Assets/Slides/Animations/Images/Curtain/kids-logo.png';
+import japLogo from '../../../public/Assets/Slides/Animations/Images/Curtain/Logo-china.png';
+import car from '../../../public/Assets/Slides/Animations/Images/Curtain/Car.png';
 import TextLogo from '../text-logo/TextLogo';
 
 import { Transition } from 'react-transition-group';
