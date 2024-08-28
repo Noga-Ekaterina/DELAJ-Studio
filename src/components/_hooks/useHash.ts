@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useState } from "react";
-import {usePathname} from "next/navigation";
+import {useIsHome} from "@/components/_hooks/useIsHome";
 
 export const useHash = () => {
+  const isHome=useIsHome()
   const [hash, setHash] = useState(window.location.hash
   );
-  const pathname=usePathname()
 
   useEffect(() => {
     if (window) {
@@ -23,7 +23,7 @@ export const useHash = () => {
 
   useEffect(() => {
     setHash(window.location.hash)
-  }, [pathname]);
+  }, [isHome]);
 
   return hash.slice(1);
 };
