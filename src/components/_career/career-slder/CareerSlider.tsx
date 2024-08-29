@@ -56,8 +56,8 @@ const CareerSlider: FC<Props> = ({ career, vacancies }) => {
     if (document) {
       const currentDuties = document.getElementById('career-' + id);
       if (currentDuties && ref.current) {
-        const offset = currentDuties.offsetLeft;
-        (ref.current as HTMLDivElement).style.transform = `translateX(-${offset}px)`;
+        const offset = 100 * (id - 1);
+        (ref.current as HTMLDivElement).style.transform = `translateX(-${offset}%)`;
       }
     }
   }, [id, viewport])

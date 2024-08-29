@@ -8,7 +8,7 @@
   padding-bottom: 30rem;
 
   &__wrap{
-    max-width: 100%;
+    width: 100%;
     flex-grow: 1;
   }
 
@@ -58,22 +58,6 @@
     }
   }
 
-  @include sm{
-    &__wrap{
-      width: min(520px, 100%);
-    }
-    h2 {
-      font-size: 109.4rem;
-    }
-    &__close {
-      height: 60px;
-      padding-right: 7px;
-      img {
-        height: 19px;
-      }
-    }
-  }
-
   @media (max-width: 1200px) {
     &__wrap{
       width: 640px;
@@ -95,4 +79,21 @@
       max-width: 100%;
     }
   }
+
+  @include sm{
+    &__wrap{
+      width: min(520px, 100%);
+    }
+    h2 {
+      font-size: 109.4rem;
+    }
+    &__close {
+      height: 60px;
+      padding-right: 7px;
+      img {
+        height: 19px;
+      }
+    }
+  }
+
 }
