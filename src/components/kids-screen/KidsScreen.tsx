@@ -11,7 +11,7 @@ import frogPicture from '../../../public/Assets/Slides/Animations/Images/Curtain
 import cloudPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Cloud.png';
 import lenyaPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Lenya.png';
 import purpleGirlPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Sonya.png';
-import logo from '../../../public/Assets/Slides/Animations/Images/Curtain/kids-logo.png';
+import logo from '../../../public/Assets/Slides/Animations/Images/Curtain/Kids-logo.svg';
 import japLogo from '../../../public/Assets/Slides/Animations/Images/Curtain/Logo-china.png';
 import car from '../../../public/Assets/Slides/Animations/Images/Curtain/Car.png';
 import TextLogo from '../text-logo/TextLogo';

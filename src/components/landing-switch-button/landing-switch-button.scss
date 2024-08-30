@@ -1,33 +1,30 @@
 @import "@/app/mixins";
 
 .landing-switch-button {
-  position: absolute;
-  top: calc(50vh - 38rem);
+  height: 94.5rem;
 
-  &__wrap {
-    position: relative;
-    height: 100vh;
-    width: 90rem;
-    transition: transform var(--transition);
+  &__content{
+    height: 100%;
   }
 
   &-grup{
     position: fixed;
+    top: 0;
     z-index: 2;
-    height: 200vh;
-    width: 180rem;
+    height: 100vh;
     display: flex;
+    align-items: center;
 
-    .button-right {
-      left: 0;
+    &.button-right {
+      right: 0;
       .adult-button, .kids-button {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
     }
 
-    .button-left {
-      right: 0;
+    &.button-left {
+      left: 0;
 
       .adult-button, .kids-button {
         border-top-left-radius: 0;

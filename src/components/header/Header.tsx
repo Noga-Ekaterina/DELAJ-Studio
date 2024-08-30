@@ -46,7 +46,7 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   const isHome=useIsHome()
   const locale=useLocale()
   const {isLandingSwiped, prevHeaderVariant, changePrevHeaderVariant, changeMenuOpened, changeCurrentPage}=store
-  const ref= useRef(null)
+  const ref= useRef<LottieRefCurrentProps | null>(null)
   const objAnimation={
     kids: logoKids,
     adult: logoAdults,
@@ -57,7 +57,7 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   const handleComplete = () => {
     console.log(ref.current)
     console.log(`Анимация ${animationIndex + 1} завершена!`);
-    (ref as unknown as MutableRefObject<LottieRefCurrentProps>).current?.setDirection(1)
+    ref.current?.setDirection(1)
     setAnimationIndex(prevIndex => prevHeaderVariant=="normal"? (prevIndex + 1) % animations.length: 0);
 
     console.log(animationIndex)
@@ -89,9 +89,9 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
 
   useEffect(() => {
     if (variant =="normal"){
-      (ref as unknown as MutableRefObject<LottieRefCurrentProps>).current.setDirection(-1)
+      ref.current?.setDirection(-1)
     }
-    (ref as unknown as MutableRefObject<LottieRefCurrentProps>).current.play()
+    ref.current?.play()
   }, [animations]);
 
   return (
@@ -116,11 +116,11 @@ const Mail = () => {
   const {changeModalContactsOpened} = store;
   const [isHover, setIsHover] = useState(false);
   const [isWasHover, setIsWasHover] = useState(false);
-  const ref= useRef(null)
+  const ref= useRef<LottieRefCurrentProps | null>(null)
 
   useEffect(() => {
     if (ref.current && isWasHover)
-      (ref as unknown as MutableRefObject<LottieRefCurrentProps>).current.setSpeed(0.6)
+      ref.current?.setSpeed(0.6)
   }, [ref.current, isHover]);
   return (
       <button
