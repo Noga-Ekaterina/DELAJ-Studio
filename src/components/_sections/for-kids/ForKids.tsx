@@ -22,7 +22,7 @@ const ForKids = () => {
 
   return (
     <div className='for-kids'>
-      <Showreel className='landings-showreel'/>
+      <Showreel video="kids"/>
       <HeadingSection
         title={landingsText.kids.title[locale]}
         text={landingsText.kids.text[locale]}

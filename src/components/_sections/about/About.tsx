@@ -100,7 +100,7 @@ const About = () => {
         </div>
 
         {/* <Image className='about-image' src={bigImage} alt=""/> */}
-        <Showreel className='about-showreel' />
+        <Showreel video={"about"} />
 
         <section className="menu-section about-technologies">
           <div className="about-technologies__item">VFX</div>

@@ -13,20 +13,4 @@
       overflow: hidden;
     }
   }
-
-  &-showreel {
-    max-height: 300rem;
-  }
-
-  @media screen and (max-width: 1200px) {
-    &-showreel {
-     max-height: 300px;
-    }
-  }
-
-  @media screen and (max-width: 1025px) {
-    &-showreel {
-     max-height: 230pxpx;
-    }
-  }
 }

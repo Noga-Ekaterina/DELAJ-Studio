@@ -1,6 +1,16 @@
+@import "@/app/mixins";
 .showreel {
+  width: 100vw;
+  aspect-ratio:2048/858;
+  display: flex;
+  align-items: center;
   overflow: hidden;
   position: relative;
+
+  @include sm{
+    aspect-ratio: 16/9;
+  }
+
   &-main {
     min-width: 100%;
     height: auto;

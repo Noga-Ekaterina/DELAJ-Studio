@@ -26,7 +26,7 @@ const ForAdult: FC = () => {
 
   return (
     <div className='for-adult'>
-      <Showreel className='landings-showreel'/>
+      <Showreel video="adults"/>
       <HeadingSection
         className='for-adult__heading'
         title={landingsText.adult.title[locale]}
