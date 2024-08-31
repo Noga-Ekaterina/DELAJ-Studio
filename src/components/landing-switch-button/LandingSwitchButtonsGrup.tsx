@@ -15,7 +15,6 @@ const LandingSwitchButtonsGrup = () => {
   const hash =useHash()
   const [curtainAnimationEnd, setCurtainAnimationEnd] = useState(false)
   const [standartShowButton, setStandartShowButton] = useState(false)
-  const scale= hash=="second-landing"?-1:1
 
   useEffect(() => {
     if (!showMainScreen){
@@ -36,24 +35,22 @@ const LandingSwitchButtonsGrup = () => {
       <>
         <div
             className="landing-switch-button-grup button-right"
-            style={{transform: `scaleX(${scale}`}}
         >
           <LandingSwitchButton
               handleClick={() => changeSwiped(true)}
               render={() => <KidsButton/>}
               firstType="adult"
-              startIShow={standartShowButton && !isLandingSwiped}
+              startIsShow={standartShowButton && !isLandingSwiped}
           />
         </div>
         <div
             className="landing-switch-button-grup button-left"
-            style={{transform: `scaleX(${scale}`}}
         >
           <LandingSwitchButton
               handleClick={() => changeSwiped(false)}
               render={() => <AdultButton/>}
               firstType="kids"
-              startIShow={standartShowButton && isLandingSwiped}
+              startIsShow={standartShowButton && isLandingSwiped}
           />
         </div>
       </>
