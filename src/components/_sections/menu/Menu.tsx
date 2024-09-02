@@ -16,6 +16,7 @@ import bgTablet from '../../../../public/images/modals/menu-bg-tablet.png';
 import bgMobile from '../../../../public/images/modals/menu-bg-mobile.png';
 
 import cn from 'classnames';
+import Outline from "@/components/outline/Outline";
 
 const Menu: FC = () => {
   const locale=useLocale()
@@ -48,6 +49,8 @@ const Menu: FC = () => {
         <Image className='menu-home__bg' src={bg} alt="" width={1000}/>
         <Image className='menu-home__bg menu-home__bg-tablet' width={1000} src={bgTablet} alt="" />
         <Image className='menu-home__bg menu-home__bg-mobile' width={1000} src={bgMobile} alt="" />
+
+        <Outline/>
       </div>
   );
 };

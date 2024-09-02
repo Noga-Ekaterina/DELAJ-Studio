@@ -69,7 +69,6 @@ const App = ({children}:IWithChildren) => {
       <>
         {(!isload || !isHome) && <Header/>}
         {children}
-        <Outline/>
         <ModalMenu/>
         <ModalContacts/>
       </>

@@ -1,14 +1,9 @@
 .outline {
-  position: fixed;
+  position: absolute;
   left: 0;
-  right: 0;
+  width: 100vw;
   height: 5rem;
-  background-color: currentColor;
   z-index: 2;
-
-  &.topline {
-    top: 0;
-  }
   &.underlines {
     bottom: 0;
     display: flex;

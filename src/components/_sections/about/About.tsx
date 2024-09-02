@@ -40,6 +40,7 @@ import sponsor23 from '../../../../public/images/modals/sponsor-23.png'
 import sponsor24 from '../../../../public/images/modals/sponsor-24.png'
 import Showreel from '@/components/showreel/Showreel';
 import {useLocale} from "@/components/_hooks/useLocale";
+import Outline from "@/components/outline/Outline";
 
 const sponsors = [
 sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9,sponsor10,sponsor11,sponsor12,sponsor13,sponsor14,sponsor15,sponsor16,sponsor17,sponsor18,sponsor29,sponsor20,sponsor21,sponsor22,sponsor23,sponsor24
@@ -166,6 +167,7 @@ const About = () => {
           </div>
         </section> 
       </div>
+      <Outline/>
     </div>
   );
 };

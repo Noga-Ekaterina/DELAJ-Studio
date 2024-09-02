@@ -63,7 +63,9 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
     console.log(animationIndex)
   }
 
-
+  useEffect(() => {
+    ref.current?.setSpeed(0.7)
+  }, [ref.current]);
 
   useEffect(() => {
     console.log('Пользователь перешёл с хэша: ' + prevHeaderVariant + ' на хэш: ' + variant);
@@ -266,7 +268,7 @@ const Header: FC<IWithClass> = (props) => {
           .with(
             {hash: 'menu'},
             () => (
-              <header className={cn(className, "hidden-header")} >
+              <header className={cn(className, "white-header")} >
                 <div className='container'>
                   <Mail />
 

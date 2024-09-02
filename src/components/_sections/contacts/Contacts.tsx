@@ -19,6 +19,7 @@ import rabbit from '../../../../public/images/modals/contacts-bg.svg';
 
 import Image from 'next/image';
 import cn from 'classnames';
+import Outline from "@/components/outline/Outline";
 
 const Contacts = () => {
   const locale=useLocale()
@@ -62,6 +63,7 @@ const Contacts = () => {
           </div>
         </div>  
       </div>
+      <Outline/>
     </div>
   );
 };

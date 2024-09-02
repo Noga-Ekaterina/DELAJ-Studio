@@ -16,11 +16,8 @@ import menuSections from "@/store/text/menuSecton";
 import {observer} from "mobx-react-lite";
 import Link from "next/link";
 import career from "@/store/text/career";
-const getData = async () => {
-  const response = await fetch('/api/career');
-  const data = await response.json();
-  return data;
-}
+import Outline from "@/components/outline/Outline";
+
 
 const Career = () => {
   const locale=useLocale()
@@ -49,6 +46,7 @@ const Career = () => {
             )}
           </div>
         </div>
+        <Outline/>
       </div>
   );
 };

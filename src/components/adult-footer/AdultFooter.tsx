@@ -15,6 +15,7 @@ import {observer} from "mobx-react-lite";
 import logo from '../../../public/Assets/Slides/Animations/Images/Adults/footer-logo.svg'
 import footerMan from '../../../public/Assets/Slides/Animations/Images/Adults/footer-man.png'
 import FooterCareerList from "@/components/footer-career-list/FooterCareerList";
+import Outline from "@/components/outline/Outline";
 
 const AdultFooter: FC = () => {
   const locale=useLocale()
@@ -65,12 +66,7 @@ const AdultFooter: FC = () => {
         <Image src={footerMan} alt="" />
       </div>
 
-      <div className="adult-footer__underlines">
-        <div className="main-blue"></div>
-        <div className="yellow"></div>
-        <div className="red"></div>
-        <div className="purple"></div>
-      </div>
+      <Outline/>
     </footer>
   );
 };

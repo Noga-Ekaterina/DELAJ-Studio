@@ -124,7 +124,7 @@ const Scroller: FC<IWithChildren> = (props) => {
 
           console.log({isAtBottom, isAtTop})
 
-          if (scrollDirection=="bottom" && bottom<100){
+          if (scrollDirection=="bottom" && bottom<200){
             if (nextSection) {
               (nextSection as HTMLDivElement).style.display="block"
               window.location.hash = (nextSection as HTMLDivElement).dataset.name || ''
@@ -187,8 +187,10 @@ const Scroller: FC<IWithChildren> = (props) => {
     const overflow=getComputedStyle(document.documentElement).overflow
     scrollTimeout = setTimeout(() => {
       if (overflow!="hidden"  && hash != "" && hash != "main-screen" && isScrollOn && scrollerContainerRef.current) {
-        if (isAtBottom)
-          window.location.hash=""
+        if (isAtBottom) {
+          window.location.hash = ""
+          isAtBottom=false
+        }
         if (isAtTop)
           window.location.hash="main-screen"
       }

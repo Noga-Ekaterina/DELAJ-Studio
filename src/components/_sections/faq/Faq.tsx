@@ -8,6 +8,7 @@ import { circe } from '@/fonts';
 import menuSections from "@/store/text/menuSecton";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
+import Outline from "@/components/outline/Outline";
 
 const questions = [
   ['Я отправил портфолио, когда мне ответят?', 'Противоположная точка зрения подразумевает, что многие известные личности описаны максимально подробно. Следует отметить, что консультация с широким активом не оставляет шанса для глубокомысленных рассуждений. '],
@@ -34,6 +35,7 @@ const Faq = () => {
           ))}
         </div>
       </div>
+      <Outline/>
     </div>
   );
 };

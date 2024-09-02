@@ -9,6 +9,7 @@ import cn from 'classnames';
 import menuSections from "@/store/text/menuSecton";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
+import Outline from "@/components/outline/Outline";
 
 const Ideas = () => {
   const locale=useLocale()
@@ -38,6 +39,7 @@ const Ideas = () => {
           <ExamplesSlider className='ideas-slider'/>
         </div>
       </div>
+      <Outline/>
     </div>
   );
 };

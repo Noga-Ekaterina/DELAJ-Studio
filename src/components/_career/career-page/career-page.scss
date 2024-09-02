@@ -12,7 +12,11 @@
     flex-grow: 1;
   }
 
-  &__content{
+  .close-modal-button__wrapp {
+    background: #fff;
+    border-top: 5rem solid var(--blue);
+  }
+    &__content{
     padding: 30rem 30rem 100rem 100rem;
     position: relative;
     width: 100%;
