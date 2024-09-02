@@ -34,48 +34,17 @@ const animations={
 }
 
 interface Props extends IWithClass {
-  render: () => ReactNode 
   handleClick: () => void
-  firstType: "adult" | "kids",
-  startIsShow: boolean
+  type: "adult" | "kids",
+  isShow: boolean
 }
 
-const LandingSwitchButton: FC<Props> = ({render,  className, handleClick, firstType, startIsShow}) => {
+const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) => {
   const ref=useRef<LottieRefCurrentProps | null>(null)
-  const [isShow, setIsShow] = useState(startIsShow)
-  const [type, setType] = useState(firstType)
   const [animation, setAnimation] = useState<"in" | "full" | "out"| "hover">("out")
   const [isWasHover, setIsWasHover] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [isWasScroll, setIsWasScroll] = useState(false)
-  const hash=useHash()
-  const [scale, setScale] = useState<1 | -1>(1)
-  const [isEndOut, setIsEndOut] = useState(false)
-  const isLoad=useLoad()
-
-  const handleEnd = () => {
-    if (!isShow && startIsShow){
-      setIsEndOut(true)
-      setIsShow(true)
-    }
-  }
-
-  useEffect(() => {
-    if (isEndOut || !startIsShow){
-      setScale(hash=="second-landing"?-1:1)
-      setIsEndOut(false)
-
-      if (hash=="first-landing")
-        setType(firstType)
-      else if (hash=="second-landing")
-        setType(firstType=="kids"? "adult":"kids")
-    }
-
-  }, [isEndOut, hash]);
-
-  useEffect(() => {
-    setIsShow(startIsShow)
-  }, [startIsShow]);
 
   useEffect(() => {
     if (isShow) {
@@ -110,19 +79,19 @@ const LandingSwitchButton: FC<Props> = ({render,  className, handleClick, firstT
     } else {
       ref.current?.setDirection(1)
       setAnimation("out")
-      console.log({startIsShow: startIsShow, firstType})
+      console.log({startIsShow: isShow, type: type})
     }
   }, [isShow, isWasScroll, isHover, ref.current])
 
   useEffect(() => {
-    console.log({firstType, startIsShow})
-    if (startIsShow)
+    console.log({type: type, isShow: isShow})
+    if (isShow)
       ref.current?.play()
   }, [animation, isHover]);
 
-  useEffect(() => {
-    setIsShow(false)
-  }, [hash]);
+  // useEffect(() => {
+  //   setIsShow(false)
+  // }, [hash]);
 
   return (
       <button
@@ -134,14 +103,14 @@ const LandingSwitchButton: FC<Props> = ({render,  className, handleClick, firstT
           onClick={handleClick}
           className={'landing-switch-button'}
           type='button'
-          style={{pointerEvents: isWasScroll? "auto":"none", transform: `scaleX(${scale}`}}
+          style={{pointerEvents: isWasScroll? "auto":"none",}}
       >
         <Lottie
             animationData={animations[type][animation]}
             loop={false}
             autoPlay={false}
             lottieRef={ref}
-            onComplete={handleEnd}
+            // onComplete={handleEnd}
             className="landing-switch-button__content"
         />
       </button>

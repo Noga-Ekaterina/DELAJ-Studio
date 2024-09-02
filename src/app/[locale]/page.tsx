@@ -26,17 +26,11 @@ const Page = () => {
     <Scroller>
       <Section id="empty-place"/>
       <Section id="first-landing">
-        <Landings 
-          FirstLanding={[<ForKids key="1-kids-page"/>, <KidsButton key="1-kids-btn"/>]}
-          SecondLanding={[<ForAdult key="1-adult-page"/>, <AdultButton key="1-adult-btn"/>]}
-        />
+        <Landings direction="left"/>
       </Section>
         
       <Section id="second-landing">
-        <Landings 
-          FirstLanding={[<ForAdult key="2-kids-page"/>, <AdultButton key="2-kids-btn"/>]}
-          SecondLanding={[<ForKids key="2-adult-page"/>, <KidsButton key="2-adu;t-btn"/>]}
-        />
+        <Landings direction="right"/>
       </Section>
 
       <Section id="menu">

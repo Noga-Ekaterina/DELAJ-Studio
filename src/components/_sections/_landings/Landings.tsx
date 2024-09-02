@@ -8,10 +8,11 @@ import classNames from 'classnames';
 import { transitionStyles } from '@/vars';
 import Showreel from '@/components/showreel/Showreel';
 import LandingSwitchButton from '@/components/landing-switch-button/LandingSwitchButton';
+import ForKids from "@/components/_sections/for-kids/ForKids";
+import ForAdult from "@/components/_sections/for-adult/ForAdult";
 
 interface Props {
-  FirstLanding: ReactElement[]
-  SecondLanding : ReactElement[]
+  direction: "right"|"left"
 }
 
 const styles = {
@@ -22,13 +23,12 @@ const styles = {
   exited:  {translate: '-100vw'},
 }
 
-const Landings: FC<Props> = ({FirstLanding, SecondLanding}) => {
+const Landings: FC<Props> = ({ direction}) => {
   const { isLandingSwiped, swipeLanding } = store; 
-  const [FirstComponent, FirstButton] = FirstLanding;
-  const [SecondComponent, SecondButton] = SecondLanding;
+  const isSectionSwiped=direction=="left"? isLandingSwiped:!isLandingSwiped
 
   return (
-    <Transition in={!isLandingSwiped} timeout={0}>
+    <Transition in={!isSectionSwiped} timeout={0}>
       {(state => (
         <div 
           className='landings'
@@ -40,11 +40,11 @@ const Landings: FC<Props> = ({FirstLanding, SecondLanding}) => {
               ...transitionStyles
             }}    
           >
-            <div className={classNames("landings-page", isLandingSwiped ? 'hidden' : '')}>
-              {FirstComponent}
+            <div className={classNames("landings-page", isSectionSwiped ? 'hidden' : '')}>
+              <ForKids/>
             </div>
-            <div className={classNames("landings-page", !isLandingSwiped ? 'hidden' : '')}>
-              {SecondComponent}
+            <div className={classNames("landings-page", !isSectionSwiped ? 'hidden' : '')}>
+              <ForAdult/>
             </div>
           </div>
         </div>
