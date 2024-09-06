@@ -79,6 +79,7 @@ const MainScreen: FC = () => {
       disabled()
     } else if (hash !== 'main-screen' && hash!=""){
       changeShowMainScreen(false);
+      console.log("hidden main screen")
 
       if (hash!="first-landing")
         changeCurrentPage(null)

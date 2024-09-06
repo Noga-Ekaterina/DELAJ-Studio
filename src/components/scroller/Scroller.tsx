@@ -112,9 +112,9 @@ const Scroller: FC<IWithChildren> = (props) => {
     clearTimeout((scrollTimeout as number));
 
     const hash=window.location.hash.slice(1)
-    console.log(hash)
+    console.log(isModalMenuOpened)
     // scrollTimeout = setTimeout(() => {
-      if (!isScrolling &&hash!="" && hash!="main-screen"&& !isModalMenuOpened && !isModalContactsOpened && scrollerContainerRef.current) {
+      if (!isScrolling &&hash!="" && hash!="main-screen" && scrollerContainerRef.current) {
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
         isHiddenSection=false
         if (activeItem){

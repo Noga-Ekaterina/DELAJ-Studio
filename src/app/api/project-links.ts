@@ -2,7 +2,7 @@ const data = {
   "kids" : [
     {
       id : 1,
-      preview: '/images/data/kids-data/1.png',
+      preview: '/images/data/kids-data/preview-big.png',
       href: ''
     },
     {
@@ -17,7 +17,7 @@ const data = {
     },
     {
       id : 4,
-      preview: '/images/data/kids-data/4.png',
+      preview: '/images/data/kids-data/5.png',
       href: ''
     },
     {
@@ -84,7 +84,7 @@ const data = {
   "adult" : [
     { 
       id: 1, 
-      preview: '/images/data/adult-data/1.png',
+      preview: '/images/data/adult-data/preview-big.png',
       href: '1703-twins'
     },
     { 
@@ -99,7 +99,7 @@ const data = {
     },
     { 
       id: 4, 
-      preview: '/images/data/adult-data/4.png',
+      preview: '/images/data/adult-data/5.png',
       href: ''
     },
     { 

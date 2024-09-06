@@ -35,7 +35,7 @@ const ForAdult: FC = () => {
         image={headingImage}
       />
       <div className="for-adult__projects-wrap ">
-        <ProjectList title='adult' />
+        <ProjectList title='adults' />
       </div>
 
       <AdultFooter />

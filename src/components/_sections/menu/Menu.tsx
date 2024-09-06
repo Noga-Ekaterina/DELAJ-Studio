@@ -17,9 +17,11 @@ import bgMobile from '../../../../public/images/modals/menu-bg-mobile.png';
 
 import cn from 'classnames';
 import Outline from "@/components/outline/Outline";
+import {useIsHome} from "@/components/_hooks/useIsHome";
 
 const Menu: FC = () => {
   const locale=useLocale()
+  const isHome=useIsHome()
   const {menuSectionTitle}=menuSections
   const [links, setLinks] = useState<any[]>([])
 
@@ -29,14 +31,19 @@ const Menu: FC = () => {
       const keys = Object.keys(menuSectionTitle) as Array<keyof typeof menuSectionTitle>;
       for (let key of keys) {
         newArr.push(
-            <a href={`#${key}`} key={`menu-${key}`} className={cn("menu-link", `menu-link--${locale}`)} id={`menu-${key}`}>{menuSectionTitle[key][locale]}</a>
+            isHome ?
+                <a href={`#${key}`} key={`menu-${key}`} className={cn("menu-link", `menu-link--${locale}`)}
+                   id={`menu-${key}`}>{menuSectionTitle[key][locale]}</a>
+                :
+                <Link href={`/${locale}#${key}`} key={`menu-${key}`} className={cn("menu-link", `menu-link--${locale}`)}
+                   id={`menu-${key}`}>{menuSectionTitle[key][locale]}</Link>
         );
       }
 
 
       setLinks(newArr)
     }
-  }, [menuSectionTitle, locale]);
+  }, [menuSectionTitle, locale, isHome]);
   return (
       <div className={cn('menu menu-home', circe.className)}>
         <div className={cn("menu-home__links", `menu-home__links--${locale}`)}>

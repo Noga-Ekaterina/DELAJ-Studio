@@ -1,4 +1,10 @@
+@import "@/app/mixins";
 .project {
+  padding-top: 56rem;
+
+  @include sm{
+    padding-top: 60px;
+  }
   .container {
     max-width: 812rem;
   }
@@ -11,14 +17,27 @@
 
   &-cover {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
+
+    &-wrapp{
+      width: 100%;
+      height: 400rem;
+
+      @include md{
+        height: 400px;
+      }
+
+      @include sm{
+        height: 56vw;
+      }
+    }
   }
 
   &-data {
     font-size: 15rem;
     margin-bottom: 55rem;
-    min-height: 100vh;
     &__bottom {
       margin-top: 35rem;
       display: flex;
@@ -103,7 +122,7 @@
       padding: 0;
     }
     &-data {
-      padding: 38px 20px 30px;
+      padding: 25px 20px 30px;
       margin-bottom: 0;
 
       h1 {

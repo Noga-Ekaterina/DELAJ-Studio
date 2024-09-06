@@ -17,6 +17,26 @@ export interface ILandingText {
   footerText: ITranslation<{text: string, highlighted: string}>
 }
 
+export interface IProjectParameter {
+  title: ITranslation<string>
+  value: ITranslation<string>
+}
+
+export interface IProject {
+  id: number,
+  data: {
+    title:  ITranslation<string>,
+    type: ITranslation<string>
+    parameters: IProjectParameter[]
+    description: ITranslation<string>
+  }
+}
+
+export interface IProjectsList {
+  adults: IProject[]
+  kids: IProject[]
+}
+
 export interface ICareerDuties {
   title: ITranslation<string>
   list: ITranslation<string[]>

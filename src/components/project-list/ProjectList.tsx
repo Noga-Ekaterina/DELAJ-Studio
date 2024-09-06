@@ -9,6 +9,7 @@ import cn from 'classnames';
 import { useMediaQuery } from 'react-responsive';
 import {getShuffleArray} from "@/utils/getShuffleArray";
 import projects from "@/store/text/Projects";
+import {IProject, IProjectsList} from "@/typesData";
 
 interface Props extends IWithClass{
   title: string
@@ -60,19 +61,22 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   const [itemsGrid, setItemsGrid] = useState<any[]>([]);
 
   useEffect(() => {
-    const shuffleData = getShuffleArray([...data]);
+    if (!projectsList) return;
+
+    const shuffleData = getShuffleArray([...projectsList[title as keyof IProjectsList]]);
+
     setItemsGrid(getModifiedList(shuffleData));
-  }, [data, baseChunkSize]);
+  }, [projectsList, baseChunkSize]);
 
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/projects/${title}`);
-      const json = await response.json();
-
-      setData(json);
-    })();
-  },[])
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch(`/api/projects/${title}`);
+  //     const json = await response.json();
+  //
+  //     setData(json);
+  //   })();
+  // },[])
   useEffect(() => {
     console.log(projectsList)
   }, [projectsList]);
@@ -100,15 +104,15 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
             <div className={rowClass}
                  key={`project-list-row-${rowIndex}`}>
 
-              {row.map((item: ProjectItem, index: number) => {
+              {row.map((item: IProject, index: number) => {
                 return (
                   <Link
-                    href={`projects/${item.href}`}
+                    href={`projects/${title}/${item.id}`}
                     className='project-list__item'
 
                     key={`project-list-item-${item.id}`}>
                     <Image
-                      src={item.preview}
+                      src={`/Assets/Projects/${title[0].toUpperCase() + title.slice(1)}/Project-${item.id}/preview.png`}
                       key={'project-list-' + item.id}
                       width={400}
                       height={200}

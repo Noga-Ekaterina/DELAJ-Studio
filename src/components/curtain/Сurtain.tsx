@@ -35,12 +35,18 @@ const Curtain: FC<CurtainProps> = ({children, show, zIndex, className}) => {
 
 
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>
     if (show){
       setHidden(false)
     } else{
-      setTimeout(()=>{
+      timer= setTimeout(()=>{
         setHidden(true)
       },700)
+    }
+
+    return ()=>{
+      clearTimeout(timer)
+      setHidden(false)
     }
   },[show])
 

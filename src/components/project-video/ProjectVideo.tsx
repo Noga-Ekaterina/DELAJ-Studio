@@ -10,14 +10,8 @@ interface Props extends IWithClass {
 
 const ProjectVideo: FC<Props> = (props) => {
   return (
-    <video className={classNames(props.className)} controls={false} muted preload="none" autoPlay loop>
+    <video className={classNames(props.className)} controls preload="metadata">
       <source src={props.src} type="video/mp4" />
-      <track
-        src="/path/to/captions.vtt"
-        kind="subtitles"
-        srcLang="en"
-        label="English"
-      />
     </video>
   );
 };

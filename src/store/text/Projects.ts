@@ -1,8 +1,9 @@
 import {makeAutoObservable} from "mobx";
 import {fetchData} from "@/utils/fetchData";
+import {IProjectsList} from "@/typesData";
 
 class Store {
-  projectsList= null;
+  projectsList: null | IProjectsList= null;
 
   constructor() {
     makeAutoObservable(this);
