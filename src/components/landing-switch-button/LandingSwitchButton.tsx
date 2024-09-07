@@ -41,24 +41,36 @@ interface Props extends IWithClass {
 
 const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) => {
   const ref=useRef<LottieRefCurrentProps | null>(null)
+  const [isHidden, setIsHidden] = useState(false)
+  const [outEnd, setOutEnd] = useState(false)
   const [animation, setAnimation] = useState<"in" | "full" | "out"| "hover">("out")
   const [isWasHover, setIsWasHover] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [isWasScroll, setIsWasScroll] = useState(false)
 
+  const handleEnd = () => {
+    if (animation=="out")
+      setOutEnd(true)
+  }
+
   useEffect(() => {
+    const handleScroll = () => {
+      setIsWasScroll(true)
+
+      window.removeEventListener("scroll", handleScroll)
+    }
+
     if (isShow) {
-      const handleScroll = () => {
-        setIsWasScroll(true)
-
-        window.removeEventListener("scroll", handleScroll)
-      }
-
+      setOutEnd(false)
       window.addEventListener("scroll", handleScroll)
     }
     else {
       setIsWasScroll(false)
       setIsWasHover(false)
+    }
+
+    return ()=>{
+      window.removeEventListener("scroll", handleScroll)
     }
   }, [isShow]);
 
@@ -103,14 +115,14 @@ const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) 
           onClick={handleClick}
           className={'landing-switch-button'}
           type='button'
-          style={{pointerEvents: isWasScroll? "auto":"none",}}
+          style={{pointerEvents: isWasScroll? "auto":"none", display: outEnd? "none":"block"}}
       >
         <Lottie
             animationData={animations[type][animation]}
             loop={false}
             autoPlay={false}
             lottieRef={ref}
-            // onComplete={handleEnd}
+            onComplete={handleEnd}
             className="landing-switch-button__content"
         />
       </button>

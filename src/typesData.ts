@@ -24,6 +24,7 @@ export interface IProjectParameter {
 
 export interface IProject {
   id: number,
+  idea: boolean
   data: {
     title:  ITranslation<string>,
     type: ITranslation<string>

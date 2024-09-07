@@ -1,26 +1,51 @@
 'use client';
-import { FC, useRef } from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import './examples-slider.scss';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Navigation } from 'swiper/modules';
-import example1 from '../../../public/images/data/adult-data/1.png';
-import example2 from '../../../public/images/data/adult-data/2.png';
-import example3 from '../../../public/images/data/kids-data/8.png';
-import example4 from '../../../public/images/data/kids-data/2.png';
 import arrow from '../../../public/images/arrow.svg';
 import 'swiper/css';
 import { IWithClass } from '@/types';
 import cn from 'classnames';
+import {IProject} from "@/typesData";
+import projects from "@/store/text/Projects";
+import {getShuffleArray} from "@/utils/getShuffleArray";
+import {observer} from "mobx-react-lite";
+
+interface ISlide extends IProject{
+  type: "adults" | "kids"
+}
 
 const ExamplesSlider: FC<IWithClass> = ({ className }) => {
-  const ref = useRef<SwiperRef>(null);
+  const ref = useRef<SwiperRef | null>(null);
+  const {projectsList}=projects
+  const [slides, setSlides] = useState<ISlide[]>([])
 
   const toNextSlide = () => {
     if (!ref.current) return;
-    ref.current.swiper.slideNext();
+    console.log('next')
+    console.log(ref.current?.swiper)
+    ref.current?.swiper.slideNext();
   }
+
+  useEffect(() => {
+    if (!projectsList) return
+
+    const newArr: ISlide[]=[]
+    const keys = Object.keys(projectsList) as Array<keyof typeof projectsList>;
+    for (let key of keys) {
+      (projectsList[key] as IProject[]).forEach(item=>{
+        if (item.idea)
+          newArr.push({...item, type: key})
+      })
+    }
+
+    setSlides(getShuffleArray(newArr))
+  }, [projectsList]);
+
+  if (!projectsList)return <div></div>
 
   return (
     <div className={cn(className, "examples-slider")}>
@@ -39,29 +64,28 @@ const ExamplesSlider: FC<IWithClass> = ({ className }) => {
         loop={true}
         ref={ref}
       >
-        <SwiperSlide>
-          <Link href="/">
-            <Image src={example1} alt="" />
-          </Link>                  
-        </SwiperSlide>
-        <SwiperSlide>
-            <Link href="/">
-              <Image src={example2} alt="" />
-            </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-            <Link href="/">
-              <Image src={example3} alt="" />
-            </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-            <Link href="/">
-              <Image src={example4} alt="" />
-            </Link>
-        </SwiperSlide>
+        {
+          slides.map(slide=>(
+              <SwiperSlide
+                key={`project-ideas-item-${slide.id}`}
+              >
+                <Link
+                    href={`projects/${slide.type}/${slide.id}`}
+                >
+
+                  <Image
+                      src={`/Assets/Projects/${slide.type[0].toUpperCase() + slide.type.slice(1)}/Project-${slide.id}/preview.png`}
+                      width={131}
+                      height={63}
+                      alt=""
+                  />
+                </Link>
+              </SwiperSlide>
+          ))
+        }
       </Swiper>
     </div>
   );
 };
 
-export default ExamplesSlider;
+export default observer(ExamplesSlider);

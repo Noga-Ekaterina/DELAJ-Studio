@@ -2,6 +2,7 @@
   "adults": [
     {
       "id": 1,
+      "idea": false,
       "data": {
         "title": {
           "ru": "1703 близнецы",
@@ -50,6 +51,7 @@
     },
     {
       "id": 2,
+      "idea": true,
       "data": {
         "title": {
           "ru": "артика-17",
@@ -98,6 +100,7 @@
     },
     {
       "id": 3,
+      "idea": false,
       "data": {
         "title": {
           "ru": "николай басков",
@@ -147,6 +150,7 @@
     },
     {
       "id": 4,
+      "idea": false,
       "data": {
         "title": {
           "ru": "1703 погоня",
@@ -196,6 +200,7 @@
     },
     {
       "id": 5,
+      "idea": false,
       "data": {
         "title": {
           "ru": "черное небо",
@@ -245,6 +250,7 @@
     },
     {
       "id": 6,
+      "idea": true,
       "data": {
         "title": {
           "ru": "making of близнецы",
@@ -294,6 +300,7 @@
     },
     {
       "id": 7,
+      "idea": false,
       "data": {
         "title": {
           "ru": "родион раскол",
@@ -343,6 +350,7 @@
     },
     {
       "id": 8,
+      "idea": false,
       "data": {
         "title": {
           "ru": "Черный опер",
@@ -392,6 +400,7 @@
     },
     {
       "id": 9,
+      "idea": false,
       "data": {
         "title": {
           "ru": "кикимора",
@@ -441,6 +450,7 @@
     },
     {
       "id": 10,
+      "idea": false,
       "data": {
         "title": {
           "ru": "проект доверие",
@@ -490,6 +500,7 @@
     },
     {
       "id": 11,
+      "idea": false,
       "data": {
         "title": {
           "ru": "санек и борян",
@@ -541,6 +552,7 @@
   "kids": [
     {
       "id": 1,
+      "idea": true,
       "data": {
         "title": {
           "ru": "Спортшкола",
@@ -590,6 +602,7 @@
     },
     {
       "id": 2,
+      "idea": false,
       "data": {
         "title": {
           "ru": "какой-то зверь",
@@ -639,6 +652,7 @@
     },
     {
       "id": 3,
+      "idea": false,
       "data": {
         "title": {
           "ru": "шоу воды",
@@ -687,6 +701,7 @@
       }
     },    {
       "id": 4,
+      "idea": false,
       "data": {
         "title": {
           "ru": "соня и леня",
@@ -736,6 +751,7 @@
     },
     {
       "id": 5,
+      "idea": true,
       "data": {
         "title": {
           "ru": "метео патруль",
@@ -785,6 +801,7 @@
     },
     {
       "id": 6,
+      "idea": false,
       "data": {
         "title": {
           "ru": "регби объеденяет",
@@ -834,6 +851,7 @@
     },
     {
       "id": 7,
+      "idea": false,
       "data": {
         "title": {
           "ru": "валя времена года",
@@ -883,6 +901,7 @@
     },
     {
       "id": 8,
+      "idea": false,
       "data": {
         "title": {
           "ru": "битва роботов",
@@ -932,6 +951,7 @@
     },
     {
       "id": 9,
+      "idea": false,
       "data": {
         "title": {
           "ru": "булки",
@@ -981,6 +1001,7 @@
     },
     {
       "id": 10,
+      "idea": false,
       "data": {
         "title": {
           "ru": "business wars",
@@ -1030,6 +1051,7 @@
     },
     {
       "id": 11,
+      "idea": false,
       "data": {
         "title": {
           "ru": "какой-то город",
@@ -1079,6 +1101,7 @@
     },
     {
       "id": 12,
+      "idea": false,
       "data": {
         "title": {
           "ru": "sozdau 25",
