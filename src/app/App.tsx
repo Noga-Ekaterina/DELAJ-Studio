@@ -32,6 +32,7 @@ const App = ({children}:IWithChildren) => {
   const [currentHash, setCurrentHash] = useState('');
   const lenis=useLenis()
   const {isScrollOn}=store
+  const isLoad=useLoad()
 
   useEffect(() => {
     if (lenis){
@@ -55,7 +56,7 @@ const App = ({children}:IWithChildren) => {
     changePrevHash(currentHash)
     setCurrentHash(hash)
 
-    if (isHome)
+    if (isHome && isload)
       fetchAll()
 
     if (!projectsList && (isHome || pathname.includes("projects")))
