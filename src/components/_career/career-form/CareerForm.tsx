@@ -58,10 +58,11 @@ const CareerItemForm = () => {
         </div>
       </label>
       <div className="career-form__bottom">
-        <div className="career-form__checkbox">
-          <Field type="checkbox" name="acceptTerms" required/>
-          <label htmlFor='acceptTerms'>Я согласен на обработку персональных данных</label>
-        </div>
+        <label className="career-form__checkbox-wrapp">
+          <Field type="checkbox" name="acceptTerms" required id='acceptTerms'/>
+          <span className="career-form__checkbox"></span>
+          <span className="career-form__checkbox-text">Я согласен на обработку персональных данных</span>
+        </label>
 
         <button className={classNames('career-form__submit', raleway.className)} type="submit">откликнуться</button>
       </div>

@@ -1,3 +1,4 @@
+@import "@/app/mixins";
 .career-form {
   flex: 1;
   min-width: 430px;
@@ -46,14 +47,43 @@
   }
 
   &__checkbox {
-    margin-top: 15rem;
-    display: flex;
-    align-items: center;
-    font-size: 8rem;
-    column-gap: 7rem;
-    color: #C8C8C8;
-    label {
+    position: relative;
+    width: max(8rem, 8px);
+    aspect-ratio:1/1;
+    border: 1rem solid #C8C8C8;
 
+    &:before{
+      display: none;
+      content: '\2714';
+      color: #000;
+      position: absolute;
+      bottom: 0;
+      right: -0.12em;
+      line-height: 1em;
+
+      input:checked +&{
+        display: block;
+      }
+    }
+
+    &-wrapp{
+      margin-top: 15rem;
+      display: flex;
+      align-items: center;
+      font-size: max(8rem, 8px);
+      column-gap: max(7rem, 7px);
+      input{
+        display: none;
+      }
+    }
+
+    &-text{
+      color: #C8C8C8;
+      font-weight: 700;
+
+      input:checked ~& {
+        text-decoration: line-through;
+      }
     }
   }
 
@@ -75,7 +105,7 @@
     color: #A1A1A1;
     font-weight: 800;
     &:hover {
-      background-color: #A1A1A1;
+      background-color: #1D1D1D;
       color: #fff;
     }
   }
@@ -106,13 +136,7 @@
         }
       }
     }
-  
-    &__checkbox {
-      margin-top: 15px;
-      font-size: 8px;
-      column-gap: 7px;
-    }
-  
+
     &__submit {
       top: -25px;
       width: 138px;
