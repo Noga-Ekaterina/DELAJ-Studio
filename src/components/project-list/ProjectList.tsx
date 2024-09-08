@@ -10,6 +10,7 @@ import { useMediaQuery } from 'react-responsive';
 import {getShuffleArray} from "@/utils/getShuffleArray";
 import projects from "@/store/text/Projects";
 import {IProject, IProjectsList} from "@/typesData";
+import {observer} from "mobx-react-lite";
 
 interface Props extends IWithClass{
   title: string
@@ -133,4 +134,4 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   );
 };
 
-export default ProjectList;
+export default observer(ProjectList);
