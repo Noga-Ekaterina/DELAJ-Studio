@@ -92,9 +92,11 @@
       img {
         position: relative;
         top: 25px;
+        left: max(0px, calc(7.5% - 1.178vh));
         max-height: 190%;
         width: 100%;
         height: auto;
+        transition-duration: 0.8s;
 
         @include lg-book{
           width: 90%;
@@ -109,6 +111,7 @@
     &#kids-screen-picture {
       grid-column: 2 / 4;
       display: flex;
+      align-items: center;
       justify-content: center;
 
       @include sm{
@@ -280,6 +283,7 @@
         object-position: right;
         position: absolute;
         bottom: 2%;
+        transition-duration: 0.6s;
 
         @include md-book{
           max-width: 44%;
@@ -322,6 +326,7 @@
         max-height: 95%;
         width: 100%;
         flex-shrink: 0;
+        transition-duration: 0.6s;
 
         @include sm{
           position: absolute;
@@ -356,6 +361,7 @@
 
       img{
         top: 50px;
+        left: 0;
 
         @include sm{
           top: 5px;

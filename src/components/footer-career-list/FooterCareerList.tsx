@@ -2,6 +2,7 @@ import React from 'react';
 import career from "@/store/text/career";
 import {useLocale} from "@/components/_hooks/useLocale";
 import Link from "next/link";
+import {observer} from "mobx-react-lite";
 
 const FooterCareerList = () => {
   const locale=useLocale()
@@ -24,4 +25,4 @@ const FooterCareerList = () => {
   );
 };
 
-export default FooterCareerList;
+export default observer(FooterCareerList);

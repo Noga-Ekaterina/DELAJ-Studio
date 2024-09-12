@@ -63,13 +63,14 @@ const MainScreen: FC = () => {
     }
   }
   const handleEvent = () => {
-    if (!isLoad)
+    if (!isLoad && !isAnimationPlay)
       changeMenuOpened(true);
   }
 
   useEffect(() => {
     console.log({isAnimationPlay, isLoad})
     if (!hash || !showMainPage) {
+      console.log("hidden menu screen")
       changeMenuOpened(false);
       changeCurrentPage(null);
       changeShowMainScreen(true);
