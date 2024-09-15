@@ -38,4 +38,4 @@ const Section: FC<Props> = (props) => {
   );
 };
 
-export default observer(Section);
+export default Section;

@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 import { CurrentPageType } from "@/types";
 import { transitionStyles } from "@/vars";
 import classNames from "classnames";
+import {useChangeHash} from "@/components/_hooks/useChangeHash";
 type StyleObject = Record<string, string | number>
 
 interface Props {
@@ -30,6 +31,7 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
   const ref = useRef(null);
   const isThisPath = currentPage === props.page;
   const styleToggle = isThisPath ? 'onCurrentPage' : 'onOpen' ;
+  const changeHash=useChangeHash()
 
   const chooseLanding = () => {
     changeCurrentPage(props.page);
@@ -38,7 +40,7 @@ const PageMenuSide: FC<Props> = observer(({Component, ...props}) => {
 
   const swipeScreenUp = () => {
     if (isThisPath && window) {
-      window.location.hash = 'first-landing';
+      changeHash('first-landing')
     }
   }
 

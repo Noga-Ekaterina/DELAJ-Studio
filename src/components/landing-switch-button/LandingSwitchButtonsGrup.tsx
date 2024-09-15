@@ -1,5 +1,5 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import store from "@/store/store";
 import './landing-switch-button.scss';
 import LandingSwitchButton from "@/components/landing-switch-button/LandingSwitchButton";
@@ -47,4 +47,4 @@ const LandingSwitchButtonsGrup = () => {
   );
 };
 
-export default observer(LandingSwitchButtonsGrup);
+export default memo(observer(LandingSwitchButtonsGrup));

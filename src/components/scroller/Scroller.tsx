@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, FC, useEffect, useRef, useState } from 'react';
+import React, {createContext, FC, memo, useEffect, useRef, useState} from 'react';
 import './scroller.scss';
 import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
@@ -11,6 +11,7 @@ import { sectionsMenuHashes } from '@/vars';
 import { observer } from 'mobx-react-lite';
 import {useLoad} from "@/components/_hooks/useLoad";
 import {usePathname, useRouter} from "next/navigation";
+import {useChangeHash} from "@/components/_hooks/useChangeHash";
 
 const Scroller: FC<IWithChildren> = (props) => {
   const pathname=usePathname()
@@ -40,7 +41,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   let isScrolling=false
   let isHiddenSection= false
   const isLoad=useLoad()
-  const router=useRouter()
+  const changeHash=useChangeHash()
 
   useEffect(() => {
     clearTimeout(scrollUpTimeout)
@@ -72,36 +73,24 @@ const Scroller: FC<IWithChildren> = (props) => {
 
 
   const checkIfAtEnd = () => {
-    clearTimeout((isEndTimeout as number))
     if (scrollerContainerRef.current){
-      const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as             HTMLDivElement).dataset.name==window.location.hash.slice(1))
-      // console.log(scrollDirection)
-      if (activeItem){
-        const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect()
 
-        // console.log({bottom, top})
+      if (window.scrollY>=(scrollerContainerRef.current as HTMLDivElement).clientHeight-window.innerHeight-4){
+        isAtBottom= true
+        isAtTop=false
+        isScrolling= false
+        // performScrollAction(0)
+      }else {
+        isAtBottom=false
+      }
 
-        if (window.scrollY>=(scrollerContainerRef.current as HTMLDivElement).clientHeight-window.innerHeight-4){
-          isEndTimeout= setTimeout(()=>{
-            isAtBottom= true;
-          }, 0)
-          isAtTop=false
-          isScrolling= false
-          // performScrollAction(0)
-        }else {
-          isAtBottom=false
-        }
-
-        if (window.scrollY==0){
-          isEndTimeout= setTimeout(()=>{
-            isAtTop= true;
-          }, 0)
-          isAtBottom=false
-          isScrolling= false
-          // performScrollAction(0)
-        }else {
-          isAtTop=false
-        }
+      if (window.scrollY==0){
+        isAtTop= true;
+        isAtBottom=false
+        isScrolling= false
+        // performScrollAction(0)
+      }else {
+        isAtTop=false
       }
     }
   };
@@ -127,10 +116,10 @@ const Scroller: FC<IWithChildren> = (props) => {
           if (scrollDirection=="bottom" && bottom<200){
             if (nextSection) {
               (nextSection as HTMLDivElement).style.display="block"
-              window.location.hash = (nextSection as HTMLDivElement).dataset.name || ''
+              changeHash((nextSection as HTMLDivElement).dataset.name || '')
               // smoothScroll(bottom, 400)
             } else {
-              window.location.hash = ""
+              changeHash("")
               changeCurrentPage(null)
               changeMenuOpened(false)
               console.log("end")
@@ -164,7 +153,7 @@ const Scroller: FC<IWithChildren> = (props) => {
               //   setIsAnimationPlay(false)
               // }, 550)
             }
-            window.location.hash = (prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen"
+            changeHash((prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen")
           }
         }
         clearTimeout((scrollTimeout as number));
@@ -255,10 +244,8 @@ const Scroller: FC<IWithChildren> = (props) => {
   };
 
   useEffect(() => {
-    const debouncedCheckIfAtEnd = debounce(checkIfAtEnd, 100);
-
     const handleScroll = () => {
-      debouncedCheckIfAtEnd();
+      checkIfAtEnd();
 
       changeScrollPositionMainPage(window.scrollY)
 
@@ -336,14 +323,14 @@ const Scroller: FC<IWithChildren> = (props) => {
             // (activeItem as HTMLDivElement).scrollIntoView({behavior: "smooth"})
           }
           setTimeout(()=> {
-            window.location.hash = href
+            changeHash(href.slice(1))
             isScrolling=false
           }, 400)
         }
       })
     })
 
-  }, [isLoad]);
+  }, [isLoad, pathname]);
 
   useEffect(() =>{
     if (scrollerContainerRef.current) {
@@ -393,4 +380,4 @@ const Scroller: FC<IWithChildren> = (props) => {
   );
 };
 
-export default observer(Scroller);
+export default memo(observer(Scroller));
