@@ -1,5 +1,5 @@
 'use client';
-import {FC, useEffect, useState} from 'react';
+import {CSSProperties, FC, useEffect, useState} from 'react';
 import {IWithClass, LangType} from '@/types';
 import cn from 'classnames';
 import './language-toggle.scss';
@@ -11,6 +11,10 @@ import {useHash} from "@/components/_hooks/useHash";
 type SpanProps = {
   lang: LangType
 };
+
+interface LanguageToggleProps extends IWithClass{
+  style?: CSSProperties
+}
 
 const LanguageToggleSpan: FC<SpanProps> = (props) => {
   const locale=useLocale()
@@ -45,11 +49,11 @@ const LanguageToggleSpan: FC<SpanProps> = (props) => {
   );
 };
 
-const LanguageToggle: FC<IWithClass> = (props) => {
+const LanguageToggle: FC<LanguageToggleProps> = (props) => {
   const className = cn('language-toggle', props.className);
 
   return (
-    <div className={className}>
+    <div className={className} style={props.style}>
       <LanguageToggleSpan lang='ru'/>
       <span>/</span>
       <LanguageToggleSpan lang='en'/>

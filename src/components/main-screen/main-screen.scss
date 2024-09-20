@@ -15,24 +15,28 @@
   }
 
   &__language {
-    position: absolute;
-    bottom: 60px;
     align-items: flex-start;
     text-transform: uppercase;
     font-size: 20rem;
     font-weight: 700;
-    text-transform: uppercase;
-    button {
-      line-height: 100%;
+
+    &-wrap{
+      position: absolute;
+      bottom: 60px;
+    }
+
+    &-anim{
+      position: absolute;
+      width: 121%;
+      top: -166.5%;
+      left: -9%;
     }
   }
 
   &__arrow {
-    rotate: 90deg;
-    transition: var(--transition);
     position: relative;
     height: auto;
-    width: 16rem;
+    width: 53rem;
   }
 
   @media screen and (max-width: 1199px) {
@@ -45,8 +49,8 @@
     }
 
     &__arrow {
-      width: 18px;
-      top: -10px;
+      width: 41px;
+      top: -20px;
     }
   }
 }

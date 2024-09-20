@@ -1,10 +1,15 @@
 'use client'
 import { FC, useEffect, useRef, useState } from 'react';
-import Lottie from "lottie-react";
+import Lottie, {LottieRefCurrentProps} from "lottie-react";
 
 //Animation
 import logoAnimationOn from '../../../public/Assets/Animations/logo/delai_logo_In.json'
 import logoAnimationOut from '../../../public/Assets/Animations/logo/delai_logo_Out.json';
+import loaderLoop from "../../../public/Assets/Animations/loader/Loader_main_loop.json"
+import loaderFinish from "../../../public/Assets/Animations/loader/Loader_main_finish.json"
+import loaderHover from "../../../public/Assets/Animations/loader/Loader_main_hover.json"
+import loaderOut from "../../../public/Assets/Animations/loader/Loader_main_OUT.json"
+import laguageAnimation from "../../../public/Assets/Animations/RU_ENG_animation.json"
 
 //Images
 import arrow from '../../../public/images/arrow.svg';
@@ -46,9 +51,12 @@ const MainScreen: FC = () => {
     isScrollOn
   } = store;
   const [showArrow, setShowArrow] = useState(false);
+  const [isHover, setIsHover] = useState(false);
+  const [isWasHover, setIsWasHover] = useState(false);
   const [isAnimationPlay, setIsAnimationPlay] = useState(true)
+  const [isLanguageAnimationEnd, setIsLanguageAnimationEnd] = useState(false)
   const hash = useHash();
-  const arrowRef = useRef(null)
+  const arrowRef = useRef<LottieRefCurrentProps | null>(null)
   const containrRef=useRef(null)
   const isLoad=useLoad()
 
@@ -102,9 +110,20 @@ const MainScreen: FC = () => {
   }, [isLoad, isAnimationPlay]);
 
   useEffect(() => {
-    if (!isLoad &&!isAnimationPlay && !isMenuLandingsOpened)
+    if (!isLoad && !isMenuLandingsOpened)
       setShowArrow(true)
-  }, [isLoad, isAnimationPlay, isMenuLandingsOpened]);
+  }, [isLoad, isMenuLandingsOpened]);
+
+  useEffect(() => {
+    if (isWasHover && !isHover) {
+      arrowRef.current?.setDirection(-1)
+      console.log("out")
+    } else {
+      arrowRef.current?.setDirection(1)
+      console.log("over")
+    }
+    arrowRef.current?.play()
+  }, [isHover, isWasHover]);
 
   return (
       <Curtain show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 4:3} className="main-screen">
@@ -129,25 +148,56 @@ const MainScreen: FC = () => {
               />
           }
 
-          <Transition nodeRef={arrowRef} in={showArrow} timeout={0}>
-            {state => (
-                <Image
-                    className='main-screen__arrow'
-                    src={arrow}
-                    alt=""
-                    ref={arrowRef}
-                    style={{
-                      unmounted: {opacity: 0},
-                      entering: {opacity: 1},
-                      entered: {opacity: 1},
-                      exiting: {opacity: 0},
-                      exited: {opacity: 0},
-                    }[state]}
-                />
-            )}
+          <button
+              className='main-screen__arrow'
+              style={{pointerEvents: isLoad? "none":"auto"}}
+              onMouseOver={() => {
+                setIsHover(true);
+                setIsWasHover(true);
+              }}
+              onMouseOut={() => setIsHover(false)}
+              onClick={handleEvent}
+          >
+            <Lottie
+                animationData={isLoad? loaderLoop: showArrow? isWasHover? loaderHover: loaderOut:loaderFinish}
+                loop={isLoad}
+                lottieRef={arrowRef}
+            />
+          </button>
 
-          </Transition>
-          <LanguageToggle className={cn('main-screen__language', halvar.className)}/>
+          {
+            (!isLoad &&(hash=='' ||hash=="main-screen"))&&
+              <Transition in={isLanguageAnimationEnd} timeout={100}>
+                {state => (
+                    <div className='main-screen__language-wrap'>
+                      <LanguageToggle
+                          className={cn('main-screen__language', halvar.className)}
+                          style={{
+                            unmounted: {opacity: 0},
+                            entering: {opacity: 1},
+                            entered: {opacity: 1},
+                            exiting: {opacity: 0},
+                            exited: {opacity: 0},
+                          }[state]}
+                      />
+                      <Lottie
+                          animationData={laguageAnimation}
+                          loop={false}
+                          onComplete={() => setIsLanguageAnimationEnd(true)}
+                          className='main-screen__language-anim'
+                          style={{
+                            unmounted: {display:"block"},
+                            entering: {display:"none"},
+                            entered: {display:"none"},
+                            exiting: {display:"block"},
+                            exited: {display:"block"},
+                          }[state]}
+                      />
+                    </div>
+                )}
+              </Transition>
+
+          }
         </div>
         <PageMenu/>
       </Curtain>
