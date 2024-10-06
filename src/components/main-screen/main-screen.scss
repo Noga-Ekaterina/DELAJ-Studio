@@ -36,7 +36,7 @@
   &__arrow {
     position: relative;
     height: auto;
-    width: 53rem;
+    width: 80rem;
   }
 
   @media screen and (max-width: 1199px) {
@@ -49,8 +49,7 @@
     }
 
     &__arrow {
-      width: 41px;
-      top: -20px;
+      width: 80px;
     }
   }
 }
