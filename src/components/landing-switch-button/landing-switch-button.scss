@@ -2,6 +2,7 @@
 
 .landing-switch-button {
   height: 94.5rem;
+  background: green;
 
   &__content{
     height: 100%;
@@ -14,9 +15,10 @@
     height: 100vh;
     display: flex;
     align-items: center;
+    background: red;
 
     &.button-right {
-      right: 0;
+      right: 0 !important;
       .adult-button, .kids-button {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
@@ -24,7 +26,7 @@
     }
 
     &.button-left {
-      left: 0;
+      left: 0 !important;
 
       .adult-button, .kids-button {
         border-top-left-radius: 0;
