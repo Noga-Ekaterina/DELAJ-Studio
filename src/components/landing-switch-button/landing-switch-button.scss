@@ -2,7 +2,10 @@
 
 .landing-switch-button {
   height: 94.5rem;
-  background: green;
+
+  @include sm{
+    height: 117.5rem;
+  }
 
   &__content{
     height: 100%;
@@ -16,7 +19,10 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background: red;
+
+    @include sm{
+      max-width: 114.4rem;
+    }
 
     &.button-right {
       right: 0 !important;
