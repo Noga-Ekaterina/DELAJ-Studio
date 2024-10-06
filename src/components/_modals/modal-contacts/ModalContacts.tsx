@@ -1,6 +1,6 @@
 'use client'
 import React, {useEffect} from 'react';
-import "./modal-menu.scss"
+import "./modal-contacts.scss"
 import { observer } from 'mobx-react-lite';
 import store from "@/store/store";
 import Curtain from "@/components/curtain/Сurtain";
@@ -17,7 +17,7 @@ const ModalContacts = () => {
       changeModalContactsOpened(false)
   }, [hash]);
   return (
-      <Curtain show={isModalContactsOpened} className="">
+      <Curtain show={isModalContactsOpened} className="modal-contacts">
         <CloseButtons func={()=> changeModalContactsOpened(false)}/>
 
         <Contacts/>
