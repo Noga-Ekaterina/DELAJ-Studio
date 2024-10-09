@@ -8,7 +8,7 @@
 		transition: transform var(--transition);
 		transition-duration: 1s;
      position: relative;
-     min-height: 100.1vh;
+     min-height: calc(100* var(--vh));
 	}
   &-shield{
     position: fixed;

@@ -18,13 +18,13 @@
   }
   &__text-logo {
     color: #fff;
-    font-size: min(18rem, 2.24vh);
+    font-size: min(18rem, calc(2.24 *var(--vh)));
     text-align: center;
     position: relative;
     left: 4%;
 
     @include md-book{
-      font-size: min(18rem, 1.12vh);
+      font-size: min(18rem, calc(1.12 *var(--vh)));
     }
 
     @include sm{
@@ -92,7 +92,7 @@
       img {
         position: relative;
         top: 25px;
-        left: max(0px, calc(7.5% - 1.178vh));
+        left: max(0px, calc(7.5% - 1.178* var(--vh)));
         max-height: 190%;
         width: 100%;
         height: auto;
@@ -210,8 +210,8 @@
       img {
         position: absolute;
         bottom: 0;
-        right: -6.2vh;
-        max-width: calc(100% + 6.2vh);
+        right: calc(-6.2* var(--vh));
+        max-width: calc(100% + 6.2 *var(--vh));
         //width: 122%;
         height: 111%;
         object-position: bottom right;

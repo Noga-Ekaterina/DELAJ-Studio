@@ -114,7 +114,7 @@
     &__controls {
       &-btn {
         bottom: auto;
-        top: 40vh;  
+        top: calc(40*var(--vh));
       }
     }
   }

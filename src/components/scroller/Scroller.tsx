@@ -139,7 +139,7 @@ const Scroller: FC<IWithChildren> = (props) => {
               //   (prevSection as HTMLDivElement).style.top='0';
               //
               //   if ((prevSection as HTMLDivElement).dataset.name!="empty-place")
-              //     (activeItem as HTMLDivElement).style.transform = 'translateY(100vh)';
+              //     (activeItem as HTMLDivElement).style.transform = 'translateY(calc(100* var(--vh)))';
               // }, 50)
               //
               // setTimeout(()=>{

@@ -1,6 +1,6 @@
 @import "@/app/mixins";
 .ideas {
-  height: calc(100vh - 56rem);
+  height: calc(calc(100* var(--vh)) - 56rem);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -8,7 +8,7 @@
   overflow: hidden;
 
   @include sm{
-    height: calc(100vh - 60px);
+    height: calc(calc(100* var(--vh)) - 60px);
   }
 
   &-content {
@@ -60,7 +60,7 @@
     }
 
     &-content {
-      padding-bottom: 9vh;
+      padding-bottom: calc(9* var(--vh));
     }
   }
 

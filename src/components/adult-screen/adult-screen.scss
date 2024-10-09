@@ -15,7 +15,7 @@
   }
 
   &__text-logo {
-    font-size: min(18rem, 2.24vh);
+    font-size: min(18rem, calc(2.24* var(--vh)));
     color: #fff;
 
     @include md-book{
@@ -35,7 +35,7 @@
   &__big-logo {
     width: 38.75vw;
     height: auto;
-    max-height: 58vh;
+    max-height: calc(58* var(--vh));
 
     @include md-book{
       width: 72.2vw;

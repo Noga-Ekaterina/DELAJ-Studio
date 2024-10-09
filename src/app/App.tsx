@@ -20,6 +20,7 @@ import {useLenis} from "@studio-freight/react-lenis";
 import Outline from "@/components/outline/Outline";
 
 const App = ({children}:IWithChildren) => {
+  const [vh, setVh] = useState(0)
   const {togleScroll, changePrevHash}=store
   const {fetchMenuSectionTitle}=text
   const {fetchAll}=homeText
@@ -50,7 +51,19 @@ const App = ({children}:IWithChildren) => {
       document.documentElement.style.overflow = "hidden"
       togleScroll(false)
     }
+
+    if (window){
+      setVh(window.innerHeight/100)
+
+      window.addEventListener("resize", ()=>{
+        setVh(window.innerHeight/100)
+      })
+    }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }, [vh]);
 
   useEffect(() => {
     changePrevHash(currentHash)

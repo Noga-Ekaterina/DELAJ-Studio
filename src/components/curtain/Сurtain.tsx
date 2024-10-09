@@ -13,8 +13,8 @@ const curtainStyles = {
   unmounted: { top: "0%",},
   entering: { top: "0%",},
   entered: { top: "0%",},
-  exiting:  {  top: "-100vh",},
-  exited:  {  top: "-100vh",},
+  exiting:  {  top: "calc(-100* var(--vh))",},
+  exited:  {  top: "calc(-100* var(--vh))",},
 };
 
 interface CurtainProps extends IWithChildren{

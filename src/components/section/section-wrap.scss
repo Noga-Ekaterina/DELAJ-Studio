@@ -2,7 +2,7 @@
 
 .section-wrap {
   overflow: hidden;
-  min-height: 100vh;
+  min-height: calc(100* var(--vh));
   padding-top: 56rem;
   left: 0;
   width: 100vw;
@@ -15,7 +15,7 @@
   }
 
   &__content {
-    min-height: 100vh;
+    min-height: calc(100* var(--vh));
     position: relative;
   }
 
