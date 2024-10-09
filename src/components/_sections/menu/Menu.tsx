@@ -11,9 +11,9 @@ import {observer} from "mobx-react-lite";
 
 //Images
 import LanguageToggle from '@/components/language-toggle/LanguageToggle';
-import bg from '../../../../public/images/modals/menu-bg.png';
-import bgTablet from '../../../../public/images/modals/menu-bg-tablet.png';
-import bgMobile from '../../../../public/images/modals/menu-bg-mobile.png';
+import bg from '../../../../public/Assets/Slides/Menu/Images/bg.png';
+import bgTablet from '../../../../public/Assets/Slides/Menu/Images/bg-tablet.png';
+import bgMobile from '../../../../public/Assets/Slides/Menu/Images/bg-mobile.png';
 
 import cn from 'classnames';
 import Outline from "@/components/outline/Outline";

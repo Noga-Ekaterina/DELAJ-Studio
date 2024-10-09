@@ -19,6 +19,7 @@ import footerCarrot from '../../../public/Assets/Slides/Animations/Images/Kids/f
 
 import LanguageToggle from '../language-toggle/LanguageToggle';
 import FooterCareerList from "@/components/footer-career-list/FooterCareerList";
+import FooterContacts from "@/components/footer-contacts/FooterContacts";
 
 const KidsFooter: FC = () => {
   const className = cn('kids-footer', circe.className);
@@ -38,15 +39,8 @@ const KidsFooter: FC = () => {
     <footer className={className}>
       <div className="footer-item kids-footer__item" id="kids-footer-blue">
         <div className="footer-item__content">
-          <a href="#contacts" className='footer-link'>
-            {menuSectionTitle&& menuSectionTitle.contacts[locale]}
-          </a>
-          <ul className='kids-footer__item-list'>
-            <li>Head <a href="/">hello@delai.studio</a></li>
-            <li>HR <a href="/">@jenechkina1</a></li>
-            <li>Work <a href="/">documents@horshield.com</a></li>
-          </ul>
-          <a href="/">
+          <FooterContacts type='kids' className="kids-footer__item-list"/>
+          <a href="#">
             <Image className='footer-item__logo' src={footerLogo} alt="" />
           </a>
           <Image className='footer-item__image' src={footerPhone} alt="" />

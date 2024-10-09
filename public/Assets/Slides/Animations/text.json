@@ -8,6 +8,56 @@
       "ru": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры",
       "en": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры"
     },
+    "contacts": [
+      {
+        "title": {
+          "ru": "Head",
+          "en": "Head"
+        },
+        "link": {
+          "href": {
+            "ru": "mailto:hello@delai.studio",
+            "en": "mailto:hello@delai.studio"
+          },
+          "text": {
+            "ru": "hello@delai.studio",
+            "en": "hello@delai.studio"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "TG HR",
+          "en": "TG HR"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/jenechkina1",
+            "en": "t.me/jenechkina1"
+          },
+          "text": {
+            "ru": "@jenechkina1",
+            "en": "@jenechkina1"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "TG Other",
+          "en": "TG Other"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/delaistudio",
+            "en": "t.me/delaistudio"
+          },
+          "text": {
+            "ru": "@delaistudio",
+            "en": "@delaistudio"
+          }
+        }
+      }
+    ],
     "footerText": {
       "ru": {
         "text": "заходите\nв гости",
@@ -27,6 +77,56 @@
     "text": {
       "ru": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры",
       "en": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры"
-    }
+    },
+    "contacts": [
+      {
+        "title": {
+          "ru": "Head",
+          "en": "Head"
+        },
+        "link": {
+          "href": {
+            "ru": "mailto:hello@delai.studio",
+            "en": "mailto:hello@delai.studio"
+          },
+          "text": {
+            "ru": "hello@delai.studio",
+            "en": "hello@delai.studio"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "HR",
+          "en": "HR"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/jenechkina1",
+            "en": "t.me/jenechkina1"
+          },
+          "text": {
+            "ru": "@jenechkina1",
+            "en": "@jenechkina1"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "Работа",
+          "en": "Work"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/delaistudio",
+            "en": "t.me/delaistudio"
+          },
+          "text": {
+            "ru": "@delaistudio",
+            "en": "@delaistudio"
+          }
+        }
+      }
+    ]
   }
 }

@@ -16,6 +16,7 @@ import logo from '../../../public/Assets/Slides/Animations/Images/Adults/footer-
 import footerMan from '../../../public/Assets/Slides/Animations/Images/Adults/footer-man.png'
 import FooterCareerList from "@/components/footer-career-list/FooterCareerList";
 import Outline from "@/components/outline/Outline";
+import FooterContacts from "@/components/footer-contacts/FooterContacts";
 
 const AdultFooter: FC = () => {
   const locale=useLocale()
@@ -27,13 +28,9 @@ const AdultFooter: FC = () => {
       <div className="adult-footer__content">
         <div className="footer-item adult-footer__item" id="adult-footer-blue">
           <div className="footer-item__content">
-            <a href="#contacts" className='footer-link'>{menuSectionTitle&& menuSectionTitle.contacts[locale]}</a>
-            <ul>
-              <li>Head <a href="/">hello@delai.studio</a></li>
-              <li>HR <a href="/">@jenechkina1</a></li>
-              <li>Work <a href="/">documents@horshield.com</a></li>
-            </ul>
-            <a href='/'>
+            <FooterContacts type="adult"/>
+
+            <a href='#'>
               <Image src={logo} className='footer-item__logo' alt=""/>
             </a>
           </div>

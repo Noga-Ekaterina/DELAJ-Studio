@@ -10,33 +10,40 @@ import menuSections from "@/store/text/menuSecton";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import Outline from "@/components/outline/Outline";
+import home from "@/store/text/home";
 
 const Ideas = () => {
   const locale=useLocale()
   const {menuSectionTitle}=menuSections
+  const {ideasText}=home
+
+  if (!ideasText) return <div></div>
+
   return (
     <div className={cn("menu-inner ideas", circe.className)}>
       <div className="menu-section ideas-content">
         <h1 className='menu-link'>{menuSectionTitle&& menuSectionTitle.ideas[locale]}</h1>
 
-        <h2 className={cn('menu-calling', halvar.className)}>мы всегда <br/>в поиске идей!</h2>
+        <h2 className={cn('menu-calling', halvar.className)}>{ideasText.title[locale]}</h2>
 
         <div className="ideas-mail menu-mail">
-          <Link href="/">invest@delai.studio </Link>
-          <p>Если у вас есть крутая идея для мультфильма и вы хотите ее реализовать — пишите нам на почту</p>
+          <a href={ideasText.mail.href[locale]}>{ideasText.mail.text[locale]}</a>
+          <p>{ideasText.text[locale]}</p>
         </div>
 
         <div className="ideas-bottom">
           <div className="ideas-conditions">
-            <p className="ideas-conditions__title">Условия подачи</p>
+            <p className="ideas-conditions__title">{ideasText.conditions.title[locale]}</p>
             <ol>
-              <li>Быть старше 18 лет </li>
-              <li>Желательно иметь профильное образование в области кино, художественных искусств или иметь опыт работы в киносфере, но готовы рассмотреть и заявки от студентов последних курсов профильных вузов </li>
-              <li>Заявка должна содержать (презентацию с общим описанием проекта, сценарий, синопсис) </li>
+              {
+                ideasText.conditions.list[locale].map((condition, index)=>(
+                    <li key={`ideas-conditions-${index}`}>{condition}</li>
+                ))
+              }
             </ol>
           </div>
 
-          <ExamplesSlider className='ideas-slider'/>
+          <ExamplesSlider title={ideasText.projectsTitle[locale]} className='ideas-slider'/>
         </div>
       </div>
       <Outline/>

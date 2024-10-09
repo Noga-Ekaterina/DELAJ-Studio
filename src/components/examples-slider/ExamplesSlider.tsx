@@ -14,11 +14,15 @@ import projects from "@/store/text/Projects";
 import {getShuffleArray} from "@/utils/getShuffleArray";
 import {observer} from "mobx-react-lite";
 
+interface Proos extends IWithClass{
+  title: string
+}
+
 interface ISlide extends IProject{
   type: "adults" | "kids"
 }
 
-const ExamplesSlider: FC<IWithClass> = ({ className }) => {
+const ExamplesSlider: FC<Proos> = ({ className,  title}) => {
   const ref = useRef<SwiperRef | null>(null);
   const {projectsList}=projects
   const [slides, setSlides] = useState<ISlide[]>([])
@@ -51,7 +55,7 @@ const ExamplesSlider: FC<IWithClass> = ({ className }) => {
     <div className={cn(className, "examples-slider")}>
       <div className="examples-slider__head">
         <div className="examples-slider__head-title">
-          реализованные <br />проекты
+          {title}
         </div>
         <button className='examples-slider__head-button' onClick={toNextSlide}>
           <Image src={arrow} alt=""/>

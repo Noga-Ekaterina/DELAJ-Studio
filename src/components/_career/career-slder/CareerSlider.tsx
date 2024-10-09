@@ -4,7 +4,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import "../../_sections/career/career.scss";
 import './career-slider.scss';
 import {IWithClass} from "@/types";
-import {ICareer, ICareerDuties} from "@/typesData";
+import {ICareer, IBlockList} from "@/typesData";
 import Image from "next/image";
 import arrow from '../../../../public/images/arrow.svg';
 import { useViewport } from "@/components/_hooks/useViewport";

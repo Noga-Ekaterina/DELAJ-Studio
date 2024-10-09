@@ -1,14 +1,14 @@
 'use client'
-import React from 'react';
+import React, {memo} from 'react';
 import '../menu/menu.scss' ;
 import './about.scss';
 import menuSections from "@/store/text/menuSecton";
 import {observer} from "mobx-react-lite";
 
 // Images
-import aboutHero from '../../../../public/images/modals/about-hero-image.png';
-import aboutHeroSketch from '../../../../public/images/modals/about-hero-image-2.png';
-import aboutSketch from '../../../../public/images/modals/about-sketch.png';
+import aboutHero from '../../../../public/Assets/Slides/About/Images/1.png';
+import aboutHeroSketch from '../../../../public/Assets/Slides/About/Images/2.png';
+import aboutSketch from '../../../../public/Assets/Slides/About/Images/3.png';
 
 import Image from 'next/image';
 import { halvar, circe } from '@/fonts';
@@ -41,6 +41,7 @@ import sponsor24 from '../../../../public/images/modals/sponsor-24.png'
 import Showreel from '@/components/showreel/Showreel';
 import {useLocale} from "@/components/_hooks/useLocale";
 import Outline from "@/components/outline/Outline";
+import home from "@/store/text/home";
 
 const sponsors = [
 sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9,sponsor10,sponsor11,sponsor12,sponsor13,sponsor14,sponsor15,sponsor16,sponsor17,sponsor18,sponsor29,sponsor20,sponsor21,sponsor22,sponsor23,sponsor24
@@ -49,6 +50,10 @@ sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9
 const About = () => {
   const locale=useLocale()
   const {menuSectionTitle}=menuSections
+  const {aboutText}=home
+
+  if (!aboutText) return <div></div>
+
   return (
     <div className={cn("menu", circe.className)}>
       <div className={'menu-inner about'}>
@@ -63,33 +68,32 @@ const About = () => {
               <Image className="about-hero__picture" src={aboutHero} alt="" />
             
               <div className='about-hero__paragraph'>
-                <p>Студия образовалась в 2017 году командой профессионалов из CG индустрии и анимации. За нашими плечами участие в больших международных и российских проектах. </p>
-                <p> Мы сотрудничаем с крупными брендами, агентствами и киностудиями.</p>
+                <p>{aboutText.text1[locale]}</p>
               </div>
               
               <div className="about-text">
-                <h2 className={halvar.className}>Что мы <br/>делаем?</h2>
-                <p>Мы хотим вам показать подробный процесс работы над анимационным роликом в технике 2D рисованной анимации и аниме. Здесь собраны самые мельчайшие нюансы, дабы продемонстрировать, какие этапы и подэтапы пройдет проект прежде чем обрести свои финальные черты.</p>
+                <h2 className={halvar.className}>{aboutText.whatDo.title[locale]}</h2>
+                <p>{aboutText.whatDo.text[locale]}</p>
               </div>
               <Image className='about-hero__sketch' src={aboutHeroSketch} alt="" />
           </section>
 
           <section className='about-animation'>
-            <div className='about-animation__item'>2D-анимация</div>
-            <div className='about-animation__item'>3D-анимация</div>
+            {
+              aboutText.animationStyles[locale].map(animation=> (
+                  <div key={`animations-style-${animation}`} className='about-animation__item'>{animation}</div>
+              ))
+            }
           </section>
 
           <section className='menu-section about-branches'>
-            <h2>направления работы</h2>
+            <h2>{aboutText.a_2D_3D.title[locale]}</h2>
             <ul>
-              <li>рекламные ролики</li>
-              <li>имиджевые ролики</li>
-              <li>промо-ролики</li>
-              <li>анимационные сериалы</li>
-              <li>полный метр</li>
-              <li>короткий метр</li>
-              <li>book-трейлеры</li>
-              <li>музыкальные клипы</li>
+              {
+                aboutText.a_2D_3D.list[locale].map((item, index)=>(
+                    <li key={`2D-3D-${index}`}>{item}</li>
+                ))
+              }
             </ul>
           </section>
 
@@ -104,62 +108,49 @@ const About = () => {
         <Showreel video={"about"} />
 
         <section className="menu-section about-technologies">
-          <div className="about-technologies__item">VFX</div>
-          <div className="about-technologies__item">моушн-дизайн</div>
-          <div className="about-technologies__item">инфографика</div>
-          <div className="about-technologies__item">звукорежиссура</div>
+          {
+            aboutText.specializations[locale].map((specialization, index)=> (
+                <div key={`specialization-${index}`} className="about-technologies__item">{specialization}</div>
+            ))
+          }
         </section>
 
-        
+
         <div className="container">
           <section className='about-work'>
             <Image className='about-work__sketch' src={aboutSketch} alt=""/>
             <div className="about-text">
-              <h2 className={halvar.className}>как мы <br/>работаем?</h2>
-              <p>Мы хотим вам показать подробный процесс работы над анимационным роликом в технике 2D рисованной анимации и аниме. Здесь собраны самые мельчайшие нюансы, дабы продемонстрировать, какие этапы и подэтапы пройдет проект прежде чем обрести свои финальные черты.</p>
+              <h2 className={halvar.className}>{aboutText.howWork.title[locale]}</h2>
+              <p>{aboutText.howWork.text[locale]}</p>
             </div>
           </section>
         </div>
 
         <div className="container">
           <section className='about-steps'>
-            <div className="about-steps__item">
-              <h2>этап <br />пре-продакшен</h2>
-              <ul>
-                <li>Сценарий </li>
-                <li>Сториборд </li>
-                <li>Колор-скрипт </li>
-                <li>Аниматик </li>
-                <li>Концепт Арт </li>
-              </ul>
-            </div>
-            <div className="about-steps__item">
-              <h2>этап II <br />продакшен</h2>
-              <ul>
-                <li>Иллюстрации фонов </li>
-                <li>Иллюстрации персонажей </li>
-                <li>Анимация</li>
-                <li>Композитинг</li>
-              </ul>
-            </div>
-            <div className="about-steps__item">
-              <h2>этап III <br />пост-продакшен</h2>
-              <ul>
-                <li>Музыка</li>
-                <li>Звукорежиссура</li>
-                <li>Цветокоррекция</li>
-                <li>Монтаж</li>
-              </ul>
-            </div>
+            {
+              aboutText.howWork.stages.map((stage, index)=> (
+                  <div key={`about-stage-${index}`} className="about-steps__item">
+                    <h2>{stage.title[locale]}</h2>
+                    <ul>
+                      {
+                        stage.list[locale] &&stage.list[locale].map((punct, index)=>(
+                            <li key={`about-stage-punct-${index}`}>{punct}</li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+              ))
+            }
           </section>
         </div>
 
         <section className="about-sponsors">
           <div className="menu-section">
-            <h2 className={halvar.className}>наши <br />клиенты</h2>
+            <h2 className={halvar.className}>наши <br/>клиенты</h2>
             <div className="about-sponsors__list">
               {sponsors.map((item, index) => (
-                <div className='about-sponsors__list-item' key={'sponsor' + index}>
+                  <div className='about-sponsors__list-item' key={'sponsor' + index}>
                   <Image src={item} alt="" />
                 </div>
               ))}
@@ -172,4 +163,4 @@ const About = () => {
   );
 };
 
-export default observer(About);
+export default memo(observer(About));

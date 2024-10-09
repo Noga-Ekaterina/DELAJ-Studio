@@ -227,22 +227,6 @@ const Scroller: FC<IWithChildren> = (props) => {
   }
 
 
-  const handleTouchStart = (event: TouchEvent) => {
-    touchStartY = event.touches[0].clientY;
-  };
-
-  const handleTouchMove = (event: TouchEvent) => {
-    let touchMoveY = event.touches[0].clientY;
-    console.log({isAtBottom})
-    if (touchStartY!=undefined){
-      scrollDirection=touchMoveY<touchStartY? "bottom":"top"
-      if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
-        handleEnd()
-      }
-    }
-    // eventDisabled(event)
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       checkIfAtEnd();
@@ -263,6 +247,23 @@ const Scroller: FC<IWithChildren> = (props) => {
         }
       }
       performScrollAction()
+    };
+
+
+    const handleTouchStart = (event: TouchEvent) => {
+      touchStartY = event.touches[0].clientY;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      let touchMoveY = event.touches[0].clientY;
+      console.log({isAtBottom})
+      if (touchStartY!=undefined){
+        scrollDirection=touchMoveY<touchStartY? "bottom":"top"
+        if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
+          handleEnd()
+        }
+      }
+      // eventDisabled(event)
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -330,7 +331,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       })
     })
 
-  }, [isLoad, pathname]);
+  }, [isLoad, pathname, hash]);
 
   useEffect(() =>{
     if (scrollerContainerRef.current) {

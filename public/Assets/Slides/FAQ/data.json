@@ -1,0 +1,102 @@
+[
+  {
+    "question": {
+      "ru": "Я отправил портфолио, когда мне ответят?",
+      "en": "When will I get a response after sending my portfolio?"
+    },
+    "answer": {
+      "ru": "Мы стараемся ответить на все поданные заявки в течение недели. Если вы не получили ответ, значит, мы пока не нашли подходящей задачи для вас.",
+      "en": "We aim to respond to all submitted applications within a week. If you haven't received a response, it means we haven't found a suitable task for you yet."
+    }
+  },
+  {
+    "question": {
+      "ru": "Берете ли вы к себе на стажировки, и на каких условиях?",
+      "en": "Do you accept interns, and under what conditions?"
+    },
+    "answer": {
+      "ru": "Да, мы принимаем стажеров. Условия стажировки зависят от конкретной позиции, пожалуйста, ознакомьтесь с информацией на нашем сайте.",
+      "en": "Yes, we accept interns. The conditions of the internship depend on the specific position, please refer to the information on our website."
+    }
+  },
+  {
+    "question": {
+      "ru": "Возможно ли участвовать в нескольких проектах разом?",
+      "en": "Is it possible to participate in several projects at once?"
+    },
+    "answer": {
+      "ru": "Да, участие в нескольких проектах возможно, но важно учитывать, как это повлияет на качество выполнения задач.",
+      "en": "Yes, participating in several projects at once is possible, but it’s important to consider how it might affect the quality of task completion."
+    }
+  },
+  {
+    "question": {
+      "ru": "Что если я не получил(а) ответа на стажировку, тестовое задание? Письмо не дошло?",
+      "en": "What if I didn't receive a response regarding the internship or test assignment? What if the letter didn't reach you?"
+    },
+    "answer": {
+      "ru": "Друзья, не волнуйтесь, письмо до нас дошло, но, возможно, что мы его еще не успели подробно рассмотреть и изучить. Если вам не ответили в течении недели, то у нас нет для вас подходящей задачи и мы не можем ее вам выдать. Но бывает и так, что уровень кандидата очень низкий или недостаточно опыта даже для минимального прохода. Пожалуйста, не расстраивайтесь! Ваши контакты и портфолио остаются у нас и при первом подходящем поводе, мы с вами свяжемся.",
+      "en": "Don't worry, your letter reached us, but we might not have had time to review it in detail yet. If you haven't heard back within a week, it means we currently don't have a suitable task for you. However, sometimes a candidate's level may be too low or there may not be enough experience for even the minimum requirements. Please don't be upset! Your contacts and portfolio will remain with us, and we will reach out to you when a suitable opportunity arises."
+    }
+  },
+  {
+    "question": {
+      "ru": "Берете ли вы к себе на стажировки, и на каких условиях?",
+      "en": "Do you accept interns, and under what conditions?"
+    },
+    "answer": {
+      "ru": "Да, мы принимаем стажеров. Условия стажировки зависят от конкретной позиции, пожалуйста, ознакомьтесь с информацией на нашем сайте.",
+      "en": "Yes, we accept interns. The conditions of the internship depend on the specific position, please refer to the information on our website."
+    }
+  },
+  {
+    "question": {
+      "ru": "Возможно ли участвовать в нескольких проектах разом?",
+      "en": "Is it possible to participate in several projects at once?"
+    },
+    "answer": {
+      "ru": "Да, участие в нескольких проектах возможно, но важно учитывать, как это повлияет на качество выполнения задач.",
+      "en": "Yes, participating in several projects at once is possible, but it’s important to consider how it might affect the quality of task completion."
+    }
+  },
+  {
+    "question": {
+      "ru": "Что если я не получил(а) ответа на стажировку, тестовое задание? Письмо не дошло?",
+      "en": "What if I didn't receive a response regarding the internship or test assignment? What if the letter didn't reach you?"
+    },
+    "answer": {
+      "ru": "Друзья, не волнуйтесь, письмо до нас дошло, но, возможно, что мы его еще не успели подробно рассмотреть и изучить. Если вам не ответили в течении недели, то у нас нет для вас подходящей задачи и мы не можем ее вам выдать. Но бывает и так, что уровень кандидата очень низкий или недостаточно опыта даже для минимального прохода. Пожалуйста, не расстраивайтесь! Ваши контакты и портфолио остаются у нас и при первом подходящем поводе, мы с вами свяжемся.",
+      "en": "Don't worry, your letter reached us, but we might not have had time to review it in detail yet. If you haven't heard back within a week, it means we currently don't have a suitable task for you. However, sometimes a candidate's level may be too low or there may not be enough experience for even the minimum requirements. Please don't be upset! Your contacts and portfolio will remain with us, and we will reach out to you when a suitable opportunity arises."
+    }
+  },
+  {
+    "question": {
+      "ru": "Берете ли вы к себе на стажировки, и на каких условиях?",
+      "en": "Do you accept interns, and under what conditions?"
+    },
+    "answer": {
+      "ru": "Да, мы принимаем стажеров. Условия стажировки зависят от конкретной позиции, пожалуйста, ознакомьтесь с информацией на нашем сайте.",
+      "en": "Yes, we accept interns. The conditions of the internship depend on the specific position, please refer to the information on our website."
+    }
+  },
+  {
+    "question": {
+      "ru": "Возможно ли участвовать в нескольких проектах разом?",
+      "en": "Is it possible to participate in several projects at once?"
+    },
+    "answer": {
+      "ru": "Да, участие в нескольких проектах возможно, но важно учитывать, как это повлияет на качество выполнения задач.",
+      "en": "Yes, participating in several projects at once is possible, but it’s important to consider how it might affect the quality of task completion."
+    }
+  },
+  {
+    "question": {
+      "ru": "Что если я не получил(а) ответа на стажировку, тестовое задание? Письмо не дошло?",
+      "en": "What if I didn't receive a response regarding the internship or test assignment? What if the letter didn't reach you?"
+    },
+    "answer": {
+      "ru": "Друзья, не волнуйтесь, письмо до нас дошло, но, возможно, что мы его еще не успели подробно рассмотреть и изучить. Если вам не ответили в течении недели, то у нас нет для вас подходящей задачи и мы не можем ее вам выдать. Но бывает и так, что уровень кандидата очень низкий или недостаточно опыта даже для минимального прохода. Пожалуйста, не расстраивайтесь! Ваши контакты и портфолио остаются у нас и при первом подходящем поводе, мы с вами свяжемся.",
+      "en": "Don't worry, your letter reached us, but we might not have had time to review it in detail yet. If you haven't heard back within a week, it means we currently don't have a suitable task for you. However, sometimes a candidate's level may be too low or there may not be enough experience for even the minimum requirements. Please don't be upset! Your contacts and portfolio will remain with us, and we will reach out to you when a suitable opportunity arises."
+    }
+  }
+]

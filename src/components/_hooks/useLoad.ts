@@ -5,21 +5,21 @@ import projects from "@/store/text/Projects";
 import {useEffect, useState} from "react";
 
 export const useLoad=()=>{
-  const {landingsText}=homeText
+  const {landingsText, aboutText, ideasText, faqText}=homeText
   const {menuSectionTitle}=menuSections
   const {careerList} =career
   const {projectsList}=projects
   const [isLoad, setIsLoad] = useState(true)
 
   useEffect(() => {
-    if (landingsText && menuSectionTitle && careerList && projectsList){
+    if (landingsText && menuSectionTitle && careerList && projectsList && aboutText && ideasText && faqText){
       setIsLoad(false)
       console.log("load end")
     }else {
       console.log("load")
       setIsLoad(true)
     }
-  }, [menuSectionTitle, landingsText, careerList, projectsList]);
+  }, [menuSectionTitle, landingsText, careerList, projectsList, aboutText, ideasText, faqText]);
 
   return isLoad
 }

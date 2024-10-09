@@ -38,4 +38,4 @@ const Section: FC<Props> = (props) => {
   );
 };
 
-export default Section;
+export default memo(Section);
