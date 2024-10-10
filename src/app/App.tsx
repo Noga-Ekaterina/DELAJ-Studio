@@ -53,10 +53,10 @@ const App = ({children}:IWithChildren) => {
     }
 
     if (window){
-      setVh(window.innerHeight/100)
+      setVh(document.documentElement.clientHeight/100)
 
       window.addEventListener("resize", ()=>{
-        setVh(window.innerHeight/100)
+        setVh(document.documentElement.clientHeight/100)
       })
     }
   }, []);

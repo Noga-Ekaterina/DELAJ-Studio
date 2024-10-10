@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react"
 
 export const useViewport = () => {
-  const [viewport, setViewport] = useState(window.innerWidth / window.innerHeight);
+  const [viewport, setViewport] = useState(document.documentElement.clientWidth / document.documentElement.clientHeight);
 
   useEffect(() => {
     if (window) {
       const changeViewport = () => {
-        setViewport(window.innerWidth / window.innerHeight);
+        setViewport(document.documentElement.clientWidth / document.documentElement.clientHeight);
       }
 
       window.addEventListener('resize', changeViewport);
