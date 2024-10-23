@@ -14,6 +14,10 @@
 	--transition:  
 			0.5s 
 			cubic-bezier(0.16, 1, 0.3, 1);
+
+    @media (height: 100dvh) {
+      --vh: 1dvh
+    }
 }
 
 html {
