@@ -75,7 +75,7 @@ const Scroller: FC<IWithChildren> = (props) => {
   const checkIfAtEnd = () => {
     if (scrollerContainerRef.current){
 
-      if (window.scrollY>=(scrollerContainerRef.current as HTMLDivElement).clientHeight-document.documentElement.clientHeight-4){
+      if (window.scrollY>=(scrollerContainerRef.current as HTMLDivElement).clientHeight-window.innerHeight-4){
         isAtBottom= true
         isAtTop=false
         isScrolling= false
@@ -192,7 +192,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       if (activeItem) {
         const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
-        if (top>1 || bottom< document.documentElement.clientHeight){
+        if (top>1 || bottom< window.innerHeight){
           event.preventDefault()
           console.log("preventD")
         }
