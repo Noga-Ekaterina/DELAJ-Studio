@@ -42,6 +42,7 @@ import Showreel from '@/components/showreel/Showreel';
 import {useLocale} from "@/components/_hooks/useLocale";
 import Outline from "@/components/outline/Outline";
 import home from "@/store/text/home";
+import LogosSlider from "@/components/logos-slider/LogosSlider";
 
 const sponsors = [
 sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9,sponsor10,sponsor11,sponsor12,sponsor13,sponsor14,sponsor15,sponsor16,sponsor17,sponsor18,sponsor29,sponsor20,sponsor21,sponsor22,sponsor23,sponsor24
@@ -147,13 +148,9 @@ const About = () => {
 
         <section className="about-sponsors">
           <div className="menu-section">
-            <h2 className={halvar.className}>наши <br/>клиенты</h2>
+            <h2 className={halvar.className}>{aboutText.clients.title[locale]}</h2>
             <div className="about-sponsors__list">
-              {sponsors.map((item, index) => (
-                  <div className='about-sponsors__list-item' key={'sponsor' + index}>
-                  <Image src={item} alt="" />
-                </div>
-              ))}
+              <LogosSlider/>
             </div>
           </div>
         </section> 

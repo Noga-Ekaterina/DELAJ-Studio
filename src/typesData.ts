@@ -74,14 +74,19 @@ export interface IAboutHowWork extends IBlockText{
   stages:IBlockList[]
 }
 
+export interface IAboutClients{
+  title: ITranslation<string>
+  quantity: number
+}
+
 export interface IAbout {
   text1: ITranslation<string>
   whatDo:IBlockText
-  animationStyles:
-  ITranslation<string[]>
+  animationStyles: ITranslation<string[]>
   a_2D_3D: IBlockList
   specializations:ITranslation<string[]>
   howWork: IAboutHowWork
+  clients: IAboutClients
 }
 
 export interface ISectionMail extends IBlockText{
