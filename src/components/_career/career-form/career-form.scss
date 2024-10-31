@@ -3,27 +3,24 @@
   flex: 1;
   min-width: 430px;
   &__field {
+    position: relative;
     border-bottom: 1rem solid #EAEAEA;
     padding: 0 2rem 3rem;
     margin-bottom: 7rem;
     display: block;
     .input-wrap {
-      position: relative;
+      position: absolute;
       overflow: hidden;
-      height: 35rem;
+      left: 0;
+      bottom: 3rem;
+      width: 100%;
     }
     input {
-      font-size: 43rem;
-      text-transform: uppercase;
+      font-size: 25rem;
+      font-weight: 700;
       width: 100%;
       background-color: transparent;
       line-height: 50%;
-      position: relative;
-      top: -13rem;
-      &::-webkit-input-placeholder {
-        color: #EAEAEA;
-        font-weight: 300;
-      }
     }
 
     p {
@@ -31,19 +28,25 @@
       font-size: 7rem;
       text-transform: uppercase;
     }
+  }
 
-    &-notice {
-      display: flex;
-      column-gap: 5rem;
-      .red-notice {
-        padding-left: 5rem;
-        border-left: 1rem solid #EAEAEA;
-        color: #E5CECE;
-        strong {
-          color: #E5A6A6;
-        }
-      }
-    }
+  &__block-placeholder{
+    display: flex;
+    pointer-events: none;
+    gap: 5rem;
+  }
+
+  &__placeholder{
+    color: #EAEAEA;
+    font-weight: 300;
+    font-size: max(43px, 43rem);
+    text-transform: uppercase;
+    line-height: 1em;
+  }
+
+  &__note{
+    position: relative;
+    top: min(-3px, -3rem);
   }
 
   &__checkbox {
@@ -115,28 +118,20 @@
       border-bottom: 1px solid #EAEAEA;
       padding: 0 2px 3px;
       margin-bottom: 7px;
+
       .input-wrap {
         height: 35px;
       }
+
       input {
-        font-size: 43px;
-        top: -13px;
+        font-size: 25px;
       }
-  
+
       p {
         font-size: 7px;
         font-weight: 700;
       }
-  
-      &-notice {
-        column-gap: 5px;
-        .red-notice {
-          padding-left: 5px;
-          border-left: 1px solid #EAEAEA;
-        }
-      }
     }
-
     &__submit {
       top: -25px;
       width: 138px;
@@ -151,10 +146,14 @@
     align-self: center;
   }
 
-  @media screen and (max-width: 540px){
+  @media screen and (max-width: 660px){
     min-width: unset;
 
-    &__bottom {
+    &__block-placeholder{
+      flex-direction: column;
+    }
+
+      &__bottom {
       flex-direction: column;
       row-gap: 20px;
     }

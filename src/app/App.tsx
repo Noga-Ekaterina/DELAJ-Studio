@@ -25,7 +25,7 @@ const App = ({children}:IWithChildren) => {
   const {fetchMenuSectionTitle}=text
   const {fetchAll}=homeText
   const {projectsList, fetchProjectsList}=projects
-  const {careerList, fetchCareerList}=career
+  const {careerList, fetchAllCareer}=career
   const isHome=useIsHome()
   const pathname=usePathname()
   const isload= useLoad()
@@ -76,7 +76,7 @@ const App = ({children}:IWithChildren) => {
       fetchProjectsList()
 
     if (!careerList && (isHome || pathname.includes("career")))
-      fetchCareerList()
+      fetchAllCareer()
   }, [hash, isHome]);
 
   return (

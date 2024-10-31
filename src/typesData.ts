@@ -1,3 +1,5 @@
+import {HTMLInputTypeAttribute} from "react";
+
 export interface ITranslation<T> {
   ru: T,
   en: T
@@ -101,4 +103,23 @@ export interface IIdeas extends ISectionMail{
 export interface IFaq {
   question: ITranslation<string>
   answer: ITranslation<string>
+}
+
+export interface IFormNote{
+  text: string
+  red?: string[]
+  underline?: string[]
+}
+
+export interface IFormInput{
+  name: string
+  type: HTMLInputTypeAttribute
+  placeholder: ITranslation<string>
+  note?: ITranslation<IFormNote>
+}
+
+export interface IForm{
+  inputs: IFormInput[]
+  acceptTerms: ITranslation<string>
+  button: ITranslation<string>
 }

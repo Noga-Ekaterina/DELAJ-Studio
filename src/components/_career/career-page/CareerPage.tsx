@@ -39,7 +39,7 @@ const CareerPage = ({id}: Props) => {
         <CloseButtons func={goBack}>
           <BreadCrumbs
               links={[
-                {text: 'вакансии', path: `/${locale}/#career`},
+                {text: locale=="ru"? 'вакансии':"vacancy", path: `/${locale}/#career`},
                 {text: careerItem.data.title[locale]}
               ]}
           />
@@ -61,7 +61,14 @@ const CareerPage = ({id}: Props) => {
             </div>
           </div>
         </div>
-        <Link className='career-page__more' href={`/${locale}#career`}>еще вакансии</Link>
+        <Link className='career-page__more' href={`/${locale}#career`}>
+          {
+            locale=="ru"?
+                <>еще вакансии</>
+                :
+                <>more vacancies</>
+          }
+        </Link>
       </div>
   );
 };
