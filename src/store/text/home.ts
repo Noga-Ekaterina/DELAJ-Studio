@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import {fetchData} from "@/utils/fetchData";
-import {IAbout, IFaq, IIdeas, ILandingText} from "@/typesData";
+import {IAbout, IContacts, IFaq, IIdeas, ILandingText} from "@/typesData";
 
 
 class Store {
@@ -16,6 +16,8 @@ class Store {
 
   ideasText: null| IIdeas =null
 
+  contactsText: null|IContacts= null
+
   fetchLandingsText=async ()=> {
     this.landingsText = await fetchData('Slides/Animations/text.json');
   }
@@ -28,6 +30,10 @@ class Store {
     this.ideasText = await fetchData('Slides/Ideas/text.json');
   }
 
+  fetchContactsText=async ()=> {
+    this.contactsText = await fetchData('Slides/Contacts/text.json');
+  }
+
   fetchFaqText=async ()=> {
     this.faqText = await fetchData('Slides/FAQ/data.json');
   }
@@ -36,6 +42,7 @@ class Store {
     this.fetchLandingsText()
     this.fetchAboutText()
     this.fetchIdeasText()
+    this.fetchContactsText()
     this.fetchFaqText()
   }
 }

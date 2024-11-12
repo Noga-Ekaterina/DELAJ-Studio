@@ -1,0 +1,72 @@
+{
+  "title": {
+    "ru": "заходите\nв гости!",
+    "en": "заходите\nв гости!"
+  },
+  "social": [
+    {
+      "title": {
+        "ru": "Вконтакте",
+        "en": "Вконтакте"
+      },
+      "href": {
+        "ru": "https://vk.com/delai.studio",
+        "en": "https://vk.com/delai.studio"
+      }
+    },
+    {
+      "title": {
+        "ru": "Telegram",
+        "en": "Telegram"
+      },
+      "href": {
+        "ru": "https://t.me/delaistudio",
+        "en": "https://t.me/delaistudio"
+      }
+    },
+    {
+      "title": {
+        "ru": "Behance",
+        "en": "Behance"
+      },
+      "href": {
+        "ru": "https://www.behance.net/delaistudio",
+        "en": "https://www.behance.net/delaistudio"
+      }
+    },
+    {
+      "title": {
+        "ru": "Facebook",
+        "en": "Facebook"
+      },
+      "href": {
+        "ru": "https://www.facebook.com/delaistudio",
+        "en": "https://www.facebook.com/delaistudio"
+      }
+    },
+    {
+      "title": {
+        "ru": "Vimeo",
+        "en": "Vimeo"
+      },
+      "href": {
+        "ru": "https://vimeo.com/delaistudio",
+        "en": "https://vimeo.com/delaistudio"
+      }
+    }
+  ],
+  "mail": {
+    "text": {
+      "ru": "hello@delai.studio",
+      "en": "hello@delai.studio"
+    },
+    "href": {
+      "ru": "mailto:hello@delai.studio",
+      "en": "mailto:hello@delai.studio"
+    }
+  },
+  "text": {
+    "ru": "По всем вопросам, связанным \nс разработкой проектов или сотрудничеством, пишите нам на почту ",
+    "en": "По всем вопросам, связанным \nс разработкой проектов или сотрудничеством, пишите нам на почту "
+  }
+}

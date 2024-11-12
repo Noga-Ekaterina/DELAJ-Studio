@@ -45,21 +45,6 @@
         margin-right: 5rem;  
         height: 14rem;
       }
-      // &#contacts-vk {
-      //   color: #3177F6;
-      // }
-      // &#contacts-tg {
-      //   color: #4F9FDF;
-      // }
-      // &#contacts-be {
-      //   color: #1E57F6;
-      // }
-      // &#contacts-fb {
-      //   color: #4A598F;
-      // }
-      // &#contacts-vi {
-      //   color: #52BAFF;
-      // }
     }
   }
 
@@ -113,7 +98,7 @@
     &-list {
       flex-direction: column;
       justify-content: center;
-      row-gap: calc(10 *var(--vh));
+      row-gap: calc(7 *var(--vh));
       padding: calc(3 *var(--vh)) 0;
       top: 0;
     }

@@ -100,6 +100,15 @@ export interface IIdeas extends ISectionMail{
   projectsTitle: ITranslation<string>
 }
 
+export interface ISocial{
+  title: ITranslation<string>
+  href: ITranslation<string>
+}
+
+export interface IContacts extends ISectionMail{
+  social: ISocial[]
+}
+
 export interface IFaq {
   question: ITranslation<string>
   answer: ITranslation<string>

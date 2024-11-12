@@ -96,7 +96,7 @@
 
   &-mail {
     a {
-      font-size: 70rem;
+      font-size: min(70rem, calc(10.46* var(--vh)));
       font-weight: 300;
       line-height: 0.9em;
       border-bottom: 3.5rem solid;
@@ -117,7 +117,7 @@
 
   @media screen and (min-width: 1680px) {
     &-link {
-      font-size: 105rem; 
+      font-size: 105rem;
     }
   }
 
@@ -129,7 +129,7 @@
 
     &-mail {
       a {
-        font-size: 75px;
+        font-size: min(75px, calc(10.46* var(--vh)));
       }
       p {
         max-width: 236px;
@@ -141,7 +141,7 @@
   @media screen and (max-width: 768px) {
     &-mail {
       a {
-        font-size: 117rem;
+        font-size: min(117rem, calc(5.68* var(--vh)));
         border-bottom-width: 0.05em;
       }
     }
