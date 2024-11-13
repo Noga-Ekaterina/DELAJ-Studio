@@ -2,7 +2,7 @@
 import { IWithClass } from '@/types';
 import classNames from 'classnames';
 import { FC } from 'react';
-import arrow from '../../../public/images/bread-crumbs-arrow.svg';
+import arrow from '../../../public/Assets/Icons/bread-crumbs-arrow.svg';
 import Image from 'next/image';
 import './bread-crumbs.scss';
 import { circe } from '@/fonts';

@@ -5,7 +5,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Navigation } from 'swiper/modules';
-import arrow from '../../../public/images/arrow.svg';
+import arrow from '../../../public/Assets/Icons/arrow.svg';
 import 'swiper/css';
 import { IWithClass } from '@/types';
 import cn from 'classnames';

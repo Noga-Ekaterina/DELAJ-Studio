@@ -5,7 +5,7 @@ import './faq.scss';
 import QuestionItem from '@/components/question-item/QuestionItem';
 import cn from 'classnames';
 import { circe } from '@/fonts';
-import menuSections from "@/store/text/menuSecton";
+import general from "@/store/text/general";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import Outline from "@/components/outline/Outline";
@@ -13,7 +13,7 @@ import home from "@/store/text/home";
 
 const Faq = () => {
   const locale=useLocale()
-  const {menuSectionTitle}=menuSections
+  const {menuSectionTitle}=general
   const {faqText}=home
   return (
     <div className={cn('menu-inner faq', circe.className)}>

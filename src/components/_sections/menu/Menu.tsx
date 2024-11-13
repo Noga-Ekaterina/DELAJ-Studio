@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { halvar, circe } from '@/fonts';
 import './menu-home.scss';
 import {useLocale} from "@/components/_hooks/useLocale";
-import menuSections from "@/store/text/menuSecton";
+import general from "@/store/text/general";
 import {observer} from "mobx-react-lite";
 
 //Images
@@ -22,7 +22,7 @@ import {useIsHome} from "@/components/_hooks/useIsHome";
 const Menu: FC = () => {
   const locale=useLocale()
   const isHome=useIsHome()
-  const {menuSectionTitle}=menuSections
+  const {menuSectionTitle}=general
   const [links, setLinks] = useState<any[]>([])
 
   useEffect(() => {

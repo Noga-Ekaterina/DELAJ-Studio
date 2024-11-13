@@ -1,12 +1,5 @@
-import { IProject } from '@/types';
-import { GetServerSideProps } from 'next';
 import { FC } from 'react';
-import { circe, halvar } from '@/fonts';
-import getDuration from '@/utils/getDuration';
-import classNames from 'classnames';
-import BasicFooter from '@/components/basic-footer/BasicFooter';
-import {observer} from "mobx-react-lite";
-import projects from "@/store/text/Projects";
+import BasicFooter from '@/components/_footers/basic-footer/BasicFooter';
 import Project from "@/components/project/Project";
 
 interface Props {

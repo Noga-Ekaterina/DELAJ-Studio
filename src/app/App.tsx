@@ -7,7 +7,7 @@ import SmoothScrolling from "@/app/SmoothScrolling";
 import ModalMenu from "@/components/_modals/modal-menu/ModalMenu";
 import ModalContacts from "@/components/_modals/modal-contacts/ModalContacts";
 import store from "@/store/store";
-import text from "@/store/text/menuSecton";
+import general from "@/store/text/general";
 import {useLoad} from "@/components/_hooks/useLoad";
 import {observer} from "mobx-react-lite";
 import homeText from "@/store/text/home";
@@ -22,7 +22,7 @@ import Outline from "@/components/outline/Outline";
 const App = ({children}:IWithChildren) => {
   const [vh, setVh] = useState(0)
   const {togleScroll, changePrevHash}=store
-  const {fetchMenuSectionTitle}=text
+  const {fetchGeneral}= general
   const {fetchAll}=homeText
   const {projectsList, fetchProjectsList}=projects
   const {careerList, fetchAllCareer}=career
@@ -45,7 +45,7 @@ const App = ({children}:IWithChildren) => {
   }, [isScrollOn]);
 
   useEffect(() => {
-    fetchMenuSectionTitle()
+    fetchGeneral()
 
     if (isHome && (hash=="" || hash=="main-screen")) {
       document.documentElement.style.overflow = "hidden"

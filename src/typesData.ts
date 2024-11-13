@@ -18,16 +18,40 @@ export interface ILink {
   text: ITranslation<string>
 }
 
-export interface ILandingContact {
-  title: ITranslation<string>
-  link: ILink
-}
 
 export interface ILandingText {
   title: ITranslation<string>,
   text: ITranslation<string>,
-  contacts: ILandingContact[]
+  contacts: IFooterContact[]
   footerText: ITranslation<{text: string, highlighted: string}>
+}
+
+export interface IFooterContact {
+  title: ITranslation<string>
+  link: ILink
+}
+
+export interface IFooterKids{
+  contacts: IFooterContact[]
+  socialTitle: ITranslation<{text: string, highlighted: string}>
+  social: ISocial[]
+}
+
+export interface IFooterAdult{
+  contacts: IFooterContact[]
+  social: ISocial[]
+  rights: ITranslation<string>
+}
+
+export interface IFooterProject{
+  social: ISocial[]
+  rights: ITranslation<string>
+}
+
+export interface IFooters{
+  kids: IFooterKids
+  adult: IFooterAdult
+  project: IFooterProject
 }
 
 export interface IProjectParameter {

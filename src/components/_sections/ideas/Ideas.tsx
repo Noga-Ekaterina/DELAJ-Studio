@@ -6,7 +6,7 @@ import { halvar, circe } from '@/fonts';
 import Link from 'next/link';
 import ExamplesSlider from '@/components/examples-slider/ExamplesSlider';
 import cn from 'classnames';
-import menuSections from "@/store/text/menuSecton";
+import general from "@/store/text/general";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import Outline from "@/components/outline/Outline";
@@ -14,7 +14,7 @@ import home from "@/store/text/home";
 
 const Ideas = () => {
   const locale=useLocale()
-  const {menuSectionTitle}=menuSections
+  const {menuSectionTitle}=general
   const {ideasText}=home
 
   if (!ideasText) return <div></div>

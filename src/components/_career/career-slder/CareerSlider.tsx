@@ -6,7 +6,7 @@ import './career-slider.scss';
 import {IWithClass} from "@/types";
 import {ICareer, IBlockList} from "@/typesData";
 import Image from "next/image";
-import arrow from '../../../../public/images/arrow.svg';
+import arrow from '../../../../public/Assets/Icons/arrow.svg';
 import { useViewport } from "@/components/_hooks/useViewport";
 import classNames from "classnames";
 import {useLocale} from "@/components/_hooks/useLocale";

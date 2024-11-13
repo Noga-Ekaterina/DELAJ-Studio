@@ -1,0 +1,11 @@
+.flashing-list{
+  &__item{
+    font-weight: 300;
+    color: #EAEAEA;
+
+    &--active{
+      font-weight: 700;
+      color: #000;
+    }
+  }
+}

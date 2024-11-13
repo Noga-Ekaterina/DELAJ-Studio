@@ -5,7 +5,7 @@ import './for-adult.scss';
 // Images
 import headingImage from '../../../../public/Assets/Slides/Animations/Images/Adults/heading.png';
 import subtitle from "../../../../public/Assets/Slides/Animations/Images/Adults/subtitle.svg"
-import AdultFooter from '@/components/adult-footer/AdultFooter';
+import AdultFooter from '@/components/_footers/adult-footer/AdultFooter';
 import ProjectList from '@/components/project-list/ProjectList';
 import homeText from "@/store/text/home";
 import {useLocale} from "@/components/_hooks/useLocale";

@@ -12,7 +12,7 @@ import close from '../../../../public/images/close.svg';
 import Image from 'next/image';
 import CareerOption from '@/components/_career/career-option/CareerOptions';
 import {useLocale} from "@/components/_hooks/useLocale";
-import menuSections from "@/store/text/menuSecton";
+import general from "@/store/text/general";
 import {observer} from "mobx-react-lite";
 import Link from "next/link";
 import career from "@/store/text/career";
@@ -21,7 +21,7 @@ import Outline from "@/components/outline/Outline";
 
 const Career = () => {
   const locale=useLocale()
-  const {menuSectionTitle}=menuSections
+  const {menuSectionTitle}=general
   const hash = useHash();
   const {careerList} =career
 

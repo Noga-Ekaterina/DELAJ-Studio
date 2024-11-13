@@ -5,7 +5,7 @@ import './contacts.scss';
 import '../../../components/_sections/about/about.scss';
 import { halvar, circe } from '@/fonts';
 import Link from 'next/link';
-import menuSections from "@/store/text/menuSecton";
+import general from "@/store/text/general";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 
@@ -19,7 +19,7 @@ import home from "@/store/text/home";
 
 const Contacts = () => {
   const locale=useLocale()
-  const {menuSectionTitle}=menuSections
+  const {menuSectionTitle}=general
   const {contactsText}= home
 
   if (!contactsText) return <div/>

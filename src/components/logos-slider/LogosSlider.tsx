@@ -7,7 +7,7 @@ import {clearTimers, observer} from "mobx-react-lite";
 import {Swiper, SwiperRef, SwiperSlide} from "swiper/react";
 import Image from "next/image";
 import {SwiperNavigation} from "@/utils/SwiperNavigation";
-import arrow from '../../../public/images/arrow.svg';
+import arrow from '../../../public/Assets/Icons/arrow.svg';
 
 const LogosSlider = () => {
   const {aboutText}=home

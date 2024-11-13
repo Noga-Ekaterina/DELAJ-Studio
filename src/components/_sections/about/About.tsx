@@ -2,7 +2,7 @@
 import React, {memo} from 'react';
 import '../menu/menu.scss' ;
 import './about.scss';
-import menuSections from "@/store/text/menuSecton";
+import general from "@/store/text/general";
 import {observer} from "mobx-react-lite";
 
 // Images
@@ -43,14 +43,11 @@ import {useLocale} from "@/components/_hooks/useLocale";
 import Outline from "@/components/outline/Outline";
 import home from "@/store/text/home";
 import LogosSlider from "@/components/logos-slider/LogosSlider";
-
-const sponsors = [
-sponsor1,sponsor2,sponsor3,sponsor4,sponsor5,sponsor6,sponsor7,sponsor8,sponsor9,sponsor10,sponsor11,sponsor12,sponsor13,sponsor14,sponsor15,sponsor16,sponsor17,sponsor18,sponsor29,sponsor20,sponsor21,sponsor22,sponsor23,sponsor24
-]
+import FlashingList from "@/components/flashing-list/FlashingList";
 
 const About = () => {
   const locale=useLocale()
-  const {menuSectionTitle}=menuSections
+  const {menuSectionTitle}=general
   const {aboutText}=home
 
   if (!aboutText) return <div></div>
@@ -89,13 +86,7 @@ const About = () => {
 
           <section className='menu-section about-branches'>
             <h2>{aboutText.a_2D_3D.title[locale]}</h2>
-            <ul>
-              {
-                aboutText.a_2D_3D.list[locale].map((item, index)=>(
-                    <li key={`2D-3D-${index}`}>{item}</li>
-                ))
-              }
-            </ul>
+            <FlashingList strings={aboutText.a_2D_3D.list[locale]}/>
           </section>
 
           <div className="about-top__side-lines">

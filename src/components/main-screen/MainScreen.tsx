@@ -12,7 +12,7 @@ import loaderOut from "../../../public/Assets/Animations/loader/Loader_main_OUT.
 import laguageAnimation from "../../../public/Assets/Animations/RU_ENG_animation.json"
 
 //Images
-import arrow from '../../../public/images/arrow.svg';
+import arrow from '../../../public/Assets/Icons/arrow.svg';
 
 import './main-screen.scss';
 import LanguageToggle from '../language-toggle/LanguageToggle';

@@ -1,0 +1,222 @@
+{
+  "kids": {
+    "contacts": [
+      {
+        "title": {
+          "ru": "Head",
+          "en": "Head"
+        },
+        "link": {
+          "href": {
+            "ru": "mailto:hello@delai.studio",
+            "en": "mailto:hello@delai.studio"
+          },
+          "text": {
+            "ru": "hello@delai.studio",
+            "en": "hello@delai.studio"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "TG HR",
+          "en": "TG HR"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/jenechkina1",
+            "en": "t.me/jenechkina1"
+          },
+          "text": {
+            "ru": "@jenechkina1",
+            "en": "@jenechkina1"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "TG Other",
+          "en": "TG Other"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/delaistudio",
+            "en": "t.me/delaistudio"
+          },
+          "text": {
+            "ru": "@delaistudio",
+            "en": "@delaistudio"
+          }
+        }
+      }
+    ],
+    "socialTitle": {
+      "ru": {
+        "text": "заходите\nв гости",
+        "highlighted": "гости"
+      },
+      "en": {
+        "text": "follow\n us online",
+        "highlighted": "online"
+      }
+    },
+    "social": [
+      {
+        "title": {
+          "ru": "Be",
+          "en": "Be"
+        },
+        "href": {
+          "ru": "https://www.behance.net/delaistudio",
+          "en": "https://www.behance.net/delaistudio"
+        }
+      },
+      {
+        "title": {
+          "ru": "Vk",
+          "en": "Vk"
+        },
+        "href": {
+          "ru": "https://vk.com/delai.studio",
+          "en": "https://vk.com/delai.studio"
+        }
+      },
+      {
+        "title": {
+          "ru": "Tg",
+          "en": "Tg"
+        },
+        "href": {
+          "ru": "https://t.me/delaistudio",
+          "en": "https://t.me/delaistudio"
+        }
+      }
+    ]
+  },
+  "adult": {
+    "contacts": [
+      {
+        "title": {
+          "ru": "Head",
+          "en": "Head"
+        },
+        "link": {
+          "href": {
+            "ru": "mailto:hello@delai.studio",
+            "en": "mailto:hello@delai.studio"
+          },
+          "text": {
+            "ru": "hello@delai.studio",
+            "en": "hello@delai.studio"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "HR",
+          "en": "HR"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/jenechkina1",
+            "en": "t.me/jenechkina1"
+          },
+          "text": {
+            "ru": "@jenechkina1",
+            "en": "@jenechkina1"
+          }
+        }
+      },
+      {
+        "title": {
+          "ru": "Работа",
+          "en": "Work"
+        },
+        "link": {
+          "href": {
+            "ru": "t.me/delaistudio",
+            "en": "t.me/delaistudio"
+          },
+          "text": {
+            "ru": "@delaistudio",
+            "en": "@delaistudio"
+          }
+        }
+      }
+    ],
+    "social": [
+      {
+        "title": {
+          "ru": "Be",
+          "en": "Be"
+        },
+        "href": {
+          "ru": "https://www.behance.net/delaistudio",
+          "en": "https://www.behance.net/delaistudio"
+        }
+      },
+      {
+        "title": {
+          "ru": "Vk",
+          "en": "Vk"
+        },
+        "href": {
+          "ru": "https://vk.com/delai.studio",
+          "en": "https://vk.com/delai.studio"
+        }
+      },
+      {
+        "title": {
+          "ru": "Tg",
+          "en": "Tg"
+        },
+        "href": {
+          "ru": "https://t.me/delaistudio",
+          "en": "https://t.me/delaistudio"
+        }
+      }
+    ],
+    "rights": {
+      "ru": "Все права защищены",
+      "en": "All rights reserved"
+    }
+  },
+  "project": {
+    "social": [
+      {
+        "title": {
+          "ru": "Be",
+          "en": "Be"
+        },
+        "href": {
+          "ru": "https://www.behance.net/delaistudio",
+          "en": "https://www.behance.net/delaistudio"
+        }
+      },
+      {
+        "title": {
+          "ru": "Vk",
+          "en": "Vk"
+        },
+        "href": {
+          "ru": "https://vk.com/delai.studio",
+          "en": "https://vk.com/delai.studio"
+        }
+      },
+      {
+        "title": {
+          "ru": "Tg",
+          "en": "Tg"
+        },
+        "href": {
+          "ru": "https://t.me/delaistudio",
+          "en": "https://t.me/delaistudio"
+        }
+      }
+    ],
+    "rights": {
+      "ru": "Все права защищены",
+      "en": "All rights reserved"
+    }
+  }
+}
