@@ -31,6 +31,8 @@ const KidsFooter: FC = () => {
   useEffect(() => {
     if (footers){
       const obj=footers.kids.socialTitle[locale]
+
+      if (typeof obj.highlighted=='string')
       setWords(obj.text.split(obj.highlighted))
     }
   }, [footers, locale]);
@@ -65,7 +67,7 @@ const KidsFooter: FC = () => {
                 if (footers){
                   const obj=footers.kids.socialTitle[locale]
 
-                  if (index === 0) {
+                  if (index === 0 && typeof obj.highlighted==="string") {
                     if (obj.text.indexOf(obj.highlighted)>0){
                       return (
                           <span key={index}>

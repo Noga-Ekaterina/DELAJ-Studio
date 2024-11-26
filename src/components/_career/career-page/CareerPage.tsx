@@ -16,6 +16,7 @@ import {useRouter} from "next/navigation";
 import store from "@/store/store";
 import CloseButtons from "@/components/close-modal-button/CloseButtons";
 import Link from "next/link";
+import Outline from "@/components/outline/Outline";
 
 interface Props {
   id: number
@@ -69,6 +70,8 @@ const CareerPage = ({id}: Props) => {
                 <>more vacancies</>
           }
         </Link>
+
+        <Outline/>
       </div>
   );
 };

@@ -17,13 +17,14 @@ export interface ILink {
   href: ITranslation<string>
   text: ITranslation<string>
 }
-
+export interface IBlockHighlighted{
+  text: string
+  highlighted: string |string[]
+}
 
 export interface ILandingText {
   title: ITranslation<string>,
-  text: ITranslation<string>,
-  contacts: IFooterContact[]
-  footerText: ITranslation<{text: string, highlighted: string}>
+  text: ITranslation<string>
 }
 
 export interface IFooterContact {
@@ -33,7 +34,7 @@ export interface IFooterContact {
 
 export interface IFooterKids{
   contacts: IFooterContact[]
-  socialTitle: ITranslation<{text: string, highlighted: string}>
+  socialTitle: ITranslation<IBlockHighlighted>
   social: ISocial[]
 }
 
@@ -138,17 +139,13 @@ export interface IFaq {
   answer: ITranslation<string>
 }
 
-export interface IFormNote{
-  text: string
-  red?: string[]
-  underline?: string[]
-}
 
 export interface IFormInput{
   name: string
   type: HTMLInputTypeAttribute
   placeholder: ITranslation<string>
-  note?: ITranslation<IFormNote>
+  note?: ITranslation<IBlockHighlighted>
+  error?: ITranslation<string>
 }
 
 export interface IForm{

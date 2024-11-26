@@ -4,18 +4,30 @@
   min-width: 430px;
   &__field {
     position: relative;
-    border-bottom: 1rem solid #EAEAEA;
-    padding: 0 2rem 3rem;
+    border-bottom: 1rem solid;
+    border-color: #EAEAEA;
+    padding: 0 2rem;
     margin-bottom: 7rem;
     display: block;
+
+    &--error{
+      border-color: var(--red);
+
+      .input-wrap{
+        color: var(--red);
+      }
+    }
+
     .input-wrap {
       position: absolute;
       overflow: hidden;
       left: 0;
-      bottom: 3rem;
+      bottom: 0;
       width: 100%;
     }
     input {
+      position: relative;
+      bottom: -6rem;
       font-size: 25rem;
       font-weight: 700;
       width: 100%;
@@ -46,7 +58,21 @@
 
   &__note{
     position: relative;
-    top: min(-3px, -3rem);
+    top: max(2px, 2rem);
+    text-transform: uppercase;
+    line-height: 166%;
+  }
+
+  &__highlighted{
+    color: #999999;
+  }
+
+  &__error-text{
+    color: var(--red) !important;
+    position: absolute;
+    right: 0;
+    bottom: 3rem;
+    z-index: 999;
   }
 
   &__checkbox {
@@ -69,8 +95,11 @@
       }
     }
 
+    &--error{
+      border-color: var(--red);
+    }
+
     &-wrapp{
-      margin-top: 15rem;
       display: flex;
       align-items: center;
       font-size: max(8rem, 8px);
@@ -84,6 +113,10 @@
       color: #C8C8C8;
       font-weight: 700;
 
+      &--error{
+        color: var(--red);
+      }
+
       input:checked ~& {
         text-decoration: line-through;
       }
@@ -93,11 +126,12 @@
   &__bottom {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 18rem;
   }
 
   &__submit {
     position: relative;
-    top: -25rem;
     width: 138rem;
     height: 34rem;
     background-color: #fff;
@@ -133,7 +167,6 @@
       }
     }
     &__submit {
-      top: -25px;
       width: 138px;
       height: 34px;
       border: 1px solid #C8C8C8;
@@ -156,6 +189,10 @@
       &__bottom {
       flex-direction: column;
       row-gap: 20px;
+    }
+
+    &__note{
+      line-height: normal;
     }
 
     &__submit {

@@ -100,7 +100,11 @@ input, textarea, select {
 	font-family: inherit;
     font-size: inherit;
     color: inherit;
-    background-color: transparent;
+    background-color: transparent !important;
+
+  &:-webkit-autofill, &:-internal-autofill-selected {
+    background-color: transparent !important;
+  }
 }
 
 input::-ms-clear {

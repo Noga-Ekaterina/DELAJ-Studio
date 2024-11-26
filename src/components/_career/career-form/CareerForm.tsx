@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import { Formik, Form, Field } from 'formik';
 import './career-form.scss';
 import { raleway } from '@/fonts';
@@ -6,11 +6,16 @@ import classNames from 'classnames';
 import career from "@/store/text/career";
 import {IFormInput} from "@/typesData";
 import {useLocale} from "@/components/_hooks/useLocale";
+import {observer} from "mobx-react-lite";
+import cn from "classnames";
 
 interface IInputProps{
   input: IFormInput
+  isError: boolean
+  setIsError: (isError: boolean)=> void
+  isShowError: boolean
 }
-const Input=({input}:IInputProps)=>{
+const Input=({input, isError, setIsError, isShowError}:IInputProps)=>{
   const [value, setValue] = useState('')
   const locale=useLocale()
   const [note, setNote] = useState("")
@@ -18,18 +23,12 @@ const Input=({input}:IInputProps)=>{
   useEffect(() => {
     if (!input.note) return
 
-    const {text, red, underline}=input.note[locale]
+    const {text, highlighted}=input.note[locale]
     let result= text
 
-    if (red){
-      red.map(str=>{
-        result=result.replace(str, `<span class="red">${str}</span>`)
-      })
-    }
-
-    if (underline){
-      underline.map(str=>{
-        result=result.replace(str, `<span class="underline">${str}</span>`)
+    if (Array.isArray(highlighted)){
+      highlighted.map(str=>{
+        result=result.replace(str, `<span class="career-form__highlighted">${str}</span>`)
       })
     }
 
@@ -37,13 +36,53 @@ const Input=({input}:IInputProps)=>{
   }, [locale]);
 
   useEffect(() => {
-    console.log(value)
+    function checkTel(str: string) {
+      // Регулярное выражение для проверки: строка должна начинаться с '+'
+      // и далее могут быть только цифры, дефисы и пробелы
+      const regex = /^\+[\d\s\-]*$/;
+      const digitCount = (str.match(/\d/g) || []).length; // Считаем количество цифр
+
+      if (regex.test(str)) {
+        return digitCount>18
+      } else {
+        return true;
+      }
+    }
+
+    function checkEmail(email: string) {
+      // Регулярное выражение для проверки корректности электронной почты
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (regex.test(email)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    setIsError(value.length==0)
+
+    switch (input.type){
+      case "tel":
+        setIsError(checkTel(value))
+        console.log(setIsError(checkTel(value)))
+        break
+      case "email":
+        setIsError(checkEmail(value))
+        break
+    }
   }, [value]);
 
   return (
-      <label htmlFor={input.name} className="career-form__field">
+      <label
+          htmlFor={input.name}
+          className={cn(
+              "career-form__field",
+              (isShowError && isError) && "career-form__field--error"
+          )}
+      >
         <div className="input-wrap">
-          <Field id={input.name} name={input.name} type={input.type}
+          <Field id={input.name} name={input.name} type="text"
             onInput={(e: React.FormEvent<HTMLInputElement>) => setValue((e.target as HTMLInputElement).value)}
           />
         </div>
@@ -54,6 +93,12 @@ const Input=({input}:IInputProps)=>{
           <span className="career-form__placeholder">{input.placeholder[locale]}</span>
           <p className="career-form__note" dangerouslySetInnerHTML={{__html: note}}></p>
         </div>
+
+        <p className="career-form__error-text">
+          {
+            (value.length>0 && isError && isShowError && input.error) && <>{input.error[locale]}</>
+          }
+        </p>
       </label>
   )
 }
@@ -62,18 +107,46 @@ const CareerItemForm = () => {
   const locale=useLocale()
   const {formText} = career
   const [inputsObj, setInputsObj] = useState<{ [key: string]: string }>({})
+  const [isErrorsObj, setIsErrorsObj] = useState<{ [key: string]: boolean, acceptTerms: boolean }>({acceptTerms: true})
+  const [isShowErrors, setIsShowErrors] = useState(false)
+  const [isErrorAcceptTerm, setIsErrorAcceptTerm] = useState(false)
+
+  const changeError=(name:string)=>{
+    const func=(isError: boolean)=>{
+      setIsErrorsObj(prevState => ({...prevState, [name]: isError}))
+      console.log(isError)
+    }
+
+    return func
+  }
+
+  const handleCheked=(e: FormEvent<HTMLInputElement>)=> {
+    setIsErrorsObj(prevState => ({
+      ...prevState,
+      acceptTerms: !(e.target as HTMLInputElement).checked
+    }))
+
+  }
 
   useEffect(() => {
     if (!formText) return
 
-    const result: {[key: string]: string}={}
+    const inputsResult: {[key: string]: string}={}
+    const errorsResult: {[key: string]: boolean}={}
 
     formText.inputs.forEach(input=>{
-      result[input.name]=""
+      inputsResult[input.name]=""
+      errorsResult[input.name]= true
     })
 
-    setInputsObj(result)
+
+    setInputsObj(inputsResult)
+    setIsErrorsObj(prevState => ({...prevState, ...errorsResult}))
   }, [formText]);
+
+  useEffect(() => {
+    setIsErrorAcceptTerm(isShowErrors && isErrorsObj.acceptTerms)
+  }, [isShowErrors, isErrorsObj]);
 
   if (!formText) return <div/>
 
@@ -84,21 +157,52 @@ const CareerItemForm = () => {
         acceptTerms: false
       }}
       onSubmit={values => {
-        
+        if (!formText) return
+
+        let isErrors= false
+        const inputs= formText.inputs
+
+        for (let i=0; i<=inputs.length-1; i++){
+          if (isErrorsObj[inputs[i].name]){
+            isErrors=true
+            break
+          }
+        }
+
+        if (isErrors) {
+          setIsShowErrors(true)
+        }else {
+        }
       }}
   >
     <Form className='career-form'>
       {
         formText.inputs.map((input, index)=>(
-            <Input input={input} key={`career-form-${input.name}-${index}`}/>
+            <Input
+                input={input}
+                key={`career-form-${input.name}-${index}`}
+                isError={isErrorsObj[input.name]}
+                setIsError={changeError(input.name)}
+                isShowError={isShowErrors}
+            />
         ))
       }
 
       <div className="career-form__bottom">
-        <label className="career-form__checkbox-wrapp">
-          <Field type="checkbox" name="acceptTerms" required id='acceptTerms'/>
-          <span className="career-form__checkbox"></span>
-          <span className="career-form__checkbox-text">{formText.acceptTerms[locale]}</span>
+        <label className="career-form__checkbox-wrapp" htmlFor="acceptTerms">
+          <Field type="checkbox" name="acceptTerms" id='acceptTerms' onInput={handleCheked}/>
+          <span
+              className={cn(
+                  "career-form__checkbox",
+                  isErrorAcceptTerm && "career-form__checkbox--error"
+              )}></span>
+          <span className={cn(
+              "career-form__checkbox-text",
+              isErrorAcceptTerm && "career-form__checkbox-text--error"
+          )}
+          >
+             {formText.acceptTerms[locale]}
+          </span>
         </label>
 
         <button className={classNames('career-form__submit', raleway.className)} type="submit">{formText.button[locale]}</button>
@@ -108,4 +212,4 @@ const CareerItemForm = () => {
   );
 };
 
-export default CareerItemForm;
+export default observer(CareerItemForm);
