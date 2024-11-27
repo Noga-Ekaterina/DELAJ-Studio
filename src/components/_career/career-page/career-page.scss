@@ -23,6 +23,10 @@
     padding: 30rem 50rem 0 100rem;
     position: relative;
     width: 100%;
+
+      @include sm{
+        padding: 15px 20px 60px;
+      }
   }
 
   h2 {
