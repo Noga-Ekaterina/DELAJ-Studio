@@ -9,7 +9,7 @@ import { useHash } from '../_hooks/useHash';
 import { P, match } from 'ts-pattern';
 import { observer } from 'mobx-react-lite';
 import store from '@/store/store';
-import { usePathname } from 'next/navigation';
+import {usePathname, useRouter} from 'next/navigation';
 import Lottie, {LottieRefCurrentProps} from "lottie-react";
 
 import contactsIn from "../../../public/Assets/Animations/header/contacts/contacts_In.json"
@@ -21,6 +21,7 @@ import logoAdults from "../../../public/Assets/Animations/logo/delai_to_adults.j
 
 import menuIn from "../../../public/Assets/Animations/header/menu/menu_IN.json"
 import menuHover from "../../../public/Assets/Animations/header/menu/menu_Mouse.json"
+import arrowBack from "../../../public/Assets/Animations/header/arrow_back.json"
 
 import {useIsHome} from "@/components/_hooks/useIsHome";
 import Link from "next/link";
@@ -182,11 +183,52 @@ const ButtonMenu = ({isOpen = false, cls = ''}) => {
   );
 };
 
+const ArrowBack=()=>{
+  const [isHover, setIsHover] = useState(false);
+  const router=useRouter()
+  const [isWasHover, setIsWasHover] = useState(false);
+  const menuRef = useRef(null);
+
+  const changeDirectionAnimation = (ref: MutableRefObject<LottieRefCurrentProps | null>) => {
+    ref.current?.play()
+    if (isWasHover && !isHover) {
+      ref.current?.setDirection(-1)
+    } else {
+      ref.current?.setDirection(1)
+    }
+  };
+
+  useEffect(() => {
+    changeDirectionAnimation(menuRef);
+
+  }, [isWasHover, isHover]);
+
+  return (
+      <button
+          onMouseOver={() => {
+            setIsHover(true);
+            setIsWasHover(true);
+          }}
+          onMouseOut={() => setIsHover(false)}
+          onClick={() => router.back()}
+          className="header-back-btn"
+      >
+        <Lottie
+            className='header-back'
+            animationData={arrowBack}
+            loop={false}
+            autoplay={false}
+            lottieRef={menuRef}
+        />
+      </button>
+  )
+}
+
 const Header: FC<IWithClass> = (props) => {
   const className = cn('header', props.className);
   const hash = useHash();
   const pathname = usePathname();
-  const isHome= useIsHome()
+  const isHome = useIsHome()
   const {isLandingSwiped, isMenuLandingsOpened, changeMenuOpened} = store;
   const theme: HeaderTheme = {hash, isLandingSwiped, isMenuLandingsOpened, pathname, isHome};
   console.log({pathname, hash, isHome})
@@ -200,7 +242,7 @@ const Header: FC<IWithClass> = (props) => {
                 () => (
                     <header className={cn(className, "white-header")}>
                       <div className='container'>
-                        <Mail/>
+                        <ArrowBack/>
 
                         <Logo variant="normal"/>
 

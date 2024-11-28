@@ -11,6 +11,26 @@
     height: auto;
   }
 
+
+  &-back {
+    min-width: 72rem;
+    height: auto;
+    position: absolute;
+    inset: auto;
+
+    &-btn{
+      width: 15rem;
+      height: 10rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      *{
+        pointer-events: none;
+      }
+    }
+  }
+
   &-burger {
     width: 19rem;
     height: auto;
