@@ -21,7 +21,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     changeMenuOpened,
     changeCurrentPage,
     isModalMenuOpened,
-    isModalContactsOpened,
+    currentPage,
     showMainPage,
     showMainScreen,
     scrollPositionMainPage,
@@ -44,14 +44,10 @@ const Scroller: FC<IWithChildren> = (props) => {
   const changeHash=useChangeHash()
 
   useEffect(() => {
-    clearTimeout(scrollUpTimeout)
-    if (showMainScreen&&(hash=="main-screen" || hash=="")){
-      scrollUpTimeout= setTimeout(()=>{
-        window.scrollTo(0,0)
-      }, 900)
-    }else
-      clearTimeout(scrollUpTimeout)
-  }, [hash, showMainScreen]);
+    if (currentPage&&(hash=="main-screen" || hash=="")){
+      window.scrollTo(0, 0)
+    }
+  }, [hash, currentPage]);
 
   let isAtBottom =false;
   let isAtTop=true

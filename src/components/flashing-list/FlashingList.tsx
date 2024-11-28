@@ -17,7 +17,6 @@ const FlashingList = ({strings}:Props) => {
 
   useEffect(() => {
     timeout= setTimeout(()=>{
-      console.log(indexActive)
       if (indexActive>=strings.length-1)
         setIndexActive(0)
       else

@@ -11,31 +11,18 @@ import loaderHover from "../../../public/Assets/Animations/loader/Loader_main_ho
 import loaderOut from "../../../public/Assets/Animations/loader/Loader_main_OUT.json"
 import laguageAnimation from "../../../public/Assets/Animations/RU_ENG_animation.json"
 
-//Images
-import arrow from '../../../public/Assets/Icons/arrow.svg';
-
 import './main-screen.scss';
 import LanguageToggle from '../language-toggle/LanguageToggle';
 import store from '@/store/store';
 import { observer } from 'mobx-react-lite';
 import cn from 'classnames';
 import { halvar } from '@/fonts';
-import Image from 'next/image';
 import { Transition } from 'react-transition-group';
 import { useHash } from '@/components/_hooks/useHash';
 import PageMenu from '../page-menu/PageMenu';
-import { transitionStyles } from '@/vars';
 import Curtain from "@/components/curtain/Сurtain";
 import {useLoad} from "@/components/_hooks/useLoad";
 import {changeOverflow} from "@/utils/changeOverflow";
-
-const menuStyles = {
-  unmounted: { top: "0%",},
-  entering: { top: "0%",},
-  entered: { top: "0%",},
-  exiting:  {  top: "calc(-100* var(--vh))",},
-  exited:  {  top: "calc(-100* var(--vh))",},
-};
 
 const MainScreen: FC = () => {
   const {
