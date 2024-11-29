@@ -23,11 +23,6 @@ const Scroller: FC<IWithChildren> = (props) => {
     isModalMenuOpened,
     currentPage,
     showMainPage,
-    showMainScreen,
-    scrollPositionMainPage,
-    changeScrollPositionMainPage,
-    pageTransition,
-    changePageTransition,
     isScrollOn
   }= store
   const scrollerContainerRef =useRef<HTMLDivElement | null>(null)
@@ -227,12 +222,9 @@ const Scroller: FC<IWithChildren> = (props) => {
     const handleScroll = () => {
       checkIfAtEnd();
 
-      changeScrollPositionMainPage(window.scrollY)
-
       clearTimeout((scrollTimeout as number))
 
       if (scrollerContainerRef.current){
-        console.log({scrollPositionMainPage, scroll: window.scrollY, height: scrollerContainerRef.current?.clientHeight})
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
         if (activeItem){
           const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
@@ -335,8 +327,7 @@ const Scroller: FC<IWithChildren> = (props) => {
       if (activeItem) {
         const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
-        console.log({scrollPositionMainPage})
-        smoothScroll(pageTransition=="normal"? top: scrollPositionMainPage, 0)
+        smoothScroll(top, 0)
         // changePageTransition('normal')
       }
     }

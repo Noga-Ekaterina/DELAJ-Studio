@@ -13,13 +13,6 @@ class Store {
   // показывать ли главную страницу
   showMainPage=false
 
-  // позиция скролла главной страници
-  scrollPositionMainPage=0
-
-  // тип перехода между страницами normal или back.
-  // Если back - возврашаемся в то место, откуда перешли сюда (scrollPositionMainPage)
-  pageTransition: PageTransitionType= "normal"
-
   // открытие половинок детского и взрослого экрана меню.
   // Если false - при открытие главного экрана будет лого и выбор языка
   isMenuLandingsOpened = false;
@@ -52,14 +45,6 @@ class Store {
 
   changeShowMainPage= (value: boolean)=>{
     this.showMainPage = value
-  }
-
-  changeScrollPositionMainPage= (value: number)=>{
-    this.scrollPositionMainPage= value
-  }
-
-  changePageTransition =(value: PageTransitionType)=>{
-    this.pageTransition= value
   }
 
   swipeLanding = (value: boolean) => {

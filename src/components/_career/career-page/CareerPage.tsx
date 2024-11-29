@@ -23,7 +23,6 @@ interface Props {
 }
 const CareerPage = ({id}: Props) => {
   const locale=useLocale()
-  const {prevHash, changePageTransition} =store
   const router=useRouter()
   const {careerList} =career
   const careerItem=careerList &&careerList.find(item=> item.id==id)
@@ -31,8 +30,7 @@ const CareerPage = ({id}: Props) => {
   if (!careerItem) return <div/>
   
   const goBack = () => {
-    // changePageTransition("back")
-    router.push(`/${locale}#${prevHash}`, {scroll: false})
+    router.back()
   }
 
   return (
