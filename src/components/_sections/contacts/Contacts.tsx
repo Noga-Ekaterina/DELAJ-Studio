@@ -35,7 +35,7 @@ const Contacts = () => {
           <div className="contacts-list">
             {
               contactsText.social.map((item, index)=>(
-                  <a key={`contacts-list-link-${index}`} className='contacts-list__link' href={item.href[locale]}>
+                  <a key={`contacts-list-link-${index}`} className='contacts-list__link' href={item.href[locale]} target="_blank">
                     <img src={`/Assets/Slides/Contacts/Images/Logos/${index+1}.svg`} alt=""/>
                     {item.title[locale]}
                   </a>

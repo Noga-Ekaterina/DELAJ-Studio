@@ -19,7 +19,7 @@ const FooterContacts = (props:Props) => {
           {
             footers && footers[props.type].contacts.map(contact=>(
                 <li key={`contact-${props.type}-${contact.link.href[locale]}`}>
-                  {contact.title[locale]} <a href={contact.link.href[locale]}>{contact.link.text[locale]}</a>
+                  {contact.title[locale]} <a href={contact.link.href[locale]} target="_blank">{contact.link.text[locale]}</a>
                 </li>
               ))
           }

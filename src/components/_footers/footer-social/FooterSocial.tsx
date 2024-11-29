@@ -19,7 +19,7 @@ const FooterSocial = ({type}: Props) => {
       <div className="footer-socials">
         {
           footers[type].social.map((link, index)=>(
-              <a key={`footer-social-${index}`} href={link.href[locale]}>{link.title[locale]}</a>
+              <a key={`footer-social-${index}`} href={link.href[locale]} target="_blank">{link.title[locale]}</a>
           ))
         }
       </div>
