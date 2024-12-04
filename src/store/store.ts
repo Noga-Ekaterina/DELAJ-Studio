@@ -10,6 +10,9 @@ class Store {
   // показывать ли главный экран
   showMainScreen=true
 
+  // показать контент
+  isShowContent=false
+
   // показывать ли главную страницу
   showMainPage=false
 
@@ -38,6 +41,10 @@ class Store {
 
   //Открыто ли модальное окно контактов
   isModalContactsOpened = false
+
+  chhangeIsShowContent=()=>{
+    setTimeout(()=> this.isShowContent=true, 300)
+  }
 
   changeShowMainScreen= (value: boolean)=>{
     this.showMainScreen = value

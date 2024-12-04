@@ -23,7 +23,7 @@ import {IProjectsList, ILadings} from "@/typesData";
 
 const App = ({children}:IWithChildren) => {
   const [vh, setVh] = useState(0)
-  const {togleScroll, isLandingSwiped, changePrevHash}=store
+  const {togleScroll, isLandingSwiped, changePrevHash, chhangeIsShowContent}=store
   const {fetchGeneral, menuSectionTitle}= general
   const {fetchAll, landingsText}=homeText
   const {projectsList, fetchProjectsList}=projects
@@ -62,6 +62,8 @@ const App = ({children}:IWithChildren) => {
         setVh(window.innerHeight/100)
       })
     }
+
+    chhangeIsShowContent()
   }, []);
 
   useEffect(() => {

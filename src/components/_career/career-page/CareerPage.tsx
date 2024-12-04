@@ -22,6 +22,7 @@ interface Props {
   id: number
 }
 const CareerPage = ({id}: Props) => {
+  const {isShowContent}=store
   const locale=useLocale()
   const router=useRouter()
   const {careerList} =career
@@ -34,43 +35,51 @@ const CareerPage = ({id}: Props) => {
   }
 
   return (
-      <div className={cn("career-page", circe.className)}>
-        <CloseButtons func={goBack}>
-          <BreadCrumbs
-              links={[
-                {text: locale=="ru"? 'вакансии':"vacancy", path: `/${locale!="en"? locale:''}/#career`},
-                {text: careerItem.data.title[locale]}
-              ]}
-          />
-        </CloseButtons>
+      <>
+        {
+            isShowContent &&
+            <div className={cn("career-page", circe.className)}>
+               <CloseButtons func={goBack}>
+                  <BreadCrumbs
+                      links={[
+                        {
+                          text: locale == "ru" ? 'вакансии' : "vacancy",
+                          path: `/${locale != "en" ? locale : ''}/#career`
+                        },
+                        {text: careerItem.data.title[locale]}
+                      ]}
+                  />
+               </CloseButtons>
 
-        <div className={cn('career-page__wrap')}>
-          <div className="career-page__content">
-            <h2>{careerItem.data.title[locale]}</h2>
-            <div className="career-page__options">
-              {careerItem.data.options[locale].map((option, index) => (
-                  <CareerOption type={option} key={'career-page-option' + index}/>
-              ))}
-              <CareerOption type={careerItem.data.isOpened ? "opened" : "closed"}/>
+               <div className={cn('career-page__wrap')}>
+                  <div className="career-page__content">
+                     <h2>{careerItem.data.title[locale]}</h2>
+                     <div className="career-page__options">
+                       {careerItem.data.options[locale].map((option, index) => (
+                           <CareerOption type={option} key={'career-page-option' + index}/>
+                       ))}
+                        <CareerOption type={careerItem.data.isOpened ? "opened" : "closed"}/>
+                     </div>
+
+                     <div className="career-page__body">
+                        <CareerSlider career={careerItem} vacancies={careerList}/>
+                        <CareerItemForm/>
+                     </div>
+                  </div>
+               </div>
+               <Link className='career-page__more' href={`/${locale != "en" ? locale : ""}#career`}>
+                 {
+                   locale == "ru" ?
+                       <>еще вакансии</>
+                       :
+                       <>more vacancies</>
+                 }
+               </Link>
+
+               <Outline/>
             </div>
-
-            <div className="career-page__body">
-              <CareerSlider career={careerItem} vacancies={careerList}/>
-              <CareerItemForm/>
-            </div>
-          </div>
-        </div>
-        <Link className='career-page__more' href={`/${locale!="en"? locale:""}#career`}>
-          {
-            locale=="ru"?
-                <>еще вакансии</>
-                :
-                <>more vacancies</>
-          }
-        </Link>
-
-        <Outline/>
-      </div>
+        }
+      </>
   );
 };
 

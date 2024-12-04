@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import ProjectVideo from "@/components/project-video/ProjectVideo";
 import {IProject, IProjectsList} from "@/typesData";
 import {useLocale} from "@/components/_hooks/useLocale";
+import store from "@/store/store";
 
 interface Props {
   id: string,
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const Project = ({id, type}: Props) => {
+  const {isShowContent}=store
   const locale=useLocale()
   const {projectsList} =projects
   const project: undefined | null | false | IProject= (projectsList && (type=="kids" || type=="adults"))&& projectsList[type as keyof IProjectsList]?.find(item=> String(item.id)==id);
@@ -40,7 +42,7 @@ const Project = ({id, type}: Props) => {
   return (
       <div className="container">
         {
-          (project)
+          (project && isShowContent)
               ? (
                   <>
                     <div className="project-cover-wrapp">

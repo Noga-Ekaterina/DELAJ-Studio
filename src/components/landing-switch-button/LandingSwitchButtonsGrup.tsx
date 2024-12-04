@@ -7,7 +7,7 @@ import {useHash} from "@/components/_hooks/useHash";
 import {observer} from "mobx-react-lite";
 
 const LandingSwitchButtonsGrup = () => {
-  const { isLandingSwiped, showMainScreen, swipeLanding, changeCurrentPage } = store;
+  const {isShowContent, isLandingSwiped, showMainScreen, swipeLanding, changeCurrentPage } = store;
   const hash =useHash()
   const [curtainAnimationEnd, setCurtainAnimationEnd] = useState(false)
 
@@ -23,27 +23,31 @@ const LandingSwitchButtonsGrup = () => {
   }
 
   return (
-      <>
-        <div
-            className="landing-switch-button-grup button-right"
-        >
-          <LandingSwitchButton
-              handleClick={() => changeSwiped(hash=="first-landing")}
-              type="adult"
-              isShow={curtainAnimationEnd &&((hash=="first-landing" && !isLandingSwiped) || (isLandingSwiped && hash=="second-landing"))}
-          />
-        </div>
-        <div
-            className="landing-switch-button-grup button-left"
-        >
-          <LandingSwitchButton
-              handleClick={() => changeSwiped(hash!="first-landing")}
-              type="kids"
-              isShow={curtainAnimationEnd&& ((hash=="second-landing" && !isLandingSwiped) ||(isLandingSwiped && hash=="first-landing"))}
-          />
-        </div>
-      </>
-
+    <>
+      {
+        isShowContent &&
+          <>
+             <div
+                 className="landing-switch-button-grup button-right"
+             >
+                <LandingSwitchButton
+                    handleClick={() => changeSwiped(hash=="first-landing")}
+                    type="adult"
+                    isShow={curtainAnimationEnd &&((hash=="first-landing" && !isLandingSwiped) || (isLandingSwiped && hash=="second-landing"))}
+                />
+             </div>
+             <div
+                 className="landing-switch-button-grup button-left"
+             >
+                <LandingSwitchButton
+                    handleClick={() => changeSwiped(hash!="first-landing")}
+                    type="kids"
+                    isShow={curtainAnimationEnd&& ((hash=="second-landing" && !isLandingSwiped) ||(isLandingSwiped && hash=="first-landing"))}
+                />
+             </div>
+          </>
+      }
+    </>
   );
 };
 

@@ -29,6 +29,7 @@ import {changeOverflow} from "@/utils/changeOverflow";
 
 const MainScreen: FC = () => {
   const {
+    isShowContent,
     isMenuLandingsOpened,
     changeMenuOpened,
     changeCurrentPage,
@@ -79,8 +80,8 @@ const MainScreen: FC = () => {
       changeShowMainScreen(true);
       disabled()
     } else if (hash !== 'main-screen' && hash!=""){
-      changeShowMainScreen(false);
-      console.log("hidden main screen")
+      changeShowMainScreen(false)
+      setIsShowLang(false)
 
       if (hash!="first-landing")
         changeCurrentPage(null)
@@ -126,58 +127,65 @@ const MainScreen: FC = () => {
 
   return (
       <Curtain show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 4:3} className="main-screen">
-        <div
-            className="main-screen__content"
-            onWheel={handleEvent}
-            onTouchMove={handleEvent}
-            ref={containrRef}
-        >
-          {(isMenuLandingsOpened && !currentPage)
-              ? <Lottie
-                  className='main-screen__logo'
-                  animationData={logoAnimationOut}
-                  loop={false}
-                  onEnterFrame={() => setShowArrow(false)}
-              />
-              : <Lottie
-                  className='main-screen__logo'
-                  animationData={logoAnimationOn}
-                  loop={false}
-                  onComplete={() => setIsAnimationPlay(false)}
-              />
-          }
+        {
+          isShowContent&&
+            <>
+               <div
+                   className="main-screen__content"
+                   onWheel={handleEvent}
+                   onTouchMove={handleEvent}
+                   ref={containrRef}
+               >
+                 {(isMenuLandingsOpened && !currentPage)
+                     ? <Lottie
+                         className='main-screen__logo'
+                         animationData={logoAnimationOut}
+                         loop={false}
+                         onEnterFrame={() => setShowArrow(false)}
+                     />
+                     : <Lottie
+                         className='main-screen__logo'
+                         animationData={logoAnimationOn}
+                         loop={false}
+                         onComplete={() => setIsAnimationPlay(false)}
+                     />
+                 }
 
-          <button
-              className='main-screen__arrow'
-              style={{pointerEvents: isLoad? "none":"auto"}}
-              onMouseOver={() => {
-                setIsHover(true);
-                setIsWasHover(true);
-              }}
-              onMouseOut={() => setIsHover(false)}
-              onClick={handleEvent}
-          >
-            <Lottie
-                animationData={isLoad? loaderLoop: showArrow? isWasHover? loaderHover: loaderOut:loaderFinish}
-                loop={isLoad}
-                lottieRef={arrowRef}
-            />
-          </button>
+                  <button
+                      className='main-screen__arrow'
+                      style={{pointerEvents: isLoad ? "none" : "auto"}}
+                      onMouseOver={() => {
+                        setIsHover(true);
+                        setIsWasHover(true);
+                      }}
+                      onMouseOut={() => setIsHover(false)}
+                      onClick={handleEvent}
+                  >
+                     <Lottie
+                         animationData={isLoad ? loaderLoop : showArrow ? isWasHover ? loaderHover : loaderOut : loaderFinish}
+                         loop={isLoad}
+                         lottieRef={arrowRef}
+                     />
+                  </button>
 
-          {
-            (!isLoad &&(hash=='' ||hash=="main-screen"))&&
-              <LanguageToggle
-                  className={cn('main-screen__language', halvar.className)}
-                  elements={[
-                      <Lottie animationData={ruAnimation} loop={false} autoplay={false} lottieRef={ruRef}
-                      key={"main-btn-ru"}/>,
-                      <Lottie animationData={beamAnimation} loop={false} onComplete={()=> setIsShowLang(true)} key={"main-beam"}/>,
-                      <Lottie animationData={enAnimation} loop={false} lottieRef={enRef} autoplay={false} key={"main-btn-en"}/>
-                  ]}
-              />
-          }
-        </div>
-        <PageMenu/>
+                 {
+                     (!isLoad && (hash == '' || hash == "main-screen")) &&
+                     <LanguageToggle
+                         className={cn('main-screen__language', halvar.className)}
+                         elements={[
+                           <Lottie animationData={ruAnimation} loop={false} autoplay={false} lottieRef={ruRef}
+                                   key={"main-btn-ru"}/>,
+                           <Lottie animationData={beamAnimation} loop={false} onComplete={() => setIsShowLang(true)}
+                                   key={"main-beam"}/>,
+                           <Lottie animationData={enAnimation} loop={false} lottieRef={enRef} autoplay={false}
+                                   key={"main-btn-en"}/>
+                         ]}
+                     />
+                 }
+               </div>
+               <PageMenu/>
+            </>
+        }
       </Curtain>
 
   );
