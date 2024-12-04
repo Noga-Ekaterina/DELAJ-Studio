@@ -98,6 +98,14 @@
       width: 95px;
     }
 
+    &-back{
+      min-width: 72px;
+
+      &-btn{
+        width: 15px;
+      }
+    }
+
     &-mail {
       height: 19px;
       &.menu-mail {

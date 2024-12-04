@@ -27,6 +27,11 @@ export interface ILandingText {
   text: ITranslation<string>
 }
 
+export interface ILadings{
+  kids: ILandingText
+  adult: ILandingText
+}
+
 export interface IFooterContact {
   title: ITranslation<string>
   link: ILink

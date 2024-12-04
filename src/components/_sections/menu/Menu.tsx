@@ -35,7 +35,7 @@ const Menu: FC = () => {
                 <a href={`#${key}`} key={`menu-${key}`} className={cn("menu-link", `menu-link--${locale}`)}
                    id={`menu-${key}`}>{menuSectionTitle[key][locale]}</a>
                 :
-                <Link href={`/${locale}#${key}`} key={`menu-${key}`} className={cn("menu-link", `menu-link--${locale}`)}
+                <Link href={`/${locale!='en'? locale:""}#${key}`} key={`menu-${key}`} className={cn("menu-link", `menu-link--${locale}`)}
                    id={`menu-${key}`}>{menuSectionTitle[key][locale]}</Link>
         );
       }

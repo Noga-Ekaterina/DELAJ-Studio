@@ -9,7 +9,10 @@ import loaderLoop from "../../../public/Assets/Animations/loader/Loader_main_loo
 import loaderFinish from "../../../public/Assets/Animations/loader/Loader_main_finish.json"
 import loaderHover from "../../../public/Assets/Animations/loader/Loader_main_hover.json"
 import loaderOut from "../../../public/Assets/Animations/loader/Loader_main_OUT.json"
-import laguageAnimation from "../../../public/Assets/Animations/RU_ENG_animation.json"
+import ruAnimation from "../../../public/Assets/Animations/lang/RU.json"
+import beamAnimation from "../../../public/Assets/Animations/lang/Beam.json"
+import enAnimation from "../../../public/Assets/Animations/lang/EN.json"
+
 
 import './main-screen.scss';
 import LanguageToggle from '../language-toggle/LanguageToggle';
@@ -41,10 +44,12 @@ const MainScreen: FC = () => {
   const [isHover, setIsHover] = useState(false);
   const [isWasHover, setIsWasHover] = useState(false);
   const [isAnimationPlay, setIsAnimationPlay] = useState(true)
-  const [isLanguageAnimationEnd, setIsLanguageAnimationEnd] = useState(false)
   const hash = useHash();
   const arrowRef = useRef<LottieRefCurrentProps | null>(null)
+  const ruRef = useRef<LottieRefCurrentProps | null>(null)
+  const enRef = useRef<LottieRefCurrentProps | null>(null)
   const containrRef=useRef(null)
+  const [isShowLang, setIsShowLang] = useState(false)
   const isLoad=useLoad()
 
   const disabled = () => {
@@ -112,6 +117,13 @@ const MainScreen: FC = () => {
     arrowRef.current?.play()
   }, [isHover, isWasHover]);
 
+  useEffect(() => {
+    if (isShowLang){
+      ruRef.current?.play()
+      enRef.current?.play()
+    }
+  }, [isShowLang]);
+
   return (
       <Curtain show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 4:3} className="main-screen">
         <div
@@ -154,40 +166,20 @@ const MainScreen: FC = () => {
 
           {
             (!isLoad &&(hash=='' ||hash=="main-screen"))&&
-              <Transition in={isLanguageAnimationEnd} timeout={100}>
-                {state => (
-                    <div className='main-screen__language-wrap'>
-                      <LanguageToggle
-                          className={cn('main-screen__language', halvar.className)}
-                          style={{
-                            unmounted: {opacity: 0},
-                            entering: {opacity: 1},
-                            entered: {opacity: 1},
-                            exiting: {opacity: 0},
-                            exited: {opacity: 0},
-                          }[state]}
-                      />
-                      <Lottie
-                          animationData={laguageAnimation}
-                          loop={false}
-                          onComplete={() => setIsLanguageAnimationEnd(true)}
-                          className='main-screen__language-anim'
-                          style={{
-                            unmounted: {display:"block"},
-                            entering: {display:"none"},
-                            entered: {display:"none"},
-                            exiting: {display:"block"},
-                            exited: {display:"block"},
-                          }[state]}
-                      />
-                    </div>
-                )}
-              </Transition>
-
+              <LanguageToggle
+                  className={cn('main-screen__language', halvar.className)}
+                  elements={[
+                      <Lottie animationData={ruAnimation} loop={false} autoplay={false} lottieRef={ruRef}
+                      key={"main-btn-ru"}/>,
+                      <Lottie animationData={beamAnimation} loop={false} onComplete={()=> setIsShowLang(true)} key={"main-beam"}/>,
+                      <Lottie animationData={enAnimation} loop={false} lottieRef={enRef} autoplay={false} key={"main-btn-en"}/>
+                  ]}
+              />
           }
         </div>
         <PageMenu/>
       </Curtain>
+
   );
 };
 

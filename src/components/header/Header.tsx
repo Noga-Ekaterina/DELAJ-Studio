@@ -98,7 +98,7 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   }, [animations]);
 
   return (
-      <Link href={isHome? "": `/${locale}/#main-screen`} onClick={()=> {
+      <Link href={isHome? "": `/${locale!='en'? locale:""}#main-screen`} onClick={()=> {
         changeCurrentPage(null)
         changeMenuOpened(false)
         addHash("main-screen")

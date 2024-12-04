@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import {fetchData} from "@/utils/fetchData";
-import {IAbout, IContacts, IFaq, IIdeas, ILandingText} from "@/typesData";
+import {IAbout, IContacts, IFaq, IIdeas, ILadings, ILandingText} from "@/typesData";
 
 
 class Store {
@@ -8,7 +8,7 @@ class Store {
     makeAutoObservable(this);
   }
 
-  landingsText: null |{kids: ILandingText, adult: Omit<ILandingText, 'footerText'>}= null;
+  landingsText: null |ILadings= null;
 
   aboutText: null |IAbout = null
 

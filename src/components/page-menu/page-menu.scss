@@ -4,6 +4,7 @@
     overflow: hidden; 
     flex-shrink: 1;
     cursor: pointer;
+    z-index: 3;
 
     > div{
       transform: scale(1);

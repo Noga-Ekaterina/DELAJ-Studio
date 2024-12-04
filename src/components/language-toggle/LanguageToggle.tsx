@@ -10,10 +10,12 @@ import {useHash} from "@/components/_hooks/useHash";
 
 type SpanProps = {
   lang: LangType
+  element?: JSX.Element
 };
 
 interface LanguageToggleProps extends IWithClass{
   style?: CSSProperties
+  elements?: JSX.Element[]
 }
 
 const LanguageToggleSpan: FC<SpanProps> = (props) => {
@@ -44,19 +46,20 @@ const LanguageToggleSpan: FC<SpanProps> = (props) => {
       className={className} 
       onClick={() => changeLangauge(props.lang)}
     >
-      {props.lang}
+      {props.element ?? props.lang}
     </button>
   );
 };
 
 const LanguageToggle: FC<LanguageToggleProps> = (props) => {
   const className = cn('language-toggle', props.className);
+  const [ru, beam, en]= props.elements || []
 
   return (
     <div className={className} style={props.style}>
-      <LanguageToggleSpan lang='ru'/>
-      <span>/</span>
-      <LanguageToggleSpan lang='en'/>
+      <LanguageToggleSpan lang='ru' element={ru}/>
+      <span>{beam ?? <>/</>}</span>
+      <LanguageToggleSpan lang='en' element={en}/>
     </div>
   );
 };
