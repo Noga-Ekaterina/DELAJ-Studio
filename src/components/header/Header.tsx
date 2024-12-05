@@ -229,9 +229,11 @@ const Header: FC<IWithClass> = (props) => {
   const hash = useHash();
   const pathname = usePathname();
   const isHome = useIsHome()
-  const {isLandingSwiped, isMenuLandingsOpened, changeMenuOpened} = store;
+  const {isShowContent, isLandingSwiped, isMenuLandingsOpened, changeMenuOpened} = store;
   const theme: HeaderTheme = {hash, isLandingSwiped, isMenuLandingsOpened, pathname, isHome};
   console.log({pathname, hash, isHome})
+
+  if (!isShowContent) return <header/>
 
   return (
       <>

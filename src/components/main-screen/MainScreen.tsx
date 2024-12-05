@@ -183,9 +183,9 @@ const MainScreen: FC = () => {
                      />
                  }
                </div>
-               <PageMenu/>
             </>
         }
+        <PageMenu/>
       </Curtain>
 
   );

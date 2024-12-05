@@ -110,17 +110,7 @@ const PageMenu: FC = () => {
   const mobileScreen = useMediaQuery({maxWidth: 660});
   const [screenStyles, setScreenStyles] = useState<ScreenStylesType>('largeScreen');
   const hash= useHash()
-  const [hiden, setHiden] = useState({kids: false, adult: false})
-
-  useEffect(() => {
-    if (hash!=="" && hash!=="main-screen" && !isLandingSwiped){
-      setTimeout(()=>{
-        setHiden({...hiden, kids: true})
-      },700)
-    }else if (hash=="" || hash=="main-screen"){
-      setHiden({kids: false, adult: false})
-    }
-  }, [hash]);
+  const [hidden, setHidden] = useState(true)
 
   const swipeToKids = () => {
     if (isLandingSwiped) {
@@ -135,6 +125,10 @@ const PageMenu: FC = () => {
   }
 
   useEffect(() => {
+    setTimeout(()=>setHidden(false), 700)
+  }, []);
+
+  useEffect(() => {
     if (mediumScreen) {
       setScreenStyles((viewport>1.25 && !mobileScreen)?'largeScreen':'mediumScreen');
     } else {
@@ -144,8 +138,8 @@ const PageMenu: FC = () => {
   },[mediumScreen, viewport])
 
   return (  
-    <nav ref={ref} > 
-      <PageMenuScreen 
+    <nav ref={ref} style={{opacity: hidden?0:1}} >
+      <PageMenuScreen
         styles={sideStyles[screenStyles].kids}
         page="kids"
         Component={KidsScreen}
