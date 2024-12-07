@@ -63,7 +63,7 @@ const CareerPage = ({id}: Props) => {
 
                      <div className="career-page__body">
                         <CareerSlider career={careerItem} vacancies={careerList}/>
-                        <CareerItemForm/>
+                        <CareerItemForm vacancy={careerItem.data.title.ru}/>
                      </div>
                   </div>
                </div>

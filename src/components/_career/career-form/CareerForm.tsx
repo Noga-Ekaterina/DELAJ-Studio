@@ -9,14 +9,24 @@ import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import cn from "classnames";
 
+interface PropsForm{
+  vacancy: string
+}
+
+interface IField{
+  [key: string]: any
+  value: string
+}
+
 interface IInputProps{
   input: IFormInput
   isError: boolean
   setIsError: (isError: boolean)=> void
   isShowError: boolean
+  field: IField
 }
-const Input=({input, isError, setIsError, isShowError}:IInputProps)=>{
-  const [value, setValue] = useState('')
+const Input=({input, isError, setIsError, isShowError, field}:IInputProps)=>{
+  const value= field.value??''
   const locale=useLocale()
   const [note, setNote] = useState("")
 
@@ -82,9 +92,7 @@ const Input=({input, isError, setIsError, isShowError}:IInputProps)=>{
           )}
       >
         <div className="input-wrap">
-          <Field id={input.name} name={input.name} type="text"
-            onInput={(e: React.FormEvent<HTMLInputElement>) => setValue((e.target as HTMLInputElement).value)}
-          />
+          <input {...field} id={input.name}/>
         </div>
         <div
             className="career-form__block-placeholder"
@@ -103,7 +111,7 @@ const Input=({input, isError, setIsError, isShowError}:IInputProps)=>{
   )
 }
 
-const CareerItemForm = () => {
+const CareerItemForm = (props: PropsForm) => {
   const locale=useLocale()
   const {formText} = career
   const [inputsObj, setInputsObj] = useState<{ [key: string]: string }>({})
@@ -125,6 +133,30 @@ const CareerItemForm = () => {
       ...prevState,
       acceptTerms: !(e.target as HTMLInputElement).checked
     }))
+
+  }
+
+  const handleSubmit= async (values: { [key: string]: string | boolean, acceptTerms: boolean })=>{
+    if (!formText) return
+
+    console.log("subm")
+    let text= `<b>${props.vacancy}</b>%0A%0A`
+
+    formText.inputs.map(input=>{
+      text+=`<b>${input.placeholder.ru}:</b> ${values[input.name]}%0A`
+    })
+
+    text=text.replaceAll("+", "%2b")
+
+    const resp= await fetch(
+        `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TG_BOT_TOKEN}/sendMessage?chat_id=${process.env.NEXT_PUBLIC_CHAT_ID}&parse_mode=html&text=${text}`,
+        {
+          method: "POST",
+          headers:{
+            "Content-Type": "application/json"
+          }
+        }
+    )
 
   }
 
@@ -154,14 +186,14 @@ const CareerItemForm = () => {
     <Formik
       initialValues={{
         ...inputsObj,
-        acceptTerms: false
+        acceptTerms: false as boolean
       }}
-      onSubmit={values => {
+      onSubmit={(values: { [key: string]: string | boolean, acceptTerms: boolean }, {resetForm}) => {
         if (!formText) return
+
 
         let isErrors= false
         const inputs= formText.inputs
-
         for (let i=0; i<=inputs.length-1; i++){
           if (isErrorsObj[inputs[i].name]){
             isErrors=true
@@ -172,19 +204,37 @@ const CareerItemForm = () => {
         if (isErrors) {
           setIsShowErrors(true)
         }else {
+          setIsShowErrors(false)
+          handleSubmit(values)
+          resetForm({
+            values: {
+              ...inputsObj,
+              acceptTerms: false, // Обязательно сбрасывайте состояние чекбокса
+            },
+          });
+
         }
       }}
   >
     <Form className='career-form'>
       {
         formText.inputs.map((input, index)=>(
-            <Input
-                input={input}
-                key={`career-form-${input.name}-${index}`}
-                isError={isErrorsObj[input.name]}
-                setIsError={changeError(input.name)}
-                isShowError={isShowErrors}
-            />
+            <>
+              <Field
+                  name={input.name}
+                  type="text"
+                  render={({field}:IField)=>(
+                      <Input
+                          field={field}
+                          input={input}
+                          key={`career-form-${input.name}-${index}`}
+                          isError={isErrorsObj[input.name]}
+                          setIsError={changeError(input.name)}
+                          isShowError={isShowErrors}
+                      />
+                  )}
+              />
+            </>
         ))
       }
 
