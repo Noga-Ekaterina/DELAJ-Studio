@@ -44,7 +44,7 @@ const CareerPage = ({id}: Props) => {
                       links={[
                         {
                           text: locale == "ru" ? 'вакансии' : "vacancy",
-                          path: `/${locale != "en" ? locale : ''}/#career`
+                          path: `/${locale != "en" ? locale : ''}#career`
                         },
                         {text: careerItem.data.title[locale]}
                       ]}
