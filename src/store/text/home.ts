@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import {fetchData} from "@/utils/fetchData";
-import {IAbout, IContacts, IFaq, IIdeas, ILadings, ILandingText} from "@/typesData";
+import {IAbout, IContacts, IData, IFaq, IForm, IIdeas, ILadings, ILandingText} from "@/typesData";
 
 
 class Store {
@@ -18,32 +17,37 @@ class Store {
 
   contactsText: null|IContacts= null
 
-  fetchLandingsText=async ()=> {
-    this.landingsText = await fetchData('Slides/Animations/text.json');
+  setLandingsText=(data?: null|ILadings)=> {
+    if (data)
+      this.landingsText = data
   }
 
-  fetchAboutText=async ()=> {
-    this.aboutText = await fetchData('Slides/About/text.json');
+  setAboutText=(data?: null|IAbout)=> {
+    if (data)
+      this.aboutText = data
   }
 
-  fetchIdeasText=async ()=> {
-    this.ideasText = await fetchData('Slides/Ideas/text.json');
+  setIdeasText=(data?: null|IIdeas)=> {
+    if (data)
+      this.ideasText = data
   }
 
-  fetchContactsText=async ()=> {
-    this.contactsText = await fetchData('Slides/Contacts/text.json');
+  setContactsText=(data?: null|IContacts)=> {
+    if (data)
+      this.contactsText = data
   }
 
-  fetchFaqText=async ()=> {
-    this.faqText = await fetchData('Slides/FAQ/data.json');
+  setFaqText=(data?: null|IFaq[])=> {
+    if (data)
+      this.faqText = data
   }
 
-  fetchAll= async ()=>{
-    await this.fetchLandingsText()
-    await this.fetchAboutText()
-    await this.fetchIdeasText()
-    await this.fetchContactsText()
-    await this.fetchFaqText()
+  setAll= (data: IData)=>{
+    this.setLandingsText(data.landingsText)
+    this.setAboutText(data.aboutText)
+    this.setIdeasText(data.ideasText)
+    this.setContactsText(data.contactsText)
+    this.setFaqText(data.faqText)
   }
 }
 

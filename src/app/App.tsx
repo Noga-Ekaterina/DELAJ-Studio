@@ -27,7 +27,7 @@ const App = ({children}:IWithChildren) => {
   const {togleScroll, isLandingSwiped, changePrevHash, chhangeIsShowContent}=store
   const {fetchGeneral, menuSectionTitle}= general
   const {fetchAll, landingsText}=homeText
-  const {projectsList, fetchProjectsList}=projects
+  const {projectsList, setProjectsList}=projects
   const {careerList, fetchAllCareer}=career
   const isHome=useIsHome()
   const pathname=usePathname()

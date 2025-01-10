@@ -160,13 +160,14 @@ export interface IForm{
 }
 
 export interface IData{
-  landingsText?: null |{error: any}|ILadings
-  aboutText?: null | {error: any}|IAbout
-  faqText?: null| {error: any}|IFaq[]
-  ideasText?: null| {error: any}|IIdeas
-  contactsText?: null| {error: any}|IContacts
-  menuSectionTitle?: null | {error: any}| IMenuSectionTitle
-  footers?: null| {error: any}|IFooters
-  careerList?: null | {error: any}| ICareer[]
-  projectsList?: null | {error: any}| IProjectsList
+  landingsText?: null |ILadings
+  aboutText?: null |IAbout
+  faqText?: null|IFaq[]
+  ideasText?: null|IIdeas
+  contactsText?: null|IContacts
+  menuSectionTitle?: null | IMenuSectionTitle
+  footers?: null|IFooters
+  careerList?: null | ICareer[]
+  formText?: null|IForm
+  projectsList?: null | IProjectsList
 }

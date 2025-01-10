@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {fetchData} from "@/utils/fetchData";
-import {ICareer, IForm} from "@/typesData";
+import {ICareer, IData, IForm} from "@/typesData";
 
 class Store {
   careerList: null | ICareer[] = null;
@@ -10,16 +10,18 @@ class Store {
     makeAutoObservable(this);
   }
 
-  fetchCareerList=async ()=> {
-    this.careerList = await fetchData('Slides/Vacancy/data.json');
+  setCareerList= (data?: null|ICareer[])=> {
+    if (data)
+      this.careerList = data
   }
-  fetchFormText=async ()=> {
-    this.formText = await fetchData('Slides/Vacancy/form.json');
+  setFormText= (data?: null|IForm)=> {
+    if (data)
+     this.formText = data
   }
 
-  fetchAllCareer=()=>{
-    this.fetchCareerList()
-    this.fetchFormText()
+  setAllCareer=(data: IData)=>{
+    this.setCareerList(data.careerList)
+    this.setFormText(data.formText)
   }
 }
 

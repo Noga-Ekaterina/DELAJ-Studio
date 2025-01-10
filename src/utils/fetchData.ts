@@ -1,20 +1,15 @@
-export const fetchData=async (path: string)=> {
+import fsPromises from "fs/promises";
+import nodePath from "path";
+
+export const fetchData = async (path: string) => {
   try {
-    const resp = await fetch(`/Assets/${path}`);
-    if (!resp.ok) {
-      throw new Error("Ошибка получения данных");
-    }
-    const data = await resp.json();
-    return data; // Возвращаем данные
+    const filePath = nodePath.join(process.cwd(), `public/Assets/${path}`);
+    const jsonData = await fsPromises.readFile(filePath, "utf-8");
+
+    const serializeData = JSON.parse(jsonData);
+
+    return serializeData;
   } catch (error) {
-    return null
+    return error;
   }
-}
-
-export const fetchMenuSectionTitle=async ()=> {
-  return await fetchData('Slides/title.json');
-}
-
-export const fetchFooters =async ()=> {
-  return await fetchData('Footers.json');
-}
+};

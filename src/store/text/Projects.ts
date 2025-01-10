@@ -1,5 +1,4 @@
 import {makeAutoObservable} from "mobx";
-import {fetchData} from "@/utils/fetchData";
 import {IProjectsList} from "@/typesData";
 
 class Store {
@@ -9,8 +8,9 @@ class Store {
     makeAutoObservable(this);
   }
 
-  fetchProjectsList=async ()=> {
-    this.projectsList = await fetchData('Projects/data.json');
+  setProjectsList= (data?: null|IProjectsList)=> {
+    if (data)
+      this.projectsList = data
   }
 }
 

@@ -55,6 +55,8 @@ const init= async ()=>{
 
   data.careerList = await fetchData('Slides/Vacancy/data.json');
 
+  data.formText = await fetchData('Slides/Vacancy/form.json');
+
   data.projectsList = await fetchData('Projects/data.json');
 
   return data

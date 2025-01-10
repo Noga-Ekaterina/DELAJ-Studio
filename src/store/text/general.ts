@@ -1,7 +1,6 @@
 // store.js
 import { makeAutoObservable } from "mobx";
-import {fetchData} from "@/utils/fetchData";
-import {IFooters, IMenuSectionTitle} from "@/typesData";
+import {IData, IFooters, IMenuSectionTitle} from "@/typesData";
 
 class Store {
   menuSectionTitle: null | IMenuSectionTitle = null;
@@ -11,17 +10,19 @@ class Store {
     makeAutoObservable(this);
   }
 
-  fetchMenuSectionTitle=async ()=> {
-    this.menuSectionTitle = await fetchData('Slides/title.json');
+  setMenuSectionTitle=(data?: null|IMenuSectionTitle)=> {
+    if (data)
+      this.menuSectionTitle = data
   }
 
-  fetchFooters =async ()=> {
-    this.footers = await fetchData('Footers.json');
+  setFooters =(data?: null|IFooters)=> {
+    if (data)
+      this.footers = data
   }
 
-  fetchGeneral= async ()=>{
-    await this.fetchMenuSectionTitle()
-    await this.fetchFooters()
+  setGeneral=(data: IData)=>{
+    this.setMenuSectionTitle(data.menuSectionTitle)
+    this.setFooters(data.footers)
   }
 }
 
