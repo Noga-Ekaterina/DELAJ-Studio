@@ -10,8 +10,7 @@ class Store {
   }
 
   fetchProjectsList=async ()=> {
-    this.projectsList = await fetchData
-    ('Projects/data.json');
+    this.projectsList = await fetchData('Projects/data.json');
   }
 }
 

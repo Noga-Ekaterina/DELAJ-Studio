@@ -19,9 +19,9 @@ class Store {
     this.footers = await fetchData('Footers.json');
   }
 
-  fetchGeneral=()=>{
-    this.fetchMenuSectionTitle()
-    this.fetchFooters()
+  fetchGeneral= async ()=>{
+    await this.fetchMenuSectionTitle()
+    await this.fetchFooters()
   }
 }
 

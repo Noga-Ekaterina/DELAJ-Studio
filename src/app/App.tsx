@@ -20,6 +20,7 @@ import {useLenis} from "@studio-freight/react-lenis";
 import Outline from "@/components/outline/Outline";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {IProjectsList, ILadings} from "@/typesData";
+import MainScreen from "@/components/main-screen/MainScreen";
 
 const App = ({children}:IWithChildren) => {
   const [vh, setVh] = useState(0)
@@ -48,7 +49,7 @@ const App = ({children}:IWithChildren) => {
   }, [isScrollOn]);
 
   useEffect(() => {
-    fetchGeneral()
+    //fetchGeneral()
 
     if (isHome && (hash=="" || hash=="main-screen")) {
       document.documentElement.style.overflow = "hidden"
@@ -74,14 +75,14 @@ const App = ({children}:IWithChildren) => {
     changePrevHash(currentHash)
     setCurrentHash(hash)
 
-    if (isHome && isload)
-      fetchAll()
-
-    if (!projectsList && (isHome || pathname.includes("projects")))
-      fetchProjectsList()
-
-    if (!careerList && (isHome || pathname.includes("career")))
-      fetchAllCareer()
+    // if (isHome && isload)
+    //   fetchAll()
+    //
+    // if (!projectsList && (isHome || pathname.includes("projects")))
+    //   fetchProjectsList()
+    //
+    // if (!careerList && (isHome || pathname.includes("career")))
+    //   fetchAllCareer()
   }, [hash, isHome]);
 
   useEffect(() => {
@@ -141,6 +142,7 @@ const App = ({children}:IWithChildren) => {
       <>
         {(!isload || !isHome) && <Header/>}
         {children}
+        <MainScreen />
         <ModalMenu/>
         <ModalContacts/>
       </>

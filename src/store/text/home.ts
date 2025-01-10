@@ -38,12 +38,12 @@ class Store {
     this.faqText = await fetchData('Slides/FAQ/data.json');
   }
 
-  fetchAll=()=>{
-    this.fetchLandingsText()
-    this.fetchAboutText()
-    this.fetchIdeasText()
-    this.fetchContactsText()
-    this.fetchFaqText()
+  fetchAll= async ()=>{
+    await this.fetchLandingsText()
+    await this.fetchAboutText()
+    await this.fetchIdeasText()
+    await this.fetchContactsText()
+    await this.fetchFaqText()
   }
 }
 

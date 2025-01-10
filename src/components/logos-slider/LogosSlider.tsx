@@ -44,7 +44,7 @@ const LogosSlider = () => {
     const result: JSX.Element[]=[]
     for (let i=1; i<=aboutText.clients.quantity; i++){
       result.push(
-          <SwiperSlide>
+          <SwiperSlide key={i}>
             <img src={`/Assets/Slides/About/Images/Logos/${i}.png`} alt="" loading="lazy"/>
           </SwiperSlide>
       )

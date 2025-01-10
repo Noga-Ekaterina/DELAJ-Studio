@@ -17,6 +17,7 @@ export const useLoad=()=>{
       console.log("load end")
     }else {
       console.log("load")
+      console.log({menuSectionTitle, footers, landingsText, careerList, formText, projectsList, aboutText, ideasText, contactsText, faqText})
       setIsLoad(true)
     }
   }, [menuSectionTitle, footers, landingsText, careerList, formText, projectsList, aboutText, ideasText, contactsText, faqText]);

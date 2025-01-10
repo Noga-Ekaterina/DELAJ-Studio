@@ -4,8 +4,7 @@ import {useIsHome} from "@/components/_hooks/useIsHome";
 
 export const useHash = () => {
   const isHome=useIsHome()
-  const [hash, setHash] = useState(window.location.hash
-  );
+  const [hash, setHash] = useState("");
 
   useEffect(() => {
     if (window) {
@@ -17,7 +16,7 @@ export const useHash = () => {
         setHash(window.location.hash);
       };
       window.addEventListener('hashchange', onHashChange);
-      return () => window.removeEventListener('hashchange', onHashChange);
+      return () => window.removeEventListener('hashchan-ge', onHashChange);
     }
   }, []);
 

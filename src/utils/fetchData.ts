@@ -1,4 +1,20 @@
 export const fetchData=async (path: string)=> {
-  const response = await fetch(`/Assets/${path}`); // ваш API endpoint
-  return await response.json();
+  try {
+    const resp = await fetch(`/Assets/${path}`);
+    if (!resp.ok) {
+      throw new Error("Ошибка получения данных");
+    }
+    const data = await resp.json();
+    return data; // Возвращаем данные
+  } catch (error) {
+    return null
+  }
+}
+
+export const fetchMenuSectionTitle=async ()=> {
+  return await fetchData('Slides/title.json');
+}
+
+export const fetchFooters =async ()=> {
+  return await fetchData('Footers.json');
 }
