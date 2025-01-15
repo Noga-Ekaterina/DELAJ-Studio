@@ -16,22 +16,25 @@ import { FC } from 'react';
 import LandingSwitchButton from '@/components/landing-switch-button/LandingSwitchButton';
 import AdultButton from '@/components/landing-switch-button/AdultButton';
 import Showreel from "@/components/showreel/Showreel";
+import {ILandingText} from "@/typesData";
+
+interface Props{
+  landingText: ILandingText
+}
 
 
-const ForAdult: FC = () => {
-  const {landingsText}=homeText
+const ForAdult: FC<Props> = ({landingText}) => {
   const locale= useLocale()
 
-  if (!landingsText) return <div className="for-adult"/>
 
   return (
     <div className='for-adult'>
       <Showreel video="adults"/>
       <HeadingSection
         className='for-adult__heading'
-        title={landingsText.adult.title[locale]}
+        title={landingText.title[locale]}
         subtitle={subtitle}
-        text={landingsText.adult.text[locale]}
+        text={landingText.text[locale]}
         image={headingImage}
       />
       <div className="for-adult__projects-wrap ">

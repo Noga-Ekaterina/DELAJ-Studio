@@ -44,11 +44,15 @@ import Outline from "@/components/outline/Outline";
 import home from "@/store/text/home";
 import LogosSlider from "@/components/logos-slider/LogosSlider";
 import FlashingList from "@/components/flashing-list/FlashingList";
+import {IAbout, IMenuSectionTitle} from "@/typesData";
 
-const About = () => {
+interface Props{
+  aboutText?: IAbout|null
+  menuSectionTitle?: IMenuSectionTitle|null
+}
+
+const About = ({aboutText, menuSectionTitle}: Props) => {
   const locale=useLocale()
-  const {menuSectionTitle}=general
-  const {aboutText}=home
 
   if (!aboutText) return <div></div>
 

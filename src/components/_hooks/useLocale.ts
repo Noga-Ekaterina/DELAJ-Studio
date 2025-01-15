@@ -4,7 +4,7 @@ import {LangType} from "@/types";
 
 export const useLocale = () => {
   const pathname=usePathname()
-  const [locale, setLocale] = useState<LangType>("en")
+  const [locale, setLocale] = useState<LangType>(pathname.includes("ru/")? "ru":"en")
   useEffect(() => {
       setLocale(pathname.includes("ru/")? "ru":"en")
   }, [pathname]);

@@ -11,11 +11,15 @@ import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import Outline from "@/components/outline/Outline";
 import home from "@/store/text/home";
+import {IIdeas, IMenuSectionTitle} from "@/typesData";
 
-const Ideas = () => {
+interface Props{
+  ideasText?: IIdeas|null
+  menuSectionTitle?: IMenuSectionTitle|null
+}
+
+const Ideas = ({menuSectionTitle, ideasText}:Props) => {
   const locale=useLocale()
-  const {menuSectionTitle}=general
-  const {ideasText}=home
 
   if (!ideasText) return <div></div>
 

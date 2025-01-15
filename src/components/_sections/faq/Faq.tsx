@@ -10,11 +10,16 @@ import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import Outline from "@/components/outline/Outline";
 import home from "@/store/text/home";
+import {IFaq, IMenuSectionTitle} from "@/typesData";
 
-const Faq = () => {
+interface Props{
+  faqText?: IFaq[]|null
+  menuSectionTitle?: IMenuSectionTitle|null
+}
+
+const Faq = ({faqText, menuSectionTitle}:Props) => {
   const locale=useLocale()
-  const {menuSectionTitle}=general
-  const {faqText}=home
+
   return (
     <div className={cn('menu-inner faq', circe.className)}>
       <div className="menu-section">

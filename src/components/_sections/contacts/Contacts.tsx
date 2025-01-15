@@ -16,11 +16,15 @@ import Image from 'next/image';
 import cn from 'classnames';
 import Outline from "@/components/outline/Outline";
 import home from "@/store/text/home";
+import {IContacts, IMenuSectionTitle} from "@/typesData";
 
-const Contacts = () => {
+interface Props{
+  contactsText?: IContacts|null
+  menuSectionTitle?: IMenuSectionTitle|null
+}
+
+const Contacts = ({contactsText, menuSectionTitle}:Props) => {
   const locale=useLocale()
-  const {menuSectionTitle}=general
-  const {contactsText}= home
 
   if (!contactsText) return <div/>
 

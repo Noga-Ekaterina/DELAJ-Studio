@@ -69,11 +69,11 @@ const Page = async () => {
     <Scroller>
       <Section id="empty-place"/>
       <Section id="first-landing">
-        <Landings direction="left"/>
+        <Landings direction="left" landings={data.landingsText}/>
       </Section>
 
       <Section id="second-landing">
-        <Landings direction="right"/>
+        <Landings direction="right" landings={data.landingsText}/>
       </Section>
 
       <Section id="menu">
@@ -81,7 +81,7 @@ const Page = async () => {
       </Section>
 
       <Section id="about">
-        <About />
+        <About aboutText={data.aboutText} menuSectionTitle={data.menuSectionTitle}/>
       </Section>
 
       <Section id="career">
@@ -89,18 +89,19 @@ const Page = async () => {
       </Section>
 
       <Section id="contacts">
-        <Contacts />
+        <Contacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
       </Section>
 
       <Section id="faq">
-        <Faq />
+        <Faq menuSectionTitle={data.menuSectionTitle} faqText={data.faqText}/>
       </Section>
 
       <Section id="ideas">
-        <Ideas />
+        <Ideas menuSectionTitle={data.menuSectionTitle} ideasText={data.ideasText}/>
       </Section>
 
     </Scroller>
+      <MainScreen />
       <LandingSwitchButtonsGrup/>
     </InitData>
   )

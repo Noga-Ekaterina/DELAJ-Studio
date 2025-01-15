@@ -25,10 +25,10 @@ import MainScreen from "@/components/main-screen/MainScreen";
 const App = ({children}:IWithChildren) => {
   const [vh, setVh] = useState(0)
   const {togleScroll, isLandingSwiped, changePrevHash, chhangeIsShowContent}=store
-  const {fetchGeneral, menuSectionTitle}= general
-  const {fetchAll, landingsText}=homeText
+  const {setGeneral, menuSectionTitle}= general
+  const {setAll, landingsText}=homeText
   const {projectsList, setProjectsList}=projects
-  const {careerList, fetchAllCareer}=career
+  const {careerList, setAllCareer}=career
   const isHome=useIsHome()
   const pathname=usePathname()
   const isload= useLoad()
@@ -49,7 +49,7 @@ const App = ({children}:IWithChildren) => {
   }, [isScrollOn]);
 
   useEffect(() => {
-    //fetchGeneral()
+    //setGeneral()
 
     if (isHome && (hash=="" || hash=="main-screen")) {
       document.documentElement.style.overflow = "hidden"
@@ -76,13 +76,13 @@ const App = ({children}:IWithChildren) => {
     setCurrentHash(hash)
 
     // if (isHome && isload)
-    //   fetchAll()
+    //   setAll()
     //
     // if (!projectsList && (isHome || pathname.includes("projects")))
-    //   fetchProjectsList()
+    //   setProjectsList()
     //
     // if (!careerList && (isHome || pathname.includes("career")))
-    //   fetchAllCareer()
+    //   setAllCareer()
   }, [hash, isHome]);
 
   useEffect(() => {
@@ -142,7 +142,6 @@ const App = ({children}:IWithChildren) => {
       <>
         {(!isload || !isHome) && <Header/>}
         {children}
-        <MainScreen />
         <ModalMenu/>
         <ModalContacts/>
       </>

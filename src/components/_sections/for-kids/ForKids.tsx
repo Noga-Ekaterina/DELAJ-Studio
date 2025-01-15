@@ -12,19 +12,21 @@ import KidsFooter from '@/components/_footers/kids-footer/KidsFooter';
 import ProjectList from '@/components/project-list/ProjectList';
 import Showreel from "@/components/showreel/Showreel";
 import {useLocale} from "@/components/_hooks/useLocale";
+import {IFooterKids, ILandingText, IMenuSectionTitle} from "@/typesData";
 
-const ForKids = () => {
-  const {landingsText}=homeText
+interface Proos{
+  landingText: ILandingText
+}
+
+const ForKids = ({landingText}:Proos) => {
   const locale= useLocale()
-
-  if (!landingsText) return <div className="for-kids"/>
 
   return (
     <div className='for-kids'>
       <Showreel video="kids"/>
       <HeadingSection
-        title={landingsText.kids.title[locale]}
-        text={landingsText.kids.text[locale]}
+        title={landingText.title[locale]}
+        text={landingText.text[locale]}
         subtitle={subtitle}
         image={headingImage}
         className='for-kids__heading'
@@ -38,4 +40,4 @@ const ForKids = () => {
   );
 };
 
-export default observer(ForKids);
+export default ForKids;
