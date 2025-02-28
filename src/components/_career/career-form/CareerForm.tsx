@@ -75,7 +75,6 @@ const Input=({input, isError, setIsError, isShowError, field}:IInputProps)=>{
     switch (input.type){
       case "tel":
         setIsError(checkTel(value))
-        console.log(setIsError(checkTel(value)))
         break
       case "email":
         setIsError(checkEmail(value))
@@ -122,7 +121,6 @@ const CareerItemForm = (props: PropsForm) => {
   const changeError=(name:string)=>{
     const func=(isError: boolean)=>{
       setIsErrorsObj(prevState => ({...prevState, [name]: isError}))
-      console.log(isError)
     }
 
     return func
@@ -139,7 +137,6 @@ const CareerItemForm = (props: PropsForm) => {
   const handleSubmit= async (values: { [key: string]: string | boolean, acceptTerms: boolean })=>{
     if (!formText) return
 
-    console.log("subm")
     let text= `<b>${props.vacancy}</b>%0A%0A`
 
     formText.inputs.map(input=>{

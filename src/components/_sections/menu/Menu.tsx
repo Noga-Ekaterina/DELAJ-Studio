@@ -1,7 +1,6 @@
 'use client'
 import {FC, useEffect, useState} from 'react';
 import './menu.scss';
-import Image from 'next/image';
 import Link from 'next/link';
 import { halvar, circe } from '@/fonts';
 import './menu-home.scss';
@@ -9,12 +8,7 @@ import {useLocale} from "@/components/_hooks/useLocale";
 import general from "@/store/text/general";
 import {observer} from "mobx-react-lite";
 
-//Images
 import LanguageToggle from '@/components/language-toggle/LanguageToggle';
-import bg from '../../../../public/Assets/Slides/Menu/Images/bg.png';
-import bgTablet from '../../../../public/Assets/Slides/Menu/Images/bg-tablet.png';
-import bgMobile from '../../../../public/Assets/Slides/Menu/Images/bg-mobile.png';
-
 import cn from 'classnames';
 import Outline from "@/components/outline/Outline";
 import {useIsHome} from "@/components/_hooks/useIsHome";
@@ -53,9 +47,10 @@ const Menu: FC = () => {
           <LanguageToggle className={cn('menu-home__language', halvar.className)}/>
         </div>
 
-        <Image className='menu-home__bg' src={bg} alt="" width={1000}/>
-        <Image className='menu-home__bg menu-home__bg-tablet' width={1000} src={bgTablet} alt="" />
-        <Image className='menu-home__bg menu-home__bg-mobile' width={1000} src={bgMobile} alt="" />
+        <img className='menu-home__bg' src='/Assets/Slides/Menu/Images/bg.png' alt=""/>
+        <img className='menu-home__bg
+        menu-home__bg-tablet' src='/Assets/Slides/Menu/Images/bg-tablet.png' alt="" />
+        <img className='menu-home__bg menu-home__bg-mobile' src="/Assets/Slides/Menu/Images/bg-mobile.png" alt="" />
 
         <Outline/>
       </div>

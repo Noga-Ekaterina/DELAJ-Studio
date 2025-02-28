@@ -8,30 +8,23 @@ import ModalMenu from "@/components/_modals/modal-menu/ModalMenu";
 import ModalContacts from "@/components/_modals/modal-contacts/ModalContacts";
 import store from "@/store/store";
 import general from "@/store/text/general";
-import {useLoad} from "@/components/_hooks/useLoad";
 import {observer} from "mobx-react-lite";
-import homeText from "@/store/text/home";
 import projects from "@/store/text/Projects";
 import career from "@/store/text/career";
 import {useIsHome} from "@/components/_hooks/useIsHome";
 import {usePathname, useRouter} from "next/navigation";
 import {useHash} from "@/components/_hooks/useHash";
 import {useLenis} from "@studio-freight/react-lenis";
-import Outline from "@/components/outline/Outline";
 import {useLocale} from "@/components/_hooks/useLocale";
-import {IProjectsList, ILadings} from "@/typesData";
-import MainScreen from "@/components/main-screen/MainScreen";
 
 const App = ({children}:IWithChildren) => {
   const [vh, setVh] = useState(0)
   const {togleScroll, isLandingSwiped, changePrevHash, chhangeIsShowContent}=store
   const {setGeneral, menuSectionTitle}= general
-  const {setAll, landingsText}=homeText
   const {projectsList, setProjectsList}=projects
   const {careerList, setAllCareer}=career
   const isHome=useIsHome()
   const pathname=usePathname()
-  const isload= useLoad()
   const hash=useHash()
   const [currentHash, setCurrentHash] = useState('');
   const lenis=useLenis()
@@ -74,73 +67,12 @@ const App = ({children}:IWithChildren) => {
   useEffect(() => {
     changePrevHash(currentHash)
     setCurrentHash(hash)
-
-    // if (isHome && isload)
-    //   setAll()
-    //
-    // if (!projectsList && (isHome || pathname.includes("projects")))
-    //   setProjectsList()
-    //
-    // if (!careerList && (isHome || pathname.includes("career")))
-    //   setAllCareer()
   }, [hash, isHome]);
-
-  useEffect(() => {
-    if (isHome) {
-      if (hash === "" || hash === "main-screen" || !menuSectionTitle) {
-        document.title = title;
-      } else {
-        const key = hash.replace(/-(.)/, (match, group1) => group1.toUpperCase());
-        console.log(key);
-        if (key in menuSectionTitle) {
-          document.title = `${title} | ${menuSectionTitle[key as keyof typeof menuSectionTitle][locale].toUpperCase()}`;
-        }
-        else{
-          if (!landingsText) return
-
-          if (hash=="first-landing"){
-            const type= isLandingSwiped? "adult":'kids'
-            document.title = `${title} | ${landingsText[type as keyof typeof landingsText].title[locale].toUpperCase()}`;
-          } else if (hash=="second-landing"){
-            const type= !isLandingSwiped? "adult":'kids'
-            document.title = `${title} | ${landingsText[type as keyof typeof landingsText].title[locale].toUpperCase()}`;
-          }
-        }
-      }
-    }else  if(pathname.includes('career')){
-      if (careerList){
-        const [id ]= Array.from(pathname
-        .matchAll(/([^\/]*)\/$/g)).map(m => m[1].trim());
-
-        console.log(id)
-        const item= careerList.find(item=> String(item.id)==id)
-
-        if (item){
-          document.title=`${title} | ${item.data.title[locale].toUpperCase()}`
-        }
-      }
-    }else  if(pathname.includes('projects')){
-      if (projectsList){
-        const [data]= Array.from(pathname
-            .matchAll(/([^\/]*)\/([^\/]*)\/$/g)).map(m => m);
-        const [str, type, id ]=data
-
-        console.log({type, id})
-        if (projectsList[(type as keyof IProjectsList)]){
-          const item= projectsList[type as keyof IProjectsList]?.find(item=> String(item.id)==id)
-
-          if (item){
-            document.title=`${title} | ${item.data.title[locale].toUpperCase()}`
-          }
-        }
-      }
-    }
-  }, [isHome, hash, menuSectionTitle, title, locale, pathname]);
 
 
   return (
       <>
-        {(!isload || !isHome) && <Header/>}
+        <Header/>
         {children}
         <ModalMenu/>
         <ModalContacts/>

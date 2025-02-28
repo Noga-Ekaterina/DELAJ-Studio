@@ -1,3 +1,4 @@
+@import '@/app/mixins.scss';
 .kids-footer {
   display: flex;
   height: 240rem;
@@ -85,6 +86,14 @@
         width: 100%;
         position: relative;
         left: 3%;
+
+        @include lg{
+          width: 69%;
+        }
+
+        @include sm{
+          width: 100%;
+        }
       }
     }
   }

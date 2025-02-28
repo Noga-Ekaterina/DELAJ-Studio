@@ -1,6 +1,5 @@
 import React from 'react';
 import {useLocale} from "@/components/_hooks/useLocale";
-import homeText from "@/store/text/home";
 import general from "@/store/text/general";
 import {IWithClass} from "@/types";
 import {observer} from "mobx-react-lite";

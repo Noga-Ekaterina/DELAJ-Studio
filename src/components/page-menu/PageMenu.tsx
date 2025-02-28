@@ -134,7 +134,6 @@ const PageMenu: FC = () => {
     } else {
       setScreenStyles(viewport>1.25 ?'largeScreen': 'mediumScreen');
     }
-    console.log(viewport)
   },[mediumScreen, viewport])
 
   return (  

@@ -12,7 +12,6 @@ export const useHash = () => {
       //@ts-ignore
       const onHashChange = (e) => {
         // e.preventDefault();
-        console.log(window.location.hash)
         setHash(window.location.hash);
       };
       window.addEventListener('hashchange', onHashChange);

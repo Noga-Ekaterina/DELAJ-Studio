@@ -1,11 +1,8 @@
 
 // Components
 import MainScreen from "@/components/main-screen/MainScreen"
-import ForAdult from "@/components/_sections/for-adult/ForAdult";
-import ForKids from "@/components/_sections/for-kids/ForKids";
 import Section from "@/components/section/Section";
 import Landings from "@/components/_sections/_landings/Landings";
-import { ISection } from "@/types";
 import Scroller from "@/components/scroller/Scroller";
 import Menu from "@/components/_sections/menu/Menu";
 import About from "@/components/_sections/about/About";
@@ -13,54 +10,54 @@ import Career from "@/components/_sections/career/Career";
 import Contacts from "@/components/_sections/contacts/Contacts";
 import Faq from "@/components/_sections/faq/Faq";
 import Ideas from "@/components/_sections/ideas/Ideas";
-import KidsButton from "@/components/landing-switch-button/KidsButton";
-import AdultButton from "@/components/landing-switch-button/AdultButton";
 import LandingSwitchButtonsGrup from "@/components/landing-switch-button/LandingSwitchButtonsGrup";
 import React from "react";
-import App from "@/app/App";
-import general from "@/store/text/general";
-import homeText from "@/store/text/home";
-import projects from "@/store/text/Projects";
-import career from "@/store/text/career";
 import {fetchData} from "@/utils/fetchData";
-import {
-  IAbout,
-  ICareer,
-  IContacts, IData,
-  IFaq,
-  IFooters,
-  IIdeas,
-  ILadings,
-  IMenuSectionTitle,
-  IProjectsList
-} from "@/typesData";
+import {IData} from "@/typesData";
 import InitData from "@/app/InitData";
+import {Metadata, ResolvingMetadata} from "next";
+import {title} from "@/vars";
+import {LangType} from "@/types";
+
+type Props = {
+  params: {locale: LangType }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+  const locale = params.locale
 
 
+  return {
+    title: title[locale],
+    description: locale==="ru"? "Анимация — это наша жизнь. Наша команда занимается полным циклом производства анимационных коротких метров, полных метров и сериалов в 2D и 3D технике.":"Animation is our life. Our team is engaged in a full cycle of production of short animated films, animated feature films and series with 2D and 3D technology."
+  }
+}
 
-const init= async ()=>{
-  const data: IData={}
-  data.landingsText = await fetchData('Slides/Animations/text.json');
-  data.aboutText = await fetchData('Slides/About/text.json');
+const init = async () => {
+  const data: IData = {}
 
-  data.ideasText = await fetchData('Slides/Ideas/text.json');
+  const promises = [
+    fetchData('Slides/Animations/text.json').then(result => data.landingsText = result),
+    fetchData('Slides/About/text.json').then(result => data.aboutText = result),
+    fetchData('Slides/Ideas/text.json').then(result => data.ideasText = result),
+    fetchData('Slides/Contacts/text.json').then(result => data.contactsText = result),
+    fetchData('Slides/FAQ/data.json').then(result => data.faqText = result),
+    fetchData('Slides/title.json').then(result => data.menuSectionTitle = result),
+    fetchData('Footers.json').then(result => data.footers = result),
+    fetchData('Slides/Vacancy/data.json').then(result => data.careerList = result),
+    fetchData('Slides/Vacancy/form.json').then(result => data.formText = result),
+    fetchData('Projects/data.json').then(result => data.projectsList = result)
+  ]
 
-  data.contactsText = await fetchData('Slides/Contacts/text.json');
-
-  data.faqText = await fetchData('Slides/FAQ/data.json');
-
-  data.menuSectionTitle = await fetchData('Slides/title.json');
-
-  data.footers = await fetchData('Footers.json');
-
-  data.careerList = await fetchData('Slides/Vacancy/data.json');
-
-  data.formText = await fetchData('Slides/Vacancy/form.json');
-
-  data.projectsList = await fetchData('Projects/data.json');
+  await Promise.all(promises)
 
   return data
 }
+
 
 const Page = async () => {
   const data=await init()
@@ -85,7 +82,7 @@ const Page = async () => {
       </Section>
 
       <Section id="career">
-        <Career />
+        <Career menuSectionTitle={data.menuSectionTitle} careerList={data.careerList}/>
       </Section>
 
       <Section id="contacts">

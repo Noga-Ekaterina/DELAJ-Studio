@@ -56,7 +56,6 @@ class Store {
 
   swipeLanding = (value: boolean) => {
     this.isLandingSwiped = value;
-    console.log(this.isLandingSwiped)
   } 
 
   changeMenuOpened = (value: boolean) => {

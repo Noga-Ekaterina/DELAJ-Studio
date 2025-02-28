@@ -20,14 +20,16 @@ import store from '@/store/store';
 import { observer } from 'mobx-react-lite';
 import cn from 'classnames';
 import { halvar } from '@/fonts';
-import { Transition } from 'react-transition-group';
 import { useHash } from '@/components/_hooks/useHash';
 import PageMenu from '../page-menu/PageMenu';
 import Curtain from "@/components/curtain/Сurtain";
-import {useLoad} from "@/components/_hooks/useLoad";
 import {changeOverflow} from "@/utils/changeOverflow";
 
-const MainScreen: FC = () => {
+interface Props{
+  loader?: boolean
+}
+
+const MainScreen: FC<Props> = ({loader}) => {
   const {
     isShowContent,
     isMenuLandingsOpened,
@@ -51,7 +53,8 @@ const MainScreen: FC = () => {
   const enRef = useRef<LottieRefCurrentProps | null>(null)
   const containrRef=useRef(null)
   const [isShowLang, setIsShowLang] = useState(false)
-  const isLoad=useLoad()
+  const isLoad=loader??false
+
 
   const disabled = () => {
     if (containrRef.current!=null){
@@ -69,9 +72,7 @@ const MainScreen: FC = () => {
   }
 
   useEffect(() => {
-    console.log({isAnimationPlay, isLoad})
     if (!hash || !showMainPage) {
-      console.log("hidden menu screen")
       changeMenuOpened(false);
       changeCurrentPage(null);
       changeShowMainScreen(true);
@@ -94,7 +95,7 @@ const MainScreen: FC = () => {
   },[hash, showMainPage, isScrollOn])
 
   useEffect(() => {
-    changeOverflow(hash=="" || hash=="main-screen" || !showMainPage)
+    changeOverflow(!loader &&(hash=="" || hash=="main-screen" || !showMainPage))
   }, [hash, showMainPage]);
 
   useEffect(() => {
@@ -110,10 +111,8 @@ const MainScreen: FC = () => {
   useEffect(() => {
     if (isWasHover && !isHover) {
       arrowRef.current?.setDirection(-1)
-      console.log("out")
     } else {
       arrowRef.current?.setDirection(1)
-      console.log("over")
     }
     arrowRef.current?.play()
   }, [isHover, isWasHover]);
@@ -148,6 +147,7 @@ const MainScreen: FC = () => {
                          animationData={logoAnimationOn}
                          loop={false}
                          onComplete={() => setIsAnimationPlay(false)}
+                         style={{opacity: loader?0:1}}
                      />
                  }
 

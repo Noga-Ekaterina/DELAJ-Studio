@@ -4,44 +4,11 @@ import '../menu/menu.scss' ;
 import './about.scss';
 import general from "@/store/text/general";
 import {observer} from "mobx-react-lite";
-
-// Images
-import aboutHero from '../../../../public/Assets/Slides/About/Images/1.png';
-import aboutHeroSketch from '../../../../public/Assets/Slides/About/Images/2.png';
-import aboutSketch from '../../../../public/Assets/Slides/About/Images/3.png';
-
-import Image from 'next/image';
 import { halvar, circe } from '@/fonts';
 import cn from 'classnames';
-
-import sponsor1 from '../../../../public/images/modals/sponsor-1.png'
-import sponsor2 from '../../../../public/images/modals/sponsor-2.png'
-import sponsor3 from '../../../../public/images/modals/sponsor-3.png'
-import sponsor4 from '../../../../public/images/modals/sponsor-4.png'
-import sponsor5 from '../../../../public/images/modals/sponsor-5.png'
-import sponsor6 from '../../../../public/images/modals/sponsor-6.png'
-import sponsor7 from '../../../../public/images/modals/sponsor-7.png'
-import sponsor8 from '../../../../public/images/modals/sponsor-8.png'
-import sponsor9 from '../../../../public/images/modals/sponsor-9.png'
-import sponsor10 from '../../../../public/images/modals/sponsor-10.png'
-import sponsor11 from '../../../../public/images/modals/sponsor-11.png'
-import sponsor12 from '../../../../public/images/modals/sponsor-12.png'
-import sponsor13 from '../../../../public/images/modals/sponsor-13.png'
-import sponsor14 from '../../../../public/images/modals/sponsor-14.png'
-import sponsor15 from '../../../../public/images/modals/sponsor-15.png'
-import sponsor16 from '../../../../public/images/modals/sponsor-16.png'
-import sponsor17 from '../../../../public/images/modals/sponsor-17.png'
-import sponsor18 from '../../../../public/images/modals/sponsor-18.png'
-import sponsor29 from '../../../../public/images/modals/sponsor-19.png'
-import sponsor20 from '../../../../public/images/modals/sponsor-20.png'
-import sponsor21 from '../../../../public/images/modals/sponsor-21.png'
-import sponsor22 from '../../../../public/images/modals/sponsor-22.png'
-import sponsor23 from '../../../../public/images/modals/sponsor-23.png'
-import sponsor24 from '../../../../public/images/modals/sponsor-24.png'
 import Showreel from '@/components/showreel/Showreel';
 import {useLocale} from "@/components/_hooks/useLocale";
 import Outline from "@/components/outline/Outline";
-import home from "@/store/text/home";
 import LogosSlider from "@/components/logos-slider/LogosSlider";
 import FlashingList from "@/components/flashing-list/FlashingList";
 import {IAbout, IMenuSectionTitle} from "@/typesData";
@@ -67,7 +34,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
 
           <section className='about-hero'>
               
-              <Image className="about-hero__picture" src={aboutHero} alt="" />
+              <img className="about-hero__picture" src="/Assets/Slides/About/Images/1.png" alt="" />
             
               <div className='about-hero__paragraph'>
                 <p>{aboutText.text1[locale]}</p>
@@ -77,7 +44,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
                 <h2 className={halvar.className}>{aboutText.whatDo.title[locale]}</h2>
                 <p>{aboutText.whatDo.text[locale]}</p>
               </div>
-              <Image className='about-hero__sketch' src={aboutHeroSketch} alt="" />
+              <img className='about-hero__sketch' src="/Assets/Slides/About/Images/2.png" alt="" />
           </section>
 
           <section className='about-animation'>
@@ -100,7 +67,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
           </div>
         </div>
 
-        {/* <Image className='about-image' src={bigImage} alt=""/> */}
+        {/* <img className='about-image' src={bigImage} alt=""/> */}
         <Showreel video={"about"} />
 
         <section className="menu-section about-technologies">
@@ -114,7 +81,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
 
         <div className="container">
           <section className='about-work'>
-            <Image className='about-work__sketch' src={aboutSketch} alt=""/>
+            <img className='about-work__sketch' src='/Assets/Slides/About/Images/3.png' alt=""/>
             <div className="about-text">
               <h2 className={halvar.className}>{aboutText.howWork.title[locale]}</h2>
               <p>{aboutText.howWork.text[locale]}</p>
@@ -145,7 +112,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
           <div className="menu-section">
             <h2 className={halvar.className}>{aboutText.clients.title[locale]}</h2>
             <div className="about-sponsors__list">
-              <LogosSlider/>
+              <LogosSlider aboutText={aboutText}/>
             </div>
           </div>
         </section> 

@@ -34,12 +34,12 @@ const CareerSlider: FC<Props> = ({ career, vacancies }) => {
       const prevIndex = index - 1;
       setNewCareerIndex(prevIndex);
 
-      router.push(pathname.replace(String(id), String(id==1? vacancies.length: id-1)))
+      router.replace(pathname.replace(String(id), String(id==1? vacancies.length: id-1)))
     } else {
       const prevIndex = index + 1;
       setNewCareerIndex(prevIndex);
 
-      router.push(pathname.replace(String(id), id==vacancies.length? "1": String(id+1)))
+      router.replace(pathname.replace(String(id), id==vacancies.length? "1": String(id+1)))
     }
   }
 

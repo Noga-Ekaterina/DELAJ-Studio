@@ -29,8 +29,6 @@ const ExamplesSlider: FC<Proos> = ({ className,  title}) => {
 
   const toNextSlide = () => {
     if (!ref.current) return;
-    console.log('next')
-    console.log(ref.current?.swiper)
     ref.current?.swiper.slideNext();
   }
 
@@ -77,10 +75,8 @@ const ExamplesSlider: FC<Proos> = ({ className,  title}) => {
                     href={`projects/${slide.type}/${slide.id}`}
                 >
 
-                  <Image
+                  <img
                       src={`/Assets/Projects/${slide.type[0].toUpperCase() + slide.type.slice(1)}/Project-${slide.id}/preview.png`}
-                      width={131}
-                      height={63}
                       alt=""
                   />
                 </Link>

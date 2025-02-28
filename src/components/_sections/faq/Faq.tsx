@@ -9,7 +9,6 @@ import general from "@/store/text/general";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import Outline from "@/components/outline/Outline";
-import home from "@/store/text/home";
 import {IFaq, IMenuSectionTitle} from "@/typesData";
 
 interface Props{

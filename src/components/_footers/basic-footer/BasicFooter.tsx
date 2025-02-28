@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { circe } from '@/fonts';
 
 //Images
-import logo from '../../../../public/Assets/Slides/Animations/Images/Adults/footer-logo.svg';
+import logo from '../../../../public/Assets/Slides/Animations/Images/Adults/Footer/logo.svg';
 import LanguageToggle from '../../language-toggle/LanguageToggle';
 
 import './basic-footer.scss';

@@ -1,5 +1,4 @@
 import { IWithClass } from '@/types';
-import Image, { StaticImageData } from 'next/image';
 import { FC } from 'react';
 import cn from 'classnames';
 import './heading-section.scss';
@@ -8,8 +7,8 @@ import { circe, courierNew } from '@/fonts';
 interface Props extends IWithClass {
   title: string
   text: string,
-  image: StaticImageData,
-  subtitle: StaticImageData
+  image: string,
+  subtitle: string
 }
 
 const HeadingSection: FC<Props> = (props) => {
@@ -21,11 +20,11 @@ const HeadingSection: FC<Props> = (props) => {
 
         <div className={cn('heading-section__text', circe.className)}>
           <h1 className={circe.className}>{props.title}</h1>
-          <Image src={props.subtitle} alt="" className="heading-section__subtitle"/>
+          <img src={props.subtitle} alt="" className="heading-section__subtitle"/>
           <p>{props.text}</p>
         </div>
 
-        <Image
+        <img
             src={props.image}
             className='heading-section__image' 
             alt="" 

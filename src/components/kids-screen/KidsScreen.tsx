@@ -1,19 +1,7 @@
 'use client';
 import { FC, useEffect, useRef, useState } from 'react';
 import './kids-screen.scss';
-import Image from 'next/image';
 import cn from 'classnames';
-
-// Images
-import screenPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Book.png';
-import blackGirlPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Valya.png';
-import frogPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Frog.png';
-import cloudPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Cloud.png';
-import lenyaPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Lenya.png';
-import purpleGirlPicture from '../../../public/Assets/Slides/Animations/Images/Curtain/Sonya.png';
-import logo from '../../../public/Assets/Slides/Animations/Images/Curtain/Kids-logo.svg';
-import japLogo from '../../../public/Assets/Slides/Animations/Images/Curtain/Logo-china.png';
-import car from '../../../public/Assets/Slides/Animations/Images/Curtain/Car.png';
 import TextLogo from '../text-logo/TextLogo';
 
 import { Transition } from 'react-transition-group';
@@ -54,7 +42,7 @@ const KidsScreen: FC<Props> = (props) => {
                 ...transitionStyles
               }}
             >
-              <Image src={blackGirlPicture} alt=''/>
+              <img src="/Assets/Slides/Animations/Images/Curtain/Valya.png" alt=''/>
             </div>
           )}
         </Transition>
@@ -62,12 +50,12 @@ const KidsScreen: FC<Props> = (props) => {
 
       {/* Картинка с домом */}
       <div className="kids-screen__picture" id="kids-screen-picture">
-        <Image src={screenPicture} alt="" />
+        <img src="/Assets/Slides/Animations/Images/Curtain/Book.png" alt="" />
       </div>
 
       {/* Облачко белом фоне */}
       <div className="kids-screen__picture" id="kids-screen-white">
-        <Image src={cloudPicture} alt="" />
+        <img src="/Assets/Slides/Animations/Images/Curtain/Cloud.png" alt="" />
       </div>
 
       {/* Лого */}
@@ -82,7 +70,7 @@ const KidsScreen: FC<Props> = (props) => {
               }}
             >
               <div className="kids-screen__picture-logo-wrap">
-                <Image src={logo} alt='' />
+                <img src="/Assets/Slides/Animations/Images/Curtain/Kids-logo.svg" alt='' />
                 <TextLogo className='kids-screen__text-logo logo-subtitle' />
               </div>
             </div>
@@ -92,23 +80,24 @@ const KidsScreen: FC<Props> = (props) => {
 
       {/* Лягушка */}
       <div className="kids-screen__picture" id="kids-screen-green">
-        <Image src={frogPicture} alt=""/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Frog.png" alt=""/>
       </div>
 
       {/* Волчонок */}
       <div className="kids-screen__picture" id="kids-screen-blue">
-        <Image src={lenyaPicture} alt=''/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Lenya.png" alt=''/>
       </div>
 
       {/* Машина на красном фоне */}
-      <div className="kids-screen__picture" id="kids-screen-red">
-        <Image src={japLogo} className='red-picture-logo' alt=""/>
-        <Image src={car} className='red-picture-car' alt=""/>
+      <div className="kids-screen__picture"
+      id="kids-screen-red">
+        <img src="/Assets/Slides/Animations/Images/Curtain/Logo-china.png" className='red-picture-logo' alt=""/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Car.png" className='red-picture-car' alt=""/>
       </div>
 
       {/* Девочка на фиолетовом фоне */}
       <div className="kids-screen__picture" id="kids-screen-purple">
-        <Image src={purpleGirlPicture} quality={100} alt=''/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Sonya.png" alt=''/>
       </div>
     </div>
   );

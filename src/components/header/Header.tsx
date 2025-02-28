@@ -56,12 +56,9 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   const [animations, setAnimations] = useState<any[]>([])
 
   const handleComplete = () => {
-    console.log(ref.current)
-    console.log(`Анимация ${animationIndex + 1} завершена!`);
     ref.current?.setDirection(1)
     setAnimationIndex(prevIndex => prevHeaderVariant=="normal"? (prevIndex + 1) % animations.length: 0);
 
-    console.log(animationIndex)
   }
 
   useEffect(() => {
@@ -69,23 +66,18 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   }, [ref.current]);
 
   useEffect(() => {
-    console.log('Пользователь перешёл с хэша: ' + prevHeaderVariant + ' на хэш: ' + variant);
     changePrevHeaderVariant(variant)
     // setAnimationIndex(0)
-    console.log(animationIndex)
     let newArr: any[]=[]
     if (variant!="normal" &&(prevHeaderVariant=="normal" || variant==prevHeaderVariant)){
       newArr.push(objAnimation[variant]);
-      console.log("prev normal")
       setAnimationIndex(0)
     }else if (variant=="kids" || variant=="adult") {
       setAnimationIndex(0);
       newArr=[objAnimation[variant]]
     }else if (variant=="normal"){
-      console.log(prevHeaderVariant)
       newArr=[prevHeaderVariant!="normal"? objAnimation[prevHeaderVariant]: objAnimation.kids]
     }
-    console.log(newArr)
     setAnimations(newArr)
 
   }, [isLandingSwiped, hash, pathname]);
@@ -231,7 +223,6 @@ const Header: FC<IWithClass> = (props) => {
   const isHome = useIsHome()
   const {isShowContent, isLandingSwiped, isMenuLandingsOpened, changeMenuOpened} = store;
   const theme: HeaderTheme = {hash, isLandingSwiped, isMenuLandingsOpened, pathname, isHome};
-  console.log({pathname, hash, isHome})
 
   if (!isShowContent) return <header/>
 

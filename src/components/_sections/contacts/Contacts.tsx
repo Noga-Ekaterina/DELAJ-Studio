@@ -4,18 +4,9 @@ import '../menu/menu.scss';
 import './contacts.scss';
 import '../../../components/_sections/about/about.scss';
 import { halvar, circe } from '@/fonts';
-import Link from 'next/link';
-import general from "@/store/text/general";
 import {useLocale} from "@/components/_hooks/useLocale";
-import {observer} from "mobx-react-lite";
-
-// Images
-import bg from '../../../../public/Assets/Slides/Contacts/Images/bg.svg';
-
-import Image from 'next/image';
 import cn from 'classnames';
 import Outline from "@/components/outline/Outline";
-import home from "@/store/text/home";
 import {IContacts, IMenuSectionTitle} from "@/typesData";
 
 interface Props{
@@ -51,7 +42,7 @@ const Contacts = ({contactsText, menuSectionTitle}:Props) => {
             <p>{contactsText.text[locale]}</p>
           </div>
           <div className='contacts-bg'>
-            <Image src={bg} alt=""/>
+            <img src="/Assets/Slides/Contacts/Images/bg.svg" alt=""/>
           </div>
         </div>  
       </div>
@@ -60,4 +51,4 @@ const Contacts = ({contactsText, menuSectionTitle}:Props) => {
   );
 };
 
-export default observer(Contacts);
+export default Contacts;

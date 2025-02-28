@@ -3,17 +3,10 @@ import React, { FC } from 'react';
 import cn from 'classnames';
 import { circe } from '@/fonts';
 import './adult-footer.scss';
-import Link from 'next/link';
 import LanguageToggle from '../../language-toggle/LanguageToggle';
-import Image from 'next/image';
 import general from "@/store/text/general";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
-
-
-//Images
-import logo from '../../../../public/Assets/Slides/Animations/Images/Adults/footer-logo.svg'
-import footerMan from '../../../../public/Assets/Slides/Animations/Images/Adults/footer-man.png'
 import FooterCareerList from "@/components/_footers/footer-career-list/FooterCareerList";
 import Outline from "@/components/outline/Outline";
 import FooterContacts from "@/components/_footers/footer-contacts/FooterContacts";
@@ -32,7 +25,7 @@ const AdultFooter: FC = () => {
             <FooterContacts type="adult"/>
 
             <a href='#'>
-              <Image src={logo} className='footer-item__logo' alt=""/>
+              <img src="/Assets/Slides/Animations/Images/Adults/Footer/logo.svg" className='footer-item__logo' alt=""/>
             </a>
           </div>
         </div>
@@ -57,7 +50,7 @@ const AdultFooter: FC = () => {
       </div>
 
       <div className='adult-footer__man'>
-        <Image src={footerMan} alt="" />
+        <img src="/Assets/Slides/Animations/Images/Adults/Footer/1.png" alt="" />
       </div>
 
       <Outline/>

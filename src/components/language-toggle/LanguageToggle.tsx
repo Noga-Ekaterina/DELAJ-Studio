@@ -30,16 +30,12 @@ const LanguageToggleSpan: FC<SpanProps> = (props) => {
   const changeLangauge = (lang:LangType) => {
     if (lang!=locale){
       if (locale=="en"){
-        router.push(`/${lang}${pathname}#${hash}`)
+        router.replace(`/${lang}${pathname}#${hash}`)
       }else {
-        router.push(`${pathname.replace(locale, lang)}#${hash}`)
+        router.replace(`${pathname.replace(locale, lang)}#${hash}`)
       }
     }
   }
-
-  useEffect(() => {
-    document.documentElement.setAttribute("lang", locale)
-  }, [locale]);
 
   return (
     <button 

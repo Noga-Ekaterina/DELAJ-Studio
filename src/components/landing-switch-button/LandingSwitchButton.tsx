@@ -1,10 +1,6 @@
 'use client';
-import { CurrentPageType, IWithClass } from '@/types';
-import classNames from 'classnames';
-import {FC, MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
-import store from '@/store/store';
-import {observer} from "mobx-react-lite";
-
+import {IWithClass } from '@/types';
+import {FC, useEffect, useRef, useState} from 'react';
 import kidsIn from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_IN.json"
 import kidsFull from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_FULL.json"
 import kidsOut from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_OUT.json"
@@ -14,9 +10,7 @@ import adultIn from "@/../public/Assets/Animations/landing-switch-button/adult/D
 import adultFull from "@/../public/Assets/Animations/landing-switch-button/adult/D_anime_FULL.json"
 import adultOut from "@/../public/Assets/Animations/landing-switch-button/adult/D_anime_OUT.json"
 import adultHover from "@/../public/Assets/Animations/landing-switch-button/adult/D_anime_MOUSE_IN.json"
-import {useHash} from "@/components/_hooks/useHash";
 import Lottie, {LottieRefCurrentProps} from "lottie-react";
-import {useLoad} from "@/components/_hooks/useLoad";
 
 const animations={
   kids:{
@@ -91,12 +85,10 @@ const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) 
     } else {
       ref.current?.setDirection(1)
       setAnimation("out")
-      console.log({startIsShow: isShow, type: type})
     }
   }, [isShow, isWasScroll, isHover, ref.current])
 
   useEffect(() => {
-    console.log({type: type, isShow: isShow})
     if (isShow)
       ref.current?.play()
   }, [animation, isHover]);

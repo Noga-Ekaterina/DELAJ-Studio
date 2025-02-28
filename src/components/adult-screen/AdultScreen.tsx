@@ -1,11 +1,6 @@
 'use client'
 import {FC, useEffect, useRef} from 'react';
 import './adult-screen.scss';
-import Image from 'next/image';
-
-//Images
-import japLogo from '../../../public/Assets/Slides/Animations/Images/Curtain/Logo-china.png';
-import screenBandit from '../../../public/Assets/Slides/Animations/Images/Curtain/Bandit.png';
 
 //Animation
 import logoAnimation from '../../../public/Assets/Animations/logo/delai_to_adults.json'
@@ -42,8 +37,8 @@ const AdultScreen: FC<Props> = ({ isOpened }) => {
                 
       <div className="adult-screen__logo-wrap">
             <div className="adult-screen__jap-logo-wrap logo-subtitle">
-              <Image 
-                src={japLogo} 
+              <img
+                src="/Assets/Slides/Animations/Images/Curtain/Logo-china.png"
                 className='adult-screen__jap-logo' 
                 style={transition}
                 alt=""
@@ -65,8 +60,8 @@ const AdultScreen: FC<Props> = ({ isOpened }) => {
 
       <Transition in={isOpened} timeout={300}>
         {state => (
-          <Image 
-            src={screenBandit} 
+          <img
+            src="/Assets/Slides/Animations/Images/Curtain/Bandit.png"
             className='adult-screen__bandit' 
             alt=""
             style={{

@@ -78,12 +78,8 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   //     setData(json);
   //   })();
   // },[])
-  useEffect(() => {
-    console.log(projectsList)
-  }, [projectsList]);
 
   useEffect(() => {
-    console.log(itemsGrid)
     if (mobileScreen) {
       setBaseChunkSize(2);
     } else {
@@ -112,12 +108,9 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
                     className='project-list__item'
 
                     key={`project-list-item-${item.id}`}>
-                    <Image
+                    <img
                       src={`/Assets/Projects/${title[0].toUpperCase() + title.slice(1)}/Project-${item.id}/preview.png`}
                       key={'project-list-' + item.id}
-                      width={400}
-                      height={200}
-                      quality={100}
                       alt=""
                     />
                   </Link>

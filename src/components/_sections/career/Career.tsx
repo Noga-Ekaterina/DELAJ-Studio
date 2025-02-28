@@ -4,7 +4,7 @@ import './career.scss';
 import { circe } from '@/fonts';
 import cn from 'classnames';
 import { useHash } from '@/components/_hooks/useHash';
-import { ICareer } from '@/typesData';
+import {ICareer, IMenuSectionTitle} from '@/typesData';
 import BreadCrumbs from '@/components/bread-crumbs/BreadCrumbs';
 import CareerSlider from '../../_career/career-slder/CareerSlider';
 import CareerItemForm from '../../_career/career-form/CareerForm';
@@ -18,12 +18,13 @@ import Link from "next/link";
 import career from "@/store/text/career";
 import Outline from "@/components/outline/Outline";
 
+interface Props{
+  careerList?: ICareer[]|null
+  menuSectionTitle?: IMenuSectionTitle|null
+}
 
-const Career = () => {
+const Career = ({careerList, menuSectionTitle}:Props) => {
   const locale=useLocale()
-  const {menuSectionTitle}=general
-  const hash = useHash();
-  const {careerList} =career
 
   return (
       <div className={cn('menu-inner career', circe.className)}>
@@ -31,7 +32,7 @@ const Career = () => {
           <h1 className='menu-link'>{menuSectionTitle && menuSectionTitle.career[locale]}</h1>
           <div className="career-list">
             {careerList && (
-                (careerList as Array<ICareer>).map((item, index) => (
+                careerList.map((item, index) => (
                     <Link href={`career/${item.id}`} className="career-item" key={'career-item' + index}>
                       <h3>{item.data.title[locale]}</h3>
                       <p>{item.data.description[locale]}</p>

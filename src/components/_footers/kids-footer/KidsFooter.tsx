@@ -1,21 +1,11 @@
 'use client'
-import Link from 'next/link';
 import React, {FC, useEffect, useState} from 'react';
 import './kids-footer.scss';
 import { circe } from '../../../fonts';
 import cn from 'classnames';
-import Image from 'next/image';
-import homeText from "@/store/text/home";
 import general from "@/store/text/general";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
-
-
-//Images
-import footerLogo from '../../../../public/Assets/Slides/Animations/Images/Kids/footer-logo.svg';
-import footerPhone from '../../../../public/Assets/Slides/Animations/Images/Kids/footer-phone.png';
-import footerGirl from '../../../../public/Assets/Slides/Animations/Images/Kids/footer-girl.png';
-import footerCarrot from '../../../../public/Assets/Slides/Animations/Images/Kids/footer-carrot.png';
 
 import LanguageToggle from '../../language-toggle/LanguageToggle';
 import FooterCareerList from "@/components/_footers/footer-career-list/FooterCareerList";
@@ -43,9 +33,9 @@ const KidsFooter: FC = () => {
         <div className="footer-item__content">
           <FooterContacts type='kids' className="kids-footer__item-list"/>
           <a href="#">
-            <Image className='footer-item__logo' src={footerLogo} alt="" />
+            <img className='footer-item__logo' src="/Assets/Slides/Animations/Images/Kids/Footer/logo.svg" alt="" />
           </a>
-          <Image className='footer-item__image' src={footerPhone} alt="" />
+          <img className='footer-item__image' src="/Assets/Slides/Animations/Images/Kids/Footer/1.png" alt="" />
         </div>
       </div>
 
@@ -91,7 +81,7 @@ const KidsFooter: FC = () => {
             }
           </p>
           <FooterSocial type="kids"/>
-          <Image src={footerGirl} alt="" />
+          <img src="/Assets/Slides/Animations/Images/Kids/Footer/2.png" alt="" />
         </div>
       </div>
 
@@ -106,7 +96,7 @@ const KidsFooter: FC = () => {
               <a
                 href="#ideas" className={circe.className}>{menuSectionTitle && menuSectionTitle.ideas[locale]}</a>
             </div>
-            <Image src={footerCarrot} alt=""/>
+            <img src="/Assets/Slides/Animations/Images/Kids/Footer/3.png" alt=""/>
           </div>
         </div>
       </div>

@@ -5,8 +5,6 @@ import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
 import { useViewport } from '@/components/_hooks/useViewport';
 import store from '@/store/store';
-import homeText from "@/store/text/home";
-import projects from "@/store/text/Projects";
 import { sectionsMenuHashes } from '@/vars';
 import { observer } from 'mobx-react-lite';
 import {useLoad} from "@/components/_hooks/useLoad";
@@ -92,8 +90,6 @@ const Scroller: FC<IWithChildren> = (props) => {
     clearTimeout((scrollTimeout as number));
 
     const hash=window.location.hash.slice(1)
-    console.log(isModalMenuOpened)
-    // scrollTimeout = setTimeout(() => {
       if (!isScrolling &&hash!="" && hash!="main-screen" && scrollerContainerRef.current) {
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
         isHiddenSection=false
@@ -101,8 +97,6 @@ const Scroller: FC<IWithChildren> = (props) => {
           const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
           const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
           const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
-
-          console.log({isAtBottom, isAtTop})
 
           if (scrollDirection=="bottom" && bottom<200){
             if (nextSection) {
@@ -113,10 +107,6 @@ const Scroller: FC<IWithChildren> = (props) => {
               changeHash("")
               changeCurrentPage(null)
               changeMenuOpened(false)
-              console.log("end")
-              // setTimeout(()=>{
-              //   (activeItem as HTMLDivElement).style.display="none"
-              // }, 1000)
             }
           }else if (scrollDirection=="top" && top>200){
             if (prevSection) {
@@ -163,7 +153,6 @@ const Scroller: FC<IWithChildren> = (props) => {
 
     // isScrolling=true
     const hash=window.location.hash.slice(1)
-    console.log(hash)
     const overflow=getComputedStyle(document.documentElement).overflow
     scrollTimeout = setTimeout(() => {
       if (overflow!="hidden"  && hash != "" && hash != "main-screen" && isScrollOn && scrollerContainerRef.current) {
@@ -244,7 +233,6 @@ const Scroller: FC<IWithChildren> = (props) => {
 
     const handleTouchMove = (event: TouchEvent) => {
       let touchMoveY = event.touches[0].clientY;
-      console.log({isAtBottom})
       if (touchStartY!=undefined){
         scrollDirection=touchMoveY<touchStartY? "bottom":"top"
         if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {

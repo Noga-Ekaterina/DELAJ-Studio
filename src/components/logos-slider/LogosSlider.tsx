@@ -2,15 +2,19 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import "./logos-slider.scss"
-import home from "@/store/text/home";
 import {clearTimers, observer} from "mobx-react-lite";
 import {Swiper, SwiperRef, SwiperSlide} from "swiper/react";
 import Image from "next/image";
 import {SwiperNavigation} from "@/utils/SwiperNavigation";
 import arrow from '../../../public/Assets/Icons/arrow.svg';
+import {IAbout} from "@/typesData";
 
-const LogosSlider = () => {
-  const {aboutText}=home
+
+interface Props{
+  aboutText?: IAbout|null
+  }
+
+const LogosSlider = ({aboutText}:Props) => {
   const [slides, setSlides] = useState<JSX.Element[]|null>(null)
   const swiperRef = useRef<SwiperRef>(null);
   const swiperNav= new SwiperNavigation(swiperRef)
