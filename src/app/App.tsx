@@ -75,7 +75,6 @@ const App = ({children}:IWithChildren) => {
         <Header/>
         {children}
         <ModalMenu/>
-        <ModalContacts/>
       </>
   );
 };

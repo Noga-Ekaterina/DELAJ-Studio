@@ -18,6 +18,7 @@ import InitData from "@/app/InitData";
 import {Metadata, ResolvingMetadata} from "next";
 import {title} from "@/vars";
 import {LangType} from "@/types";
+import ModalContacts from "@/components/_modals/modal-contacts/ModalContacts";
 
 type Props = {
   params: {locale: LangType }
@@ -100,6 +101,7 @@ const Page = async () => {
     </Scroller>
       <MainScreen />
       <LandingSwitchButtonsGrup/>
+      <ModalContacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
     </InitData>
   )
 }

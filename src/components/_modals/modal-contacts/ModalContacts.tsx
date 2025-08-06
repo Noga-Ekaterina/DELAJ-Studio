@@ -7,8 +7,14 @@ import Curtain from "@/components/curtain/Сurtain";
 import CloseButtons from "@/components/close-modal-button/CloseButtons";
 import {useHash} from "@/components/_hooks/useHash";
 import Contacts from "@/components/_sections/contacts/Contacts";
+import {IContacts, IMenuSectionTitle} from "@/typesData";
 
-const ModalContacts = () => {
+interface Props{
+  contactsText?: IContacts|null
+  menuSectionTitle?: IMenuSectionTitle|null
+}
+
+const ModalContacts = ({contactsText, menuSectionTitle}:Props) => {
   const hash= useHash()
   const {isModalContactsOpened, changeModalContactsOpened}=store
 
@@ -20,7 +26,7 @@ const ModalContacts = () => {
       <Curtain show={isModalContactsOpened} className="modal-contacts">
         <CloseButtons func={()=> changeModalContactsOpened(false)}/>
 
-        <Contacts/>
+        <Contacts contactsText={contactsText} menuSectionTitle={menuSectionTitle}/>
       </Curtain>
   );
 };
