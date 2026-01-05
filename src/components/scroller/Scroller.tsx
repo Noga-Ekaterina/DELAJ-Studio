@@ -155,7 +155,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     const hash=window.location.hash.slice(1)
     const overflow=getComputedStyle(document.documentElement).overflow
     scrollTimeout = setTimeout(() => {
-      if (overflow!="hidden"  && hash != "" && hash != "main-screen" && isScrollOn && scrollerContainerRef.current) {
+      if (overflow!="hidden"  && hash != "" && hash != "main-screen" && scrollerContainerRef.current) {
         if (isAtBottom) {
           window.location.hash = ""
           isAtBottom=false

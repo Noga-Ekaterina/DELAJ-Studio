@@ -4,12 +4,7 @@ import './for-adult.scss'
 import AdultFooter from '@/components/_footers/adult-footer/AdultFooter';
 import ProjectList from '@/components/project-list/ProjectList';
 import {useLocale} from "@/components/_hooks/useLocale";
-import {observer} from "mobx-react-lite";
-
-import { ProjectItem } from '@/types';
-import { FC } from 'react';
-import LandingSwitchButton from '@/components/landing-switch-button/LandingSwitchButton';
-import AdultButton from '@/components/landing-switch-button/AdultButton';
+import {FC, memo} from 'react';
 import Showreel from "@/components/showreel/Showreel";
 import {ILandingText} from "@/typesData";
 
@@ -20,7 +15,6 @@ interface Props{
 
 const ForAdult: FC<Props> = ({landingText}) => {
   const locale= useLocale()
-
 
   return (
     <div className='for-adult'>
@@ -42,4 +36,4 @@ const ForAdult: FC<Props> = ({landingText}) => {
   );
 };
 
-export default observer(ForAdult);
+export default memo(ForAdult);

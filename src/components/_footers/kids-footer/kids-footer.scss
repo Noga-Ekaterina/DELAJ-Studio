@@ -102,7 +102,7 @@
     flex-wrap: wrap;
     height: auto;
     &__item {
-      height: 400rem;
+      height: 400rem !important;
 
       &#kids-footer-red {
         order: 4;

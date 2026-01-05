@@ -13,21 +13,14 @@ interface Props extends IWithClass, IWithChildren {
 }
 
 const Section: FC<Props> = (props) => {
-  const containerRef = useRef(null);
-  const ref = useRef(null);
-  const className = cn('section-wrap', props.className)
-  const hash = useHash()
-
   return (
     <section
-      className={className} 
-      ref={containerRef}
+      className={cn('section-wrap', props.className)}
       data-name={props.id}
       // style={{display: hidden? "none": "block"}}
       // id={props.id}
     >
       <div
-        ref={ref} 
         className={classNames(
           "section-wrap__content", 
         )}

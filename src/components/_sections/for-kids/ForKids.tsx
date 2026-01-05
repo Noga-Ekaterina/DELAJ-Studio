@@ -7,6 +7,7 @@ import ProjectList from '@/components/project-list/ProjectList';
 import Showreel from "@/components/showreel/Showreel";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {IFooterKids, ILandingText, IMenuSectionTitle} from "@/typesData";
+import {memo} from "react";
 
 interface Proos{
   landingText: ILandingText
@@ -34,4 +35,4 @@ const ForKids = ({landingText}:Proos) => {
   );
 };
 
-export default ForKids;
+export default memo(ForKids);

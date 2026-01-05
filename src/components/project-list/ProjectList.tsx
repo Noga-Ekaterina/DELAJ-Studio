@@ -22,7 +22,6 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
   const {projectsList}=projects
   const [baseChunkSize, setBaseChunkSize] = useState(3);
   const mobileScreen = useMediaQuery({maxWidth: 640});
-  const [isBigItem, setIsBigItem] = useState(false)
 
   const getModifiedList = (data: any[]) => {
     const chunkSizes = [baseChunkSize, baseChunkSize-1]; // Чередование размеров порций
