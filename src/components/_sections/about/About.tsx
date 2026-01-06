@@ -2,7 +2,6 @@
 import React, {memo} from 'react';
 import '../menu/menu.scss' ;
 import './about.scss';
-import general from "@/store/text/general";
 import {observer} from "mobx-react-lite";
 import { halvar, circe } from '@/fonts';
 import cn from 'classnames';
@@ -34,7 +33,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
 
           <section className='about-hero'>
               
-              <img className="about-hero__picture" src="/Assets/Slides/About/Images/1.png" alt="" />
+              <img className="about-hero__picture" src="/Assets/Slides/About/Images/1.png" alt="" loading="lazy" />
             
               <div className='about-hero__paragraph'>
                 <p>{aboutText.text1[locale]}</p>
@@ -44,7 +43,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
                 <h2 className={halvar.className}>{aboutText.whatDo.title[locale]}</h2>
                 <p>{aboutText.whatDo.text[locale]}</p>
               </div>
-              <img className='about-hero__sketch' src="/Assets/Slides/About/Images/2.png" alt="" />
+              <img className='about-hero__sketch' src="/Assets/Slides/About/Images/2.png" alt="" loading="lazy" />
           </section>
 
           <section className='about-animation'>
@@ -67,7 +66,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
           </div>
         </div>
 
-        {/* <img className='about-image' src={bigImage} alt=""/> */}
+        {/* <img className='about-image' src={bigImage} alt="" loading="lazy"/> */}
         <Showreel video={"about"} />
 
         <section className="menu-section about-technologies">
@@ -81,7 +80,7 @@ const About = ({aboutText, menuSectionTitle}: Props) => {
 
         <div className="container">
           <section className='about-work'>
-            <img className='about-work__sketch' src='/Assets/Slides/About/Images/3.png' alt=""/>
+            <img className='about-work__sketch' src='/Assets/Slides/About/Images/3.png' alt="" loading="lazy"/>
             <div className="about-text">
               <h2 className={halvar.className}>{aboutText.howWork.title[locale]}</h2>
               <p>{aboutText.howWork.text[locale]}</p>

@@ -25,7 +25,7 @@ const AdultFooter: FC = () => {
             <FooterContacts type="adult"/>
 
             <a href='#'>
-              <img src="/Assets/Slides/Animations/Images/Adults/Footer/logo.svg" className='footer-item__logo' alt=""/>
+              <img src="/Assets/Slides/Animations/Images/Adults/Footer/logo.svg" className='footer-item__logo' alt="" loading="lazy"/>
             </a>
           </div>
         </div>
@@ -50,7 +50,7 @@ const AdultFooter: FC = () => {
       </div>
 
       <div className='adult-footer__man'>
-        <img src="/Assets/Slides/Animations/Images/Adults/Footer/1.png" alt="" />
+        <img src="/Assets/Slides/Animations/Images/Adults/Footer/1.png" alt="" loading="lazy" />
       </div>
 
       <Outline/>

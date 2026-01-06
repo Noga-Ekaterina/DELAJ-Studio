@@ -111,6 +111,7 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
                       src={`/Assets/Projects/${title[0].toUpperCase() + title.slice(1)}/Project-${item.id}/preview.png`}
                       key={'project-list-' + item.id}
                       alt=""
+                      loading="lazy"
                     />
                   </Link>
                 );

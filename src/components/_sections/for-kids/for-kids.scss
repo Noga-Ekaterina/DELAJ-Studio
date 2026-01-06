@@ -7,8 +7,9 @@
     h1{
       color: var(--main-blue);
     }
-    img {
-      top: -50rem;
+
+    .heading-section__image {
+      aspect-ratio: 41/14;
     }
   }
   &__projects-wrap {

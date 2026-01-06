@@ -31,7 +31,7 @@ const Contacts = ({contactsText, menuSectionTitle}:Props) => {
             {
               contactsText.social.map((item, index)=>(
                   <a key={`contacts-list-link-${index}`} className='contacts-list__link' href={item.href[locale]} target="_blank">
-                    <img src={`/Assets/Slides/Contacts/Images/Logos/${index+1}.svg`} alt=""/>
+                    <img src={`/Assets/Slides/Contacts/Images/Logos/${index+1}.svg`} alt="" loading="lazy"/>
                     {item.title[locale]}
                   </a>
               ))
@@ -42,7 +42,7 @@ const Contacts = ({contactsText, menuSectionTitle}:Props) => {
             <p>{contactsText.text[locale]}</p>
           </div>
           <div className='contacts-bg'>
-            <img src="/Assets/Slides/Contacts/Images/bg.svg" alt=""/>
+            <img src="/Assets/Slides/Contacts/Images/bg.svg" alt="" loading="lazy"/>
           </div>
         </div>  
       </div>

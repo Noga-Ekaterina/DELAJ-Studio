@@ -33,9 +33,9 @@ const KidsFooter: FC = () => {
         <div className="footer-item__content">
           <FooterContacts type='kids' className="kids-footer__item-list"/>
           <a href="#">
-            <img className='footer-item__logo' src="/Assets/Slides/Animations/Images/Kids/Footer/logo.svg" alt="" />
+            <img className='footer-item__logo' src="/Assets/Slides/Animations/Images/Kids/Footer/logo.svg" alt="" loading="lazy" />
           </a>
-          <img className='footer-item__image' src="/Assets/Slides/Animations/Images/Kids/Footer/1.png" alt="" />
+          <img className='footer-item__image' src="/Assets/Slides/Animations/Images/Kids/Footer/1.png" alt="" loading="lazy" />
         </div>
       </div>
 
@@ -81,7 +81,7 @@ const KidsFooter: FC = () => {
             }
           </p>
           <FooterSocial type="kids"/>
-          <img src="/Assets/Slides/Animations/Images/Kids/Footer/2.png" alt="" />
+          <img src="/Assets/Slides/Animations/Images/Kids/Footer/2.png" alt="" loading="lazy" />
         </div>
       </div>
 
@@ -96,7 +96,7 @@ const KidsFooter: FC = () => {
               <a
                 href="#ideas" className={circe.className}>{menuSectionTitle && menuSectionTitle.ideas[locale]}</a>
             </div>
-            <img src="/Assets/Slides/Animations/Images/Kids/Footer/3.png" alt=""/>
+            <img src="/Assets/Slides/Animations/Images/Kids/Footer/3.png" alt="" loading="lazy"/>
           </div>
         </div>
       </div>

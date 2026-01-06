@@ -47,10 +47,10 @@ const Menu: FC = () => {
           <LanguageToggle className={cn('menu-home__language', halvar.className)}/>
         </div>
 
-        <img className='menu-home__bg' src='/Assets/Slides/Menu/Images/bg.png' alt=""/>
+        <img className='menu-home__bg' src='/Assets/Slides/Menu/Images/bg.png' alt="" loading="lazy"/>
         <img className='menu-home__bg
-        menu-home__bg-tablet' src='/Assets/Slides/Menu/Images/bg-tablet.png' alt="" />
-        <img className='menu-home__bg menu-home__bg-mobile' src="/Assets/Slides/Menu/Images/bg-mobile.png" alt="" />
+        menu-home__bg-tablet' src='/Assets/Slides/Menu/Images/bg-tablet.png' alt="" loading="lazy" />
+        <img className='menu-home__bg menu-home__bg-mobile' src="/Assets/Slides/Menu/Images/bg-mobile.png" alt="" loading="lazy" />
 
         <Outline/>
       </div>

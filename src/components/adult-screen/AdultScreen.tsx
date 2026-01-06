@@ -42,6 +42,7 @@ const AdultScreen: FC<Props> = ({ isOpened }) => {
                 className='adult-screen__jap-logo' 
                 style={transition}
                 alt=""
+                loading="lazy"
               />
             </div>
         
@@ -74,6 +75,7 @@ const AdultScreen: FC<Props> = ({ isOpened }) => {
                 exited:  { right: '-100%'},
               }[state]
             }}
+            loading="lazy"
           />
         )}
       </Transition>

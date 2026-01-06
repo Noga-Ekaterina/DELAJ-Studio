@@ -78,6 +78,7 @@ const ExamplesSlider: FC<Proos> = ({ className,  title}) => {
                   <img
                       src={`/Assets/Projects/${slide.type[0].toUpperCase() + slide.type.slice(1)}/Project-${slide.id}/preview.png`}
                       alt=""
+                      loading="lazy"
                   />
                 </Link>
               </SwiperSlide>

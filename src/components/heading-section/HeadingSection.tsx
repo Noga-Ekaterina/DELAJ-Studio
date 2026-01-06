@@ -20,14 +20,15 @@ const HeadingSection: FC<Props> = (props) => {
 
         <div className={cn('heading-section__text', circe.className)}>
           <h1 className={circe.className}>{props.title}</h1>
-          <img src={props.subtitle} alt="" className="heading-section__subtitle"/>
+          <img src={props.subtitle} alt="" className="heading-section__subtitle" loading="lazy"/>
           <p>{props.text}</p>
         </div>
 
         <img
             src={props.image}
             className='heading-section__image' 
-            alt="" 
+            alt=""
+            loading="lazy"
           />
       </div>
     </section>

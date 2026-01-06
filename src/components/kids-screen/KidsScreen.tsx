@@ -42,7 +42,7 @@ const KidsScreen: FC<Props> = (props) => {
                 ...transitionStyles
               }}
             >
-              <img src="/Assets/Slides/Animations/Images/Curtain/Valya.png" alt=''/>
+              <img src="/Assets/Slides/Animations/Images/Curtain/Valya.png" alt='' loading="lazy"/>
             </div>
           )}
         </Transition>
@@ -50,12 +50,12 @@ const KidsScreen: FC<Props> = (props) => {
 
       {/* Картинка с домом */}
       <div className="kids-screen__picture" id="kids-screen-picture">
-        <img src="/Assets/Slides/Animations/Images/Curtain/Book.png" alt="" />
+        <img src="/Assets/Slides/Animations/Images/Curtain/Book.png" alt="" loading="lazy" />
       </div>
 
       {/* Облачко белом фоне */}
       <div className="kids-screen__picture" id="kids-screen-white">
-        <img src="/Assets/Slides/Animations/Images/Curtain/Cloud.png" alt="" />
+        <img src="/Assets/Slides/Animations/Images/Curtain/Cloud.png" alt="" loading="lazy" />
       </div>
 
       {/* Лого */}
@@ -70,7 +70,7 @@ const KidsScreen: FC<Props> = (props) => {
               }}
             >
               <div className="kids-screen__picture-logo-wrap">
-                <img src="/Assets/Slides/Animations/Images/Curtain/Kids-logo.svg" alt='' />
+                <img src="/Assets/Slides/Animations/Images/Curtain/Kids-logo.svg" alt='' loading="lazy" />
                 <TextLogo className='kids-screen__text-logo logo-subtitle' />
               </div>
             </div>
@@ -80,24 +80,24 @@ const KidsScreen: FC<Props> = (props) => {
 
       {/* Лягушка */}
       <div className="kids-screen__picture" id="kids-screen-green">
-        <img src="/Assets/Slides/Animations/Images/Curtain/Frog.png" alt=""/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Frog.png" alt="" loading="lazy"/>
       </div>
 
       {/* Волчонок */}
       <div className="kids-screen__picture" id="kids-screen-blue">
-        <img src="/Assets/Slides/Animations/Images/Curtain/Lenya.png" alt=''/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Lenya.png" alt='' loading="lazy"/>
       </div>
 
       {/* Машина на красном фоне */}
       <div className="kids-screen__picture"
       id="kids-screen-red">
-        <img src="/Assets/Slides/Animations/Images/Curtain/Logo-china.png" className='red-picture-logo' alt=""/>
-        <img src="/Assets/Slides/Animations/Images/Curtain/Car.png" className='red-picture-car' alt=""/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Logo-china.png" className='red-picture-logo' alt="" loading="lazy"/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Car.png" className='red-picture-car' alt="" loading="lazy"/>
       </div>
 
       {/* Девочка на фиолетовом фоне */}
       <div className="kids-screen__picture" id="kids-screen-purple">
-        <img src="/Assets/Slides/Animations/Images/Curtain/Sonya.png" alt=''/>
+        <img src="/Assets/Slides/Animations/Images/Curtain/Sonya.png" alt='' loading="lazy"/>
       </div>
     </div>
   );
