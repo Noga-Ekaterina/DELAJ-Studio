@@ -4,7 +4,6 @@ import {ICareer, IData, IForm} from "@/typesData";
 
 class Store {
   careerList: null | ICareer[] = null;
-  formText: IForm|null=null
 
   constructor() {
     makeAutoObservable(this);
@@ -14,14 +13,9 @@ class Store {
     if (data)
       this.careerList = data
   }
-  setFormText= (data?: null|IForm)=> {
-    if (data)
-     this.formText = data
-  }
 
   setAllCareer=(data: IData)=>{
     this.setCareerList(data.careerList)
-    this.setFormText(data.formText)
   }
 }
 

@@ -2,10 +2,9 @@ import React, {FC} from 'react';
 import CareerPage from "@/components/_career/career-page/CareerPage";
 import {Metadata, ResolvingMetadata} from "next";
 import {title} from "@/vars";
-import {ICareer, IData} from "@/typesData";
+import {ICareer, ICareerPage} from "@/typesData";
 import {fetchData} from "@/utils/fetchData";
 import {LangType} from "@/types";
-import InitData from "@/app/InitData";
 
 interface Props {
   params: {
@@ -31,7 +30,7 @@ export async function generateMetadata(
 
 
 const init = async () => {
-  const data: IData = {}
+  const data: ICareerPage = {}
 
   const promises = [
     fetchData('Slides/Vacancy/data.json').then(result => data.careerList = result),
@@ -49,9 +48,7 @@ const Page:FC<Props> = async ({params}) => {
   const {id} =params
 
   return(
-      <InitData data={data}>
-        <CareerPage careerList={data.careerList} id={Number(id)}/>
-      </InitData>
+      <CareerPage careerList={data.careerList} formText={data.formText} id={Number(id)}/>
   )
 };
 

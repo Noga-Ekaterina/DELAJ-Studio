@@ -6,14 +6,15 @@ import ProjectList from '@/components/project-list/ProjectList';
 import {useLocale} from "@/components/_hooks/useLocale";
 import {FC, memo} from 'react';
 import Showreel from "@/components/showreel/Showreel";
-import {ILandingText} from "@/typesData";
+import {ILandingText, IProject} from "@/typesData";
 
-interface Props{
+interface Props {
   landingText: ILandingText
+  projects?: IProject[]
 }
 
 
-const ForAdult: FC<Props> = ({landingText}) => {
+const ForAdult: FC<Props> = ({landingText, projects}) => {
   const locale= useLocale()
 
   return (
@@ -27,7 +28,7 @@ const ForAdult: FC<Props> = ({landingText}) => {
         image="/Assets/Slides/Animations/Images/Adults/heading.png"
       />
       <div className="for-adult__projects-wrap ">
-        <ProjectList title='adults' />
+        <ProjectList title='adults' projects={projects}/>
       </div>
 
       <AdultFooter />

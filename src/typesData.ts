@@ -27,7 +27,7 @@ export interface ILandingText {
   text: ITranslation<string>
 }
 
-export interface ILadings{
+export interface ILadingsText {
   kids: ILandingText
   adult: ILandingText
 }
@@ -159,15 +159,24 @@ export interface IForm{
   button: ITranslation<string>
 }
 
-export interface IData{
-  landingsText?: null |ILadings
+export interface ICareerPage{
+  careerList?: null|ICareer[]
+  formText?: null|IForm
+}
+
+
+
+export interface IProjectsAndLayout{
+  projectsList?: null | IProjectsList
+  menuSectionTitle?: null | IMenuSectionTitle
+  footers?: null|IFooters
+}
+
+export interface IData extends IProjectsAndLayout{
+  landingsText?: null |ILadingsText
   aboutText?: null |IAbout
   faqText?: null|IFaq[]
   ideasText?: null|IIdeas
   contactsText?: null|IContacts
-  menuSectionTitle?: null | IMenuSectionTitle
-  footers?: null|IFooters
   careerList?: null | ICareer[]
-  formText?: null|IForm
-  projectsList?: null | IProjectsList
 }

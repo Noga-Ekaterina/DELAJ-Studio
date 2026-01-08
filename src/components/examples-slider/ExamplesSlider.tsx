@@ -1,5 +1,5 @@
 'use client';
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useMemo, useRef, useState} from 'react';
 import './examples-slider.scss';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
@@ -9,31 +9,29 @@ import arrow from '../../../public/Assets/Icons/arrow.svg';
 import 'swiper/css';
 import { IWithClass } from '@/types';
 import cn from 'classnames';
-import {IProject} from "@/typesData";
-import projects from "@/store/text/Projects";
+import {IProject, IProjectsList} from "@/typesData";
 import {getShuffleArray} from "@/utils/getShuffleArray";
 import {observer} from "mobx-react-lite";
 
 interface Proos extends IWithClass{
   title: string
+  projectsList?: null|IProjectsList
 }
 
 interface ISlide extends IProject{
   type: "adults" | "kids"
 }
 
-const ExamplesSlider: FC<Proos> = ({ className,  title}) => {
+const ExamplesSlider: FC<Proos> = ({ className,  title, projectsList}) => {
   const ref = useRef<SwiperRef | null>(null);
-  const {projectsList}=projects
-  const [slides, setSlides] = useState<ISlide[]>([])
 
   const toNextSlide = () => {
     if (!ref.current) return;
     ref.current?.swiper.slideNext();
   }
 
-  useEffect(() => {
-    if (!projectsList) return
+  const slides=useMemo(() => {
+    if (!projectsList) return []
 
     const newArr: ISlide[]=[]
     const keys = Object.keys(projectsList) as Array<keyof typeof projectsList>;
@@ -44,7 +42,7 @@ const ExamplesSlider: FC<Proos> = ({ className,  title}) => {
       })
     }
 
-    setSlides(getShuffleArray(newArr))
+    return getShuffleArray(newArr)
   }, [projectsList]);
 
   if (!projectsList)return <div></div>

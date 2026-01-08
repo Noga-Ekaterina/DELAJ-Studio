@@ -4,13 +4,14 @@ import './career-form.scss';
 import { raleway } from '@/fonts';
 import classNames from 'classnames';
 import career from "@/store/text/career";
-import {IFormInput} from "@/typesData";
+import {IForm, IFormInput} from "@/typesData";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {observer} from "mobx-react-lite";
 import cn from "classnames";
 
 interface PropsForm{
   vacancy: string
+  formText?: null|IForm
 }
 
 interface IField{
@@ -110,9 +111,8 @@ const Input=({input, isError, setIsError, isShowError, field}:IInputProps)=>{
   )
 }
 
-const CareerItemForm = (props: PropsForm) => {
+const CareerItemForm = ({vacancy, formText}: PropsForm) => {
   const locale=useLocale()
-  const {formText} = career
   const [inputsObj, setInputsObj] = useState<{ [key: string]: string }>({})
   const [isErrorsObj, setIsErrorsObj] = useState<{ [key: string]: boolean, acceptTerms: boolean }>({acceptTerms: true})
   const [isShowErrors, setIsShowErrors] = useState(false)
@@ -137,7 +137,7 @@ const CareerItemForm = (props: PropsForm) => {
   const handleSubmit= async (values: { [key: string]: string | boolean, acceptTerms: boolean })=>{
     if (!formText) return
 
-    let text= `<b>${props.vacancy}</b>%0A%0A`
+    let text= `<b>${vacancy}</b>%0A%0A`
 
     formText.inputs.map(input=>{
       text+=`<b>${input.placeholder.ru}:</b> ${values[input.name]}%0A`

@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import BasicFooter from '@/components/_footers/basic-footer/BasicFooter';
 import Project from "@/components/project/Project";
-import {IData, IProject, IProjectsList} from "@/typesData";
+import {IProjectsAndLayout, IProject, IProjectsList} from "@/typesData";
 import {fetchData} from "@/utils/fetchData";
 import {title} from "@/vars";
 import {LangType} from "@/types";
@@ -18,7 +18,7 @@ interface Props {
 
 
 const init = async (type: string, id: string) => {
-  const data: IData = {}
+  const data: IProjectsAndLayout = {}
 
   const promises = [
     fetchData('Slides/title.json').then(result => data.menuSectionTitle = result),

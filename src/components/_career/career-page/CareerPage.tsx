@@ -17,13 +17,12 @@ import store from "@/store/store";
 import CloseButtons from "@/components/close-modal-button/CloseButtons";
 import Link from "next/link";
 import Outline from "@/components/outline/Outline";
-import {ICareer} from "@/typesData";
+import {ICareer, ICareerPage} from "@/typesData";
 
-interface Props {
+interface Props extends ICareerPage{
   id: number
-  careerList?: ICareer[]|null
 }
-const CareerPage = ({id, careerList}: Props) => {
+const CareerPage = ({id, careerList, formText}: Props) => {
   const {isShowContent}=store
   const locale=useLocale()
   const router=useRouter()
@@ -64,7 +63,7 @@ const CareerPage = ({id, careerList}: Props) => {
 
             <div className="career-page__body">
               <CareerSlider career={careerItem} vacancies={careerList}/>
-              <CareerItemForm vacancy={careerItem.data.title.ru}/>
+              <CareerItemForm vacancy={careerItem.data.title.ru} formText={formText}/>
             </div>
           </div>
         </div>

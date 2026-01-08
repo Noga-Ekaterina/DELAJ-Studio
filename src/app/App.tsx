@@ -7,10 +7,7 @@ import SmoothScrolling from "@/app/SmoothScrolling";
 import ModalMenu from "@/components/_modals/modal-menu/ModalMenu";
 import ModalContacts from "@/components/_modals/modal-contacts/ModalContacts";
 import store from "@/store/store";
-import general from "@/store/text/general";
 import {observer} from "mobx-react-lite";
-import projects from "@/store/text/Projects";
-import career from "@/store/text/career";
 import {useIsHome} from "@/components/_hooks/useIsHome";
 import {usePathname, useRouter} from "next/navigation";
 import {useHash} from "@/components/_hooks/useHash";
@@ -20,9 +17,6 @@ import {useLocale} from "@/components/_hooks/useLocale";
 const App = ({children}:IWithChildren) => {
   const [vh, setVh] = useState(0)
   const {togleScroll, isLandingSwiped, changePrevHash, chhangeIsShowContent}=store
-  const {setGeneral, menuSectionTitle}= general
-  const {projectsList, setProjectsList}=projects
-  const {careerList, setAllCareer}=career
   const isHome=useIsHome()
   const pathname=usePathname()
   const hash=useHash()
@@ -74,7 +68,6 @@ const App = ({children}:IWithChildren) => {
       <>
         <Header/>
         {children}
-        <ModalMenu/>
       </>
   );
 };

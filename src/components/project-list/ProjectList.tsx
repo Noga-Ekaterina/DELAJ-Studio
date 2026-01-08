@@ -1,5 +1,5 @@
 'use client'
-import { FC, ReactNode, useEffect, useState } from 'react';
+import {FC, ReactNode, useEffect, useMemo, useState} from 'react';
 import './project-list.scss';
 
 import Link from 'next/link';
@@ -8,18 +8,17 @@ import { IWithClass, ProjectItem } from '@/types';
 import cn from 'classnames';
 import { useMediaQuery } from 'react-responsive';
 import {getShuffleArray} from "@/utils/getShuffleArray";
-import projects from "@/store/text/Projects";
 import {IProject, IProjectsList} from "@/typesData";
 import {observer} from "mobx-react-lite";
 
 interface Props extends IWithClass{
   title: string
   Wallpapper?: FC
+  projects?: IProject[]
 }
 
-const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
+const ProjectList: FC<Props> = ({title, projects, className, Wallpapper }) => {
   const [data, setData] = useState<ProjectItem[]>([]);
-  const {projectsList}=projects
   const [baseChunkSize, setBaseChunkSize] = useState(3);
   const mobileScreen = useMediaQuery({maxWidth: 640});
 
@@ -58,15 +57,13 @@ const ProjectList: FC<Props> = ({ title, className, Wallpapper }) => {
     return result;
   };
 
-  const [itemsGrid, setItemsGrid] = useState<any[]>([]);
+  const itemsGrid= useMemo(() => {
+    if (!projects) return [];
 
-  useEffect(() => {
-    if (!projectsList) return;
+    const shuffleData = getShuffleArray([...projects]);
 
-    const shuffleData = getShuffleArray([...projectsList[title as keyof IProjectsList]]);
-
-    setItemsGrid(getModifiedList(shuffleData));
-  }, [projectsList, baseChunkSize]);
+    return getModifiedList(shuffleData) ;
+  }, [projects, baseChunkSize]);
 
 
   // useEffect(() => {

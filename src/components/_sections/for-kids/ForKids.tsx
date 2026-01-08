@@ -6,14 +6,15 @@ import KidsFooter from '@/components/_footers/kids-footer/KidsFooter';
 import ProjectList from '@/components/project-list/ProjectList';
 import Showreel from "@/components/showreel/Showreel";
 import {useLocale} from "@/components/_hooks/useLocale";
-import {IFooterKids, ILandingText, IMenuSectionTitle} from "@/typesData";
+import {IFooterKids, ILandingText, IMenuSectionTitle, IProject} from "@/typesData";
 import {memo} from "react";
 
 interface Proos{
   landingText: ILandingText
+  projects?: IProject[]
 }
 
-const ForKids = ({landingText}:Proos) => {
+const ForKids = ({landingText, projects}:Proos) => {
   const locale= useLocale()
 
   return (
@@ -27,7 +28,7 @@ const ForKids = ({landingText}:Proos) => {
         className='for-kids__heading'
       />
       <div className="for-kids__projects-wrap">
-      <ProjectList className="for-kids__projects" title='kids' />
+      <ProjectList className="for-kids__projects" title='kids' projects={projects}/>
       </div>
 
       <KidsFooter />

@@ -10,11 +10,14 @@ import Showreel from '@/components/showreel/Showreel';
 import LandingSwitchButton from '@/components/landing-switch-button/LandingSwitchButton';
 import ForKids from "@/components/_sections/for-kids/ForKids";
 import ForAdult from "@/components/_sections/for-adult/ForAdult";
-import {IFooters, ILadings, IMenuSectionTitle} from "@/typesData";
+import {IFooters, ILadingsText, IMenuSectionTitle, IProjectsList} from "@/typesData";
+import {IProject} from "@/types";
 
 interface Props {
   direction: "right"|"left"
-  landings?: ILadings|null
+  landings?: ILadingsText|null
+  projectsList?: null|IProjectsList
+
 }
 
 const styles = {
@@ -25,7 +28,7 @@ const styles = {
   exited:  {translate: '-100vw'},
 }
 
-const Landings: FC<Props> = ({ direction, landings}) => {
+const Landings: FC<Props> = ({ direction, landings, projectsList}) => {
   const { isLandingSwiped, swipeLanding } = store; 
   const isSectionSwiped=direction=="left"? isLandingSwiped:!isLandingSwiped
 
@@ -45,10 +48,10 @@ const Landings: FC<Props> = ({ direction, landings}) => {
             }}    
           >
             <div className={classNames("landings-page", isSectionSwiped ? 'hidden' : '')}>
-              <ForKids landingText={landings.kids}/>
+              <ForKids landingText={landings.kids} projects={projectsList?.kids}/>
             </div>
             <div className={classNames("landings-page", !isSectionSwiped ? 'hidden' : '')}>
-              <ForAdult landingText={landings.adult}/>
+              <ForAdult landingText={landings.adult} projects={projectsList?.adults}/>
             </div>
           </div>
         </div>

@@ -40,6 +40,7 @@ export async function generateMetadata(
 
 const init = async () => {
   const data: IData = {}
+  console.log("home")
 
   const promises = [
     fetchData('Slides/Animations/text.json').then(result => data.landingsText = result),
@@ -50,7 +51,6 @@ const init = async () => {
     fetchData('Slides/title.json').then(result => data.menuSectionTitle = result),
     fetchData('Footers.json').then(result => data.footers = result),
     fetchData('Slides/Vacancy/data.json').then(result => data.careerList = result),
-    fetchData('Slides/Vacancy/form.json').then(result => data.formText = result),
     fetchData('Projects/data.json').then(result => data.projectsList = result)
   ]
 
@@ -64,41 +64,41 @@ const Page = async () => {
   const data=await init()
   return (
     <InitData data={data}>
-    <Scroller>
-      <Section id="empty-place"/>
-      <Section id="first-landing">
-        <Landings direction="left" landings={data.landingsText}/>
-      </Section>
+      <Scroller>
+        <Section id="empty-place"/>
+        <Section id="first-landing">
+          <Landings direction="left" landings={data.landingsText} projectsList={data.projectsList}/>
+        </Section>
 
-      <Section id="second-landing">
-        <Landings direction="right" landings={data.landingsText}/>
-      </Section>
+        <Section id="second-landing">
+          <Landings direction="right" landings={data.landingsText} projectsList={data.projectsList}/>
+        </Section>
 
-      <Section id="menu">
-        <Menu />
-      </Section>
+        <Section id="menu">
+          <Menu />
+        </Section>
 
-      <Section id="about">
-        <About aboutText={data.aboutText} menuSectionTitle={data.menuSectionTitle}/>
-      </Section>
+        <Section id="about">
+          <About aboutText={data.aboutText} menuSectionTitle={data.menuSectionTitle}/>
+        </Section>
 
-      <Section id="career">
-        <Career menuSectionTitle={data.menuSectionTitle} careerList={data.careerList}/>
-      </Section>
+        <Section id="career">
+          <Career menuSectionTitle={data.menuSectionTitle} careerList={data.careerList}/>
+        </Section>
 
-      <Section id="contacts">
-        <Contacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
-      </Section>
+        <Section id="contacts">
+          <Contacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
+        </Section>
 
-      <Section id="faq">
-        <Faq menuSectionTitle={data.menuSectionTitle} faqText={data.faqText}/>
-      </Section>
+        <Section id="faq">
+          <Faq menuSectionTitle={data.menuSectionTitle} faqText={data.faqText}/>
+        </Section>
 
-      <Section id="ideas">
-        <Ideas menuSectionTitle={data.menuSectionTitle} ideasText={data.ideasText}/>
-      </Section>
+        <Section id="ideas">
+          <Ideas menuSectionTitle={data.menuSectionTitle} ideasText={data.ideasText} projectsList={data.projectsList}/>
+        </Section>
 
-    </Scroller>
+      </Scroller>
       <MainScreen />
       <LandingSwitchButtonsGrup/>
       <ModalContacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
