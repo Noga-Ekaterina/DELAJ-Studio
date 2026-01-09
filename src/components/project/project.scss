@@ -1,6 +1,10 @@
 @import "@/app/mixins";
 .project {
   padding-top: 56rem;
+  min-height: calc(100 * var(--vh));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @include sm{
     padding-top: 60px;

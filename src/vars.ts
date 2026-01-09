@@ -4,3 +4,4 @@ export const title={
   ru:"ДЕЛАЙ - анимационная студия",
   en:"DELAI - animation studio"
 }
+export const locales=['ru', "en"] as const

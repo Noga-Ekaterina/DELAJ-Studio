@@ -16,17 +16,23 @@ import {fetchData} from "@/utils/fetchData";
 import {IData} from "@/typesData";
 import InitData from "@/app/InitData";
 import {Metadata, ResolvingMetadata} from "next";
-import {title} from "@/vars";
+import {locales, title} from "@/vars";
 import {LangType} from "@/types";
 import ModalContacts from "@/components/_modals/modal-contacts/ModalContacts";
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: {locale: LangType }
-  searchParams: { [key: string]: string | string[] | undefined }
+}
+export const revalidate = 120;
+
+// Генерация статических параметров для главной
+export async function generateStaticParams() {
+  return locales.map(locale => ({ locale }));
 }
 
 export async function generateMetadata(
-    { params, searchParams }: Props,
+    { params}: Props,
     parent: ResolvingMetadata
 ): Promise<Metadata> {
   const locale = params.locale
@@ -60,8 +66,13 @@ const init = async () => {
 }
 
 
-const Page = async () => {
+const Page = async ({ params}: Props) => {
   const data=await init()
+
+  if (!locales.includes(params.locale as any)) {
+    notFound();
+  }
+
   return (
     <InitData data={data}>
       <Scroller>

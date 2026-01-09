@@ -3,16 +3,51 @@ import BasicFooter from '@/components/_footers/basic-footer/BasicFooter';
 import Project from "@/components/project/Project";
 import {IProjectsAndLayout, IProject, IProjectsList} from "@/typesData";
 import {fetchData} from "@/utils/fetchData";
-import {title} from "@/vars";
+import {locales, title} from "@/vars";
 import {LangType} from "@/types";
 import {Metadata, ResolvingMetadata} from "next";
 import InitData from "@/app/InitData";
+import {notFound} from "next/navigation";
 
 interface Props {
   params: {
     id: string,
     locale: LangType
-    type: string
+    type: keyof IProjectsList
+  }
+}
+export const revalidate = 120;
+
+
+const projectTypes = ['kids', 'adults'] as const;
+
+// Генерация статических путей
+export async function generateStaticParams() {
+  try {
+    // Получаем популярные проекты для каждого типа
+    const projectsList: null|IProjectsList = await fetchData('Projects/data.json');
+    const allParams = [];
+
+    if (!projectsList) return []
+
+    for (const type of projectTypes) {
+      const projects = projectsList[type]
+
+      for (const locale of locales) {
+        for (const project of projects) {
+          allParams.push({
+            locale,
+            type,
+            id: project.id.toString(),
+          });
+        }
+      }
+    }
+
+    return allParams;
+  } catch (error) {
+    console.error('Failed to generate static params for projects:', error);
+    return [];
   }
 }
 
@@ -54,6 +89,8 @@ export async function generateMetadata(
 const Page: FC<Props> =async ({ params }:Props) => {
   const { id, type, locale } = params;
   const {data, project}=await init(type, id)
+
+  if (!project || !locales.includes(params.locale as any)) notFound()
 
   return (
       <InitData data={data}>

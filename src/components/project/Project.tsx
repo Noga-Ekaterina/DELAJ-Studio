@@ -3,13 +3,11 @@ import React, {useEffect, useState} from 'react';
 import "./project.scss"
 import classNames from "classnames";
 import {circe, halvar} from "@/fonts";
-import projects from "@/store/text/Projects";
 import {observer} from "mobx-react-lite";
 import ProjectVideo from "@/components/project-video/ProjectVideo";
 import {IProject, IProjectsList} from "@/typesData";
 import {useLocale} from "@/components/_hooks/useLocale";
 import store from "@/store/store";
-import {title} from "@/vars";
 
 interface Props {
   id: string,
