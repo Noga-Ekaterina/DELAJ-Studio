@@ -54,7 +54,8 @@ const MainScreen: FC<Props> = ({loader}) => {
   const containrRef=useRef(null)
   const [isShowLang, setIsShowLang] = useState(false)
   const isLoad=loader??false
-
+  const [isClient, setIsClient] = useState(false)
+  const [isFirst, setIsFirst] = useState(true)
 
   const disabled = () => {
     if (containrRef.current!=null){
@@ -67,8 +68,10 @@ const MainScreen: FC<Props> = ({loader}) => {
     }
   }
   const handleEvent = () => {
-    if (!isLoad && !isAnimationPlay)
+    if (!isLoad && !isAnimationPlay) {
       changeMenuOpened(true);
+      setIsFirst(false)
+    }
   }
 
   useEffect(() => {
@@ -83,6 +86,7 @@ const MainScreen: FC<Props> = ({loader}) => {
     } else if (hash !== 'main-screen' && hash!=""){
       changeShowMainScreen(false)
       setIsShowLang(false)
+      setIsFirst(false)
 
       if (hash!="first-landing")
         changeCurrentPage(null)
@@ -101,12 +105,12 @@ const MainScreen: FC<Props> = ({loader}) => {
   useEffect(() => {
     if (!isLoad && !isAnimationPlay)
       changeShowMainPage(true)
-  }, [isLoad, isAnimationPlay]);
+  }, [isAnimationPlay]);
 
   useEffect(() => {
     if (!isLoad && !isMenuLandingsOpened)
       setShowArrow(true)
-  }, [isLoad, isMenuLandingsOpened]);
+  }, [isMenuLandingsOpened]);
 
   useEffect(() => {
     if (isWasHover && !isHover) {
@@ -124,8 +128,14 @@ const MainScreen: FC<Props> = ({loader}) => {
     }
   }, [isShowLang]);
 
+  useEffect(() => {
+    setIsClient(true)
+  }, []);
+
+  if (!isClient) return <div/>
+
   return (
-      <Curtain show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 4:3} className="main-screen">
+      <Curtain show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 5:3} className="main-screen">
         {
           isShowContent&&
             <>
@@ -169,7 +179,7 @@ const MainScreen: FC<Props> = ({loader}) => {
                   </button>
 
                  {
-                     (!isLoad && (hash == '' || hash == "main-screen")) &&
+                     (!isFirst || (!isLoad && (hash == '' || hash == "main-screen"))) &&
                      <LanguageToggle
                          className={cn('main-screen__language', halvar.className)}
                          elements={[

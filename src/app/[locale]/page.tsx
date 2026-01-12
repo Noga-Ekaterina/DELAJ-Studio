@@ -74,46 +74,48 @@ const Page = async ({ params}: Props) => {
   }
 
   return (
-    <InitData data={data}>
-      <Scroller>
-        <Section id="empty-place"/>
-        <Section id="first-landing">
-          <Landings direction="left" landings={data.landingsText} projectsList={data.projectsList}/>
-        </Section>
+      <>
+        <InitData data={data}/>
 
-        <Section id="second-landing">
-          <Landings direction="right" landings={data.landingsText} projectsList={data.projectsList}/>
-        </Section>
+        <Scroller>
+          <Section id="empty-place"/>
+          <Section id="first-landing">
+            <Landings direction="left" landings={data.landingsText} projectsList={data.projectsList}/>
+          </Section>
 
-        <Section id="menu">
-          <Menu />
-        </Section>
+          <Section id="second-landing">
+            <Landings direction="right" landings={data.landingsText} projectsList={data.projectsList}/>
+          </Section>
 
-        <Section id="about">
-          <About aboutText={data.aboutText} menuSectionTitle={data.menuSectionTitle}/>
-        </Section>
+          <Section id="menu">
+            <Menu />
+          </Section>
 
-        <Section id="career">
-          <Career menuSectionTitle={data.menuSectionTitle} careerList={data.careerList}/>
-        </Section>
+          <Section id="about">
+            <About aboutText={data.aboutText} menuSectionTitle={data.menuSectionTitle}/>
+          </Section>
 
-        <Section id="contacts">
-          <Contacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
-        </Section>
+          <Section id="career">
+            <Career menuSectionTitle={data.menuSectionTitle} careerList={data.careerList}/>
+          </Section>
 
-        <Section id="faq">
-          <Faq menuSectionTitle={data.menuSectionTitle} faqText={data.faqText}/>
-        </Section>
+          <Section id="contacts">
+            <Contacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
+          </Section>
 
-        <Section id="ideas">
-          <Ideas menuSectionTitle={data.menuSectionTitle} ideasText={data.ideasText} projectsList={data.projectsList}/>
-        </Section>
+          <Section id="faq">
+            <Faq menuSectionTitle={data.menuSectionTitle} faqText={data.faqText}/>
+          </Section>
 
-      </Scroller>
-      <MainScreen />
-      <LandingSwitchButtonsGrup/>
-      <ModalContacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
-    </InitData>
+          <Section id="ideas">
+            <Ideas menuSectionTitle={data.menuSectionTitle} ideasText={data.ideasText} projectsList={data.projectsList}/>
+          </Section>
+
+        </Scroller>
+        <MainScreen />
+        <ModalContacts menuSectionTitle={data.menuSectionTitle} contactsText={data.contactsText}/>
+        <LandingSwitchButtonsGrup/>
+      </>
   )
 }
 

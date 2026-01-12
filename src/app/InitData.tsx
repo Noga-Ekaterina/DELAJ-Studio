@@ -4,6 +4,7 @@ import {IData} from "@/typesData";
 import {IWithChildren} from "@/types";
 import career from "@/store/text/career";
 import general from "@/store/text/general";
+import {observer} from "mobx-react-lite";
 
 interface Props extends IWithChildren{
   data: IData
@@ -24,4 +25,4 @@ const InitData = ({children, data}:Props) => {
   );
 };
 
-export default InitData;
+export default observer(InitData);

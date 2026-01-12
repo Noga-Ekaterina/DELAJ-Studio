@@ -16,7 +16,7 @@ import {useLocale} from "@/components/_hooks/useLocale";
 
 const App = ({children}:IWithChildren) => {
   const [vh, setVh] = useState(0)
-  const {togleScroll, isLandingSwiped, changePrevHash, chhangeIsShowContent}=store
+  const {togleScroll, isLandingSwiped, changePrevHash, changeIsShowContent}=store
   const isHome=useIsHome()
   const pathname=usePathname()
   const hash=useHash()
@@ -51,7 +51,7 @@ const App = ({children}:IWithChildren) => {
       })
     }
 
-    chhangeIsShowContent()
+    setTimeout(()=> changeIsShowContent(), 300)
   }, []);
 
   useEffect(() => {

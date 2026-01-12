@@ -10,6 +10,8 @@ export const useViewport = () => {
         setViewport(window.innerWidth / window.innerHeight);
       }
 
+      changeViewport()
+
       window.addEventListener('resize', changeViewport);
       return () => {
         window.removeEventListener('resize', changeViewport);

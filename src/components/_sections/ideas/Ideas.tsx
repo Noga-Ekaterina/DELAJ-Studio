@@ -47,7 +47,7 @@ const Ideas = ({menuSectionTitle, ideasText, projectsList}:Props) => {
             </ol>
           </div>
 
-          <ExamplesSlider title={ideasText.projectsTitle[locale]} className='ideas-slider'/>
+          <ExamplesSlider title={ideasText.projectsTitle[locale]} className='ideas-slider' projectsList={projectsList}/>
         </div>
       </div>
       <Outline/>

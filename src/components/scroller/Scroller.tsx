@@ -1,5 +1,5 @@
 'use client'
-import React, {createContext, FC, memo, useEffect, useRef, useState} from 'react';
+import React, {createContext, FC, memo, useCallback, useEffect, useRef, useState} from 'react';
 import './scroller.scss';
 import { IWithChildren } from '@/types';
 import { useHash } from '@/components/_hooks/useHash';
@@ -12,93 +12,78 @@ import {usePathname, useRouter} from "next/navigation";
 import {useChangeHash} from "@/components/_hooks/useChangeHash";
 
 const Scroller: FC<IWithChildren> = (props) => {
-  const pathname=usePathname()
+  const pathname = usePathname();
   const hash = useHash();
   const viewport = useViewport();
+  const isLoad = useLoad();
+  const changeHash = useChangeHash();
+
   const {
     changeMenuOpened,
     changeCurrentPage,
-    isModalMenuOpened,
-    currentPage,
-    showMainPage,
-    isScrollOn
-  }= store
-  const scrollerContainerRef =useRef<HTMLDivElement | null>(null)
-  const scrollerRef =useRef<HTMLDivElement | null>(null)
-  let scrollDirection: "top"|"bottom"
-  const [isAnimationPlay, setIsAnimationPlay] = useState(false)
-  let scrollUpTimeout: NodeJS.Timeout | number
-  let scrollTimeout: NodeJS.Timeout | number
-  let scrollEndTimeout: NodeJS.Timeout | number
-  let isEndTimeout: NodeJS.Timeout | number
-  let isScrolling=false
-  let isHiddenSection= false
-  const isLoad=useLoad()
-  const changeHash=useChangeHash()
+    showMainPage
+  } = store;
 
-  useEffect(() => {
-    if (currentPage&&(hash=="main-screen" || hash=="")){
-      window.scrollTo(0, 0)
-    }
-  }, [hash, currentPage]);
+  // Refs для DOM элементов и значений
+  const scrollerContainerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const timersRef = useRef<{
+    scroll: NodeJS.Timeout | null;
+    scrollEnd: NodeJS.Timeout | null;
+    scrollUp: NodeJS.Timeout | null;
+  }>({
+    scroll: null,
+    scrollEnd: null,
+    scrollUp: null
+  });
 
-  let isAtBottom =false;
-  let isAtTop=true
-  let touchStartY: number|undefined = 0;
+  const stateRef = useRef({
+    isStart: true,
+    isScrolling: false,
+    isAtBottom: false,
+    isAtTop: false,
+    scrollDirection: "top" as "top" | "bottom",
+    touchStartY: undefined as undefined | number
+  });
 
-  function debounce<T extends any[]>(func: (...args: T) => void, delay: number) {
-    let timeoutId: NodeJS.Timeout | undefined;
-
-    return function (...args: T) {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  }
-
-
-
-  const checkIfAtEnd = () => {
-    if (scrollerContainerRef.current){
+  const checkIfAtEnd = useCallback(() => {
+    if (scrollerContainerRef.current && !stateRef.current.isStart){
 
       if (window.scrollY>=(scrollerContainerRef.current as HTMLDivElement).clientHeight-window.innerHeight-4){
-        isAtBottom= true
-        isAtTop=false
-        isScrolling= false
+        stateRef.current.isAtBottom= true
+        stateRef.current.isAtTop=false
+        stateRef.current.isScrolling= false
         // performScrollAction(0)
       }else {
-        isAtBottom=false
+        stateRef.current.isAtBottom=false
       }
 
       if (window.scrollY==0){
-        isAtTop= true;
-        isAtBottom=false
-        isScrolling= false
+        stateRef.current.isAtTop= true;
+        stateRef.current.isAtBottom=false
+        stateRef.current.isScrolling= false
         // performScrollAction(0)
       }else {
-        isAtTop=false
+        stateRef.current.isAtTop=false
       }
     }
-  };
+  }, [])
 
 
-  const performScrollAction = () => {
+  const performScrollAction = useCallback(() => {
     // Если пользователь начал прокрутку или касание, сбросим таймер
-    clearTimeout((scrollTimeout as number));
+    if (timersRef.current.scroll)
+      clearTimeout(timersRef.current.scroll);
 
     const hash=window.location.hash.slice(1)
-      if (!isScrolling &&hash!="" && hash!="main-screen" && scrollerContainerRef.current) {
+      if (!stateRef.current.isScrolling &&hash!="" && hash!="main-screen" && scrollerContainerRef.current) {
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as HTMLDivElement).dataset.name==hash)
-        isHiddenSection=false
         if (activeItem){
           const nextSection = (activeItem as HTMLDivElement).nextElementSibling;
           const prevSection = (activeItem as HTMLDivElement).previousElementSibling;
           const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
 
-          if (scrollDirection=="bottom" && bottom<200){
+          if (stateRef.current.scrollDirection=="bottom" && bottom<200){
             if (nextSection) {
               (nextSection as HTMLDivElement).style.display="block"
               changeHash((nextSection as HTMLDivElement).dataset.name || '')
@@ -108,65 +93,45 @@ const Scroller: FC<IWithChildren> = (props) => {
               changeCurrentPage(null)
               changeMenuOpened(false)
             }
-          }else if (scrollDirection=="top" && top>200){
-            if (prevSection) {
-              // (prevSection as HTMLDivElement).style   .cssText = `
-              // display: block;
-              // position: absolute;`;
-              // const prevSectionHeight=(prevSection as HTMLDivElement).clientHeight;
-              // (prevSection as HTMLDivElement).style.top= -prevSectionHeight+"px";
-              //
-              // setTimeout(()=>{
-              //   (prevSection as HTMLDivElement).style.top='0';
-              //
-              //   if ((prevSection as HTMLDivElement).dataset.name!="empty-place")
-              //     (activeItem as HTMLDivElement).style.transform = 'translateY(calc(100* var(--vh)))';
-              // }, 50)
-              //
-              // setTimeout(()=>{
-              //   (activeItem as HTMLDivElement).style.cssText=`
-              //     display: none;
-              //     transform: transplateY(0)
-              //   `;
-              //   (prevSection as HTMLDivElement).style.position="static";
-              //
-              //   clearTimeout((scrollTimeout as number));
-              //   setIsAnimationPlay(false)
-              // }, 550)
-            }
+          }else if (stateRef.current.scrollDirection=="top" && top>200){
             changeHash((prevSection as HTMLDivElement).dataset.name != "empty-place" ? (prevSection as HTMLDivElement).dataset.name || '' : "main-screen")
           }
         }
-        clearTimeout((scrollTimeout as number));
+
+        if (timersRef.current.scroll)
+          clearTimeout(timersRef.current.scroll);
       }
       // isHiddenSection=false
-      // isScrolling = false;  // Сбросим флаг
-      touchStartY=undefined
+      // stateRef.current.isScrolling = false;  // Сбросим флаг
+      stateRef.current.touchStartY=undefined
       // setIsAnimationPlay(true)
     // }, (timeout as number));
-  };
+  }, []);
 
 
-  const handleEnd = () => {
+  const handleEnd =useCallback(() => {
     // Если пользователь начал прокрутку или касание, сбросим таймер
-    clearTimeout((scrollTimeout as number));
+    if (timersRef.current.scroll)
+      clearTimeout(timersRef.current.scroll);
 
-    // isScrolling=true
+    // stateRef.current.isScrolling=true
     const hash=window.location.hash.slice(1)
     const overflow=getComputedStyle(document.documentElement).overflow
-    scrollTimeout = setTimeout(() => {
+    timersRef.current.scroll = setTimeout(() => {
       if (overflow!="hidden"  && hash != "" && hash != "main-screen" && scrollerContainerRef.current) {
-        if (isAtBottom) {
-          window.location.hash = ""
-          isAtBottom=false
+        if (stateRef.current.isAtBottom) {
+          changeHash("")
+          stateRef.current.isAtBottom=false
+
+          setTimeout(()=> window.scrollTo(0,0), 700)
         }
-        if (isAtTop)
-          window.location.hash="main-screen"
+        if (stateRef.current.isAtTop)
+          changeHash("main-screen")
       }
     }, 15)
-  }
+  }, [])
 
-  const eventDisabled = (event: Event) => {
+  const eventDisabled = useCallback((event: Event) => {
     if (scrollerContainerRef.current){
       const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
       if (activeItem) {
@@ -174,14 +139,13 @@ const Scroller: FC<IWithChildren> = (props) => {
 
         if (top>1 || bottom< window.innerHeight){
           event.preventDefault()
-          console.log("preventD")
         }
       }
     }
-  }
+  }, [])
 
-  function smoothScroll(distance: number, duration:number) {
-    isScrolling = true;
+  const smoothScroll= useCallback((distance: number, duration:number) =>{
+    stateRef.current.isScrolling = true;
 
     const startScrollPosition = window.scrollY;
     const startTime = performance.now();
@@ -199,19 +163,19 @@ const Scroller: FC<IWithChildren> = (props) => {
       if (progress < 1) {
         requestAnimationFrame(animation);
       } else {
-        isScrolling = false; // Завершение анимации
+        stateRef.current.isScrolling = false; // Завершение анимации
       }
     }
 
     requestAnimationFrame(animation);
-  }
-
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
       checkIfAtEnd();
 
-      clearTimeout((scrollTimeout as number))
+      if(timersRef.current.scroll)
+      clearTimeout(timersRef.current.scroll)
 
       if (scrollerContainerRef.current){
         const activeItem= Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item=> (item as          HTMLDivElement).dataset.name==window.location.hash.slice(1))
@@ -219,23 +183,40 @@ const Scroller: FC<IWithChildren> = (props) => {
           const {bottom, top}=(activeItem as HTMLDivElement).getBoundingClientRect();
 
           if (top>=0 && top<=8) {
-            setIsAnimationPlay(false)
+            // setIsAnimationPlay(false)
           }
         }
       }
       performScrollAction()
     };
 
+    const handleWheel=(event: WheelEvent) => {
+      if (timersRef.current.scrollEnd)
+        clearTimeout(timersRef.current.scrollEnd)
+
+      stateRef.current.scrollDirection=event.deltaY>0? "bottom":"top"
+      if ((stateRef.current.isAtBottom && event.deltaY > 0) || (stateRef.current.isAtTop && event.deltaY < 0)) {
+        handleEnd()
+      }
+
+      eventDisabled(event)
+    }
+
+    const handleKeydown=(event: KeyboardEvent) => {
+      if ((stateRef.current.isAtBottom && (event.key === 'ArrowDown' || event.key === 'PageDown')) || (stateRef.current.isAtTop && (event.key === 'ArrowUp' || event.key === 'PageUp'))) {
+        handleEnd()
+      }
+    }
 
     const handleTouchStart = (event: TouchEvent) => {
-      touchStartY = event.touches[0].clientY;
+      stateRef.current.touchStartY = event.touches[0].clientY;
     };
 
     const handleTouchMove = (event: TouchEvent) => {
       let touchMoveY = event.touches[0].clientY;
-      if (touchStartY!=undefined){
-        scrollDirection=touchMoveY<touchStartY? "bottom":"top"
-        if ((isAtBottom && touchMoveY < touchStartY) || (isAtTop && touchMoveY > touchStartY)) {
+      if (stateRef.current.touchStartY!=undefined){
+        stateRef.current.scrollDirection=touchMoveY<stateRef.current.touchStartY? "bottom":"top"
+        if ((stateRef.current.isAtBottom && touchMoveY < stateRef.current.touchStartY) || (stateRef.current.isAtTop && touchMoveY > stateRef.current.touchStartY)) {
           handleEnd()
         }
       }
@@ -244,100 +225,77 @@ const Scroller: FC<IWithChildren> = (props) => {
 
     window.addEventListener('scroll', handleScroll);
 
-    window.addEventListener('wheel', (event) => {
-      clearTimeout((scrollEndTimeout as number))
-      scrollDirection=event.deltaY>0? "bottom":"top"
-      if ((isAtBottom && event.deltaY > 0) || (isAtTop && event.deltaY < 0)) {
-        handleEnd()
-        // console.log("end")
-      }
-
-      eventDisabled(event)
-    }, {passive: false});
-    window.addEventListener('keydown', (event) => {
-      if ((isAtBottom && (event.key === 'ArrowDown' || event.key === 'PageDown')) || (isAtTop && (event.key === 'ArrowUp' || event.key === 'PageUp'))) {
-        handleEnd()
-      }
-    });
+    window.addEventListener('wheel', handleWheel, {passive: false});
+    window.addEventListener('keydown', handleKeydown);
     window.addEventListener('touchstart', handleTouchStart, false);
     window.addEventListener('touchmove', handleTouchMove, false);
-    window.addEventListener('touchend', e=> isScrolling=false)
-    // window.addEventListener("hashchange", handleHash)
+    window.addEventListener('touchend', e=> stateRef.current.isScrolling=false)
 
     // Очистка эффектов при размонтировании
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('wheel', performScrollAction);
-      window.removeEventListener('keydown', performScrollAction);
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeydown);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
 
-  // Проверка начального состояния при загрузке компонента
+  // вешаем onclick на ссылки якоря
   useEffect(() => {
-    checkIfAtEnd();
-    // scrolling()
-  }, []);
+    const handleAnchorClick = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement;
 
-  useEffect(() => {
+      if (!anchor) return;
 
-    document.querySelectorAll("a[href^='#']").forEach(item=>{
-      item.addEventListener("click", evt => {
-        evt.preventDefault()
-        const href=item.getAttribute("href")
+      event.preventDefault();
+      const href = anchor.getAttribute('href');
 
-        if (href){
+      if (!href) return;
 
-          isScrolling=true
+      stateRef.current.isScrolling = true;
+      const targetElement = document.querySelector(`[data-name='${href.slice(1)}']`) as HTMLElement;
 
-          const activeItem= document.querySelector(`[data-name='${href.slice(1)}']`)
-          if (activeItem) {
-            const {top} = (activeItem as HTMLDivElement).getBoundingClientRect();
+      if (targetElement) {
+        const { top } = targetElement.getBoundingClientRect();
+        smoothScroll(top, 400)
 
+        setTimeout(()=> {
+          changeHash(href.slice(1))
+          stateRef.current.isScrolling=false
+        }, 400)
+      }
+    };
 
-            smoothScroll(top, 400)
-            // (activeItem as HTMLDivElement).scrollIntoView({behavior: "smooth"})
-          }
-          setTimeout(()=> {
-            changeHash(href.slice(1))
-            isScrolling=false
-          }, 400)
-        }
-      })
-    })
+    document.addEventListener('click', handleAnchorClick);
 
-  }, [isLoad, pathname, hash]);
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+    };
+  }, []); // Эффект выполняется только один раз при монтировании
 
+  // прокручиваем к разделу при открытии стр
   useEffect(() =>{
-    if (scrollerContainerRef.current) {
+    if (scrollerContainerRef.current && isLoad && stateRef.current.isStart) {
+
       const activeItem = Array.from((scrollerContainerRef.current as HTMLDivElement).children).find(item => (item as HTMLDivElement).dataset.name == window.location.hash.slice(1))
       if (activeItem) {
+        window.scrollTo(0,0)
         const {bottom, top} = (activeItem as HTMLDivElement).getBoundingClientRect();
 
         smoothScroll(top, 0)
-        // changePageTransition('normal')
+
+        setTimeout(()=> {
+          stateRef.current.isStart = false
+          checkIfAtEnd()
+        }, 100)
+      }else {
+        stateRef.current.isStart=false
+        checkIfAtEnd()
       }
     }
-  }, [pathname, isLoad, showMainPage]);
-
-  useEffect(() => {
-    let touchStartY = 0;
-
-    // wi-
-    document.addEventListener('touchstart', function(event) {
-      touchStartY = event.touches[0].clientY;
-    }, { passive: false });
-
-    document.addEventListener('touchend', function(event) {
-      let touchEndY = event.changedTouches[0].clientY;
-      if (touchEndY > touchStartY) {
-        event.preventDefault();
-      }
-    }, { passive: false });
-
-
-  }, []);
+  }, [pathname, isLoad]);
 
   return (
 
@@ -345,12 +303,12 @@ const Scroller: FC<IWithChildren> = (props) => {
          // onScroll={e=>onScroll(e)}
          ref={scrollerRef}
     >
-      <div 
+      <div
         className="scroller-content"
         ref={scrollerContainerRef}
       >
-      
-        {props.children}  
+
+        {props.children}
       </div>
     </div>
   );

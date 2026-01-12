@@ -10,13 +10,29 @@ interface Props extends IWithClass {
 }
 
 const Showreel: FC<Props> = observer((props) => {
-  const { showMainScreen } = store;
+  const { showMainScreen, isModalMenuOpened, isModalContactsOpened } = store;
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const playAttemptRef = useRef<number>(0);
   const isPlayingRef = useRef<boolean>(false);
+  const [isOpenCurtain, setIsOpenCurtain] = useState(false)
+  const timeout=useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    if (timeout.current){
+      clearTimeout(timeout.current)
+      timeout.current=null
+
+    }
+    const hash=window.location.hash.slice(1)
+    if((showMainScreen && (hash=="" || hash=="main-screen")) || isModalContactsOpened || isModalMenuOpened ){
+      timeout.current= setTimeout(()=> setIsOpenCurtain(true), 600)
+    }else {
+      setIsOpenCurtain(false)
+    }
+  }, [showMainScreen, isModalContactsOpened, isModalMenuOpened ]);
 
   // Intersection Observer для отслеживания видимости
   useEffect(() => {
@@ -28,7 +44,7 @@ const Showreel: FC<Props> = observer((props) => {
             if (entry.isIntersecting) {
               // Видео вошло в область видимости
               setIsVisible(true);
-              if (!showMainScreen) {
+              if (!isOpenCurtain) {
                 safePlay();
               }
             } else {
@@ -47,7 +63,7 @@ const Showreel: FC<Props> = observer((props) => {
 
     observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, [showMainScreen]);
+  }, [isOpenCurtain]);
 
   // Функция безопасного воспроизведения
   const safePlay = useCallback(async () => {
@@ -113,22 +129,22 @@ const Showreel: FC<Props> = observer((props) => {
 
   // Сброс видео при скрытии
   useEffect(() => {
-    if (showMainScreen && videoRef.current) {
+    if (isOpenCurtain && videoRef.current) {
       safePause();
       videoRef.current.currentTime = 0;
     }
-  }, [showMainScreen, safePause]);
+  }, [isOpenCurtain, safePause]);
 
-  // Управление воспроизведением при изменении showMainScreen
+  // Управление воспроизведением при изменении isOpenCurtain
   useEffect(() => {
     if (!videoRef.current) return;
 
-    if (!showMainScreen && isVisible) {
+    if (!isOpenCurtain && isVisible) {
       safePlay();
     } else {
       safePause();
     }
-  }, [showMainScreen, isVisible, safePlay, safePause]);
+  }, [isOpenCurtain, isVisible, safePlay, safePause]);
 
   // Обработчики событий видео
   useEffect(() => {
@@ -136,13 +152,13 @@ const Showreel: FC<Props> = observer((props) => {
     if (!video) return;
 
     const handleLoadedData = () => {
-      if (!showMainScreen && isVisible) {
+      if (!isOpenCurtain && isVisible) {
         safePlay();
       }
     };
 
     const handleEnded = () => {
-      if (isVisible && !showMainScreen) {
+      if (isVisible && !isOpenCurtain) {
         video.currentTime = 0;
         safePlay();
       }
@@ -167,7 +183,7 @@ const Showreel: FC<Props> = observer((props) => {
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('play', handlePlay);
     };
-  }, [safePlay, showMainScreen, isVisible]);
+  }, [safePlay, isOpenCurtain, isVisible]);
 
   return (
       <div
@@ -188,7 +204,7 @@ const Showreel: FC<Props> = observer((props) => {
             autoPlay={false} // Убираем нативный autoplay
             loop
             playsInline
-            style={{ display: showMainScreen ? "none" : "block" }}
+            style={{ display: isOpenCurtain ? "none" : "block" }}
         >
           <source
               media="(max-width: 640px)"

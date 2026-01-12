@@ -33,7 +33,6 @@ const Curtain: FC<CurtainProps> = ({children, show, zIndex, className}) => {
   const hash = useHash();
   const [hidden, setHidden] = useState(false)
 
-
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>
     if (show){
@@ -59,7 +58,7 @@ const Curtain: FC<CurtainProps> = ({children, show, zIndex, className}) => {
                   style={{
                     ...transitionStyles,
                     ...curtainStyles[state],
-                    zIndex: hidden ? -1 : zIndex? zIndex: 5
+                    zIndex: hidden ? -1 : zIndex || 5
                   }}
               >
                 {children}

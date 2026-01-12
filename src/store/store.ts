@@ -42,8 +42,8 @@ class Store {
   //Открыто ли модальное окно контактов
   isModalContactsOpened = false
 
-  chhangeIsShowContent=()=>{
-    setTimeout(()=> this.isShowContent=true, 300)
+  changeIsShowContent=()=>{
+    this.isShowContent = true;
   }
 
   changeShowMainScreen= (value: boolean)=>{

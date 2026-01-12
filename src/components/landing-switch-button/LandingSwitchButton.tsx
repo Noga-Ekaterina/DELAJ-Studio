@@ -1,6 +1,6 @@
 'use client';
 import {IWithClass } from '@/types';
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, memo, useEffect, useRef, useState} from 'react';
 import kidsIn from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_IN.json"
 import kidsFull from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_FULL.json"
 import kidsOut from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_OUT.json"
@@ -121,4 +121,4 @@ const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) 
   );
 };
 
-export default LandingSwitchButton;
+export default memo(LandingSwitchButton);
