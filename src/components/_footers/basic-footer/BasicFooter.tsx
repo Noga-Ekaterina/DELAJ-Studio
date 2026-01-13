@@ -19,7 +19,6 @@ const BasicFooter = () => {
   const locale=useLocale()
   const {footers}=general
 
-  console.log(footers)
 
   return (
     <footer className={classNames('footer basic-footer', circe.className)}>

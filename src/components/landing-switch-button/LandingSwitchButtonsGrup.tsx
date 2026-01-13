@@ -10,10 +10,15 @@ const LandingSwitchButtonsGrup = () => {
   const {isShowContent, isLandingSwiped, showMainScreen, swipeLanding, changeCurrentPage } = store;
   const hash =useHash()
   const [curtainAnimationEnd, setCurtainAnimationEnd] = useState(false)
+  const [isShow, setIsShow] = useState(false)
+
+  useEffect(() => {
+    setTimeout(()=> setIsShow(true), 500)
+  }, []);
 
   useEffect(() => {
     if (!showMainScreen){
-      setTimeout(()=> setCurtainAnimationEnd(true), 700)
+      setTimeout(()=> setCurtainAnimationEnd(true), 433)
     }
   }, [showMainScreen]);
 
@@ -29,6 +34,7 @@ const LandingSwitchButtonsGrup = () => {
           <>
              <div
                  className="landing-switch-button-grup button-right"
+                 style={{opacity: Number(isShow)}}
              >
                 <LandingSwitchButton
                     handleClick={() => changeSwiped(hash=="first-landing")}
@@ -38,6 +44,7 @@ const LandingSwitchButtonsGrup = () => {
              </div>
              <div
                  className="landing-switch-button-grup button-left"
+                 style={{opacity: Number(isShow)}}
              >
                 <LandingSwitchButton
                     handleClick={() => changeSwiped(hash!="first-landing")}

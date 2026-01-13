@@ -35,6 +35,9 @@
     overflow: hidden;
     font-size: 0;
     background: #fff;
+    margin-bottom: -1px;
+    margin-right: -1px;
+
     &-logo {
       display: flex;
       flex-direction: column;

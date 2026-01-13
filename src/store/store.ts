@@ -10,6 +10,8 @@ class Store {
   // показывать ли главный экран
   showMainScreen=true
 
+  keyMainScreen=1
+
   // показать контент
   isShowContent=false
 
@@ -44,6 +46,10 @@ class Store {
 
   changeIsShowContent=()=>{
     this.isShowContent = true;
+  }
+
+  incKeyMainScreen=()=>{
+    this.keyMainScreen++
   }
 
   changeShowMainScreen= (value: boolean)=>{

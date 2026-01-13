@@ -302,6 +302,7 @@ const Scroller: FC<IWithChildren> = (props) => {
     <div className='scroller'
          // onScroll={e=>onScroll(e)}
          ref={scrollerRef}
+         style={{opacity: Number(showMainPage)}}
     >
       <div
         className="scroller-content"

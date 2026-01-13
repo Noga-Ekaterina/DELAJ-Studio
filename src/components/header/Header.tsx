@@ -1,6 +1,6 @@
 'use client';
 import {HeaderVariant, IWithClass} from '@/types';
-import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
+import {FC, MutableRefObject, useEffect, useRef, useState, MouseEvent} from 'react';
 import cn from 'classnames';
 
 import { sectionsMenuHashes } from '@/vars';
@@ -26,6 +26,7 @@ import arrowBack from "../../../public/Assets/Animations/header/arrow_back.json"
 import {useIsHome} from "@/components/_hooks/useIsHome";
 import Link from "next/link";
 import {useLocale} from "@/components/_hooks/useLocale";
+import {useChangeHash} from "@/components/_hooks/useChangeHash";
 
 type HeaderTheme = {
   hash: string, 
@@ -38,15 +39,13 @@ interface LogoProps {
   variant: HeaderVariant
 }
 
-const addHash= (hash: string) => {
-  setTimeout(()=>window.location.hash=hash, 180)
-}
 const Logo = ({ variant= 'normal'}: LogoProps) => {
   const pathname=usePathname()
   const hash=useHash()
   const isHome=useIsHome()
   const locale=useLocale()
-  const {isLandingSwiped, prevHeaderVariant, changePrevHeaderVariant, changeMenuOpened, changeCurrentPage}=store
+  const changeHash= useChangeHash()
+  const {isLandingSwiped, prevHeaderVariant, changePrevHeaderVariant, changeMenuOpened, changeCurrentPage, incKeyMainScreen}=store
   const ref= useRef<LottieRefCurrentProps | null>(null)
   const objAnimation={
     kids: logoKids,
@@ -59,6 +58,17 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
     ref.current?.setDirection(1)
     setAnimationIndex(prevIndex => prevHeaderVariant=="normal"? (prevIndex + 1) % animations.length: 0);
 
+  }
+
+  const addHash= (e:  MouseEvent<HTMLAnchorElement>, hash: string) => {
+    if (isHome) {
+      e.preventDefault()
+
+      changeHash(hash)
+      incKeyMainScreen()
+
+      setTimeout(()=> window.scrollTo(0,0), 700)
+    }
   }
 
   useEffect(() => {
@@ -90,10 +100,10 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
   }, [animations]);
 
   return (
-      <Link href={isHome? "": `/${locale!='en'? locale:""}#main-screen`} onClick={()=> {
+      <Link href={isHome? "#": `/${locale!='en'? locale:""}#main-screen`} replace={isHome} onClick={(e)=> {
         changeCurrentPage(null)
         changeMenuOpened(false)
-        addHash("main-screen")
+        addHash(e, "main-screen")
       }}>
         <Lottie
             animationData={animations[animationIndex]}

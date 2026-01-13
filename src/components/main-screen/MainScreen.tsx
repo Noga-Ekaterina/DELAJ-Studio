@@ -31,6 +31,7 @@ interface Props{
 
 const MainScreen: FC<Props> = ({loader}) => {
   const {
+    keyMainScreen,
     isShowContent,
     isMenuLandingsOpened,
     changeMenuOpened,
@@ -41,7 +42,7 @@ const MainScreen: FC<Props> = ({loader}) => {
     showMainScreen,
     changeShowMainScreen,
     isLandingSwiped,
-    isScrollOn
+    isScrollOn,
   } = store;
   const [showArrow, setShowArrow] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -125,6 +126,7 @@ const MainScreen: FC<Props> = ({loader}) => {
     if (isShowLang){
       ruRef.current?.play()
       enRef.current?.play()
+      setIsShowLang(false)
     }
   }, [isShowLang]);
 
@@ -135,7 +137,7 @@ const MainScreen: FC<Props> = ({loader}) => {
   if (!isClient) return <div/>
 
   return (
-      <Curtain show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 5:3} className="main-screen">
+      <Curtain key={keyMainScreen} show={showMainScreen} zIndex={(currentPage || (hash!="" && hash!="main-screen"))? 5:3} className="main-screen">
         {
           isShowContent&&
             <>
