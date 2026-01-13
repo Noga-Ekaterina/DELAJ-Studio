@@ -11,11 +11,21 @@
   }
 
   &__btn{
-    width: 21rem;
+    width: 17rem;
     flex-shrink: 0;
+
+    img{
+      height: auto;
+    }
 
     &--prev{
       transform: rotate(180deg);
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    &__btn{
+      width: 12px;
     }
   }
 }

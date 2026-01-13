@@ -322,6 +322,12 @@
       }
     }
 
+    &-technologies {
+      &__item{
+        font-size: 9px;
+      }
+    }
+
     &-work {
       padding: 0;
       flex-direction: column;

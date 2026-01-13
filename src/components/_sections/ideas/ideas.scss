@@ -60,7 +60,7 @@
     }
 
     &-content {
-      padding-bottom: calc(9* var(--vh));
+      padding-bottom: calc(7* var(--vh));
     }
   }
 
@@ -71,10 +71,6 @@
 
     &-conditions {
       align-self: flex-start;
-    }
-
-    &-mail {
-      margin: 70px 0;
     }
   }
 }

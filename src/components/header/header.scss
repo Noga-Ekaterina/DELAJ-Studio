@@ -13,22 +13,27 @@
 
 
   &-back {
-    min-width: 72rem;
-    max-width: 480%;
+    width: 112rem;
     height: auto;
     position: absolute;
     inset: auto;
 
     &-btn{
-      width: 15rem;
-      height: 10rem;
+      width: 24rem;
+      height: 20rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      top: 1rem;
 
       *{
         pointer-events: none;
       }
+    }
+
+    svg{
+      width: 100%;
     }
   }
 
