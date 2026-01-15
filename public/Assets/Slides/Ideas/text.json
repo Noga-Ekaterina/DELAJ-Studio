@@ -1,7 +1,7 @@
 {
   "title": {
     "ru": "мы всегда\nв поиске идей!",
-    "en": "мы всегда\nв поиске идей!"
+    "en": "We are always\nlooking for ideas!"
   },
   "mail": {
     "text": {
@@ -15,12 +15,12 @@
   },
   "text": {
     "ru": "Если у вас есть крутая идея для \nмультфильма и вы хотите ее\n реализовать — пишите нам на почту",
-    "en": "Если у вас есть крутая идея для \nмультфильма и вы хотите ее\n реализовать — пишите нам на почту"
+    "en": "Got a cool idea for a cartoon?\nDream of bringing it to life?\nSend your pitch to our email!"
   },
   "conditions": {
     "title": {
       "ru": "Условия подачи",
-      "en": "Условия подачи"
+      "en": "Eligibility"
     },
     "list": {
       "ru": [
@@ -29,14 +29,14 @@
         "Заявка должна содержать (презентацию с общим описанием проекта, сценарий, синопсис)"
       ],
       "en": [
-        "Быть старше 18 лет",
-        "Желательно иметь профильное образование в области кино, художественных искусств или иметь опыт работы в киносфере, но готовы рассмотреть и заявки от студентов последних курсов профильных вузов",
-        "Заявка должна содержать (презентацию с общим описанием проекта, сценарий, синопсис)"
+        "Must be 18+",
+        "Relevant education or professional experience in film/visual arts. Senior students are also welcome!",
+        "The application must include (a presentation with a general project description, a script, a synopsis in .PDF)."
       ]
     }
   },
   "projectsTitle":{
     "ru": "реализованные \nпроекты",
-    "en": "реализованные \nпроекты"
+    "en": "completed\nprojects"
   }
 }

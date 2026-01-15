@@ -1,102 +1,92 @@
 [
   {
     "question": {
-      "ru": "Я отправил портфолио, когда мне ответят?",
-      "en": "When will I get a response after sending my portfolio?"
+      "ru": "Как попасть в команду студии?",
+      "en": "How to join the studio team?"
     },
     "answer": {
-      "ru": "Мы стараемся ответить на все поданные заявки в течение недели. Если вы не получили ответ, значит, мы пока не нашли подходящей задачи для вас.",
-      "en": "We aim to respond to all submitted applications within a week. If you haven't received a response, it means we haven't found a suitable task for you yet."
+      "ru": "Всё просто — заходите в раздел «Карьера» на нашем сайте и оставляйте заявку. Заявки, отправленные на почту или в личные сообщения, мы не рассматриваем.",
+      "en": "It's simple — go to the \"Career\" section on our website and submit your application. We do not consider applications sent by email or private messages."
     }
   },
   {
     "question": {
-      "ru": "Берете ли вы к себе на стажировки, и на каких условиях?",
-      "en": "Do you accept interns, and under what conditions?"
+      "ru": "В каком формате присылать портфолио?",
+      "en": "What format should I use to send my portfolio?"
     },
     "answer": {
-      "ru": "Да, мы принимаем стажеров. Условия стажировки зависят от конкретной позиции, пожалуйста, ознакомьтесь с информацией на нашем сайте.",
-      "en": "Yes, we accept interns. The conditions of the internship depend on the specific position, please refer to the information on our website."
+      "ru": "Присылайте ссылку на Behance, ArtStation или аналогичный ресурс. Не используйте временные ссылки на файлообменники — они могут перестать работать.",
+      "en": "Send a link to Behance, ArtStation, or a similar resource. Do not use temporary links to file hosting services — they may stop working."
     }
   },
   {
     "question": {
-      "ru": "Возможно ли участвовать в нескольких проектах разом?",
-      "en": "Is it possible to participate in several projects at once?"
+      "ru": "Могу ли я отправить заявку на несколько вакансий?",
+      "en": "Can I apply for several vacancies?"
     },
     "answer": {
-      "ru": "Да, участие в нескольких проектах возможно, но важно учитывать, как это повлияет на качество выполнения задач.",
-      "en": "Yes, participating in several projects at once is possible, but it’s important to consider how it might affect the quality of task completion."
+      "ru": "Да, можно. Отправляйте столько заявок, сколько хотите — главное, чтобы они были по делу.",
+      "en": "Yes, you can. Send as many applications as you like — the main thing is that they are relevant."
     }
   },
   {
     "question": {
-      "ru": "Что если я не получил(а) ответа на стажировку, тестовое задание? Письмо не дошло?",
-      "en": "What if I didn't receive a response regarding the internship or test assignment? What if the letter didn't reach you?"
+      "ru": "Когда мне ответят на заявку?",
+      "en": "When will I receive a response to my application?"
     },
     "answer": {
-      "ru": "Друзья, не волнуйтесь, письмо до нас дошло, но, возможно, что мы его еще не успели подробно рассмотреть и изучить. Если вам не ответили в течении недели, то у нас нет для вас подходящей задачи и мы не можем ее вам выдать. Но бывает и так, что уровень кандидата очень низкий или недостаточно опыта даже для минимального прохода. Пожалуйста, не расстраивайтесь! Ваши контакты и портфолио остаются у нас и при первом подходящем поводе, мы с вами свяжемся.",
-      "en": "Don't worry, your letter reached us, but we might not have had time to review it in detail yet. If you haven't heard back within a week, it means we currently don't have a suitable task for you. However, sometimes a candidate's level may be too low or there may not be enough experience for even the minimum requirements. Please don't be upset! Your contacts and portfolio will remain with us, and we will reach out to you when a suitable opportunity arises."
+      "ru": "Мы внимательно смотрим все анкеты, но отвечаем только в случае, если ваша заявка подошла под актуальные задачи. Если вы не получили ответ в течение 1–2 недель — не стоит волноваться, иногда ответ по вакансии может быть через долгое время.\n\nНе стоит отправлять заявку чаще чем один раз в 2–3 месяца, чтобы избежать дублирования.",
+      "en": "We carefully review all applications, but we only respond if your application is suitable for our current tasks.\n\nIf you haven't received a reply within 1–2 weeks — don't worry, sometimes the response to a vacancy may come after a long time.\n\nYou should not send an application more often than once every 2–3 months to avoid duplication."
     }
   },
   {
     "question": {
-      "ru": "Берете ли вы к себе на стажировки, и на каких условиях?",
-      "en": "Do you accept interns, and under what conditions?"
+      "ru": "Какие специалисты вам чаще всего нужны?",
+      "en": "Which specialists are you most often looking for?"
     },
     "answer": {
-      "ru": "Да, мы принимаем стажеров. Условия стажировки зависят от конкретной позиции, пожалуйста, ознакомьтесь с информацией на нашем сайте.",
-      "en": "Yes, we accept interns. The conditions of the internship depend on the specific position, please refer to the information on our website."
+      "ru": "Список актуальных вакансий мы регулярно обновляем на сайте — загляните в раздел «Карьера» и посмотрите, кого мы ищем.",
+      "en": "We regularly update the list of current vacancies on the website — check the \"Career\" section to see who we are looking for."
     }
   },
   {
     "question": {
-      "ru": "Возможно ли участвовать в нескольких проектах разом?",
-      "en": "Is it possible to participate in several projects at once?"
+      "ru": "Вы берёте новичков или студентов на стажировку?",
+      "en": "Do you take in beginners or students for internships?"
     },
     "answer": {
-      "ru": "Да, участие в нескольких проектах возможно, но важно учитывать, как это повлияет на качество выполнения задач.",
-      "en": "Yes, participating in several projects at once is possible, but it’s important to consider how it might affect the quality of task completion."
+      "ru": "Иногда мы объявляем приём заявок на стажировку — об этом мы сообщаем отдельно. Вы всегда можете подать заявку в разделе вакансии и она будет рассматриваться в общем порядке.",
+      "en": "Sometimes we announce an open call for internship applications — we notify about this separately. You can always apply in the vacancies section, and it will be considered in the general order."
     }
   },
   {
     "question": {
-      "ru": "Что если я не получил(а) ответа на стажировку, тестовое задание? Письмо не дошло?",
-      "en": "What if I didn't receive a response regarding the internship or test assignment? What if the letter didn't reach you?"
+      "ru": "Вы делаете коммерческие заказы?",
+      "en": "Do you accept commercial orders?"
     },
     "answer": {
-      "ru": "Друзья, не волнуйтесь, письмо до нас дошло, но, возможно, что мы его еще не успели подробно рассмотреть и изучить. Если вам не ответили в течении недели, то у нас нет для вас подходящей задачи и мы не можем ее вам выдать. Но бывает и так, что уровень кандидата очень низкий или недостаточно опыта даже для минимального прохода. Пожалуйста, не расстраивайтесь! Ваши контакты и портфолио остаются у нас и при первом подходящем поводе, мы с вами свяжемся.",
-      "en": "Don't worry, your letter reached us, but we might not have had time to review it in detail yet. If you haven't heard back within a week, it means we currently don't have a suitable task for you. However, sometimes a candidate's level may be too low or there may not be enough experience for even the minimum requirements. Please don't be upset! Your contacts and portfolio will remain with us, and we will reach out to you when a suitable opportunity arises."
+      "ru": "Да, конечно. Мы работаем с брендами, агентствами, киностудиями и частными клиентами. Пишите нам на hello@delai.studio — обсудим задачу и найдем нужный формат сотрудничества.",
+      "en": "Yes, of course. We work with brands, agencies, film studios, and private clients.\n\nWrite to us at hello@delai.studio — we will discuss the task and find the right format for cooperation."
     }
   },
   {
     "question": {
-      "ru": "Берете ли вы к себе на стажировки, и на каких условиях?",
-      "en": "Do you accept interns, and under what conditions?"
+      "ru": "Можно ли прислать вам идею мультфильма?",
+      "en": "Can I send you an idea for an animated film?"
     },
     "answer": {
-      "ru": "Да, мы принимаем стажеров. Условия стажировки зависят от конкретной позиции, пожалуйста, ознакомьтесь с информацией на нашем сайте.",
-      "en": "Yes, we accept interns. The conditions of the internship depend on the specific position, please refer to the information on our website."
+      "ru": "Да, можно. Но важно понимать, что мы не всегда отвечаем на такие заявки. Если идея нам откликнется — мы обязательно свяжемся. В разделе «Идеи» на сайте есть подробности, как всё правильно оформить.",
+      "en": "Yes, you can. But it is important to understand that we do not always reply to such applications. If the idea resonates with us, we will definitely get in touch. The \"Ideas\" section on the website has details on how to properly submit everything."
     }
   },
   {
     "question": {
-      "ru": "Возможно ли участвовать в нескольких проектах разом?",
-      "en": "Is it possible to participate in several projects at once?"
+      "ru": "У меня есть другой вопрос — куда писать?",
+      "en": "I have another question — where should I write?"
     },
     "answer": {
-      "ru": "Да, участие в нескольких проектах возможно, но важно учитывать, как это повлияет на качество выполнения задач.",
-      "en": "Yes, participating in several projects at once is possible, but it’s important to consider how it might affect the quality of task completion."
-    }
-  },
-  {
-    "question": {
-      "ru": "Что если я не получил(а) ответа на стажировку, тестовое задание? Письмо не дошло?",
-      "en": "What if I didn't receive a response regarding the internship or test assignment? What if the letter didn't reach you?"
-    },
-    "answer": {
-      "ru": "Друзья, не волнуйтесь, письмо до нас дошло, но, возможно, что мы его еще не успели подробно рассмотреть и изучить. Если вам не ответили в течении недели, то у нас нет для вас подходящей задачи и мы не можем ее вам выдать. Но бывает и так, что уровень кандидата очень низкий или недостаточно опыта даже для минимального прохода. Пожалуйста, не расстраивайтесь! Ваши контакты и портфолио остаются у нас и при первом подходящем поводе, мы с вами свяжемся.",
-      "en": "Don't worry, your letter reached us, but we might not have had time to review it in detail yet. If you haven't heard back within a week, it means we currently don't have a suitable task for you. However, sometimes a candidate's level may be too low or there may not be enough experience for even the minimum requirements. Please don't be upset! Your contacts and portfolio will remain with us, and we will reach out to you when a suitable opportunity arises."
+      "ru": "Если вопрос не связан с вакансиями — пишите нам в сообщения группы или на почту hello@delai.studio. Если вопрос дельный — обязательно постараемся ответить!",
+      "en": "If the question is not related to vacancies — write to us in the group messages or to the email hello@delai.studio. If the question is important, we will certainly try to answer!"
     }
   }
 ]

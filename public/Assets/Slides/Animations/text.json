@@ -2,21 +2,21 @@
   "kids": {
     "title": {
       "ru": "детская анимация",
-      "en": "детская анимация"
+      "en": "children's animation"
     },
     "text": {
       "ru": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры",
-      "en": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры"
+      "en": "Anime\n Motion design\n feature films\n Series\n Short films"
     }
   },
   "adult": {
     "title": {
       "ru": "взрослая анимация",
-      "en": "взрослая анимация"
+      "en": "adult animation"
     },
     "text": {
       "ru": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры",
-      "en": "Аниме\n Моушн-дизайн\n Полные метры\n Сериалы\n Короткие метры"
+      "en": "Anime\n Motion design\n feature films\n Series\n Short films"
     }
   }
 }
