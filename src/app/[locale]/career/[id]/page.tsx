@@ -50,7 +50,15 @@ export async function generateMetadata(
 
   return {
     title: title[locale] +`${careerItem&&` | ${careerItem.data.title[locale]}`}`,
-    description: careerItem? careerItem.data.description[locale]:''
+    description: careerItem? careerItem.data.description[locale]:'',
+    alternates: {
+      languages: {
+        'ru': `https://delai.studio/ru/career/${id}`,
+        'en': `https://delai.studio/en/career/${id}`,
+        'x-default': `https://delai.studio/en/career/${id}`,
+      },
+      canonical: `https://delai.studio/${locale}/career/${id}`
+    },
   }
 }
 

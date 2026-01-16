@@ -40,7 +40,15 @@ export async function generateMetadata(
 
   return {
     title: title[locale],
-    description: locale==="ru"? "Анимация — это наша жизнь. Наша команда занимается полным циклом производства анимационных коротких метров, полных метров и сериалов в 2D и 3D технике.":"Animation is our life. Our team is engaged in a full cycle of production of short animated films, animated feature films and series with 2D and 3D technology."
+    description: locale==="ru"? "Анимация — это наша жизнь. Наша команда занимается полным циклом производства анимационных коротких метров, полных метров и сериалов в 2D и 3D технике.":"Animation is our life. Our team is engaged in a full cycle of production of short animated films, animated feature films and series with 2D and 3D technology.",
+    alternates: {
+      languages: {
+        'ru': `https://delai.studio/ru`,
+        'en': `https://delai.studio/en`,
+        'x-default': `https://delai.studio/en`,
+      },
+      canonical: `https://delai.studio/${locale}`
+    },
   }
 }
 

@@ -82,7 +82,15 @@ export async function generateMetadata(
 
   return {
     title: title[locale] +`${project&&` | ${project.data.title[locale]}`}`,
-    description: project? project.data.description[locale]:''
+    description: project? project.data.description[locale]:'',
+    alternates: {
+      languages: {
+        'ru': `https://delai.studio/ru/projects/${type}/${id}`,
+        'en': `https://delai.studio/en/projects/${type}/${id}`,
+        'x-default': `https://delai.studio/en/projects/${type}/${id}`,
+      },
+      canonical: `https://delai.studio/${locale}/projects/${type}/${id}`
+    },
   }
 }
 
