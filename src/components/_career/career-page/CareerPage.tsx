@@ -43,7 +43,7 @@ const CareerPage = ({id, careerList, formText}: Props) => {
           <BreadCrumbs
               links={[
                 {
-                  text: locale == "ru" ? 'вакансии' : "vacancy",
+                  text: locale == "ru" ? 'карьера' : "career",
                   path: `/${locale != "en" ? locale : ''}#career`
                 },
                 {text: careerItem.data.title[locale]}
@@ -63,7 +63,7 @@ const CareerPage = ({id, careerList, formText}: Props) => {
 
             <div className="career-page__body">
               <CareerSlider career={careerItem} vacancies={careerList}/>
-              <CareerItemForm vacancy={careerItem.data.title.ru} formText={formText}/>
+              <CareerItemForm isDisabled={!careerItem.data.isOpened} vacancy={careerItem.data.title.ru} formText={formText}/>
             </div>
           </div>
         </div>

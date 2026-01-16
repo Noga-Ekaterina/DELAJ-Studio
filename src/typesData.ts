@@ -157,6 +157,7 @@ export interface IForm{
   inputs: IFormInput[]
   acceptTerms: ITranslation<string>
   button: ITranslation<string>
+  buttonDisabled: ITranslation<string>
 }
 
 export interface ICareerPage{

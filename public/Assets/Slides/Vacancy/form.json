@@ -5,19 +5,19 @@
       "type": "text",
       "placeholder": {
         "ru": "полное имя",
-        "en": "name"
+        "en": "full name"
       }
     },
     {
       "name": "phone",
       "type": "tel",
       "placeholder":{
-        "ru": "телефон",
-        "en": "phone"
+        "ru": "номер телефона",
+        "en": "phone number"
       },
       "error": {
         "ru": "некорректный номер",
-        "en": "некорректный номер"
+        "en": "incorrect number"
       }
     },
     {
@@ -29,7 +29,7 @@
       },
       "error": {
         "ru": "некорректный E-mail",
-        "en": "некорректный E-mail"
+        "en": "incorrect E-mail"
       }
     },
     {
@@ -45,8 +45,9 @@
           "highlighted": ["не прикладывать ссылки на диски!"]
         },
         "en": {
-          "text": "постоянная ссылка, \nжелательно на открытый источник\nне прикладывать ссылки на диски!",
-          "highlighted": ["не прикладывать ссылки на диски!"]
+          "text": "permanent link, \npreferably to a public source\ndo not attach links to cloud drives!",
+          "highlighted": ["do not attach links to cloud drives!"
+          ]
         }
       }
     },
@@ -54,8 +55,8 @@
       "name": "telegram",
       "type": "text",
       "placeholder": {
-        "ru": "telegram",
-        "en": "telegram"
+        "ru": "@telegram",
+        "en": "@telegram"
       }
     },
     {
@@ -70,17 +71,22 @@
           "text": "опыт работы, софт\nдополнительные способы связи"
         },
         "en": {
-          "text": "опыт работы, софт\nдополнительные способы связи"
+          "text": "Work experience, software\nadditional contact methods"
+
         }
       }
     }
   ],
   "acceptTerms": {
     "ru": "Я согласен на обработку персональных данных",
-    "en": "Я согласен на обработку персональных данных"
+    "en": "I agree to the processing of personal data"
   },
   "button": {
     "ru": "откликнуться",
-    "en": "откликнуться"
+    "en": "submit"
+  },
+  "buttonDisabled": {
+    "ru": "прием закрыт",
+    "en": "Reception is closed"
   }
 }

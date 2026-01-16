@@ -61,3 +61,8 @@ export interface IFormData {
   id: string
   values: IFormValues
 }
+
+export interface IField{
+  [key: string]: any
+  value: string
+}

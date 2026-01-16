@@ -2,6 +2,17 @@
 .career-form {
   flex: 1;
   min-width: 430px;
+  
+  fieldset:disabled{
+    *{
+      cursor: no-drop !important;
+    }
+
+    button{
+      pointer-events: none;
+    }
+  }
+
   &__field {
     position: relative;
     border-bottom: 1rem solid;

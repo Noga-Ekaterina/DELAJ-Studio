@@ -30,7 +30,7 @@ const NotFound = () => {
           <BreadCrumbs
               links={[
                 {
-                  text: locale == "ru" ? 'вакансии' : "vacancy",
+                  text: locale == "ru" ? 'карьера' : "career",
                   path: `/${locale != "en" ? locale : ''}#career`
                 },
                 {text: "404"}

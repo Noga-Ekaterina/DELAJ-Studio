@@ -19,7 +19,7 @@ const CareerOption: FC<Props> = (props) => {
 
   return (
     <div className={className}>
-      {props.type==="opened"? locale==="ru"? "Открытая":"opened": props.type==="closed"? locale==="ru"? "Закрытая":"closed": props.type}
+      {props.type==="opened"? locale==="ru"? "Открытая":"open": props.type==="closed"? locale==="ru"? "Закрытая":"closed": props.type}
     </div>
   );
 };
