@@ -6,11 +6,12 @@ import './project-video.scss';
 
 interface Props extends IWithClass {
   src: string
+  preview?: string
 }
 
 const ProjectVideo: FC<Props> = (props) => {
   return (
-    <video className={classNames(props.className)} controls preload="metadata">
+    <video className={classNames(props.className)} controls preload="metadata" poster={props.preview}>
       <source src={props.src} type="video/mp4" />
     </video>
   );

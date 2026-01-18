@@ -13,21 +13,12 @@ interface Props {
   id: string,
   type: string
   project?: IProject|null| false
+  files: string[]
 }
 
-const Project = ({id, type, project}: Props) => {
+const Project = ({id, type, project, files}: Props) => {
   const {isShowContent}=store
   const locale=useLocale()
-  const [files, setFiles] = useState<string[]>([])
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/projects/files?id=${id}&type=${type}`);
-      const json = await response.json();
-
-      setFiles(json);
-    })();
-  },[])
 
   return (
       <div
@@ -44,6 +35,7 @@ const Project = ({id, type, project}: Props) => {
                           className='project-cover'
                           src={`/Assets/Projects/${type[0].toUpperCase() + type.slice(1)}/Project-${id}/preview-big.png`}
                           alt=""
+                          loading="lazy"
                       />
                     </div>
 
@@ -66,11 +58,15 @@ const Project = ({id, type, project}: Props) => {
                     </div>
                     <div className="project-materials">
                       {Array.isArray(files) && files.map((file, index) => {
-                        const src = `/Assets/Projects/${type[0].toUpperCase() + type.slice(1)}/Project-${id}/Content/${file}`;
+                        const dir=`/Assets/Projects/${type[0].toUpperCase() + type.slice(1)}/Project-${id}/Content/`
+                        const src = `${dir}${file}`;
+
+                        if (file.includes("preview")) return
 
                         if (file.endsWith('.mp4')) {
+                          const preview =files.find(item=> item.includes(file.replace(".mp4", "-preview")))
                           return (
-                              <ProjectVideo src={src} key={'project-material' + index}/>
+                              <ProjectVideo src={src} preview={preview&&`${dir}${preview}`} key={'project-material' + index}/>
                           )
                         }
 

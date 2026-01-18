@@ -8,6 +8,8 @@ import {LangType} from "@/types";
 import {Metadata, ResolvingMetadata} from "next";
 import InitData from "@/app/InitData";
 import {notFound} from "next/navigation";
+import path from "path";
+import fs from "fs";
 
 interface Props {
   params: {
@@ -16,6 +18,11 @@ interface Props {
     type: keyof IProjectsList
   }
 }
+
+interface IData extends IProjectsAndLayout{
+  files: string[]
+}
+
 export const revalidate = 120;
 
 
@@ -53,12 +60,14 @@ export async function generateStaticParams() {
 
 
 const init = async (type: string, id: string) => {
-  const data: IProjectsAndLayout = {}
+  const data: IData = {files:[]}
+  const directoryPath = path.join(process.cwd(), `public/Assets/Projects/${type[0].toUpperCase() + type.slice(1)}/Project-${id}/Content`);
 
   const promises = [
     fetchData('Slides/title.json').then(result => data.menuSectionTitle = result),
     fetchData('Footers.json').then(result => data.footers = result),
-    fetchData('Projects/data.json').then(result => data.projectsList = result)
+    fetchData('Projects/data.json').then(result => data.projectsList = result),
+    fs.promises.readdir(directoryPath).then(resul=> data.files=resul)
   ]
 
   await Promise.all(promises)
@@ -66,6 +75,12 @@ const init = async (type: string, id: string) => {
   const projectsList = data.projectsList
 
   const project: undefined | null | false | IProject = (projectsList && (type == "kids" || type == "adults")) && projectsList[type as keyof IProjectsList]?.find(item => String(item.id) == id);
+
+  data.files.sort((a: string, b: string) => {
+    const aNum = +a.slice(0, a.indexOf('.'));
+    const bNum = +b.slice(0, b.indexOf('.'));
+    return (aNum > bNum) ? 1 : -1
+  })
 
   return { data, project }
 }
@@ -103,7 +118,7 @@ const Page: FC<Props> =async ({ params }:Props) => {
   return (
       <InitData data={data}>
         <div className='project'>
-          <Project id={id} type={type} project={project}/>
+          <Project files={data.files} id={id} type={type} project={project}/>
           <BasicFooter/>
         </div>
       </InitData>
