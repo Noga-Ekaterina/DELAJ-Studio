@@ -11,12 +11,14 @@ import LanguageToggle from '../../language-toggle/LanguageToggle';
 import FooterCareerList from "@/components/_footers/footer-career-list/FooterCareerList";
 import FooterContacts from "@/components/_footers/footer-contacts/FooterContacts";
 import FooterSocial from "@/components/_footers/footer-social/FooterSocial";
+import {useChangeHash} from "@/components/_hooks/useChangeHash";
 
 const KidsFooter: FC = () => {
   const className = cn('kids-footer', circe.className);
   const locale=useLocale()
   const {menuSectionTitle, footers}=general
   const [words, setWords] = useState<string[]>([])
+  const changeHash=useChangeHash()
 
   useEffect(() => {
     if (footers){
@@ -32,7 +34,10 @@ const KidsFooter: FC = () => {
       <div className="footer-item kids-footer__item" id="kids-footer-blue">
         <div className="footer-item__content">
           <FooterContacts type='kids' className="kids-footer__item-list"/>
-          <a href="#">
+          <a
+              href="#main-screen"
+              onClick={()=>changeHash( "main-screen")}
+          >
             <img className='footer-item__logo' src="/Assets/Slides/Animations/Images/Kids/Footer/logo.svg" alt="" loading="lazy" />
           </a>
           <img className='footer-item__image' src="/Assets/Slides/Animations/Images/Kids/Footer/1.png" alt="" loading="lazy" />

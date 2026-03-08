@@ -11,11 +11,13 @@ import FooterCareerList from "@/components/_footers/footer-career-list/FooterCar
 import Outline from "@/components/outline/Outline";
 import FooterContacts from "@/components/_footers/footer-contacts/FooterContacts";
 import FooterSocial from "@/components/_footers/footer-social/FooterSocial";
+import {useChangeHash} from "@/components/_hooks/useChangeHash";
 
 const AdultFooter: FC = () => {
   const locale=useLocale()
   const {menuSectionTitle, footers}=general
   const className = cn('adult-footer', circe.className)
+  const changeHash=useChangeHash()
 
   return (
     <footer className={className}>
@@ -24,7 +26,10 @@ const AdultFooter: FC = () => {
           <div className="footer-item__content">
             <FooterContacts type="adult"/>
 
-            <a href='#'>
+            <a
+                href='#main-screen'
+                onClick={()=>changeHash( "main-screen")}
+            >
               <img src="/Assets/Slides/Animations/Images/Adults/Footer/logo.svg" className='footer-item__logo' alt="" loading="lazy"/>
             </a>
           </div>
