@@ -2,6 +2,7 @@
 .career-form {
   flex: 1;
   min-width: 430px;
+  position: relative;
   
   fieldset:disabled{
     *{
@@ -10,6 +11,9 @@
 
     button{
       pointer-events: none;
+      border-color: #DBDBDB;
+      background: #F0F0F0;
+      color: #D1D1D1;
     }
   }
 
@@ -146,8 +150,9 @@
     width: 138rem;
     height: 34rem;
     background-color: #fff;
-    border: 1rem solid #C8C8C8;
-    border-radius: 30rem;
+    border-width: 2.5rem;
+    border-color: #EAEAEA;
+    border-style: solid;
     text-transform: uppercase;
     font-size: 9rem;
     color: #A1A1A1;
@@ -156,6 +161,20 @@
       background-color: #1D1D1D;
       color: #fff;
     }
+  }
+
+  &__alert{
+    @extend .career-form__placeholder;
+
+    position: absolute;
+    background: #fff;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1em;
+    padding: 0.5em;
+
+    box-shadow: 2px 11px 27.1px 0px #0000001A;
   }
 
   @media screen and (max-width: 1199px) {
@@ -180,8 +199,7 @@
     &__submit {
       width: 138px;
       height: 34px;
-      border: 1px solid #C8C8C8;
-      border-radius: 30px;
+      border-width: 2.5px;
       font-size: 9px;
     }
   }

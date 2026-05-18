@@ -1,5 +1,5 @@
-import React, {FormEvent, useEffect, useState} from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, {FormEvent, Fragment, useEffect, useRef, useState} from 'react';
+import {Formik, Form, Field, FormikHelpers} from 'formik';
 import './career-form.scss';
 import { raleway } from '@/fonts';
 import classNames from 'classnames';
@@ -10,6 +10,7 @@ import {observer} from "mobx-react-lite";
 import cn from "classnames";
 import {IField} from "@/types";
 import Input from "@/components/_career/career-form/Input";
+import Alert from "@/components/_career/career-form/Alert";
 
 interface PropsForm{
   vacancy: string
@@ -23,6 +24,9 @@ const CareerItemForm = ({vacancy, formText, isDisabled}: PropsForm) => {
   const [isErrorsObj, setIsErrorsObj] = useState<{ [key: string]: boolean, acceptTerms: boolean }>({acceptTerms: true})
   const [isShowErrors, setIsShowErrors] = useState(false)
   const [isErrorAcceptTerm, setIsErrorAcceptTerm] = useState(false)
+  const [isSubmiting, setIsSubmiting] = useState(false)
+  const [submitIsError, setSubmitIsError] = useState(false)
+  const timeout=useRef<NodeJS.Timeout | null>(null)
 
   const changeError=(name:string)=>{
     const func=(isError: boolean)=>{
@@ -40,28 +44,69 @@ const CareerItemForm = ({vacancy, formText, isDisabled}: PropsForm) => {
 
   }
 
-  const handleSubmit= async (values: { [key: string]: string | boolean, acceptTerms: boolean })=>{
+  const handleSubmit= async (values: { [key: string]: string | boolean, acceptTerms: boolean }, {resetForm}: FormikHelpers<typeof values>) => {
     if (!formText) return
 
-    let text= `<b>${vacancy}</b>%0A%0A`
 
-    formText.inputs.map(input=>{
-      text+=`<b>${input.placeholder.ru}:</b> ${values[input.name]}%0A`
-    })
+    let isErrors= false
+    const inputs= formText.inputs
+    for (let i=0; i<=inputs.length-1; i++){
+      if (isErrorsObj[inputs[i].name]){
+        isErrors=true
+        break
+      }
+    }
 
-    text=text.replaceAll("+", "%2b")
+    if (isErrors) {
+      setIsShowErrors(true)
+    }else {
+      setIsShowErrors(false)
 
-    const resp= await fetch(
-        `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TG_BOT_TOKEN}/sendMessage?chat_id=${process.env.NEXT_PUBLIC_CHAT_ID}&parse_mode=html&text=${text}`,
-        {
-          method: "POST",
-          headers:{
-            "Content-Type": "application/json"
-          }
+      try {
+        const response = await fetch('/api/form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            values,
+            vacancy,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || response.status!=200) {
+          throw new Error()
         }
-    )
 
+        setSubmitIsError(false)
+        // Действия при успешной отправке
+        resetForm({
+          values: {
+            ...inputsObj,
+            acceptTerms: false, // Обязательно сбрасывайте состояние чекбокса
+          },
+        });
+        setTimeout(()=> setIsSubmiting(true), 100)
+
+      } catch (err){
+        setSubmitIsError(true)
+        setIsSubmiting(true)
+      } finally {
+        timeout.current=setTimeout(()=> setIsSubmiting(false), 3000)
+
+      }
+    }
   }
+
+  useEffect(() => {
+    return ()=>{
+      if (timeout.current){
+        clearTimeout(timeout.current)
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (!formText) return
@@ -91,39 +136,13 @@ const CareerItemForm = ({vacancy, formText, isDisabled}: PropsForm) => {
         ...inputsObj,
         acceptTerms: false as boolean
       }}
-      onSubmit={(values: { [key: string]: string | boolean, acceptTerms: boolean }, {resetForm}) => {
-        if (!formText) return
-
-
-        let isErrors= false
-        const inputs= formText.inputs
-        for (let i=0; i<=inputs.length-1; i++){
-          if (isErrorsObj[inputs[i].name]){
-            isErrors=true
-            break
-          }
-        }
-
-        if (isErrors) {
-          setIsShowErrors(true)
-        }else {
-          setIsShowErrors(false)
-          handleSubmit(values)
-          resetForm({
-            values: {
-              ...inputsObj,
-              acceptTerms: false, // Обязательно сбрасывайте состояние чекбокса
-            },
-          });
-
-        }
-      }}
+      onSubmit={handleSubmit}
   >
       <Form className='career-form'>
         <fieldset disabled={isDisabled}>
           {
             formText.inputs.map((input, index)=>(
-                <>
+                <Fragment key={`career-form-${input.name}-${index}`}>
                   <Field
                       name={input.name}
                       type="text"
@@ -131,16 +150,16 @@ const CareerItemForm = ({vacancy, formText, isDisabled}: PropsForm) => {
                           <Input
                               field={field}
                               input={input}
-                              key={`career-form-${input.name}-${index}`}
                               isError={isErrorsObj[input.name]}
                               setIsError={changeError(input.name)}
                               isShowError={isShowErrors}
                           />
                       )}
                   />
-                </>
+                </Fragment>
             ))
           }
+          <Alert isShow={isSubmiting} key="alert"/>
 
           <div className="career-form__bottom">
             <label className="career-form__checkbox-wrapp" htmlFor="acceptTerms">
