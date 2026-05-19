@@ -1,6 +1,6 @@
 'use client'
 import { FC, useEffect, useRef, useState } from 'react';
-import Lottie, {LottieRefCurrentProps} from "lottie-react";
+import Lottie, {LottieRefCurrentProps} from "@/components/lottie-client/LottieClient";
 
 //Animation
 import logoAnimationOn from '../../../public/Assets/Animations/logo/delai_logo_In.json'
@@ -24,6 +24,7 @@ import { useHash } from '@/components/_hooks/useHash';
 import PageMenu from '../page-menu/PageMenu';
 import Curtain from "@/components/curtain/Сurtain";
 import {changeOverflow} from "@/utils/changeOverflow";
+import LottieIconButton from "@/components/lottie-icon-button/LottieIconButton";
 
 interface Props{
   loader?: boolean
@@ -45,11 +46,8 @@ const MainScreen: FC<Props> = ({loader}) => {
     isScrollOn,
   } = store;
   const [showArrow, setShowArrow] = useState(false);
-  const [isHover, setIsHover] = useState(false);
-  const [isWasHover, setIsWasHover] = useState(false);
   const [isAnimationPlay, setIsAnimationPlay] = useState(true)
   const hash = useHash();
-  const arrowRef = useRef<LottieRefCurrentProps | null>(null)
   const ruRef = useRef<LottieRefCurrentProps | null>(null)
   const enRef = useRef<LottieRefCurrentProps | null>(null)
   const containrRef=useRef(null)
@@ -114,15 +112,6 @@ const MainScreen: FC<Props> = ({loader}) => {
   }, [isMenuLandingsOpened]);
 
   useEffect(() => {
-    if (isWasHover && !isHover) {
-      arrowRef.current?.setDirection(-1)
-    } else {
-      arrowRef.current?.setDirection(1)
-    }
-    arrowRef.current?.play()
-  }, [isHover, isWasHover]);
-
-  useEffect(() => {
     if (isShowLang){
       ruRef.current?.play()
       enRef.current?.play()
@@ -163,22 +152,15 @@ const MainScreen: FC<Props> = ({loader}) => {
                      />
                  }
 
-                  <button
+                  <LottieIconButton
                       className='main-screen__arrow'
                       style={{pointerEvents: isLoad ? "none" : "auto"}}
-                      onMouseOver={() => {
-                        setIsHover(true);
-                        setIsWasHover(true);
-                      }}
-                      onMouseOut={() => setIsHover(false)}
                       onClick={handleEvent}
-                  >
-                     <Lottie
-                         animationData={isLoad ? loaderLoop : showArrow ? isWasHover ? loaderHover : loaderOut : loaderFinish}
-                         loop={isLoad}
-                         lottieRef={arrowRef}
-                     />
-                  </button>
+                      animationData={isLoad ? loaderLoop : showArrow ? loaderOut : loaderFinish}
+                      hoverAnimationData={loaderHover}
+                      hoverEnabled={!isLoad && showArrow}
+                      loop={isLoad}
+                  />
 
                  {
                      (!isFirst || (!isLoad && (hash == '' || hash == "main-screen"))) &&

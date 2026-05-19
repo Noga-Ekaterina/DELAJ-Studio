@@ -1,6 +1,6 @@
 'use client';
 import {HeaderVariant, IWithClass} from '@/types';
-import {FC, MutableRefObject, useEffect, useRef, useState, MouseEvent} from 'react';
+import {FC, useEffect, useRef, useState, MouseEvent} from 'react';
 import cn from 'classnames';
 
 import { sectionsMenuHashes } from '@/vars';
@@ -10,7 +10,7 @@ import { P, match } from 'ts-pattern';
 import { observer } from 'mobx-react-lite';
 import store from '@/store/store';
 import {usePathname, useRouter} from 'next/navigation';
-import Lottie, {LottieRefCurrentProps} from "lottie-react";
+import Lottie, {LottieRefCurrentProps} from "@/components/lottie-client/LottieClient";
 
 import contactsIn from "../../../public/Assets/Animations/header/contacts/contacts_In.json"
 import contactsHover from "../../../public/Assets/Animations/header/contacts/contacts_Mouse.json"
@@ -27,6 +27,7 @@ import {useIsHome} from "@/components/_hooks/useIsHome";
 import Link from "next/link";
 import {useLocale} from "@/components/_hooks/useLocale";
 import {useChangeHash} from "@/components/_hooks/useChangeHash";
+import LottieIconButton from "@/components/lottie-icon-button/LottieIconButton";
 
 type HeaderTheme = {
   hash: string, 
@@ -119,110 +120,44 @@ const Logo = ({ variant= 'normal'}: LogoProps) => {
 
 const Mail = () => {
   const {changeModalContactsOpened} = store;
-  const [isHover, setIsHover] = useState(false);
-  const [isWasHover, setIsWasHover] = useState(false);
-  const ref= useRef<LottieRefCurrentProps | null>(null)
 
-  useEffect(() => {
-    if (ref.current && isWasHover)
-      ref.current?.setSpeed(0.6)
-  }, [ref.current, isHover]);
   return (
-      <button
+      <LottieIconButton
           onClick={()=>changeModalContactsOpened(true)}
-          onMouseOver={() => {
-            setIsHover(true);
-            setIsWasHover(true);
-          }}
-          onMouseOut={() => setIsHover(false)}
-      >
-        <Lottie
-            animationData={isHover? contactsHover :isWasHover? contactOut: contactsIn}
-            loop={false}
-            lottieRef={ref}
-            className='header-mail'
-        />
-      </button>
+          variant="swap-hover"
+          animationData={contactsIn}
+          hoverAnimationData={contactsHover}
+          outAnimationData={contactOut}
+          hoverSpeed={0.6}
+          iconClassName='header-mail'
+      />
   )
 }
 
 const ButtonMenu = ({isOpen = false, cls = ''}) => {
-  const [isHover, setIsHover] = useState(false);
   const {changeModalMenuOpened} = store;
-  const [isWasHover, setIsWasHover] = useState(false);
-  const menuRef = useRef(null);
-
-  const changeDirectionAnimation = (ref: MutableRefObject<LottieRefCurrentProps | null>) => {
-    ref.current?.play()
-    if (isWasHover && !isHover) {
-      ref.current?.setDirection(-1)
-    } else {
-      ref.current?.setDirection(1)
-    }
-  };
-
-  useEffect(() => {
-    changeDirectionAnimation(menuRef);
-
-  }, [isWasHover, isHover]);
 
   return (
-      <button
-          onMouseOver={() => {
-            setIsHover(true);
-            setIsWasHover(true);
-          }}
-          onMouseOut={() => setIsHover(false)}
+      <LottieIconButton
           onClick={()=>changeModalMenuOpened(true)}
-      >
-        <Lottie
-            className='header-burger'
-            animationData={isWasHover ? menuHover : menuIn}
-            loop={false}
-            lottieRef={menuRef}
-        />
-      </button>
+          animationData={menuIn}
+          hoverAnimationData={menuHover}
+          iconClassName='header-burger'
+      />
   );
 };
 
 const ArrowBack=()=>{
-  const [isHover, setIsHover] = useState(false);
   const router=useRouter()
-  const [isWasHover, setIsWasHover] = useState(false);
-  const menuRef = useRef(null);
-
-  const changeDirectionAnimation = (ref: MutableRefObject<LottieRefCurrentProps | null>) => {
-    ref.current?.play()
-    if (isWasHover && !isHover) {
-      ref.current?.setDirection(-1)
-    } else {
-      ref.current?.setDirection(1)
-    }
-  };
-
-  useEffect(() => {
-    changeDirectionAnimation(menuRef);
-
-  }, [isWasHover, isHover]);
 
   return (
-      <button
-          onMouseOver={() => {
-            setIsHover(true);
-            setIsWasHover(true);
-          }}
-          onMouseOut={() => setIsHover(false)}
+      <LottieIconButton
           onClick={() => router.back()}
           className="header-back-btn"
-      >
-        <Lottie
-            className='header-back'
-            animationData={arrowBack}
-            loop={false}
-            autoplay={false}
-            lottieRef={menuRef}
-        />
-      </button>
+          animationData={arrowBack}
+          autoplay={false}
+          iconClassName='header-back'
+      />
   )
 }
 

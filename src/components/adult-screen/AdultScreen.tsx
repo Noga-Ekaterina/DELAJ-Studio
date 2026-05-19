@@ -8,7 +8,7 @@ import logoAnimation from '../../../public/Assets/Animations/logo/delai_to_adult
 import TextLogo from '../text-logo/TextLogo';
 import cn from 'classnames';
 import { Transition } from 'react-transition-group';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { LottieRefCurrentProps } from '@/components/lottie-client/LottieClient';
 import store from '@/store/store';
 
 interface Props {

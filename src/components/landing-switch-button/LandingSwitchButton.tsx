@@ -1,6 +1,6 @@
 'use client';
 import {IWithClass } from '@/types';
-import {FC, memo, useEffect, useRef, useState} from 'react';
+import {FC, memo, useEffect, useState} from 'react';
 import kidsIn from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_IN.json"
 import kidsFull from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_FULL.json"
 import kidsOut from "@/../public/Assets/Animations/landing-switch-button/kids/D_kids_OUT.json"
@@ -10,7 +10,7 @@ import adultIn from "@/../public/Assets/Animations/landing-switch-button/adult/D
 import adultFull from "@/../public/Assets/Animations/landing-switch-button/adult/D_anime_FULL.json"
 import adultOut from "@/../public/Assets/Animations/landing-switch-button/adult/D_anime_OUT.json"
 import adultHover from "@/../public/Assets/Animations/landing-switch-button/adult/D_anime_MOUSE_IN.json"
-import Lottie, {LottieRefCurrentProps} from "lottie-react";
+import LottieIconButton from "@/components/lottie-icon-button/LottieIconButton";
 
 const animations={
   kids:{
@@ -34,12 +34,9 @@ interface Props extends IWithClass {
 }
 
 const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) => {
-  const ref=useRef<LottieRefCurrentProps | null>(null)
   const [isHidden, setIsHidden] = useState(false)
   const [outEnd, setOutEnd] = useState(false)
-  const [animation, setAnimation] = useState<"in" | "full" | "out"| "hover">("out")
-  const [isWasHover, setIsWasHover] = useState(false);
-  const [isHover, setIsHover] = useState(false);
+  const [animation, setAnimation] = useState<"in" | "full" | "out">("out")
   const [isWasScroll, setIsWasScroll] = useState(false)
 
   const handleEnd = () => {
@@ -60,7 +57,6 @@ const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) 
     }
     else {
       setIsWasScroll(false)
-      setIsWasHover(false)
     }
 
     return ()=>{
@@ -71,53 +67,31 @@ const LandingSwitchButton: FC<Props> = ({className, handleClick, type, isShow}) 
   useEffect(() => {
 
     if (isShow){
-      if (isWasScroll){
-        if (isWasHover){
-          setAnimation("hover")
-          if (!isHover)
-            ref.current?.setDirection(-1)
-         else
-            ref.current?.setDirection(1)
-        }else
-          setAnimation("full")
-      }else
+      if (isWasScroll)
+        setAnimation("full")
+      else
         setAnimation("in")
     } else {
-      ref.current?.setDirection(1)
       setAnimation("out")
     }
-  }, [isShow, isWasScroll, isHover, ref.current])
-
-  useEffect(() => {
-    if (isShow)
-      ref.current?.play()
-  }, [animation, isHover]);
+  }, [isShow, isWasScroll])
 
   // useEffect(() => {
   //   setIsShow(false)
   // }, [hash]);
 
   return (
-      <button
-          onMouseOver={() => {
-            setIsHover(true);
-            setIsWasHover(true);
-          }}
-          onMouseOut={() => setIsHover(false)}
+      <LottieIconButton
           onClick={handleClick}
           className={'landing-switch-button'}
-          type='button'
           style={{pointerEvents: isWasScroll? "auto":"none", display: outEnd? "none":"block"}}
-      >
-        <Lottie
-            animationData={animations[type][animation]}
-            loop={false}
-            autoPlay={false}
-            lottieRef={ref}
-            onComplete={handleEnd}
-            className="landing-switch-button__content"
-        />
-      </button>
+          animationData={animations[type][animation]}
+          hoverAnimationData={animations[type].hover}
+          hoverEnabled={isShow && isWasScroll}
+          resetHoverOnAnimationChange
+          onComplete={handleEnd}
+          iconClassName="landing-switch-button__content"
+      />
   );
 };
 
