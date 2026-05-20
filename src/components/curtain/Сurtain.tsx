@@ -1,13 +1,13 @@
 'use client'
-import {FC, useEffect, useRef, useState} from "react";
+import {FC, useRef} from "react";
 import "./curtain.scss"
-import store from "@/store/store";
 import { observer } from 'mobx-react-lite';
-import {useHash} from "@/components/_hooks/useHash";
 import {Transition} from "react-transition-group";
-import {transitionStyles} from "@/vars";
 import cn from 'classnames';
 import {IWithChildren} from "@/types";
+
+const transitionDuration = 700;
+const curtainTransition = {transition: 'top 0.7s cubic-bezier(0.16, 1, 0.3, 1)'};
 
 const curtainStyles = {
   unmounted: { top: "0%",},
@@ -24,47 +24,28 @@ interface CurtainProps extends IWithChildren{
 }
 
 const Curtain: FC<CurtainProps> = ({children, show, zIndex, className}) => {
-  const {
-    isMenuLandingsOpened,
-    changeMenuOpened,
-    changeCurrentPage,
-    currentPage
-  } = store;
-  const hash = useHash();
-  const [hidden, setHidden] = useState(false)
-
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>
-    if (show){
-      setHidden(false)
-    } else{
-      timer= setTimeout(()=>{
-        setHidden(true)
-      },700)
-    }
-
-    return ()=>{
-      clearTimeout(timer)
-      setHidden(false)
-    }
-  },[show])
+  const ref = useRef<HTMLDivElement>(null);
+  const baseZIndex = zIndex ?? 5;
 
   return (
-      <Transition in={show} timeout={0}>
-        {state => (
-            <>
+      <Transition nodeRef={ref} in={show} timeout={transitionDuration}>
+        {state => {
+          const currentZIndex = state === "exited" ? -1 : state === "entering" ? baseZIndex : baseZIndex;
+
+          return (
               <div
+                  ref={ref}
                   className={cn("curtain", className)}
                   style={{
-                    ...transitionStyles,
+                    ...curtainTransition,
                     ...curtainStyles[state],
-                    zIndex: hidden ? -1 : zIndex || 5
+                    zIndex: currentZIndex
                   }}
               >
                 {children}
               </div>
-            </>
-        )}
+          )
+        }}
       </Transition>
   );
 };
